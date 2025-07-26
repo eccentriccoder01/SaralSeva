@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import logo from './../assets/emblem.svg';
 import amrit from './../assets/logo-amrit2.png';
 import swachh from './../assets/swachh2.png';
+import S from './../../../S.png';
 
 const Header = () => {
   return (
@@ -13,9 +15,20 @@ const Header = () => {
           className='w-14 h-14 lg:h-20 lg:w-20 drop-shadow-lg' 
         />
         <div>
-          <h1 className='text-3xl lg:text-5xl font-extrabold text-orange-900 tracking-tight jost'>
-            SaralSeva
-          </h1>
+          <Link className="navbar-brand" to="/">
+              <span className="flex items-center text-3xl lg:text-5xl font-extrabold text-orange-900 tracking-tight jost h-10">
+                  <img
+                      src={S}
+                      alt="S"
+                      style={{
+                          height: '3.5rem',
+                          marginRight: '-12px',
+                          transform: 'translateY(-2px)' 
+                      }}
+                  />
+                  aralSeva
+              </span>
+          </Link>
           <p className='hidden md:block text-gray-600 lg:text-lg mt-1'>
             Simplified Work Based Accounting Application for Panchayati Raj
           </p>

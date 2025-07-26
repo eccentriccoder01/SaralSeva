@@ -9,6 +9,7 @@ import notification_icon from "./../assets/notification.png";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Toaster, toast } from "sonner";
+import S from './../../../S.png';
 
 const Header = () => {
   const { isAuthenticated, logoutEmployee, getNotification, limitNotification, notificationCount, markAsRead, getLimitNotifications } = useContext(EmployeeContext);
@@ -33,9 +34,20 @@ const Header = () => {
         <div className="flex items-center gap-3">
           <img src={logo} alt="logo" className="w-8 lg:w-12" />
           <div>
-            <h1 className="text-2xl text-orange-900 md:text-xl jost lg:text-4xl font-extrabold">
-              SaralSeva
-            </h1>
+          <Link className="navbar-brand" to="/">
+              <span className="flex items-center text-3xl lg:text-5xl font-extrabold text-orange-900 tracking-tight jost h-10">
+                  <img
+                      src={S}
+                      alt="S"
+                      style={{
+                          height: '3.5rem',
+                          marginRight: '-12px',
+                          transform: 'translateY(-2px)' 
+                      }}
+                  />
+                  aralSeva
+              </span>
+          </Link>
             <p className="hidden text-gray-500 lg:block">
               Simplified Work Based Accounting Application for Panchayati Raj
             </p>
