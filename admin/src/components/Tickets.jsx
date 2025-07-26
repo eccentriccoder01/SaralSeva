@@ -1,62 +1,59 @@
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "./context/adminContext";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Link, useNavigate } from "react-router-dom";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Link } from "react-router-dom";
+
+const StatusBadge = ({ status }) => {
+    const baseClasses = "px-3 py-1 text-sm font-semibold rounded-full capitalize";
+    const statusClasses = {
+        pending: "bg-amber-100 text-amber-800",
+        approved: "bg-green-100 text-green-800",
+        rejected: "bg-red-100 text-red-800",
+    };
+    return <span className={`${baseClasses} ${statusClasses[status] || 'bg-gray-100 text-gray-800'}`}>{status}</span>;
+};
 
 const Tickets = () => {
-  const { tickets , getAllSchemes  } = useContext(AdminContext);
+  const { tickets, getAllSchemes } = useContext(AdminContext);
 
-  useEffect(()=>{
-    getAllSchemes()
-  },[])
+  useEffect(() => {
+    getAllSchemes();
+  }, []);
   
   return (
-    <div className="pt-10 lg:pt-0" >
-      <h1>Employees</h1>
-      <Table>
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Sl No</TableHead>
-            <TableHead> Name</TableHead>
-            <TableHead>Scheme Name</TableHead>
-            <TableHead>Scheme Code</TableHead>
-            <TableHead>Registration Number</TableHead>
-            <TableHead className="">Assigned To</TableHead>
-            <TableHead className="">Employee ID</TableHead>
-            <TableHead className="">Initial Status</TableHead>
-            <TableHead className="">Remark</TableHead>
-            <TableHead className="">Final Status</TableHead>
-            
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {tickets?.map((ticket, index) => (
-            <TableRow key={index} className={`${ticket.final_status==='pending' ? "text-blue-700":"" || ticket.final_status==='approved' ? "text-green-700":"" || ticket.final_status==='rejected' ? "text-red-700":""}`}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell >
-                <Link to={`/ticket/${ticket?._id}`} className="hover:underline">{ticket?.name}</Link>
-              </TableCell>
-              <TableCell>{ticket?.scheme_name}</TableCell>
-              <TableCell>{ticket?.scheme_code}</TableCell>
-              <TableCell>{ticket?.registration_no}</TableCell>
-              <TableCell>{ticket?.assigned_to?.name || ""}</TableCell>
-              <TableCell>{ticket?.assigned_to?.empId}</TableCell>
-              <TableCell>{ticket?.initial_status}</TableCell>
-              <TableCell>{ticket?.remarks??"NA"}</TableCell>
-              <TableCell className='font-bold'>{ticket?.final_status}</TableCell>
+    <div className="bg-white p-6 rounded-2xl shadow-lg">
+      <h1 className="text-3xl font-bold text-orange-900 mb-6 jost">All Scheme Tickets</h1>
+      <div className="overflow-hidden border border-gray-200 rounded-lg">
+        <Table>
+          <TableCaption>A list of all scheme applications.</TableCaption>
+          <TableHeader className="bg-orange-900">
+            <TableRow>
+              <TableHead className="text-white font-semibold">Sl No</TableHead>
+              <TableHead className="text-white font-semibold">Applicant Name</TableHead>
+              <TableHead className="text-white font-semibold">Scheme Name</TableHead>
+              <TableHead className="text-white font-semibold">Registration No.</TableHead>
+              <TableHead className="text-white font-semibold">Assigned To</TableHead>
+              <TableHead className="text-white font-semibold">Final Status</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {tickets?.map((ticket, index) => (
+              <TableRow key={index} className="hover:bg-orange-50/70">
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>
+                  <Link to={`/ticket/${ticket?._id}`} className="font-semibold text-stone-800 hover:text-orange-700 hover:underline">
+                    {ticket?.name}
+                  </Link>
+                </TableCell>
+                <TableCell>{ticket?.scheme_name}</TableCell>
+                <TableCell>{ticket?.registration_no}</TableCell>
+                <TableCell>{ticket?.assigned_to?.name || "Unassigned"}</TableCell>
+                <TableCell><StatusBadge status={ticket?.final_status} /></TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

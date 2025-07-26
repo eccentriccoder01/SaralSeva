@@ -1,178 +1,98 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { AdminContext } from "./context/adminContext";
-import employee_profile from "../assets/employee_profile.png";
 import axios from "axios";
 import { Button } from "./ui/button";
 import { toast, Toaster } from "sonner";
+import { SendHorizonal } from "lucide-react";
 
 const Message = () => {
-  const { uniqueRecipients, id, getUniqueRecipientsWithLatestMessage } =
-    useContext(AdminContext);
+  const { uniqueRecipients, id, getUniqueRecipientsWithLatestMessage } = useContext(AdminContext);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [conversation, setConversation] = useState([]);
   const [msg, setMsg] = useState("");
+  const conversationEndRef = useRef(null);
 
-  // Set the first recipient as the default selected recipient
   useEffect(() => {
-    if (uniqueRecipients.length > 0) {
+    if (uniqueRecipients.length > 0 && !selectedRecipient) {
       setSelectedRecipient(uniqueRecipients[0].recipient);
     }
-  }, [uniqueRecipients]);
+  }, [uniqueRecipients, selectedRecipient]);
 
-  // Fetch conversation when a recipient is selected
+  const scrollToBottom = () => {
+    conversationEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     const fetchConversation = async () => {
       if (selectedRecipient) {
         try {
-          const response = await axios.post(
-            "http://localhost:5000/api/v1/messages/getMessages",
-            {
-              sender: id, // Replace with admin ID
-              receiver: selectedRecipient._id,
-            }
-          );
+          const response = await axios.post("http://localhost:5000/api/v1/messages/getMessages", { sender: id, receiver: selectedRecipient._id });
           setConversation(response.data.message);
-        } catch (error) {
-          console.error("Error fetching conversation:", error);
-        }
+        } catch (error) { console.error("Error fetching conversation:", error); }
       }
     };
     fetchConversation();
-  }, [selectedRecipient]);
+  }, [selectedRecipient, id]);
 
-  // Handle sending a new message
-  const handleSubmitSend = async (receiverId, e) => {
+  useEffect(() => { scrollToBottom(); }, [conversation]);
+
+  const handleSubmitSend = async (e) => {
     e.preventDefault();
-    const senderType = "Admin";
-    const sender = id;
-    const receiver = receiverId;
-    const message = msg;
-    const receiverType = "employee";
-
+    if (!msg.trim() || !selectedRecipient) return;
     try {
-      await axios.post("http://localhost:5000/api/v1/messages/sendMessage", {
-        sender,
-        senderType,
-        receiver,
-        message,
-        receiverType,
-      })
-      .then((res) => {
-        if (res.data.message === "Message sent successfully") {
-          toast(
-            // <div className="w-full p-4 text-white bg-green-900 rounded-lg">
-            //   <h1 className="text-md">Message sent successfully</h1>
-            // </div>
-              <h1 className="text-md">Message sent successfully</h1>
-            
-          );
-        }
-      })
+      await axios.post("http://localhost:5000/api/v1/messages/sendMessage", { sender: id, senderType: "Admin", receiver: selectedRecipient._id, message: msg, receiverType: "employee" });
+      toast.success("Message sent successfully!");
       setMsg("");
-     
-      // Re-fetch the conversation to update it
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/messages/getMessages",
-        {
-          sender: id, // Replace with admin ID
-          receiver: selectedRecipient._id,
-        }
-      );
-      setConversation(response.data.message);
+      const updatedConversation = await axios.post("http://localhost:5000/api/v1/messages/getMessages", { sender: id, receiver: selectedRecipient._id });
+      setConversation(updatedConversation.data.message);
       getUniqueRecipientsWithLatestMessage();
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
+    } catch (error) { console.error("Error sending message:", error); }
   };
 
   return (
-    <div className="flex flex-col gap-4 mt-10 lg:flex-row lg:justify-center">
-      <Toaster />
-      <div className="border border-gray-500 lg:w-[25%] p-3 rounded-md w-full">
-        {uniqueRecipients.map((data) => (
-          <div
-            key={data?.recipient?._id}
-            className={`flex gap-4 mt-4 overflow-hidden cursor-pointer ${
-              selectedRecipient?._id === data?.recipient?._id
-                ? "bg-green-50"
-                : ""
-            }`}
-            onClick={() => setSelectedRecipient(data?.recipient)}
-          >
-            <img
-              src={data?.recipient?.profilePic}
-              alt=""
-              className="w-10 rounded-full"
-            />
-            <div>
-              <h1>{data?.recipient?.name}</h1>
-              <h1 className="text-truncate">
-                {data?.latestMessage?.receiverType === "employee"
-                  ? "You: "
-                  : `${data?.recipient?.name}: `}
-                <span className="truncate-message">
+    <div className="flex flex-col lg:flex-row gap-6 h-[85vh]">
+      <Toaster position="top-center" richColors />
+      <div className="border border-gray-200 lg:w-[30%] bg-white rounded-2xl shadow-lg flex flex-col">
+        <h2 className="p-4 text-xl font-bold text-orange-900 border-b">Conversations</h2>
+        <div className="overflow-y-auto">
+          {uniqueRecipients.map((data) => (
+            <div key={data?.recipient?._id} className={`flex gap-4 p-4 cursor-pointer border-l-4 ${selectedRecipient?._id === data?.recipient?._id ? "bg-amber-50 border-amber-500" : "border-transparent hover:bg-gray-50"}`} onClick={() => setSelectedRecipient(data?.recipient)}>
+              <img src={data?.recipient?.profilePic} alt="profile" className="w-12 h-12 rounded-full" />
+              <div className="overflow-hidden">
+                <h3 className="font-semibold text-stone-800">{data?.recipient?.name}</h3>
+                <p className="text-sm text-gray-500 truncate">
+                  {data?.latestMessage?.senderType === "Admin" ? "You: " : ''}
                   {data?.latestMessage?.message}
-                </span>
-              </h1>
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <div className="border border-gray-500 lg:w-[50%] p-3 rounded-md w-full lg:h-[70vh] flex flex-col overflow-auto">
+      <div className="border border-gray-200 lg:w-[70%] bg-white rounded-2xl shadow-lg flex flex-col">
         {selectedRecipient ? (
           <>
-            <h1>Conversation with {selectedRecipient.name}</h1>
-            <div className="flex-grow overflow-y-auto">
-              {conversation.length > 0 ? (
-                conversation.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`mt-2 ${
-                      msg.senderType === "Admin"
-                        ? "text-left float-left clear-both"
-                        : "text-right float-right clear-both px-2"
-                    }`}
-                  >
-                    <p
-                      className={`flex items-center p-1 rounded-lg gap-2 ${
-                        msg.senderType === "Admin"
-                          ? "bg-green-200"
-                          : "bg-gray-200"
-                      }`}
-                    >
-                      <img src={msg.sender?.profilePic} alt="" className="w-10 rounded-full" />
-                      {msg.message}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <p>No messages yet.</p>
-              )}
+            <div className="flex items-center gap-4 p-4 border-b">
+              <img src={selectedRecipient.profilePic} alt="recipient profile" className="w-12 h-12 rounded-full"/>
+              <h2 className="text-xl font-bold text-stone-800">{selectedRecipient.name}</h2>
             </div>
+            <div className="flex-grow p-4 overflow-y-auto bg-orange-50/30">
+              {conversation.map((msg, index) => (
+                <div key={index} className={`flex my-2 ${msg.senderType === "Admin" ? "justify-end" : "justify-start"}`}>
+                  <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${msg.senderType === "Admin" ? "bg-orange-600 text-white rounded-br-none" : "bg-gray-200 text-black rounded-bl-none"}`}>
+                    {msg.message}
+                  </div>
+                </div>
+              ))}
+              <div ref={conversationEndRef} />
+            </div>
+            <form className="flex items-center gap-4 p-4 border-t" onSubmit={handleSubmitSend}>
+              <textarea placeholder="Type your message..." className="w-full p-3 border border-gray-300 rounded-lg outline-none resize-none focus:ring-2 focus:ring-amber-500" rows={2} value={msg} onChange={(e) => setMsg(e.target.value)}></textarea>
+              <Button type="submit" className="p-3 rounded-lg bg-orange-700 hover:bg-orange-800" size="icon"><SendHorizonal className="w-6 h-6 text-white"/></Button>
+            </form>
           </>
-        ) : (
-          <p>Select a recipient to view the conversation.</p>
-        )}
-
-        <form
-          className="mt-auto"
-          onSubmit={(e) => handleSubmitSend(selectedRecipient._id, e)}
-        >
-          <textarea
-            name=""
-            id=""
-            className="w-full p-3 py-1 mt-3 border border-gray-500 rounded-sm"
-            rows={5}
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-          ></textarea>
-          <div className="flex items-center justify-center">
-            <Button className="px-10 py-2 mt-3 bg-green-900" type="submit">
-              Send
-            </Button>
-          </div>
-        </form>
+        ) : <div className="flex items-center justify-center h-full text-xl text-gray-500">Select a conversation to start messaging.</div>}
       </div>
     </div>
   );

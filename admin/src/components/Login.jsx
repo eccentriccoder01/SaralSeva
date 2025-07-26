@@ -1,30 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import banner from '../assets/ChatbotBg.jpg';
-import bg from '../assets/bg-1.7ef54ee8de41cb08.png';
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { AdminContext } from "./context/adminContext";
-import { Toaster , toast } from "sonner";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-      email:"",
-      password:""
-  })
-
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  // const handleLogin = async(e) =>{
-  //   e.preventDefault();
-  //   await axios.post("http://localhost:5000/api/v1/admin/loginAdmin",formData).then((res)=>{
-  //     if(res.data.success){
-  //       localStorage.setItem("token",res.data.token); 
-  //       navigate("/")
-  //     }
-  //   })
-  // }
-  
-  const {login , error, isAuthenticated} = useContext(AdminContext);
+  const { login, error, isAuthenticated } = useContext(AdminContext);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -34,55 +18,49 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(formData)
-    await login(formData);
-    toast(
-      <div className='w-full p-4 text-white bg-green-900 rounded-lg'>
-        <h1 className="text-md">Login successfully</h1>
-      </div>
-    );
-  }
+    const success = await login(formData);
+    if(success) {
+      toast.success("Login successful!");
+    }
+  };
   
+  const inputClasses = "w-full p-3 bg-white/80 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
+
   return (
-   
-      <div className="relative mt-40  shadow-lg w-[450px] mx-auto p-10 border-b-8 rounded border-b-green-900  "
-      style={{backgroundImage:`url(${banner})`}}
-      >
-       <Toaster/>
-          <form className="flex flex-col items-center justify-center gap-3 " onSubmit={handleLogin}
-          >
-            <h1 className="flex gap-3 text-3xl item-center"> Admin User Login</h1>
-            <input
-              type="type"
-              placeholder="Enter your Email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-              className="w-full p-3 py-1 mt-3 border border-gray-500 rounded-sm"
-            />
-            <input
-              type="password"
-              placeholder="Enter your Password"
-              name="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-              className="w-full p-3 py-1 mt-3 border border-gray-500 rounded-sm"
-            />
-            <p className="w-full mt-2 text-sm text-right text-gray-500">
-              Forgot Password ?
-            </p>
-            <p className="text-sm text-gray-500">
-              Not registered ?
-              <Link  to='/register'><span className="font-semibold text-md" >Register Now</span></Link>
-            </p>
-            <p className="text-center text-red-500">{error}</p>
-            <Button className="w-full mt-5 text-xl bg-green-900 hover:bg-green-800" type="submit">
-              Log in with Password
-            </Button>
-          </form>
-      
+    <div className="relative min-h-screen flex items-center justify-center p-4" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover' }}>
+      <Toaster position="top-center" richColors />
+      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="relative w-full max-w-md p-10 bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border-t-8 border-amber-500">
+        <form className="flex flex-col items-center justify-center gap-4" onSubmit={handleLogin}>
+          <h1 className="text-3xl font-bold text-center text-orange-900 jost">Admin Portal Login</h1>
+          <input
+            type="email"
+            placeholder="Enter your Email"
+            name="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+            className={inputClasses}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Enter your Password"
+            name="password"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+            className={inputClasses}
+            required
+          />
+          <p className="w-full text-sm text-right text-orange-700 hover:underline">
+            <Link to="#">Forgot Password?</Link>
+          </p>
+          {error && <p className="text-center text-red-600 font-medium">{error}</p>}
+          <Button className="w-full mt-4 text-xl py-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl" type="submit">
+            Log In
+          </Button>
+        </form>
       </div>
- 
+    </div>
   );
 };
 

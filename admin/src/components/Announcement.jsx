@@ -1,88 +1,72 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Megaphone } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { Megaphone, PlusCircle } from "lucide-react";
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import axios from "axios";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 
 const Announcement = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [announcement_details, setAnnouncement_details] = useState("");
+  const [announcements, setAnnouncements] = useState([]);
 
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
-  const [announcement_details,setAnnouncement_details] = useState("");
-  const [announcement,setAnnouncement] = useState([]);
-  const handleAnnouncement = async() =>{
+  const getAnnouncements = async () => {
     try {
-      await axios.post("http://localhost:5000/api/v1/announcement/add_announcement",{announcement_details})
-      .then((res) => {
-       if(res.data.message==='announcement added succesfully'){
-         toast(
-           <div className='w-full p-4 text-white bg-green-900 rounded-lg'>
-             <h1 className="text-md">Announcement added succesfully</h1>
-           </div>
-         )
-         handleClose()
-         getAnnouncement()
-       } 
-         })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getAnnouncement = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:5000/api/v1/announcement/get_announcement"
-      );
-      setAnnouncement(res.data.announcement);
-    } catch (error) {
-      console.log(error);
-    }
+      const res = await axios.get("http://localhost:5000/api/v1/announcement/get_announcement");
+      setAnnouncements(res.data.announcement);
+    } catch (error) { console.log(error); }
   };
 
   useEffect(() => {
-    getAnnouncement();
+    getAnnouncements();
   }, []);
-  return (
-    <div className="pt-10 lg:pt-0">
-      <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialogTrigger className="flex float-right gap-3 px-10 py-2 text-xl text-white bg-green-900 rounded-md">Add <Megaphone /></AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Add Anouncement</AlertDialogTitle>
-            <AlertDialogDescription>
-              <textarea name="" id="" rows={5} className="w-full p-3 border border-gray-500" onChange={(e) => setAnnouncement_details(e.target.value)}></textarea>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <Button onClick={handleAnnouncement}>Add</Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-     
-      <h1>Announcement</h1>
-      {
-         announcement.map((item,index) => {
-          return (
-            <div className="flex flex-col mt-3" key={item.id}>
-              <p>{index+1}.{item.announcement_details}</p>
-            </div>  
-          )
-         })
+
+  const handleAnnouncement = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/v1/announcement/add_announcement", { announcement_details });
+      if (res.data.message === 'announcement added succesfully') {
+        toast.success("Announcement added successfully!");
+        setIsOpen(false);
+        getAnnouncements();
+        setAnnouncement_details("");
       }
+    } catch (error) { console.log(error); }
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-2xl shadow-lg">
+      <Toaster position="top-center" richColors />
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-orange-900 jost">Manage Announcements</h1>
+        <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+          <AlertDialogTrigger asChild>
+            <Button className="gap-2 font-bold text-white bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg shadow-md hover:shadow-lg">
+              <PlusCircle size={18} /> Add New
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Add New Announcement</AlertDialogTitle>
+              <AlertDialogDescription>
+                <textarea rows={5} className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:ring-amber-500" onChange={(e) => setAnnouncement_details(e.target.value)} placeholder="Enter announcement details..."></textarea>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
+              <Button onClick={handleAnnouncement} className="bg-orange-700 hover:bg-orange-800">Add Announcement</Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+
+      <div className="space-y-4">
+        {announcements.length > 0 ? announcements.map((item, index) => (
+          <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg bg-orange-50/50" key={item.id}>
+            <Megaphone className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1"/>
+            <p className="text-stone-800">{item.announcement_details}</p>
+          </div>
+        )) : <p className="text-center text-gray-500 py-10">No announcements have been made.</p>}
+      </div>
     </div>
   );
 };

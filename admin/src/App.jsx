@@ -1,6 +1,5 @@
-// App.js
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import "./index.css"; // Make sure this includes Tailwind styles
+import "./index.css";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
