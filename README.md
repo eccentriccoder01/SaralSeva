@@ -2,13 +2,11 @@
 
 # <div align="center">SaralSeva</div>
 
-## 🇮🇳 Digitizing Governance at the Gram Panchayat Level
-
-**SaralSeva** is a web-based application designed to streamline the application and grievance resolution process for rural government schemes. This platform offers user-friendly features for users to apply for schemes, track their progress, and receive updates, as well as powerful tools for administrators and employees to manage scheme applications, monitor performance, and communicate effectively.
+**SaralSeva** is a web-based full stack application designed to streamline the application and grievance resolution process for rural government schemes. This platform offers user-friendly features for users to apply for schemes, track their progress, and receive updates, as well as powerful tools for administrators and employees to manage scheme applications, monitor performance, and communicate effectively.
 
 ---
 
-## ✨ The Vision: Digital Empowerment at the Grassroots
+## 🇮🇳 The Vision: Digitising Governance at the Gram Panchayat Level
 
 SaralSeva is more than just a software project; it's an initiative for social good, aimed at strengthening governance from the ground up. It directly contributes to building a more inclusive and transparent Digital India by focusing on:
 
