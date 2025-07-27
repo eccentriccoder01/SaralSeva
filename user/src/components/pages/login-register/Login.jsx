@@ -13,6 +13,7 @@ const Login = () => {
   const imageBaseClasses = "w-24 h-24 transition-all duration-300";
   const imageSelectedClasses = "grayscale-0";
   const imageUnselectedClasses = "grayscale opacity-60 hover:opacity-100";
+  const buttonLinkClasses = 'inline-block px-8 mt-2 text-xl text-center uppercase bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all py-3';
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] py-10 bg-orange-50/30">
@@ -45,16 +46,22 @@ const Login = () => {
             <Button className='px-8 mt-2 text-xl uppercase bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all'>User Login</Button>
           </Link>
         )}
+
         {chooseLogin === "admin" && (
           <div className="text-center animate-in fade-in duration-500">
             <p className="text-gray-500">Only for Administrative Staff</p>
-            <Button className='px-8 mt-2 text-xl uppercase bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all'>Admin Login</Button>
+            <a href={import.meta.env.VITE_ADMIN_URL} className={buttonLinkClasses}>
+              Admin Login
+            </a>
           </div>
         )}
+
         {chooseLogin === "employee" && (
           <div className="text-center animate-in fade-in duration-500">
             <p className="text-gray-500">Only for Employed Personnel</p>
-            <Button className='px-8 mt-2 text-xl uppercase bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all'>Employee Login</Button>
+            <a href={import.meta.env.VITE_EMPLOYEE_URL} className={buttonLinkClasses}>
+              Employee Login
+            </a>
           </div>
         )}
       </div>
