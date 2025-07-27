@@ -2,7 +2,6 @@ import schemeAppliedModel from "../models/schemeAppliedModel.js";
 import schemeModel from "../models/schemeModel.js";
 import {v2 as cloudinary} from 'cloudinary'
 
-
 const addSchemeController = async (req, res) => {
     const { scheme_name, scheme_dept, scheme_details, scheme_benefits, scheme_eligibility, scheme_documents_required ,scheme_code} = req.body;
     try {
@@ -44,7 +43,6 @@ const addSchemeController = async (req, res) => {
     }
 }
 
-//list all schemes
 const listSchemeController = async (req, res) => {
     try {
         const products = await schemeModel.find({})
@@ -60,7 +58,6 @@ const listSchemeController = async (req, res) => {
         })
     }
 }
-
 
 const getSingleSchemeController = async (req, res) => {
     const id = req.params.id;
@@ -78,7 +75,6 @@ const getSingleSchemeController = async (req, res) => {
         });
     }
 };
-
 
 export { addSchemeController ,listSchemeController ,getSingleSchemeController} 
 

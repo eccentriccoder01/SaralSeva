@@ -21,8 +21,6 @@ const applyGrievance = async (req, res) => {
       if (!req.file) {
          return res.status(400).send('No file uploaded.');
       }
-      //  const pdf = req.pdf
-
 
       let pdfUrl = await cloudinary.uploader.upload(req.file.path, {
          resource_type: "raw"
@@ -41,11 +39,9 @@ const applyGrievance = async (req, res) => {
 
       const generateRegistrationNo = async () => {
          const prefix = "GRV"
-         const randomDigits = Math.floor(100000 + Math.random() * 900000); // generates a 6-digit random number
+         const randomDigits = Math.floor(100000 + Math.random() * 900000);
          return `${prefix}${randomDigits}`;
       };
-
-      // const document = req.files?.document && req.files?.document[0];
 
       const grievanceApplied = new grievanceModel({
          name,

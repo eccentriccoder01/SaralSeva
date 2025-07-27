@@ -83,12 +83,10 @@ const grievanceSchema = new mongoose.Schema({
 
 grievanceSchema.methods.updateStatus = function(status) {
     this.status = status;
-    // return this.save();
   };
 
   grievanceSchema.methods.updateRemarks = function(remarks) {
     this.remarks = remarks;
-    // return this.save();
   };
 
 const grievanceModel = mongoose.model('grievances' , grievanceSchema) || mongoose.model('grievances')

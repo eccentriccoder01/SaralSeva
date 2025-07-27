@@ -9,7 +9,7 @@ const notificationSchema = new mongoose.Schema({
     recipientType: {
         type: String,
         required: true,
-        enum: ['employee', 'Admin'] // Adjust based on your user roles
+        enum: ['employee', 'Admin']
     },
     message: {
         required: true,

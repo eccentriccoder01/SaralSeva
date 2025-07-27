@@ -7,7 +7,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import heroBg from "./../../../assets/baner-cpgrams_3.jpg"; // Using a relevant background
+import heroBg from "./../../../assets/baner-cpgrams_3.jpg";
 
 const VerifyOtp = ({ setIsAuthenticated }) => {
   const location = useLocation();

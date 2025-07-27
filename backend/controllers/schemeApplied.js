@@ -7,9 +7,6 @@ import notificationModel from "../models/notificationSchema.js";
 import mongoose from "mongoose";
 import twilio from 'twilio'
 
-
-
-// Twilio setup
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const applyScheme = async (req, res) => {
@@ -18,10 +15,9 @@ const applyScheme = async (req, res) => {
     try {
         const generateRegistrationNo = async () => {
             const prefix = scheme_code?.split('/')[0];
-            const randomDigits = Math.floor(100000 + Math.random() * 900000); // generates a 6-digit random number
+            const randomDigits = Math.floor(100000 + Math.random() * 900000);
             return `${prefix}${randomDigits}`;
         };
-
 
         const photo = req.files?.photo && req.files?.photo[0]
         const aadharPhoto = req.files?.aadharPhoto && req.files?.aadharPhoto[0]
@@ -77,8 +73,6 @@ const applyScheme = async (req, res) => {
 
         await newSchemeApplied.save();
 
-
-        // Push the new scheme to the assigned employee's assignedSchemes array
         randomEmployee.assignedSchemes.push(newSchemeApplied._id);
         await randomEmployee.save();
 
@@ -93,8 +87,6 @@ const applyScheme = async (req, res) => {
         user.schemes_applied.push(newSchemeApplied._id);
         await user.save();
 
-
-        // Store notification for employee
         const notification = new notificationModel({
             recipientId: randomEmployee._id,
             recipientType: 'employee',
@@ -109,9 +101,6 @@ const applyScheme = async (req, res) => {
             from: process.env.TWILIO_PHONE_NUMBER,
             to: `+91${7326074744}`,
         });
-
-
-
 
         return res.json({
             success: true,
@@ -209,8 +198,5 @@ const checkSchemeStatus = async (req, res) => {
         })
     }
 }
-
-
-
 
 export { applyScheme, getAppliedSchemes, getAllSchemes, getSingleAppliedScheme ,checkSchemeStatus};

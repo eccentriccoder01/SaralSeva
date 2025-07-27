@@ -4,7 +4,7 @@ const messageSchema = new mongoose.Schema({
     senderType: {
         type: String,
         required: true,
-        enum: ['employee', 'Admin'] // Adjust based on your user roles
+        enum: ['employee', 'Admin']
     },
     sender: {
         type: mongoose.Schema.Types.ObjectId,
@@ -14,7 +14,7 @@ const messageSchema = new mongoose.Schema({
     receiverType: {
         type: String,
         required: true,
-        enum: ['employee', 'Admin'] // Adjust based on your user roles
+        enum: ['employee', 'Admin']
     },
     receiver: {
         type: mongoose.Schema.Types.ObjectId,

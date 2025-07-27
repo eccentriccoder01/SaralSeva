@@ -128,12 +128,10 @@ const schemeAppliedSchema = new mongoose.Schema({
 
 schemeAppliedSchema.methods.updateInitialStatus = function(status) {
     this.initial_status = status;
-    // return this.save();
   };
 
   schemeAppliedSchema.methods.updateRemarks = function(remarks) {
     this.remarks = remarks;
-    // return this.save();
   };
   
   schemeAppliedSchema.methods.updateFinalStatus = function(status) {

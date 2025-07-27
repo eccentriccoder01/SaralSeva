@@ -131,14 +131,11 @@ const getUniqueReciepents = async (req, res) => {
 
 
 const getUniqueRecipientsWithLatestMessage = async (req, res) => {
-    const { sender, senderType } = req.body; // This would be the admin's ID and type
+    const { sender, senderType } = req.body;
     try {
-        // Get the distinct recipient IDs
         const recipientIds = await messageModel.distinct("receiver", { sender: sender, senderType: senderType });
-
-        // Fetch the user details of the recipients and their latest message
         const recipientsWithMessages = await Promise.all(recipientIds.map(async (recipientId) => {
-            const recipient = await employeeModel.findById(recipientId); // Replace UserModel with your actual user model
+            const recipient = await employeeModel.findById(recipientId);
             const latestMessage = await messageModel.findOne({
                 $or: [
                     { sender: sender, receiver: recipientId, senderType: senderType },
@@ -166,14 +163,11 @@ const getUniqueRecipientsWithLatestMessage = async (req, res) => {
 };
 
 const getUniqueRecipientsWithLatestMessageForEmployee = async (req, res) => {
-    const { sender, senderType } = req.body; // This would be the admin's ID and type
+    const { sender, senderType } = req.body;
     try {
-        // Get the distinct recipient IDs
         const recipientIds = await messageModel.distinct("receiver", { sender: sender, senderType: senderType });
-
-        // Fetch the user details of the recipients and their latest message
         const recipientsWithMessages = await Promise.all(recipientIds.map(async (recipientId) => {
-            const recipient = await adminModel.findById(recipientId); // Replace UserModel with your actual user model
+            const recipient = await adminModel.findById(recipientId);
             const latestMessage = await messageModel.findOne({
                 $or: [
                     { sender: sender, receiver: recipientId, senderType: senderType },
