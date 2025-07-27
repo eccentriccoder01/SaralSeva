@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { AdminContext } from "./context/adminContext";
 import { Button } from "./ui/button";
 import { AlertDialog, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import PDFViewer from "./PDFviewer";
+import PDFViewer from "./PDFViewer";
 import axios from "axios";
 import moment from "moment";
 import { Toaster, toast } from "sonner";
