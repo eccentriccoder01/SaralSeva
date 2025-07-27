@@ -12,7 +12,7 @@ import Grievances from "./components/Grievances";
 import Tickets from "./components/Tickets";
 import SingleTicket from "./components/SingleTicket";
 import Profile from "./components/Profile";
-import SingleGrievance from "./components/singleGrievance";
+import SingleGrievance from "./components/SingleGrievance";
 import Notifications from "./components/Notifications";
 import Message from "./components/Message";
 
