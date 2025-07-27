@@ -26,11 +26,11 @@ const SingleEmployee = () => {
       } catch (error) { console.log(error); }
     };
     const employeePerformance = async (id) => {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeePerformance", { id });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeePerformance`, { id });
       setPerformance(res.data.data);
     };
     const employeeGreivancePerformance = async (id) => {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeeGrievancePerformance", { id });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeeGrievancePerformance`, { id });
       setGrievancePerformance(res.data.data);
     };
     handleSingleEmployee(id);
@@ -48,7 +48,7 @@ const SingleEmployee = () => {
 
   const handleSubmitSend = async () => {
     try {
-      await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/sendMessage", { sender, senderType: "Admin", receiver: id, message: msg, receiverType: "employee" });
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/sendMessage`, { sender, senderType: "Admin", receiver: id, message: msg, receiverType: "employee" });
       toast.success("Message sent successfully");
       setMsg("");
       setIsOpen(false);

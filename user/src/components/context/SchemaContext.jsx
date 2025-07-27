@@ -12,7 +12,7 @@ const SchemeProvider = ({children}) =>{
     
     const getScheme = async () =>{
         try {
-            await axios.get('${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme')
+            await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme`)
             .then((res) => {
                 setScheme(res.data)
             })

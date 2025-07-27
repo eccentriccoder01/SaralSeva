@@ -12,7 +12,7 @@ const Announcement = () => {
 
   const getAnnouncements = async () => {
     try {
-      const res = await axios.get("${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/get_announcement");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/get_announcement`);
       setAnnouncements(res.data.announcement);
     } catch (error) { console.log(error); }
   };
@@ -23,7 +23,7 @@ const Announcement = () => {
 
   const handleAnnouncement = async () => {
     try {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/add_announcement", { announcement_details });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/add_announcement`, { announcement_details });
       if (res.data.message === 'announcement added succesfully') {
         toast.success("Announcement added successfully!");
         setIsOpen(false);

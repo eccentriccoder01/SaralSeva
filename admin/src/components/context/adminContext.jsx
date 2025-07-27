@@ -36,7 +36,7 @@ const AdminProvider = ({ children }) => {
     console.log(formData);
     try {
       const response = await axios.post(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/loginAdmin",
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/loginAdmin`,
         formData
       );
 
@@ -99,7 +99,7 @@ const AdminProvider = ({ children }) => {
   const getEmployees = async () => {
     try {
       const res = await axios.get(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/getEmployees"
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/getEmployees`
       );
       console.log(res);
       setEmployees(res.data.employees);
@@ -132,7 +132,7 @@ const AdminProvider = ({ children }) => {
   const listSchemes = async () => {
     try {
       const res = await axios.get(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme"
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme`
       );
       if (res.data && Array.isArray(res.data.products)) {
         setScheme(res.data.products);
@@ -155,7 +155,7 @@ const AdminProvider = ({ children }) => {
   const getAllSchemes = async (req, res) => {
     try {
       await axios
-        .get("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getAllSchemes")
+        .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getAllSchemes`)
         .then((res) => {
           console.log(res);
           setTickets(res.data.schemes);
@@ -206,7 +206,7 @@ const AdminProvider = ({ children }) => {
   const getLimitNotifications = async () => {
     try {
       const res = await axios.get(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getLimitAdminNotifications"
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getLimitAdminNotifications`
       );
       setLimitNotification(res.data.notifications);
     } catch (error) {}
@@ -219,7 +219,7 @@ const AdminProvider = ({ children }) => {
   const getNotification = async () => {
     try {
       const res = await axios.post(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getAdminNotifications"
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getAdminNotifications`
       );
       console.log(res , localStorage.getItem("id"))
       const filteredNotifications = res.data?.notifications?.filter(
@@ -246,7 +246,7 @@ const AdminProvider = ({ children }) => {
   const markAsRead = async (notificationId) => {
     try {
       await axios
-        .post("${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/markAsRead", {
+        .post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/markAsRead`, {
           notificationId,
         })
         .then((res) => {
@@ -264,7 +264,7 @@ const AdminProvider = ({ children }) => {
   const getAllGrievance = async () => {
     try {
       const res = await axios.get(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getAllGrievance"
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getAllGrievance`
       );
       console.log(res);
       setGrievance(res.data.grievance);
@@ -328,7 +328,7 @@ const AdminProvider = ({ children }) => {
     try {
       await axios
         .post(
-          "${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/getUniqueRecipientsWithLatestMessage",
+          `${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/getUniqueRecipientsWithLatestMessage`,
           { sender, senderType }
         )
         .then((res) => {

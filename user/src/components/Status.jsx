@@ -16,8 +16,8 @@ const Status = () => {
     setResultScheme(null);
     try {
         const url = checked === 'scheme' 
-            ? "${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/checkSchemeStatus" 
-            : "${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/status"; // Assuming this is the grievance status endpoint
+            ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/checkSchemeStatus`
+            : `${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/status`;
         
         const payload = checked === 'scheme'
             ? { registration_no: inputValue }
@@ -28,7 +28,6 @@ const Status = () => {
         if (checked === 'scheme') {
             setResultScheme(res.data.schemeApplied);
         } else {
-            // Assuming grievance response has a similar structure
             setResultScheme(res.data.grievance);
         }
 
@@ -49,7 +48,6 @@ const Status = () => {
             </p>
         </div>
         
-        {/* Tab Switcher */}
         <div className="flex bg-gray-200 rounded-lg p-1 my-8">
             <button onClick={() => { setChecked("scheme"); setResultScheme(null); setError(''); }} className={`flex-1 p-2 rounded-md font-semibold transition-colors ${checked === 'scheme' ? 'bg-orange-600 text-white shadow' : 'text-gray-600 hover:bg-gray-300'}`}>Scheme Status</button>
             <button onClick={() => { setChecked("grievance"); setResultScheme(null); setError(''); }} className={`flex-1 p-2 rounded-md font-semibold transition-colors ${checked === 'grievance' ? 'bg-orange-600 text-white shadow' : 'text-gray-600 hover:bg-gray-300'}`}>Grievance Status</button>
@@ -72,7 +70,6 @@ const Status = () => {
           </Button>
         </form>
 
-        {/* Results Display */}
         <div className="mt-8 min-h-[100px]">
             {error && <p className="p-4 text-center text-red-700 bg-red-100 rounded-lg">{error}</p>}
             {resultScheme && (

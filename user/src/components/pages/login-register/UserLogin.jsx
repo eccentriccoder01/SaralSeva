@@ -31,7 +31,7 @@ const UserLogin = ({ setIsAuthenticated }) => {
   const handleOtpLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/auth/generate-otp", { mobile });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/auth/generate-otp`, { mobile });
       if (res.data.message === "OTP sent successfully") {
         navigate("/auth/verify-otp", { state: { mobile } });
       }

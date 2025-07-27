@@ -33,7 +33,7 @@ const EmployeeProvider = ({ children }) => {
   const loginEmployee = async (email, password) => {
     try {
       const response = await axios.post(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/login",
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/login`,
         {
           email,
           password,
@@ -101,7 +101,7 @@ const EmployeeProvider = ({ children }) => {
   const getAllSchemes = async (req, res) => {
     try {
       await axios
-        .get("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getAllSchemes")
+        .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getAllSchemes`)
         .then((res) => {
           //   console.log(res)
           const filteredTickets = res.data.schemes.filter(
@@ -137,7 +137,7 @@ const EmployeeProvider = ({ children }) => {
     console.log(id);
     try {
       const res = await axios.get(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getEmployeeNotifications"
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getEmployeeNotifications`
       );
       const filteredNotifications = res.data.notifications.filter(
         (notification) => notification.recipientId._id === id
@@ -164,7 +164,7 @@ const EmployeeProvider = ({ children }) => {
     console.log(id);
     try {
       const res = await axios.post(
-        "${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getLimitEmployeeNotifications",{id}
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getLimitEmployeeNotifications`,{id}
       );
 
       console.log(res)
@@ -206,7 +206,7 @@ const EmployeeProvider = ({ children }) => {
 
   const employeePerformance = async (id) => {
     const res = await axios.post(
-      "${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeePerformance",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeePerformance`,
       { id }
     );
     console.log(res);
@@ -221,7 +221,7 @@ const EmployeeProvider = ({ children }) => {
   const getAllGrievance = async () => {
     try {
       await axios
-        .get("${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getAllGrievance")
+        .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getAllGrievance`)
         .then((res) => {
           const filteredGrievance = res.data.grievance.filter(
             (grievance) => grievance.assigned_to._id === id
@@ -255,7 +255,7 @@ const EmployeeProvider = ({ children }) => {
 
   const employeeGreivancePerformance = async (id) => {
     const res = await axios.post(
-      "${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeeGrievancePerformance",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeeGrievancePerformance`,
       { id }
     );
     console.log(res);
@@ -293,7 +293,7 @@ const EmployeeProvider = ({ children }) => {
     try {
       await axios
         .post(
-          "${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/getUniqueRecipientsWithLatestMessageForEmployee",
+          `${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/getUniqueRecipientsWithLatestMessageForEmployee`,
           { sender, senderType }
         )
         .then((res) => {

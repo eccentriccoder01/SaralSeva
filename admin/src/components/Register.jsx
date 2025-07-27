@@ -22,7 +22,7 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/registerAdmin", data);
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/registerAdmin`, data);
       if (res.data.success) {
         toast.success("Admin registered successfully");
       }

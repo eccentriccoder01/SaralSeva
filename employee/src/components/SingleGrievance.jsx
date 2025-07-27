@@ -25,7 +25,7 @@ const SingleGrievance = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/changeGrievanceStatus", formData);
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/changeGrievanceStatus`, formData);
       setError(res.data.message);
       if (res.data.success) {
         getSingleGrievance(id);
