@@ -27,7 +27,7 @@ const Home = () => {
   const getAnnouncements = async () => {
     try {
       const res = await axios.get("${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/get_announcement");
-      setAnnouncements(res.data.announcement);
+      setAnnouncements(res.data.announcement || []);
     } catch (error) {
       console.error("Failed to fetch announcements:", error);
     }
