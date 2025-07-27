@@ -16,10 +16,6 @@ import notificationRouter from './routes/notificationRouter.js';
 import grievanceRouter from './routes/grievanceRouter.js';
 import messageRouter from './routes/messageRouter.js';
 
-
-
-
-
 const app = express();
 const PORT = 5000;
 
@@ -40,13 +36,8 @@ app.use('/api/v1/notification', notificationRouter)
 app.use('/api/v1/grievances' , grievanceRouter)
 app.use('/api/v1/messages' , messageRouter)
 
-
-
-
-// Twilio setup
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-// OTP generation
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
@@ -59,20 +50,15 @@ app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
         })
     }
 
-
     const otp = generateOtp();
     const otp_expiry = new Date(Date.now() + 20 * 60000); // 10 minutes expiry
 
     try {
-
-
         const  user = await userModel.findOneAndUpdate(
             { mobile },
             { otp, otp_expiry: otp_expiry },
             { upsert: true, new: true }
         );
-
-
         await twilioClient.messages.create({
             body: `Your OTP code is ${otp}`,
             from: process.env.TWILIO_PHONE_NUMBER,
@@ -91,8 +77,6 @@ app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
     }
 
 });
-
-
 
 app.post('/api/v1/user/auth/verify-otp', async (req, res) => {
     const { mobile, otp } = req.body;
@@ -114,9 +98,6 @@ app.post('/api/v1/user/auth/verify-otp', async (req, res) => {
         res.status(500).send('Failed to verify OTP');
     }
 });
-
-
-
 
 app.get('/', (req, res) => {
     res.send(`API is running`)
