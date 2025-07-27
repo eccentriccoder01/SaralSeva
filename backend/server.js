@@ -17,7 +17,7 @@ import grievanceRouter from './routes/grievanceRouter.js';
 import messageRouter from './routes/messageRouter.js';
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 app.use(cors());
