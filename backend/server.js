@@ -25,7 +25,6 @@ app.use(cors());
 connectDb();
 connectCloudinary();
 
-
 app.use('/api/v1/schemes', schemesRouter)
 app.use('/api/v1/announcement', announcementRouter)
 app.use('/api/v1/user', userRouter)
