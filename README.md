@@ -20,7 +20,7 @@ SaralSeva is more than just a software project; it's an initiative for social go
 ## 🚀 Live Demo
 
 Experience SaralSeva live here: 
-👉 [![**SaralSeva**](https://img.shields.io/badge/View-Live%20Demo-orange?style=for-the-badge)](https://SaralSeva.example.app)
+👉 [![**SaralSeva**](https://img.shields.io/badge/View-Live%20Demo-orange?style=for-the-badge)](https://saralseva.vercel.app/)
 
  <div align="center">
  <p>
