@@ -40,7 +40,7 @@ const Profile = () => {
       }
     }
     try {
-      await axios.post("http://localhost:5000/api/v1/employee/editEmployee", formData, { headers: { "Content-Type": "multipart/form-data" } });
+      await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/editEmployee", formData, { headers: { "Content-Type": "multipart/form-data" } });
       getEmployee(id);
       toast.success("Profile updated successfully!");
     } catch (error) { console.error("Error:", error); }

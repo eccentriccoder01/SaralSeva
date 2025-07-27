@@ -15,7 +15,7 @@ const SchemeDetails = () => {
   useEffect(() => {
     const getScheme = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/v1/schemes/single_scheme/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/single_scheme/${id}`);
         setScheme(res.data.scheme);
       } catch (error) {
         console.error("Failed to fetch scheme details:", error);

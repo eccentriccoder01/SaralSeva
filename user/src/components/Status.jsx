@@ -16,8 +16,8 @@ const Status = () => {
     setResultScheme(null);
     try {
         const url = checked === 'scheme' 
-            ? "http://localhost:5000/api/v1/user/scheme/checkSchemeStatus" 
-            : "http://localhost:5000/api/v1/grievances/status"; // Assuming this is the grievance status endpoint
+            ? "${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/checkSchemeStatus" 
+            : "${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/status"; // Assuming this is the grievance status endpoint
         
         const payload = checked === 'scheme'
             ? { registration_no: inputValue }

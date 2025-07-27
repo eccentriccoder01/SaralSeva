@@ -23,7 +23,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/employee/register", data);
+      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/register", data);
       setError(res.data.message);
       toast.success("Employee registered successfully!");
     } catch (err) {

@@ -12,7 +12,7 @@ const UserProvider = ({ children }) => {
   const getUser = async (id) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/v1/user/getSingleUser/${id}`
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/getSingleUser/${id}`
       );
       console.log(res)
       setUser(res.data.user);

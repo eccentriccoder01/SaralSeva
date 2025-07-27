@@ -80,7 +80,7 @@ const SchemeAppliedForm = () => {
       }
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/user/scheme/schemeApplied", formData, {
+      const response = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/schemeApplied", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (response.data.message === "Scheme applied successfully") {

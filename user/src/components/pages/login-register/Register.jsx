@@ -26,7 +26,7 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:5000/api/v1/user/registerUser", data);
+      await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/registerUser", data);
       toast.success("User registered successfully!", {
         style: { background: '#166534', color: 'white', border: 'none' },
       });

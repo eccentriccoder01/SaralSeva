@@ -25,7 +25,7 @@ const VerifyOtp = ({ setIsAuthenticated }) => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/user/auth/verify-otp", { mobile, otp: data.pin });
+      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/auth/verify-otp", { mobile, otp: data.pin });
       if (res.data.message === "OTP verified") {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.user._id);

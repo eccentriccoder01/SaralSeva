@@ -31,7 +31,7 @@ const AddScheme = () => {
     formData.append("scheme_code", scheme_code);
 
     try {
-        await axios.post("http://localhost:5000/api/v1/schemes/add_scheme", formData);
+        await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/add_scheme", formData);
         toast.success("Scheme Added Successfully");
         // Reset form fields
         setScheme_name(""); setScheme_dept(""); setScheme_details("");

@@ -55,7 +55,7 @@ const GrievancesRegistrationForm = ({ isAuthenticated }) => {
       }
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/grievances/apply", formData, { headers: { "Content-Type": "multipart/form-data" } });
+      const response = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/apply", formData, { headers: { "Content-Type": "multipart/form-data" } });
       if (response.data.message === 'Grievances applied successfully') {
         toast.success("Grievance submitted successfully!");
         navigate('/grievances_success', { state: { grievance: response.data.data } });

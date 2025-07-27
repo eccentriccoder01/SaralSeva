@@ -17,7 +17,7 @@ const Notifications = () => {
   const handleDelete = async (e, id) => {
     e.stopPropagation();
     try {
-      await axios.post("http://localhost:5000/api/v1/notification/deleteNotification", { id });
+      await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/deleteNotification", { id });
       getNotification();
       toast.success("Notification deleted successfully");
     } catch (error) {

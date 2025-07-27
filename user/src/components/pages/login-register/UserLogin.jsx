@@ -16,7 +16,7 @@ const UserLogin = ({ setIsAuthenticated }) => {
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/user/loginUser", formData);
+      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/loginUser", formData);
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.user._id);
@@ -31,7 +31,7 @@ const UserLogin = ({ setIsAuthenticated }) => {
   const handleOtpLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/user/auth/generate-otp", { mobile });
+      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/user/auth/generate-otp", { mobile });
       if (res.data.message === "OTP sent successfully") {
         navigate("/auth/verify-otp", { state: { mobile } });
       }

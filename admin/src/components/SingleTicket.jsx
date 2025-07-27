@@ -28,7 +28,7 @@ const SingleTicket = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/admin/changeStatus", formData);
+      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/changeStatus", formData);
       setError(res.data.message);
       if (res.data.message === "Status updated successfully") {
         getSingleAppliedScheme(id);

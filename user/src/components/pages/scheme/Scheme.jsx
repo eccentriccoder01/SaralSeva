@@ -13,7 +13,7 @@ const Scheme = () => {
 
   const listSchemes = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/schemes/list_scheme");
+      const res = await axios.get("${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme");
       setScheme(res.data.products);
     } catch (error) {
       console.log(error, "Something went wrong");

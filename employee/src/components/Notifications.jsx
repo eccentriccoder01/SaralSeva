@@ -16,7 +16,7 @@ const Notifications = () => {
   const handleDelete = async (e, id) => {
     e.stopPropagation(); // Prevent handleMarkAsRead from firing
     try {
-      await axios.post("http://localhost:5000/api/v1/notification/deleteNotification", { id });
+      await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/deleteNotification", { id });
       getNotification();
     } catch (error) {
       console.error("Failed to delete notification", error);

@@ -26,7 +26,7 @@ const Message = () => {
     const fetchConversation = async () => {
       if (selectedRecipient) {
         try {
-          const response = await axios.post("http://localhost:5000/api/v1/messages/getMessages", { sender: id, receiver: selectedRecipient._id });
+          const response = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/getMessages", { sender: id, receiver: selectedRecipient._id });
           setConversation(response.data.message);
         } catch (error) { console.error("Error fetching conversation:", error); }
       }
@@ -40,10 +40,10 @@ const Message = () => {
     e.preventDefault();
     if (!msg.trim() || !selectedRecipient) return;
     try {
-      await axios.post("http://localhost:5000/api/v1/messages/sendMessage", { sender: id, senderType: "Admin", receiver: selectedRecipient._id, message: msg, receiverType: "employee" });
+      await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/sendMessage", { sender: id, senderType: "Admin", receiver: selectedRecipient._id, message: msg, receiverType: "employee" });
       toast.success("Message sent successfully!");
       setMsg("");
-      const updatedConversation = await axios.post("http://localhost:5000/api/v1/messages/getMessages", { sender: id, receiver: selectedRecipient._id });
+      const updatedConversation = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/v1/messages/getMessages", { sender: id, receiver: selectedRecipient._id });
       setConversation(updatedConversation.data.message);
       getUniqueRecipientsWithLatestMessage();
     } catch (error) { console.error("Error sending message:", error); }

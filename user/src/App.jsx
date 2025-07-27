@@ -12,7 +12,7 @@ import SchemeEligibilty from './components/pages/scheme/SchemeEligibilty';
 import Scheme from './components/pages/scheme/Scheme';
 import Footer from './components/pages/Footer';
 import SchemeDetails from './components/pages/scheme/SchemeDetails';
-import Grievances from './components/grievances';
+import Grievances from './components/Grievances';
 import GrievancesRegistrationForm from './components/GrievancesRegistrationForm';
 import VerifyOtp from './components/pages/login-register/VerifyOtp';
 import { useEffect, useState } from 'react';
