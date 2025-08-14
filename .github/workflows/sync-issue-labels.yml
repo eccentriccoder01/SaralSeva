@@ -21,38 +21,35 @@ jobs:
       - name: Sync labels from linked issues to merged PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: eccentriccoder01/saralseva
+          REPO: ${{ github.repository }}
         run: |
           echo "📥 Fetching merged PRs for $REPO..."
           gh pr list --state merged --limit 100 --repo "$REPO" --json number,title,body > merged_prs.json
-
           jq -c '.[]' merged_prs.json | while read -r pr; do
             pr_number=$(echo "$pr" | jq -r '.number')
             pr_title=$(echo "$pr" | jq -r '.title')
             pr_body=$(echo "$pr" | jq -r '.body')
-
+            # Fetch PR labels
+            pr_labels=$(gh pr view "$pr_number" --repo "$REPO" --json labels | jq -r '.labels[].name')
+            if [ -n "$pr_labels" ]; then
+              echo "🔎 PR #$pr_number already has labels. Skipping."
+              continue
+            fi
             issue_number=$(echo "$pr_title $pr_body" | grep -oE '#[0-9]+' | head -n 1 | tr -d '#')
-
             if [ -z "$issue_number" ]; then
               echo "❌ PR #$pr_number has no linked issue."
               continue
             fi
-
             echo "🔗 PR #$pr_number linked to issue #$issue_number"
-
             issue_labels=$(gh issue view "$issue_number" --repo "$REPO" --json labels | jq -r '.labels[].name')
-
             if [ -z "$issue_labels" ]; then
               echo "⚠️  Issue #$issue_number has no labels."
               continue
             fi
-
             while IFS= read -r label; do
               echo "🏷️  Applying label '$label' to PR #$pr_number..."
               gh pr edit "$pr_number" --repo "$REPO" --add-label "$label"
             done <<< "$issue_labels"
-
             sleep 0.5
           done
-
           echo "✅ Done syncing labels."
