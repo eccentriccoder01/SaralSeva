@@ -20,14 +20,18 @@ const SchemeApplied = () => {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50/30 px-[5vw] py-12">
+    <div className="min-h-screen bg-orange-50/30 dark:bg-gray-900/30 px-[5vw] py-12 transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-orange-900 mb-8 jost">My Applied Schemes</h1>
-        <div className="overflow-hidden border border-gray-200 rounded-lg shadow-lg bg-white">
+        <h1 className="text-4xl font-extrabold text-orange-900 dark:text-orange-400 mb-8 jost transition-colors duration-500">
+          My Applied Schemes
+        </h1>
+        <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg bg-white dark:bg-gray-800 transition-colors duration-500">
           {user?.schemes_applied && user.schemes_applied.length > 0 ? (
             <Table>
-              <TableCaption>A list of all schemes you have applied for.</TableCaption>
-              <TableHeader className="bg-orange-900">
+              <TableCaption className="dark:text-gray-300">
+                A list of all schemes you have applied for.
+              </TableCaption>
+              <TableHeader className="bg-orange-900 dark:bg-orange-800 transition-colors duration-500">
                 <TableRow>
                   <TableHead className="text-white font-semibold">Sl No</TableHead>
                   <TableHead className="text-white font-semibold">Scheme Name</TableHead>
@@ -39,17 +43,27 @@ const SchemeApplied = () => {
               </TableHeader>
               <TableBody>
                 {user.schemes_applied.map((item, index) => (
-                  <TableRow key={index} className="hover:bg-orange-50/70">
-                    <TableCell className="font-medium text-gray-700">{index + 1}</TableCell>
-                    <TableCell className="font-semibold text-stone-800">{item?.scheme_name}</TableCell>
-                    <TableCell className="text-gray-600">{item?.registration_no}</TableCell>
-                    <TableCell className="text-gray-600">{moment(item?.created_at).format("DD MMM, YYYY")}</TableCell>
+                  <TableRow
+                    key={index}
+                    className="hover:bg-orange-50/70 dark:hover:bg-gray-700/50 transition-colors duration-300"
+                  >
+                    <TableCell className="font-medium text-gray-700 dark:text-gray-300">{index + 1}</TableCell>
+                    <TableCell className="font-semibold text-stone-800 dark:text-gray-200">{item?.scheme_name}</TableCell>
+                    <TableCell className="text-gray-600 dark:text-gray-400">{item?.registration_no}</TableCell>
+                    <TableCell className="text-gray-600 dark:text-gray-400">
+                      {moment(item?.created_at).format("DD MMM, YYYY")}
+                    </TableCell>
                     <TableCell>
-                        <span className="px-3 py-1 text-sm font-semibold text-blue-800 bg-blue-100 rounded-full">{item?.initial_status}</span>
+                      <span className="px-3 py-1 text-sm font-semibold text-blue-800 bg-blue-100 dark:text-blue-200 dark:bg-blue-900/30 rounded-full transition-colors duration-500">
+                        {item?.initial_status}
+                      </span>
                     </TableCell>
                     <TableCell className="text-center">
-                      <button onClick={() => handlePdf(item)} className="p-2 transition-colors rounded-full hover:bg-gray-200">
-                          <Download className="w-6 h-6 text-red-700"/>
+                      <button
+                        onClick={() => handlePdf(item)}
+                        className="p-2 transition-colors rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                      >
+                        <Download className="w-6 h-6 text-red-700 dark:text-red-400" />
                       </button>
                     </TableCell>
                   </TableRow>
@@ -57,7 +71,9 @@ const SchemeApplied = () => {
               </TableBody>
             </Table>
           ) : (
-            <p className="mt-5 text-center text-xl text-gray-500 py-20">You have not applied for any schemes yet.</p>
+            <p className="mt-5 text-center text-xl text-gray-500 dark:text-gray-300 py-20 transition-colors duration-500">
+              You have not applied for any schemes yet.
+            </p>
           )}
         </div>
       </div>

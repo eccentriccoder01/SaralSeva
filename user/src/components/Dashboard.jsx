@@ -2,7 +2,7 @@ import React from "react";
 import map from "./../assets/map.gif";
 import swatchh from './../assets/SHS-English.jpg';
 
-const StatCard = ({ title, value, color, icon }) => {
+const StatCard = ({ title, value, color }) => {
     const colorVariants = {
         blue: 'from-blue-500 to-blue-700',
         green: 'from-green-500 to-green-700',
@@ -19,10 +19,10 @@ const StatCard = ({ title, value, color, icon }) => {
 
 const Dashboard = () => {
   return (
-    <div className="p-4 lg:p-8 bg-orange-50/30">
+    <div className="p-4 lg:p-8 bg-orange-50/30 dark:bg-gray-900/30 transition-colors duration-300">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="p-6 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center">
-                <h2 className="text-3xl font-bold text-orange-900 mb-4 jost">National Presence</h2>
+            <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-colors duration-300">
+                <h2 className="text-3xl font-bold text-orange-900 dark:text-orange-400 mb-4 jost">National Presence</h2>
                 <img src={map} alt="Map of India" className="w-full rounded-lg"/>
             </div>
             <div className="space-y-8">
