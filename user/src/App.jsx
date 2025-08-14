@@ -1,5 +1,9 @@
  import { BrowserRouter, Route, Routes } from 'react-router-dom';
+ import ScrollToTop from './components/ScrollToTop';
+
 import './App.css'
+
+
 import Navbar from './components/Navbar';
 import Home from './components/pages/home/Home';
 import Header from './components/Header';
@@ -61,6 +65,7 @@ function App() {
       <Route path='/contact' element={<Contact/>}/>  
     </Routes>
     <Footer/>
+    <ScrollToTop />
     </BrowserRouter>
   )
 }
