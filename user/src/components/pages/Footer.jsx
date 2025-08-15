@@ -69,7 +69,7 @@ const Footer = () => {
                 title: "ABOUT",
                 links: [
                   { name: "About the Portal", href: "#" },
-                  { name: "FAQs", href: "#" },
+                  { name: "FAQs", href: "/faq" },
                   { name: "Privacy Policy", href: "#" },
                   { name: "Linking Policy", href: "#" },
                 ],
