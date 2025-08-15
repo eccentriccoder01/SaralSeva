@@ -6,32 +6,32 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay"
-
+import Autoplay from "embla-carousel-autoplay";
 
 const Slider = ({ image1, image2, image3, image4, image5 }) => {
   return (
-    <div className="overflow-hidden">
-      <Carousel 
-       plugins={[
-        Autoplay({
-          delay: 4000,
-        }),
-      ]}
+    <div className="overflow-hidden relative">
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 4000, // 4 seconds
+            stopOnInteraction: false, // keep autoplay even after manual navigation
+          }),
+        ]}
       >
         <CarouselContent>
-          <CarouselItem>
-          <img src={image2} alt="" />
-          </CarouselItem>
-          <CarouselItem>
-            <img src={image3} alt="" />
-          </CarouselItem>
-          <CarouselItem>
-            <img src={image4} alt="" />
-          </CarouselItem>
+          {[image1, image2, image3, image4, image5].map((img, index) => (
+            <CarouselItem key={index}>
+              <img
+                src={img}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-auto object-cover"
+              />
+            </CarouselItem>
+          ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10" />
+        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10" />
       </Carousel>
     </div>
   );

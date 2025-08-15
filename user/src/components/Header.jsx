@@ -7,29 +7,31 @@ import S from './../../../S.png';
 
 const Header = () => {
   return (
-    <div className='px-[5vw] py-4 w-full flex justify-between items-center bg-orange-50/50 backdrop-blur-sm border-b border-gray-200'>
+    <div className='px-[5vw] py-4 w-full flex justify-between items-center bg-orange-50/50 dark:bg-gray-900/50 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 transition-colors duration-500'>
       <div className='flex items-center gap-4'>
-        <img 
-          src={logo} 
-          alt="Ashoka Emblem" 
-          className='w-14 h-14 lg:h-20 lg:w-20 drop-shadow-lg' 
-        />
+     <img 
+  src={logo} 
+  alt="Ashoka Emblem" 
+  className='w-14 h-14 lg:h-20 lg:w-20 drop-shadow-lg dark:invert dark:brightness-300' 
+/>
+
+
         <div>
           <Link className="navbar-brand" to="/">
-              <span className="flex items-center text-3xl lg:text-5xl font-extrabold text-orange-900 tracking-tight jost h-10">
-                  <img
-                      src={S}
-                      alt="S"
-                      style={{
-                          height: '3.5rem',
-                          marginRight: '-12px',
-                          transform: 'translateY(-2px)' 
-                      }}
-                  />
-                  aralSeva
-              </span>
+            <span className="flex items-center text-3xl lg:text-5xl font-extrabold text-orange-900 dark:text-orange-400 tracking-tight jost h-10 transition-colors duration-500">
+              <img
+                  src={S}
+                  alt="S"
+                  style={{
+                      height: '3.5rem',
+                      marginRight: '-12px',
+                      transform: 'translateY(-2px)' 
+                  }}
+              />
+              aralSeva
+            </span>
           </Link>
-          <p className='hidden md:block text-gray-600 lg:text-lg mt-1'>
+          <p className='hidden md:block text-gray-600 dark:text-gray-300 lg:text-lg mt-1 transition-colors duration-500'>
             Simplified Work Based Accounting Application for Panchayati Raj
           </p>
         </div>
