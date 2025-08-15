@@ -29,6 +29,7 @@ import GrievancesApplied from './components/GrievancesApplied';
 import Status from './components/Status';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
+import Faq from './components/Faq';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -63,6 +64,7 @@ function App() {
       <Route path='/status' element={<Status/>}/>  
       <Route path='/dashboard' element={<Dashboard/>}/>  
       <Route path='/contact' element={<Contact/>}/>  
+      <Route path='/faq' element={<Faq/>}/>
     </Routes>
     <Footer/>
     <ScrollToTop />
