@@ -50,7 +50,7 @@ const Footer = () => {
                   <h2 className="font-extrabold text-white text-lg mb-3 tracking-widest jost">ABOUT</h2>
                   <nav className="list-none mb-10 flex flex-col gap-2">
                       <li><a className="hover:text-amber-400 transition-colors" href="#">About the Portal</a></li>
-                      <li><a className="hover:text-amber-400 transition-colors" href="#">FAQs</a></li>
+                      <li><a className="hover:text-amber-400 transition-colors" href="faqs">FAQs</a></li>
                       <li><a className="hover:text-amber-400 transition-colors" href="#">Privacy Policy</a></li>
                       <li><a className="hover:text-amber-400 transition-colors" href="#">Linking Policy</a></li>
                   </nav>
