@@ -1,8 +1,36 @@
-import React from "react";
+
 import banner from "./../assets/header-banner2.jpg";
 import { Mail, MapPin } from "lucide-react";
+import { useState } from "react";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      alert(data.message); // show success message
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
       <div
@@ -64,7 +92,7 @@ const Contact = () => {
             <h3 className="text-2xl font-bold text-center text-orange-900 dark:text-orange-400 mb-6">
               Send Us a Message
             </h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name */}
                 <div>
@@ -73,7 +101,10 @@ const Contact = () => {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     placeholder="Enter your name"
+                     value={formData.name}
+        onChange={handleChange}
                     className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                     required
                   />
@@ -85,7 +116,10 @@ const Contact = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="Enter your email"
+                     value={formData.email}
+        onChange={handleChange}
                     className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                     required
                   />
@@ -98,7 +132,10 @@ const Contact = () => {
                 </label>
                 <input
                   type="text"
+                  name="subject"
                   placeholder="Enter subject"
+                  value={formData.subject}
+        onChange={handleChange}
                   className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                 />
               </div>
@@ -108,8 +145,10 @@ const Contact = () => {
                   Message
                 </label>
                 <textarea
-                  rows="5"
+                name="message"
                   placeholder="Write your message here..."
+                  value={formData.message}
+        onChange={handleChange}
                   className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   required
                 ></textarea>
