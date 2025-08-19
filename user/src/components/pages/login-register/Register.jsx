@@ -93,9 +93,11 @@ const RegisterForm = () => {
   
 const onSubmit = async (data) => {
    if (!isPhoneVerified) {
-      toast.error("Please verify your phone number first");
-      return;
-    }
+  toast.warning("Phone number not verified via OTP (optional)", {
+    style: { background: '#92400E', color: 'white', border: 'none' },
+  });
+}
+
     try {
       const formData = new FormData();
       for (const key in data) {
