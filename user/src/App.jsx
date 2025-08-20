@@ -30,6 +30,8 @@ import Status from './components/Status';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
 import Faq from './components/Faq';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import LinkingPolicy from './components/LinkingPolicy';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -65,6 +67,8 @@ function App() {
       <Route path='/dashboard' element={<Dashboard/>}/>  
       <Route path='/contact' element={<Contact/>}/>  
       <Route path='/faq' element={<Faq/>}/>
+      <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
+      <Route path='/linkingpolicy' element={<LinkingPolicy/>}/>
     </Routes>
     <Footer/>
     <ScrollToTop />
