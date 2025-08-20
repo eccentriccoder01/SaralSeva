@@ -9,23 +9,102 @@ import * as z from "zod";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast, Toaster } from "sonner";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // 👁 for toggle
 
+// ✅ Schema with confirmPassword + refine
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+  confirmPassword: z.string().min(6, { message: "Please confirm your password" }),
   mobile: z.string().length(10, { message: "Mobile number must be 10 digits" }).regex(/^[0-9]+$/, { message: "Invalid mobile number" }),
   country: z.string().min(1, { message: "Country is required" }),
   state: z.string().min(1, { message: "State is required" }),
   gender: z.enum(["male", "female"], { message: "Gender is required" }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"]  
 });
 
 const RegisterForm = () => {
   const [countryid, setCountryid] = useState("");
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({ resolver: zodResolver(schema) });
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
+  // ✅ Password toggle state
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+  // ✅ Password strength checker
+  const [passwordStrength, setPasswordStrength] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    symbol: false,
+});
+   const getPasswordStrengthColor = (condition) => {
+    return condition ? "text-green-600" : "text-gray-400";
+  };
+  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({ resolver: zodResolver(schema) });
+  const password = watch("password");
 
-  const onSubmit = async (data) => {
+  // Track password strength
+  React.useEffect(() => {
+    if (!password) return;
+    setPasswordStrength({
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    });
+  }, [password]);
+
+  // ✅ Send OTP
+  const handleSendOtp = async (mobile) => {
     try {
+      setLoading(true);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/send-otp`, { phone: mobile });
+      toast.success("OTP sent successfully!");
+      setOtpSent(true);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Verify OTP
+  const handleVerifyOtp = async (mobile) => {
+    try {
+      setLoading(true);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/verify-otp`, { phone: mobile, otp });
+      toast.success("Phone number verified!");
+      setIsPhoneVerified(true);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "OTP verification failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+const onSubmit = async (data) => {
+   if (!isPhoneVerified) {
+  toast.warning("Phone number not verified via OTP (optional)", {
+    style: { background: '#92400E', color: 'white', border: 'none' },
+  });
+}
+
+    try {
+      const formData = new FormData();
+      for (const key in data) {
+        if (key !== "confirmPassword") {
+          formData.append(key, data[key]);
+        }
+      }
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/registerUser`, data);
       toast.success("User registered successfully!", {
         style: { background: '#166534', color: 'white', border: 'none' },
@@ -53,9 +132,10 @@ const RegisterForm = () => {
                 <Link to='/userlogin' className="font-semibold text-orange-700 hover:underline">Log In</Link>
               </p>
           </div>
-
+          {/* Right Side Form */}
           <div className="w-full max-w-lg p-8 bg-white rounded-2xl shadow-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Name + Gender */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <input id="name" type="text" placeholder="Enter your Name" {...register("name")} className={inputClasses}/>
@@ -70,16 +150,66 @@ const RegisterForm = () => {
                   {errors.gender && <p className={errorClasses}>{errors.gender.message}</p>}
                 </div>
               </div>
-              
+               {/* Email */}
               <input id="email" type="text" placeholder="Enter your Email" {...register("email")} className={inputClasses} />
               {errors.email && <p className={errorClasses}>{errors.email.message}</p>}
 
-              <input type="password" placeholder="Enter your Password" {...register("password")} className={inputClasses} />
+              {/* Password + Toggle + Strength */}
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                   placeholder="Enter your Password"
+                      {...register("password")}
+                   className={inputClasses}
+                />
+              <button type="button" className="absolute right-3 top-3" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <EyeSlashIcon className="w-5 h-5 text-gray-600" /> : <EyeIcon className="w-5 h-5 text-gray-600" />}
+                </button>
               {errors.password && <p className={errorClasses}>{errors.password.message}</p>}
+              <div className="mt-2 text-sm grid grid-cols-2 gap-2">
+                  <span className={getPasswordStrengthColor(passwordStrength.length)}>8 characters</span>
+                  <span className={getPasswordStrengthColor(passwordStrength.uppercase)}>Uppercase</span>
+                  <span className={getPasswordStrengthColor(passwordStrength.lowercase)}>Lowercase</span>
+                  <span className={getPasswordStrengthColor(passwordStrength.number)}>Number</span>
+                  <span className={getPasswordStrengthColor(passwordStrength.symbol)}>Symbol</span>
+                </div>
+              </div>
 
+              {/* Confirm Password */}
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm your Password"
+                  {...register("confirmPassword")}
+                  className={inputClasses}
+                />
+                <button type="button" className="absolute right-3 top-3" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                  {showConfirmPassword ? <EyeSlashIcon className="w-5 h-5 text-gray-600" /> : <EyeIcon className="w-5 h-5 text-gray-600" />}
+                </button>
+                {errors.confirmPassword && <p className={errorClasses}>{errors.confirmPassword.message}</p>}
+              </div>
+
+              {/* Mobile + OTP */}
+              <div className="flex gap-2"></div>
               <input type="tel" placeholder="Enter your Mobile Number" {...register("mobile")} className={inputClasses} />
+              <Button type="button" onClick={() => handleSendOtp(watch("mobile"))} disabled={otpSent || loading}>
+                {otpSent ? "OTP Sent" : "Send OTP"}
+              </Button>
               {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
+              {otpSent && !isPhoneVerified && (
+                <div className="flex gap-2">
+                  <input type="text" placeholder="Enter OTP" value={otp} onChange={(e) => setOtp(e.target.value)} className={inputClasses} />
+                  <Button type="button" onClick={() => handleVerifyOtp(watch("mobile"))} disabled={loading}>
+                    Verify OTP
+                  </Button>
+                </div>
+              )}
+
+              {/* Profile Picture */}
+              <input type="file" {...register("profilePicture")} className={inputClasses} />
+              
+              {/* Country + State */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" />
@@ -92,7 +222,7 @@ const RegisterForm = () => {
               </div>
 
               <Button className="w-full text-lg py-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all" type="submit">
-                Create Account
+               {loading ? "Processing..." : "Create Account"}
               </Button>
             </form>
           </div>
