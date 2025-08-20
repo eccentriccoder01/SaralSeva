@@ -1,8 +1,36 @@
-import React from "react";
+
 import banner from "./../assets/header-banner2.jpg";
 import { Mail, MapPin } from "lucide-react";
+import { useState } from "react";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      alert(data.message); // show success message
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
       <div
@@ -24,12 +52,12 @@ const Contact = () => {
             As a partner to the community, we look forward to your comments, suggestions, and any feedback that will help us provide better service. Here are the ways to contact us:
           </p>
         </div>
-
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 mt-12">
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="flex flex-col gap-8">
           {/* Email & Phone Card */}
-          <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl border-t-4 border-amber-500 transform hover:-translate-y-2 hover:scale-105 transition-all duration-300">
+          <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-6">
-              <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full hover:shadow-lg transition-shadow duration-300">
+              <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
                 <Mail className="w-10 h-10 text-amber-600 dark:text-amber-300" />
               </div>
               <div>
@@ -45,9 +73,9 @@ const Contact = () => {
           </div>
 
           {/* Address Card */}
-          <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl border-t-4 border-amber-500 transform hover:-translate-y-2 hover:scale-105 transition-all duration-300">
+          <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center gap-6">
-              <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full hover:shadow-lg transition-shadow duration-300">
+              <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
                 <MapPin className="w-10 h-10 text-amber-600 dark:text-amber-300" />
               </div>
               <div>
@@ -59,6 +87,85 @@ const Contact = () => {
             </div>
           </div>
         </div>
+        {/* Right Side: Contact Form */}
+          <div className="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500">
+            <h3 className="text-2xl font-bold text-center text-orange-900 dark:text-orange-400 mb-6">
+              Send Us a Message
+            </h3>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Name */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                     value={formData.name}
+        onChange={handleChange}
+                    className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    required
+                  />
+                </div>
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                     value={formData.email}
+        onChange={handleChange}
+                    className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    required
+                  />
+                </div>
+              </div>
+              {/* Subject */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Enter subject"
+                  value={formData.subject}
+        onChange={handleChange}
+                  className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                />
+              </div>
+              {/* Message */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Message
+                </label>
+                <textarea
+                name="message"
+                  placeholder="Write your message here..."
+                  value={formData.message}
+        onChange={handleChange}
+                  className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                  required
+                ></textarea>
+              </div>
+              {/* Submit */}
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
   );

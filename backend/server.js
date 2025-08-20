@@ -15,6 +15,7 @@ import schemeAppliedRouter from './routes/schemeAppliedRouter.js';
 import notificationRouter from './routes/notificationRouter.js';
 import grievanceRouter from './routes/grievanceRouter.js';
 import messageRouter from './routes/messageRouter.js';
+import contactRouter from "./routes/contactRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,6 +35,7 @@ app.use('/api/v1/user/scheme', schemeAppliedRouter)
 app.use('/api/v1/notification', notificationRouter)
 app.use('/api/v1/grievances' , grievanceRouter)
 app.use('/api/v1/messages' , messageRouter)
+app.use("/api/v1/contact", contactRouter);
 
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
