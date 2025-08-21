@@ -6,6 +6,7 @@ const addSchemeController = async (req, res) => {
     const { scheme_name, scheme_dept, scheme_details, scheme_benefits, scheme_eligibility, scheme_documents_required ,scheme_code} = req.body;
     try {
 
+        
         if (!req.file) {
           return res.status(400).send('No file uploaded.');
         }
