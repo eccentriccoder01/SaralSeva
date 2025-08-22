@@ -116,7 +116,7 @@ const onSubmit = async (data) => {
     }
   };
   
-  const inputClasses = "w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
+  const inputClasses = "dark:text-black w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
   const errorClasses = "text-red-600 text-sm mt-1";
 
   return (
@@ -127,7 +127,7 @@ const onSubmit = async (data) => {
           <div className="text-center lg:text-left lg:w-1/3">
               <img src={sms} alt="Register using your mobile" className="max-w-xs mx-auto lg:max-w-sm" />
               <h1 className="text-4xl font-extrabold text-orange-900 mt-6 jost">Create a SaralSeva Account</h1>
-              <p className="text-lg text-gray-600 mt-2">
+              <p className="text-lg text-gray-600 dark:text-white mt-2">
                 Already have an Account?{' '}
                 <Link to='/userlogin' className="font-semibold text-orange-700 hover:underline">Log In</Link>
               </p>
@@ -210,7 +210,7 @@ const onSubmit = async (data) => {
               <input type="file" {...register("profilePicture")} className={inputClasses} />
               
               {/* Country + State */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 dark:text-black">
                   <div>
                     <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" />
                     {errors.country && <p className={errorClasses}>{errors.country.message}</p>}

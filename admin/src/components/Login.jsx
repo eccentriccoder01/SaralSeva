@@ -24,7 +24,7 @@ const Login = () => {
     }
   };
   
-  const inputClasses = "w-full p-3 bg-white/80 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
+  const inputClasses = "dark:text-black w-full p-3 bg-white/80 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
 
   return (
     <div className="relative min-h-screen flex items-center justify-center p-4" style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover' }}>
