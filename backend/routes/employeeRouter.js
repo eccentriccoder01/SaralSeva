@@ -1,6 +1,7 @@
 import express from 'express'
 import { editEmployee, empChangeStatus, empGrievanceChangeStatus, employeeGrievancePerformance, employeePerformance, getAllEmployee, getSingleEmployee, login_employee, register_employee } from '../controllers/employeeController.js';
 import upload from '../middleware/multer.js';
+import multerErrorhandle from '../middleware/multerErrorHandle.js';
 
 const employeeRouter = express.Router();
 
@@ -16,7 +17,7 @@ employeeRouter.post('/employeePerformance' , employeePerformance)
 
 employeeRouter.post('/employeeGrievancePerformance' , employeeGrievancePerformance)
 
-employeeRouter.post('/editEmployee' , upload.single('profilePic') ,editEmployee)
+employeeRouter.post('/editEmployee' , multerErrorhandle(upload.single('profilePic')) ,editEmployee)
 employeeRouter.post('/changeGrievanceStatus' , empGrievanceChangeStatus)
 
 

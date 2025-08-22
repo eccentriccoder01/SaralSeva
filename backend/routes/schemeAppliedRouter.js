@@ -1,15 +1,16 @@
 import express from  'express'
 import { applyScheme, checkSchemeStatus, getAllSchemes, getAppliedSchemes, getSingleAppliedScheme } from '../controllers/schemeApplied.js';
 import upload from '../middleware/multer.js';
+import multerErrorHandle from '../middleware/multerErrorHandle.js';
 
 const schemeAppliedRouter = express.Router()
 
-schemeAppliedRouter.post('/schemeApplied' , upload.fields([
+schemeAppliedRouter.post('/schemeApplied' , multerErrorHandle(upload.fields([
     { name: 'photo', maxCount: 1 },
     { name: 'aadharPhoto', maxCount: 1 },
     { name: 'panPhoto', maxCount: 1 },
     { name: 'bank_passbook', maxCount: 1 }
-  ]),  applyScheme)
+  ])),  applyScheme)
 
 
 schemeAppliedRouter.get('/getAppliedSchemes', getAppliedSchemes)
