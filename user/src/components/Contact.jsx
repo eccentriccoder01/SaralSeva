@@ -1,4 +1,3 @@
-
 import banner from "./../assets/header-banner2.jpg";
 import { Mail, MapPin } from "lucide-react";
 import { useState } from "react";
@@ -18,11 +17,14 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/v1/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       alert(data.message); // show success message
     } catch (err) {
@@ -49,45 +51,66 @@ const Contact = () => {
             Get in Touch
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            As a partner to the community, we look forward to your comments, suggestions, and any feedback that will help us provide better service. Here are the ways to contact us:
+            As a partner to the community, we look forward to your comments,
+            suggestions, and any feedback that will help us provide better
+            service. Here are the ways to contact us:
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="flex flex-col gap-8">
-          {/* Email & Phone Card */}
-          <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
-            <div className="flex items-center gap-6">
-              <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
-                <Mail className="w-10 h-10 text-amber-600 dark:text-amber-300" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-stone-800 dark:text-gray-200">By Email & Phone</h3>
-                <p className="mt-1 text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Email: <a href="mailto:info@dgs.gov.in" className="font-semibold text-orange-700 dark:text-orange-400 hover:underline">info@dgs.gov.in</a>
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Phone: <span className="font-semibold text-orange-700 dark:text-orange-400">9876543210</span>
-                </p>
+          <div className="flex flex-col gap-8">
+            {/* Email & Phone Card */}
+            <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center gap-6">
+                <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
+                  <Mail className="w-10 h-10 text-amber-600 dark:text-amber-300" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-stone-800 dark:text-gray-200">
+                    By Email & Phone
+                  </h3>
+                  <p className="mt-1 text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Email:{" "}
+                    <a
+                      href="mailto:info@dgs.gov.in"
+                      className="font-semibold text-orange-700 dark:text-orange-400 hover:underline"
+                    >
+                      info@dgs.gov.in
+                    </a>
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Phone:{" "}
+                    <span className="font-semibold text-orange-700 dark:text-orange-400">
+                      9876543210
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Address Card */}
-          <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
-            <div className="flex items-center gap-6">
-              <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
-                <MapPin className="w-10 h-10 text-amber-600 dark:text-amber-300" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-stone-800 dark:text-gray-200">Our Address</h3>
-                <p className="mt-1 text-gray-600 dark:text-gray-300 leading-relaxed">National Portal Secretariat</p>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">CGO Complex, Lodhi Road,</p>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">New Delhi - 110 003, India.</p>
+            {/* Address Card */}
+            <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center gap-6">
+                <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
+                  <MapPin className="w-10 h-10 text-amber-600 dark:text-amber-300" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-stone-800 dark:text-gray-200">
+                    Our Address
+                  </h3>
+                  <p className="mt-1 text-gray-600 dark:text-gray-300 leading-relaxed">
+                    National Portal Secretariat
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    CGO Complex, Lodhi Road,
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    New Delhi - 110 003, India.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* Right Side: Contact Form */}
+          {/* Right Side: Contact Form */}
           <div className="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500">
             <h3 className="text-2xl font-bold text-center text-orange-900 dark:text-orange-400 mb-6">
               Send Us a Message
@@ -103,8 +126,8 @@ const Contact = () => {
                     type="text"
                     name="name"
                     placeholder="Enter your name"
-                     value={formData.name}
-        onChange={handleChange}
+                    value={formData.name}
+                    onChange={handleChange}
                     className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                     required
                   />
@@ -118,8 +141,8 @@ const Contact = () => {
                     type="email"
                     name="email"
                     placeholder="Enter your email"
-                     value={formData.email}
-        onChange={handleChange}
+                    value={formData.email}
+                    onChange={handleChange}
                     className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                     required
                   />
@@ -135,7 +158,7 @@ const Contact = () => {
                   name="subject"
                   placeholder="Enter subject"
                   value={formData.subject}
-        onChange={handleChange}
+                  onChange={handleChange}
                   className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                 />
               </div>
@@ -145,10 +168,10 @@ const Contact = () => {
                   Message
                 </label>
                 <textarea
-                name="message"
+                  name="message"
                   placeholder="Write your message here..."
                   value={formData.message}
-        onChange={handleChange}
+                  onChange={handleChange}
                   className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   required
                 ></textarea>
@@ -165,7 +188,6 @@ const Contact = () => {
             </form>
           </div>
         </div>
-
       </div>
     </div>
   );
