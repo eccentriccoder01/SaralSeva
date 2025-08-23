@@ -17,7 +17,7 @@ const UserLogin = ({ setIsAuthenticated }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/user/loginUser`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/loginUser`,
         formData
       );
       console.log(res);

@@ -105,7 +105,7 @@ const onSubmit = async (data) => {
           formData.append(key, data[key]);
         }
       }
-      const res = await axios.post(`http://localhost:8000/api/v1/user/registerUser`, data);
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/registerUser`, data);
       console.log(res);
       if (res.data.success) {
         toast.success("User registered successfully!", {
