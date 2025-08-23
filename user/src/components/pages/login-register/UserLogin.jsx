@@ -16,14 +16,21 @@ const UserLogin = ({ setIsAuthenticated }) => {
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/loginUser`, formData);
+      const res = await axios.post(
+        `http://localhost:8000/api/v1/user/loginUser`,
+        formData
+      );
+      console.log(res);
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.user._id);
         setIsAuthenticated(true);
         navigate("/");
+      } else {
+        setError(res.data.message || "Login failed.");
       }
     } catch (err) {
+      console.log(err);
       setError(err.response?.data?.message || "An error occurred.");
     }
   };

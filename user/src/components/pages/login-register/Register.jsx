@@ -105,10 +105,17 @@ const onSubmit = async (data) => {
           formData.append(key, data[key]);
         }
       }
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/registerUser`, data);
-      toast.success("User registered successfully!", {
-        style: { background: '#166534', color: 'white', border: 'none' },
-      });
+      const res = await axios.post(`http://localhost:8000/api/v1/user/registerUser`, data);
+      console.log(res);
+      if (res.data.success) {
+        toast.success("User registered successfully!", {
+          style: { background: '#166534', color: 'white', border: 'none' },
+        });
+      } else {
+        toast.error(res.data.message || "Registration failed.", {
+          style: { background: '#991B1B', color: 'white', border: 'none' },
+        });
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed.", {
         style: { background: '#991B1B', color: 'white', border: 'none' },
