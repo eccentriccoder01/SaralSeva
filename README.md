@@ -176,6 +176,28 @@ npm run dev
 
 -----
 
+### 🤝 Contributors
+We appreciate all the amazing people who have contributed to SaralSeva! 🙏
+<div align="center">
+  <a href="https://github.com/eccentriccoder01/SaralSeva/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=eccentriccoder01/SaralSeva" alt="Contributors" />
+  </a>
+</div>
+
+#### How to Become a Contributor
+We welcome contributions from developers of all skill levels! Here are some ways you can contribute:
+
+- 🐛 Bug fixes - Help us identify and fix bugs
+- ✨ New features - Suggest and implement new functionality
+- 📚 Documentation - Improve our docs and guides
+- 🎨 UI/UX improvements - Make the platform more user-friendly
+- 🔧 Performance optimizations - Help make SaralSeva faster and more efficient
+- 🌐 Translations - Help make SaralSeva accessible in more languages
+- 📱 Mobile responsiveness - Improve the mobile experience
+- 🔒 Security enhancements - Help keep user data safe
+
+Thank you to everyone who has made SaralSeva better! 💚
+
 ## Issue Creation ✴
 
 Report bugs and issues or propose improvements through our GitHub repository's "Issues" tab.
