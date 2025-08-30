@@ -39,7 +39,7 @@ const faqs = [
   {
     question: "What documents do I need to apply?",
     answer:
-      "The documents depend on the scheme you’re applying for. Commonly required documents include: Aadhaar Card, Proof of residence, Income certificate, Caste certificate (if applicable), Bank account details."
+      "The documents depend on the scheme you're applying for. Commonly required documents include: Aadhaar Card, Proof of residence, Income certificate, Caste certificate (if applicable), Bank account details."
   },
   {
     question: "Is SaralSeva available in regional languages?",
@@ -59,7 +59,7 @@ const faqs = [
   {
     question: "How is my personal data protected?",
     answer:
-      "SaralSeva follows the Government of India’s data protection and privacy guidelines. Your personal information is encrypted and used only for processing your scheme applications."
+      "SaralSeva follows the Government of India's data protection and privacy guidelines. Your personal information is encrypted and used only for processing your scheme applications."
   }
 ];
 
@@ -71,9 +71,9 @@ export default function Faq() {
   };
 
   return (
-    <div className="bg-[#fdfaf6] min-h-screen">
+    <div className="bg-[#fdfaf6] dark:bg-gray-900 min-h-screen transition-colors duration-300">
       {/* Header */}
-      <header className="bg-[#7b3f00] text-white py-4 shadow-md">
+      <header className="bg-[#7b3f00] text-white py-4 shadow-lg">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">FAQs - SaralSeva</h1>
         </div>
@@ -81,7 +81,7 @@ export default function Faq() {
 
       {/* Main FAQ Section */}
       <main className="container mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold text-center text-[#7b3f00] mb-8">
+        <h2 className="text-3xl font-bold text-center text-[#7b3f00] dark:text-orange-400 mb-8 transition-colors duration-300">
           Frequently Asked Questions
         </h2>
 
@@ -89,15 +89,15 @@ export default function Faq() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-xl border border-orange-200"
+              className="bg-white dark:bg-gray-800 shadow-lg rounded-xl border border-orange-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-400 transition-all duration-300"
             >
               <button
-                className="w-full text-left px-6 py-4 flex justify-between items-center text-[#7b3f00] font-semibold"
+                className="w-full text-left px-6 py-4 flex justify-between items-center text-[#7b3f00] dark:text-orange-400 font-semibold hover:text-[#5d2f00] dark:hover:text-orange-300 transition-colors duration-200"
                 onClick={() => toggleFAQ(index)}
               >
                 {faq.question}
                 <span
-                  className={`transform transition-transform duration-300 ${
+                  className={`transform transition-transform duration-300 text-[#7b3f00] dark:text-orange-400 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                 >
@@ -105,7 +105,9 @@ export default function Faq() {
                 </span>
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-4 text-gray-700">{faq.answer}</div>
+                <div className="px-6 pb-4 text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
+                  {faq.answer}
+                </div>
               )}
             </div>
           ))}
