@@ -1,7 +1,26 @@
-import React from 'react';
-import { Shield, Lock, Eye, Users, Database, FileText, AlertTriangle, Mail } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Shield, Lock, Eye, Users, Database, FileText, AlertTriangle, Mail, Sun, Moon } from 'lucide-react';
 
 const PrivacyPolicy = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Persist theme in localStorage
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  // Load saved theme on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") setDarkMode(true);
+  }, []);
+
   const sections = [
     {
       id: "information-collection",
@@ -168,7 +187,7 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -188,10 +207,20 @@ const PrivacyPolicy = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Theme Toggle Button */}
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
+          >
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        </div>
+
         {/* Introduction */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Commitment to Your Privacy</h2>
-          <div className="prose prose-lg max-w-none text-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 transition-colors duration-500">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Our Commitment to Your Privacy</h2>
+          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
             <p className="mb-4">
               SaralSeva is dedicated to strengthening governance from the ground up by providing transparent, 
               accessible, and secure digital services for rural government schemes. This Privacy Policy explains 
@@ -203,7 +232,7 @@ const PrivacyPolicy = () => {
               critical importance of maintaining the confidentiality and integrity of your personal information 
               while ensuring transparency in government operations.
             </p>
-            <p className="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
               <strong>Last Updated:</strong> August 2025 | <strong>Effective Date:</strong> August 19, 2025
             </p>
           </div>
@@ -212,7 +241,7 @@ const PrivacyPolicy = () => {
         {/* Sections */}
         <div className="space-y-8">
           {sections.map((section, index) => (
-            <div key={section.id} className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div key={section.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-colors duration-500">
               <div className="bg-gradient-to-r from-blue-500 to-orange-400 text-white p-6">
                 <div className="flex items-center">
                   {section.icon}
@@ -224,7 +253,7 @@ const PrivacyPolicy = () => {
                 <div className="space-y-8">
                   {section.content.map((subsection, subIndex) => (
                     <div key={subIndex}>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                         <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
                         {subsection.subtitle}
                       </h3>
@@ -232,7 +261,7 @@ const PrivacyPolicy = () => {
                         {subsection.items.map((item, itemIndex) => (
                           <li key={itemIndex} className="flex items-start">
                             <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-gray-700 leading-relaxed">{item}</span>
+                            <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -276,13 +305,13 @@ const PrivacyPolicy = () => {
         </div>
 
         {/* Footer Note */}
-        <div className="bg-gray-50 rounded-xl p-6 mt-8 text-center">
-          <p className="text-gray-600 text-sm leading-relaxed">
+        <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 mt-8 text-center transition-colors duration-500">
+          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
             This Privacy Policy is part of SaralSeva's commitment to building a transparent, accountable, 
             and citizen-centric digital governance ecosystem. Regular updates ensure compliance with 
             evolving data protection regulations and government guidelines.
           </p>
-          <div className="flex flex-wrap justify-center items-center mt-4 space-x-4 text-xs text-gray-500">
+          <div className="flex flex-wrap justify-center items-center mt-4 space-x-4 text-xs text-gray-500 dark:text-gray-400">
             <span>🇮🇳 Proudly Indian</span>
             <span>•</span>
             <span>Digital India Initiative</span>

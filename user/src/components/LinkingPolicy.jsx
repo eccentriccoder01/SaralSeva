@@ -1,7 +1,26 @@
-import React from 'react';
-import { Link2, ExternalLink, Shield, AlertTriangle, CheckCircle, XCircle, Globe, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Link2, ExternalLink, Shield, AlertTriangle, CheckCircle, XCircle, Globe, Users, Sun, Moon } from 'lucide-react';
 
 const LinkingPolicy = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Persist theme in localStorage
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  // Load saved theme on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") setDarkMode(true);
+  }, []);
+
   const linkingTypes = [
     {
       type: "Outbound Links",
@@ -48,7 +67,7 @@ const LinkingPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -68,10 +87,20 @@ const LinkingPolicy = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Theme Toggle Button */}
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
+          >
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        </div>
+
         {/* Introduction */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Linking Framework</h2>
-          <div className="prose prose-lg max-w-none text-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 transition-colors duration-500">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Our Linking Framework</h2>
+          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
             <p className="mb-4">
               As a government platform dedicated to transparent and accessible digital governance, 
               SaralSeva maintains strict guidelines for linking to and from external websites. 
@@ -83,8 +112,8 @@ const LinkingPolicy = () => {
               services while protecting users from security threats and ensuring compliance with 
               government digital standards.
             </p>
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
-              <p className="text-sm text-blue-800">
+            <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 p-4 rounded">
+              <p className="text-sm text-blue-800 dark:text-blue-200">
                 <strong>Policy Scope:</strong> This policy applies to all hyperlinks, redirects, 
                 API integrations, and digital connections associated with the SaralSeva platform.
               </p>
@@ -93,25 +122,25 @@ const LinkingPolicy = () => {
         </div>
 
         {/* Types of Linking */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Types of Linking</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 transition-colors duration-500">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Types of Linking</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {linkingTypes.map((item, index) => (
-              <div key={index} className="border border-gray-200 rounded-xl p-6">
+              <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-xl p-6 transition-colors duration-500">
                 <div className="flex items-center mb-4">
                   <div className={`${item.color} text-white p-2 rounded-lg mr-3`}>
                     {item.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{item.type}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{item.type}</h3>
                 </div>
-                <p className="text-gray-600">{item.description}</p>
+                <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Outbound Linking Policy */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-8 transition-colors duration-500">
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6">
             <div className="flex items-center">
               <ExternalLink className="w-6 h-6 mr-3" />
@@ -122,11 +151,11 @@ const LinkingPolicy = () => {
           <div className="p-8">
             <div className="grid lg:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
                   Permitted External Links
                 </h3>
-                <ul className="space-y-3 text-gray-700">
+                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
                     <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                     Official government websites and portals (.gov.in domains)
@@ -155,11 +184,11 @@ const LinkingPolicy = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                   <XCircle className="w-5 h-5 text-red-500 mr-2" />
                   Prohibited External Links
                 </h3>
-                <ul className="space-y-3 text-gray-700">
+                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                   {prohibitedContent.slice(0, 6).map((item, index) => (
                     <li key={index} className="flex items-start">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
@@ -170,9 +199,9 @@ const LinkingPolicy = () => {
               </div>
             </div>
 
-            <div className="mt-8 bg-gray-50 rounded-lg p-6">
-              <h4 className="font-semibold text-gray-900 mb-3">Link Disclaimer</h4>
-              <p className="text-gray-700 text-sm leading-relaxed">
+            <div className="mt-8 bg-gray-50 dark:bg-gray-700 rounded-lg p-6 transition-colors duration-500">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Link Disclaimer</h4>
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                 All external links are provided for user convenience and informational purposes. 
                 SaralSeva does not endorse, control, or assume responsibility for the content, 
                 privacy policies, or practices of external websites. Users access external sites 
@@ -184,15 +213,15 @@ const LinkingPolicy = () => {
         </div>
 
         {/* Approved Government Domains */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Pre-Approved Government Domains</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 transition-colors duration-500">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Pre-Approved Government Domains</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {approvedDomains.map((category, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{category.category}</h3>
+              <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 transition-colors duration-500">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{category.category}</h3>
                 <div className="space-y-2">
                   {category.domains.map((domain, domainIndex) => (
-                    <span key={domainIndex} className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full mr-2 mb-2">
+                    <span key={domainIndex} className="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 text-sm px-3 py-1 rounded-full mr-2 mb-2">
                       *.{domain}
                     </span>
                   ))}
@@ -203,7 +232,7 @@ const LinkingPolicy = () => {
         </div>
 
         {/* Inbound Linking Policy */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-8 transition-colors duration-500">
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6">
             <div className="flex items-center">
               <Link2 className="w-6 h-6 mr-3" />
@@ -214,8 +243,8 @@ const LinkingPolicy = () => {
           <div className="p-8">
             <div className="grid lg:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Permitted Inbound Links</h3>
-                <ul className="space-y-3 text-gray-700">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Permitted Inbound Links</h3>
+                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
                     Government websites and official portals
@@ -234,8 +263,8 @@ const LinkingPolicy = () => {
                   </li>
                 </ul>
 
-                <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Link Requirements</h4>
-                <ul className="space-y-2 text-gray-600 text-sm">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">Link Requirements</h4>
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
                   <li>• Links must be contextually relevant</li>
                   <li>• Must not misrepresent SaralSeva's purpose</li>
                   <li>• Should not bypass authentication mechanisms</li>
@@ -244,8 +273,8 @@ const LinkingPolicy = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Linking Restrictions</h3>
-                <ul className="space-y-3 text-gray-700">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Linking Restrictions</h3>
+                <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                   <li className="flex items-start">
                     <XCircle className="w-5 h-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" />
                     Commercial websites without prior approval
@@ -264,9 +293,9 @@ const LinkingPolicy = () => {
                   </li>
                 </ul>
 
-                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mt-6">
-                  <h4 className="font-semibold text-orange-800 mb-2">Approval Required</h4>
-                  <p className="text-orange-700 text-sm">
+                <div className="bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-700 rounded-lg p-4 mt-6 transition-colors duration-500">
+                  <h4 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">Approval Required</h4>
+                  <p className="text-orange-700 dark:text-orange-300 text-sm">
                     Commercial entities, media organizations, and third-party services must 
                     obtain written permission before linking to SaralSeva.
                   </p>
@@ -277,7 +306,7 @@ const LinkingPolicy = () => {
         </div>
 
         {/* Security and Monitoring */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-8 transition-colors duration-500">
           <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6">
             <div className="flex items-center">
               <Shield className="w-6 h-6 mr-3" />
@@ -288,8 +317,8 @@ const LinkingPolicy = () => {
           <div className="p-8">
             <div className="grid lg:grid-cols-3 gap-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Link Verification</h3>
-                <ul className="space-y-2 text-gray-600 text-sm">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Link Verification</h3>
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
                   <li>• SSL/TLS certificate validation</li>
                   <li>• Malware and phishing detection</li>
                   <li>• Content appropriateness review</li>
@@ -298,8 +327,8 @@ const LinkingPolicy = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Monitoring Systems</h3>
-                <ul className="space-y-2 text-gray-600 text-sm">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Monitoring Systems</h3>
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
                   <li>• 24/7 link availability monitoring</li>
                   <li>• Suspicious activity detection</li>
                   <li>• User feedback analysis</li>
@@ -308,8 +337,8 @@ const LinkingPolicy = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Response Protocols</h3>
-                <ul className="space-y-2 text-gray-600 text-sm">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Response Protocols</h3>
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
                   <li>• Immediate removal of harmful links</li>
                   <li>• User notification systems</li>
                   <li>• Incident reporting procedures</li>
@@ -358,17 +387,17 @@ const LinkingPolicy = () => {
         </div>
 
         {/* Policy Updates */}
-        <div className="bg-gray-50 rounded-xl p-6 mt-8 text-center">
+        <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 mt-8 text-center transition-colors duration-500">
           <div className="flex items-center justify-center mb-4">
             <AlertTriangle className="w-5 h-5 text-orange-500 mr-2" />
-            <h3 className="font-semibold text-gray-900">Policy Updates and Compliance</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white">Policy Updates and Compliance</h3>
           </div>
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
             This Linking Policy is regularly reviewed and updated to ensure compliance with 
             evolving government guidelines, security standards, and digital governance best practices. 
             All stakeholders will be notified of significant policy changes.
           </p>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
             Last Updated: August 2025 | Next Review: February 2026 | Version: 2.1
           </p>
         </div>
