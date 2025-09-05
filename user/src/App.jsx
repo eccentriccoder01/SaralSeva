@@ -1,8 +1,8 @@
- import { BrowserRouter, Route, Routes } from 'react-router-dom';
- import ScrollToTop from './components/ScrollToTop';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
+import ScrollToBottom from './components/ScrollToBottom'; // ✅ added
 
-import './App.css'
-
+import './App.css';
 
 import Navbar from './components/Navbar';
 import Home from './components/pages/home/Home';
@@ -35,45 +35,49 @@ import LinkingPolicy from './components/LinkingPolicy';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const 
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
   }, []);
+
   return (
     <BrowserRouter>
-    <Topbar/>
-    <Header/>
-    <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/login' element={isAuthenticated ? <Home/> : <Login/>}/>
-      <Route path='/userlogin' element={isAuthenticated ? <Home/> : <UserLogin isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}/>
-      <Route path='/register' element={isAuthenticated ? <Home/> : <Register/>}/>
-      <Route path='/about' element={<About/>}/>
-      <Route path='/scheme_eligibity' element={<SchemeEligibilty/>}/>
-      <Route path='/schemes' element={<Scheme/>}/>
-      <Route path='/scheme/:id' element={<SchemeDetails/>}/>
-      <Route path='/grievances' element={<Grievances/>}/>
-      <Route path='/grievances/grievances_registration_form' element={<GrievancesRegistrationForm isAuthenticated={isAuthenticated} />}/>
-      <Route path='/auth/verify-otp' element={isAuthenticated ? <Home/>:<VerifyOtp isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}/>
-      <Route path='/apply' element={isAuthenticated ? <SchemeAppliedForm/> : <UserLogin/>}/>
-      <Route path='/scheme_applied_success' element={isAuthenticated ?  <SchemeAppliedConfirmationPage/>: <Login/>}/>
-      <Route path='/grievances_success' element={isAuthenticated ?  <GrievanceConfirmation/>: <Login/>}/>
-      <Route path='/profile' element={isAuthenticated ?  <Profile/>: <Login/>}/>     
-      <Route path='/schemeApplied' element={isAuthenticated ?  <SchemeApplied/>: <Login/>}/>     
-      <Route path='/grievancesApplied' element={isAuthenticated ?  <GrievancesApplied/>: <Login/>}/>   
-      <Route path='/status' element={<Status/>}/>  
-      <Route path='/dashboard' element={<Dashboard/>}/>  
-      <Route path='/contact' element={<Contact/>}/>  
-      <Route path='/faq' element={<Faq/>}/>
-      <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
-      <Route path='/linkingpolicy' element={<LinkingPolicy/>}/>
-    </Routes>
-    <Footer/>
-    <ScrollToTop />
+      <Topbar />
+      <Header />
+      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/login' element={isAuthenticated ? <Home/> : <Login/>}/>
+        <Route path='/userlogin' element={isAuthenticated ? <Home/> : <UserLogin isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}/>
+        <Route path='/register' element={isAuthenticated ? <Home/> : <Register/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/scheme_eligibity' element={<SchemeEligibilty/>}/>
+        <Route path='/schemes' element={<Scheme/>}/>
+        <Route path='/scheme/:id' element={<SchemeDetails/>}/>
+        <Route path='/grievances' element={<Grievances/>}/>
+        <Route path='/grievances/grievances_registration_form' element={<GrievancesRegistrationForm isAuthenticated={isAuthenticated} />}/>
+        <Route path='/auth/verify-otp' element={isAuthenticated ? <Home/>:<VerifyOtp isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}/>
+        <Route path='/apply' element={isAuthenticated ? <SchemeAppliedForm/> : <UserLogin/>}/>
+        <Route path='/scheme_applied_success' element={isAuthenticated ?  <SchemeAppliedConfirmationPage/>: <Login/>}/>
+        <Route path='/grievances_success' element={isAuthenticated ?  <GrievanceConfirmation/>: <Login/>}/>
+        <Route path='/profile' element={isAuthenticated ?  <Profile/>: <Login/>}/>     
+        <Route path='/schemeApplied' element={isAuthenticated ?  <SchemeApplied/>: <Login/>}/>     
+        <Route path='/grievancesApplied' element={isAuthenticated ?  <GrievancesApplied/>: <Login/>}/>   
+        <Route path='/status' element={<Status/>}/>  
+        <Route path='/dashboard' element={<Dashboard/>}/>  
+        <Route path='/contact' element={<Contact/>}/>  
+        <Route path='/faq' element={<Faq/>}/>
+        <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
+        <Route path='/linkingpolicy' element={<LinkingPolicy/>}/>
+      </Routes>
+
+      <Footer />
+      <ScrollToTop />
+      <ScrollToBottom /> {/* ✅ new button */}
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
