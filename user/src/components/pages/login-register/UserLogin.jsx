@@ -79,7 +79,6 @@ const UserLogin = ({ setIsAuthenticated }) => {
         setError(res.data.message || "Google login failed.");
       }
     } catch (err) {
-      console.log(err);
       setError(err.response?.data?.message || "Google login failed.");
     }
   };
