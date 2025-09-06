@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // 👁 for toggle
+import { GoogleLogin } from "@react-oauth/google"; // Google OAuth
 
 // ✅ Schema with confirmPassword + refine
 const schema = z.object({
@@ -26,7 +27,8 @@ const schema = z.object({
   path: ["confirmPassword"]  
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
   const [countryid, setCountryid] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
@@ -62,6 +64,40 @@ const RegisterForm = () => {
       symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
     });
   }, [password]);
+
+  // Google Sign-Up Handler
+  const handleGoogleSignUp = async (id_token) => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/google`,
+        { id_token, isRegistering: true }
+      );
+
+      if (res.data.success) {
+        if (res.data.incomplete) {
+          // User needs to complete registration
+          toast.success("Please complete your profile to finish registration");
+          navigate("/auth/complete-registration", {
+            state: {
+              user: res.data.user,
+              googleId: res.data.user.googleId,
+            },
+          });
+        } else {
+          // User already exists and is complete
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("id", res.data.user._id);
+          setIsAuthenticated && setIsAuthenticated(true);
+          toast.success("Signed up with Google successfully!");
+          navigate("/");
+        }
+      } else {
+        toast.error(res.data.message || "Google sign-up failed.");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Google sign-up failed.");
+    }
+  };
 
   // ✅ Send OTP
   const handleSendOtp = async (mobile) => {
@@ -111,6 +147,7 @@ const onSubmit = async (data) => {
         toast.success("User registered successfully!", {
           style: { background: '#166534', color: 'white', border: 'none' },
         });
+        setTimeout(() => navigate("/userlogin"), 2000); // Redirect after 2 seconds
       } else {
         toast.error(res.data.message || "Registration failed.", {
           style: { background: '#991B1B', color: 'white', border: 'none' },
@@ -141,6 +178,41 @@ const onSubmit = async (data) => {
           </div>
           {/* Right Side Form */}
           <div className="w-full max-w-lg p-8 bg-white rounded-2xl shadow-2xl">
+
+            {/* Google Sign-Up Button */}
+            <div className="mb-6">
+              <div className="mb-6">
+                <div className="w-full [&>div]:!w-full [&>div>div]:!w-full [&_iframe]:!w-full">
+                  <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      const id_token = credentialResponse.credential;
+                      handleGoogleSignUp(id_token);
+                    }}
+                    onError={() => toast.error("Google sign-up failed")}
+                    useOneTap
+                    text="continue_with"
+                    shape="rectangular"
+                    logo_alignment="center"
+                    style={{
+                      width: '100%',
+                      maxWidth: '400px'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or register with email
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Name + Gender */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
