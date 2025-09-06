@@ -234,6 +234,17 @@ FIREBASE_APP_ID=YOUR_FIREBASE_APP_ID
 FIREBASE_MEASUREMENT_ID=YOUR_FIREBASE_MEASUREMENT_ID
 ```
 
+Google Cloud Console (Google OAuth Client ID)
+1. Application type: Web Application
+2. Authorized JavaScript origins:
+   - http://localhost:5173 (local development)
+   - Any other frontend URI you use
+3. Redirect URIs: Not needed for this setup
+
+```bash
+GOOGLE_CLIENT_ID=YOUR_GOOGLE_OAuth_CLIENT_ID
+```
+
 c. Install dependencies and run the server:
 
 ```bash
@@ -242,6 +253,13 @@ npm start
 ```
 
 ### 3\. Set up the Frontends (`/user`, `/employee`, `/admin`):
+
+> **Note:** The following `.env` configuration is **only for the `/user`**:
+
+```bash
+VITE_GOOGLE_CLIENT_ID=YOUR_GOOGLE_OAuth_CLIENT_ID (Same as Backend)
+```
+
 
 > Repeat the following steps for each frontend directory (`user`, `employee`, and `admin`) in a **separate terminal**.
 
