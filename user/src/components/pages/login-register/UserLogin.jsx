@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import heroBg from "./../../../assets/baner-cpgrams_1.jpg"; // Using a relevant background
+import { GoogleLogin } from "@react-oauth/google";
+import { toast } from "sonner";
 
 const UserLogin = ({ setIsAuthenticated }) => {
   const [loginType, setLoginType] = useState('otp'); // 'otp' or 'email'
@@ -20,7 +22,6 @@ const UserLogin = ({ setIsAuthenticated }) => {
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/loginUser`,
         formData
       );
-      console.log(res);
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.user._id);
@@ -46,6 +47,41 @@ const UserLogin = ({ setIsAuthenticated }) => {
       setError(err.response?.data?.message || "Failed to send OTP.");
     }
   };
+
+  // Google Login Handler
+  const handleGoogleLogin = async (id_token) => {
+    setError(null);
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/google`,
+        { id_token, isRegistering: false }
+      );
+
+      if (res.data.success) {
+        if (res.data.incomplete) {
+          // User needs to complete registration
+          toast.success("Please complete your profile to finish registration");
+          navigate("/auth/complete-registration", {
+            state: {
+              user: res.data.user,
+              googleId: res.data.user.googleId,
+            },
+          });
+        } else {
+          // User is fully registered
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("id", res.data.user._id);
+          setIsAuthenticated(true);
+          navigate("/");
+        }
+      } else {
+        setError(res.data.message || "Google login failed.");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Google login failed.");
+    }
+  };
   
   const inputClasses = "dark:text-black w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
 
@@ -54,6 +90,39 @@ const UserLogin = ({ setIsAuthenticated }) => {
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative w-full max-w-md p-8 space-y-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl">
             <h1 className="text-3xl font-bold text-center text-orange-900 jost">Welcome Back</h1>
+
+            {/* Google Sign-In Button */}
+            <div className="space-y-4">
+              <div className="mb-6">
+                <div className="w-full [&>div]:!w-full [&>div>div]:!w-full [&_iframe]:!w-full">
+                  <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      const id_token = credentialResponse.credential;
+                      handleGoogleLogin(id_token);
+                    }}
+                    onError={() => toast.error("Google sign-up failed")}
+                    useOneTap
+                    text="continue_with"
+                    shape="rectangular"
+                    logo_alignment="center"
+                    style={{
+                      width: '100%',
+                      maxWidth: '400px'
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+            </div>
             
             {/* Tab Switcher */}
             <div className="flex bg-gray-200 rounded-lg p-1">

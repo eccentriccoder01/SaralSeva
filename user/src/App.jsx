@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Topbar from './components/Topbar';
 import Login from './components/pages/login-register/Login';
 import UserLogin from './components/pages/login-register/UserLogin';
+import CompleteGoogleRegistration from './components/pages/login-register/CompleteGoogleRegistration';
 import Register from './components/pages/login-register/Register';
 import About from './components/pages/About';
 import SchemeEligibilty from './components/pages/scheme/SchemeEligibilty';
@@ -51,6 +52,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={isAuthenticated ? <Home/> : <Login/>}/>
         <Route path='/userlogin' element={isAuthenticated ? <Home/> : <UserLogin isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}/>
+        <Route path="/auth/complete-registration" element={<CompleteGoogleRegistration setIsAuthenticated={setIsAuthenticated} />} />
         <Route path='/register' element={isAuthenticated ? <Home/> : <Register/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/scheme_eligibity' element={<SchemeEligibilty/>}/>

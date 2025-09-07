@@ -10,26 +10,55 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    password:{
-        type:String,
-        required:true
+    password: {
+      type: String,
+      required: function () {
+        return this.provider === "local";
+      },
     },
-    gender:{
-        type:String,
-        required:true
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+      required: function () {
+        return this.provider === "google";
+      },
     },
-    mobile:{
-        type:Number,
-        required:true,
-        unique:true
+    provider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
     },
-    state:{
-        type:String,
-        required:true
+    isComplete: {
+      type: Boolean,
+      default: function () {
+        return this.provider === "local"; // local users are always complete
+      },
     },
-    country:{
-        type:String,
-        required:true
+    gender: {
+      type: String,
+      required: function () {
+        return this.isComplete;
+      },
+    },
+    mobile: {
+      type: Number,
+      unique: true,
+      required: function () {
+        return this.isComplete;
+      },
+    },
+    state: {
+      type: String,
+      required: function () {
+        return this.isComplete;
+      },
+    },
+    country: {
+      type: String,
+      required: function () {
+        return this.isComplete;
+      },
     },
     otp: { type: String },
     otp_expiry: { type: Date },
