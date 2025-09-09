@@ -33,6 +33,7 @@ import Contact from './components/Contact';
 import Faq from './components/Faq';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import LinkingPolicy from './components/LinkingPolicy';
+import EditProfile from './components/pages/EditProfile';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -73,6 +74,7 @@ function App() {
         <Route path='/faq' element={<Faq/>}/>
         <Route path='/privacypolicy' element={<PrivacyPolicy/>}/>
         <Route path='/linkingpolicy' element={<LinkingPolicy/>}/> 
+        <Route path='/profile/edit' element={<EditProfile/>}/> 
       </Routes>
 
       <Footer />
