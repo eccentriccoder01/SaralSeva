@@ -8,8 +8,9 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css';
 
-// Validation schema like registration form
 const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     email: z.string().email({ message: "Invalid email" }),
@@ -30,7 +31,6 @@ const EditProfile = () => {
         resolver: zodResolver(schema),
     });
 
-    // Populate form with current user info
     useEffect(() => {
         if (user) {
             setValue("name", user.name || "");
@@ -51,7 +51,7 @@ const EditProfile = () => {
             );
             if (res.data.success) {
                 toast.success("Profile updated successfully!");
-                getUser(id); // Refresh context
+                getUser(id);
                 navigate("/profile");
             } else {
                 toast.error(res.data.message || "Failed to update profile");
@@ -65,48 +65,73 @@ const EditProfile = () => {
     const errorClasses = "text-red-600 text-sm mt-1";
 
     return (
-        <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded-xl shadow-lg">
+        <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded-xl shadow-lg relative">
             <h1 className="text-2xl font-bold mb-4">Edit Profile</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <input name="name" {...register("name")} placeholder="Name" className={inputClasses} />
+                <div className="relative" data-tooltip-id="name-tooltip" data-tooltip-content="Enter your full name">
+                    <input name="name" {...register("name")} placeholder="Name" className={inputClasses} />
+                </div>
                 {errors.name && <p className={errorClasses}>{errors.name.message}</p>}
 
-                <input name="email" {...register("email")} placeholder="Email" className={inputClasses} />
+                <div className="relative" data-tooltip-id="email-tooltip" data-tooltip-content="Enter a valid email address">
+                    <input name="email" {...register("email")} placeholder="Email" className={inputClasses} />
+                </div>
                 {errors.email && <p className={errorClasses}>{errors.email.message}</p>}
 
-                <select {...register("gender")} className={inputClasses}>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+                <div className="relative" data-tooltip-id="gender-tooltip" data-tooltip-content="Select your gender">
+                    <select {...register("gender")} className={inputClasses}>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
                 {errors.gender && <p className={errorClasses}>{errors.gender.message}</p>}
 
-                <input name="mobile" {...register("mobile")} placeholder="Mobile" className={inputClasses} />
+                <div className="relative" data-tooltip-id="mobile-tooltip" data-tooltip-content="Enter 10-digit mobile number">
+                    <input name="mobile" {...register("mobile")} placeholder="Mobile" className={inputClasses} />
+                </div>
                 {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
-                {/*Country + State */}
-                <CountrySelect
-                    placeHolder={user?.country || "Select Country"} // show current country as placeholder
-                    value="" // keep empty so it doesn't preselect
-                    onChange={(e) => {
-                        setCountryId(e.id);
-                        setValue("country", e.name);
-                    }}
-                />
+                <div className="relative" data-tooltip-id="country-tooltip" data-tooltip-content="Select your country">
+                    <CountrySelect
+                        placeHolder={user?.country || "Select Country"}
+                        value=""
+                        onChange={(e) => {
+                            setCountryId(e.id);
+                            setValue("country", e.name);
+                        }}
+                    />
+                </div>
                 {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
 
-                <StateSelect
-                    countryid={countryId}
-                    placeHolder={user?.state || "Select State"} 
-                    value="" 
-                    onChange={(e) => setValue("state", e.name)}
-                />
+                <div className="relative" data-tooltip-id="state-tooltip" data-tooltip-content="Select your state">
+                    <StateSelect
+                        countryid={countryId}
+                        placeHolder={user?.state || "Select State"}
+                        value=""
+                        onChange={(e) => setValue("state", e.name)}
+                    />
+                </div>
                 {errors.state && <p className={errorClasses}>{errors.state.message}</p>}
 
-                <button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg">
+                <button 
+                    type="submit" 
+                    className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg"
+                    data-tooltip-id="update-tooltip"
+                    data-tooltip-content="Click to update your profile information"
+                >
                     Update Profile
                 </button>
             </form>
+
+            {/* Tooltips */}
+            <Tooltip id="name-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+            <Tooltip id="email-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+            <Tooltip id="gender-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+            <Tooltip id="mobile-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+            <Tooltip id="country-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+            <Tooltip id="state-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+            <Tooltip id="update-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
         </div>
     );
 };

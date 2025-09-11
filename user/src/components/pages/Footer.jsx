@@ -3,8 +3,32 @@ import qrcode from "./../../assets/QRcode.jpg";
 import app from "./../../assets/app_store.svg";
 import play from "./../../assets/play_store.svg";
 import { FaInstagram, FaWhatsapp, FaFacebook, FaYoutube, FaXTwitter } from "react-icons/fa6";
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css';
+
+const tooltipStyle = {
+  backgroundColor: '#FF9933', // orange theme
+  color: '#1F2937', // dark text
+  padding: '8px 12px',
+  borderRadius: '12px',
+  fontSize: '14px',
+  fontWeight: 500,
+  textAlign: 'center',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+  maxWidth: '220px',
+  whiteSpace: 'pre-line',
+  zIndex: 9999,
+};
 
 const Footer = () => {
+  const socialLinks = [
+    { icon: <FaFacebook />, link: "/", name: "Facebook" },
+    { icon: <FaWhatsapp />, link: "/", name: "WhatsApp" },
+    { icon: <FaYoutube />, link: "/", name: "YouTube" },
+    { icon: <FaInstagram />, link: "/", name: "Instagram" },
+    { icon: <FaXTwitter />, link: "/", name: "X (Twitter)" },
+  ];
+
   return (
     <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
       <div className="container mx-auto px-5 py-16">
@@ -18,8 +42,12 @@ const Footer = () => {
               <img
                 src={qrcode}
                 alt="QR Code for Mobile App"
-                className="w-28 h-28 object-cover rounded-lg border-2 border-amber-500 p-1"
+                className="w-28 h-28 object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer"
+                data-tooltip-id="qr-tooltip"
+                data-tooltip-content="Scan this QR code to download the SaralSeva app"
               />
+              <Tooltip id="qr-tooltip" place="top" style={tooltipStyle} />
+
               <div className="flex flex-col gap-2">
                 <img
                   src={app}
@@ -35,22 +63,26 @@ const Footer = () => {
             </div>
             <div className="mt-8">
               <span className="inline-flex justify-center md:justify-start w-full gap-4">
-                {[
-                  { icon: <FaFacebook />, link: "/" },
-                  { icon: <FaWhatsapp />, link: "/" },
-                  { icon: <FaYoutube />, link: "/" },
-                  { icon: <FaInstagram />, link: "/" },
-                  { icon: <FaXTwitter />, link: "/" },
-                ].map((item, idx) => (
+                {socialLinks.map((item, idx) => (
                   <a
                     key={idx}
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-500 dark:hover:text-orange-400 transition-colors text-2xl"
+                    data-tooltip-id={`social-${idx}`}
+                    data-tooltip-content={`Follow us on ${item.name}`}
                   >
                     {item.icon}
                   </a>
+                ))}
+                {socialLinks.map((_, idx) => (
+                  <Tooltip
+                    key={idx}
+                    id={`social-${idx}`}
+                    place="top"
+                    style={tooltipStyle}
+                  />
                 ))}
               </span>
             </div>
@@ -112,25 +144,43 @@ const Footer = () => {
                   <div className="flex flex-col gap-1">
                     {section.content.map((item, i) =>
                       typeof item === "string" ? (
-                        <p key={i} className="text-sm">
-                          {item}
-                        </p>
+                        <p key={i} className="text-sm">{item}</p>
                       ) : item.type === "email" ? (
-                        <a
-                          key={i}
-                          href={`mailto:${item.value}`}
-                          className="font-semibold hover:text-amber-400 dark:hover:text-orange-400 transition-colors"
-                        >
-                          {item.value}
-                        </a>
+                        <>
+                          <a
+                            key={i}
+                            href={`mailto:${item.value}`}
+                            className="font-semibold hover:text-amber-400 dark:hover:text-orange-400 transition-colors"
+                            data-tooltip-id={`email-tooltip-${i}`}
+                            data-tooltip-content="Click to send an email"
+                          >
+                            {item.value}
+                          </a>
+                          <Tooltip
+                            id={`email-tooltip-${i}`}
+                            place="top"
+                            style={tooltipStyle}
+                          />
+                        </>
                       ) : item.type === "phone" ? (
-                        <a key={i} className="font-semibold" href={`tel:${item.value}`}>
-                          {item.value}
-                        </a>
+                        <>
+                          <a
+                            key={i}
+                            className="font-semibold"
+                            href={`tel:${item.value}`}
+                            data-tooltip-id={`phone-tooltip-${i}`}
+                            data-tooltip-content="Click to call"
+                          >
+                            {item.value}
+                          </a>
+                          <Tooltip
+                            id={`phone-tooltip-${i}`}
+                            place="top"
+                            style={tooltipStyle}
+                          />
+                        </>
                       ) : (
-                        <p key={i} className="font-semibold">
-                          {item.value}
-                        </p>
+                        <p key={i} className="font-semibold">{item.value}</p>
                       )
                     )}
                   </div>

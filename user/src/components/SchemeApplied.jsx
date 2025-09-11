@@ -4,6 +4,8 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import moment from "moment";
 import { Download } from "lucide-react";
 import CreatePdfScheme from "./CreatePdfScheme";
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css'; // adjust path if needed
 
 const SchemeApplied = () => {
   const { user, id, getUser } = useContext(UserContext);
@@ -59,12 +61,20 @@ const SchemeApplied = () => {
                       </span>
                     </TableCell>
                     <TableCell className="text-center">
-                      <button
-                        onClick={() => handlePdf(item)}
-                        className="p-2 transition-colors rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                      >
-                        <Download className="w-6 h-6 text-red-700 dark:text-red-400" />
-                      </button>
+                    <div>
+                        <button
+                          id={`downloadBtn-${index}`}
+                          onClick={() => handlePdf(item)}
+                          className="p-2 transition-colors rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                        >
+                          <Download className="w-6 h-6 text-red-700 dark:text-red-400" />
+                        </button>
+                        <Tooltip
+                          anchorId={`downloadBtn-${index}`}
+                          place="top"
+                          content="Download your scheme application as a PDF"
+                        />
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}

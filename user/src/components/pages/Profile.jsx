@@ -3,11 +3,43 @@ import { UserContext } from "../context/UserContext";
 import { Button } from "../ui/button";
 import { Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css';
 
-const ProfileInfoRow = ({ label, value }) => (
-  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-    <dt className="text-md font-medium text-gray-500 dark:text-gray-400">{label}</dt>
-    <dd className="mt-1 text-md text-stone-800 dark:text-stone-200 sm:mt-0 sm:col-span-2 font-semibold">{value || "N/A"}</dd>
+const tooltipStyle = {
+  backgroundColor: '#FF9933', // orange theme
+  color: '#1F2937', // dark text
+  padding: '8px 12px',
+  borderRadius: '12px',
+  fontSize: '14px',
+  fontWeight: 500,
+  textAlign: 'center',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+  maxWidth: '220px',
+  whiteSpace: 'pre-line',
+  zIndex: 9999,
+};
+
+const ProfileInfoRow = ({ label, value, tooltip, isLink }) => (
+  <div
+    className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 px-3 hover:bg-orange-50/40 dark:hover:bg-gray-800/40 rounded-lg transition-colors"
+    data-tooltip-id={`${label}-tooltip`}
+    data-tooltip-content={tooltip}
+  >
+    <dt className="text-md font-medium text-gray-600 dark:text-gray-400">{label}</dt>
+    <dd className="mt-1 text-md text-stone-900 dark:text-stone-200 sm:mt-0 sm:col-span-2 font-semibold">
+      {isLink && value ? (
+        <a
+          href={isLink === "email" ? `mailto:${value}` : `tel:${value}`}
+          className="text-amber-600 hover:underline"
+        >
+          {value}
+        </a>
+      ) : (
+        value || "N/A"
+      )}
+    </dd>
+    <Tooltip id={`${label}-tooltip`} place="top" style={tooltipStyle} />
   </div>
 );
 
@@ -40,12 +72,12 @@ const Profile = () => {
         </div>
         <div className="px-6 sm:px-8 py-4">
           <dl className="divide-y divide-gray-200 dark:divide-gray-700">
-            <ProfileInfoRow label="Full Name" value={user.name} />
-            <ProfileInfoRow label="Gender" value={user.gender ? user.gender.charAt(0).toUpperCase() + user.gender.slice(1) : "N/A"} />
-            <ProfileInfoRow label="Email Address" value={user.email} />
-            <ProfileInfoRow label="Mobile Number" value={user.mobile} />
-            <ProfileInfoRow label="Country" value={user.country} />
-            <ProfileInfoRow label="State" value={user.state} />
+            <ProfileInfoRow label="Full Name" value={user.name} tooltip="This is your registered name." />
+            <ProfileInfoRow label="Gender" value={user.gender ? user.gender.charAt(0).toUpperCase() + user.gender.slice(1) : "N/A"} tooltip="Your selected gender." />
+            <ProfileInfoRow label="Email Address" value={user.email} tooltip="Click to send an email." isLink="email" />
+            <ProfileInfoRow label="Mobile Number" value={user.mobile} tooltip="Click to call this number." isLink="phone" />
+            <ProfileInfoRow label="Country" value={user.country} tooltip="Your registered country." />
+            <ProfileInfoRow label="State" value={user.state} tooltip="Your registered state." />
           </dl>
         </div>
       </div>
