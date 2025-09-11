@@ -1,36 +1,35 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
-  const [user, setUser] = useState([]);
-  const [isAuthenticated,setIsAuthenticated] = useState(localStorage.getItem("isAuthenticated"))
-  const getUser = async (id) => {
+  const [user, setUser] = useState(null); // null initially
+  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
+
+  // Fetch user by ID
+  const getUser = useCallback(async (id) => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/getSingleUser/${id}`
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/getSingleUser/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(res)
       setUser(res.data.user);
     } catch (error) {
-      console.log(error);
+      console.error("Failed to fetch user:", error);
     }
-  };
-
-  console.log(user)
+  }, [token]);
 
   useEffect(() => {
     if (isAuthenticated && id) {
       getUser(id);
     }
-  }, [isAuthenticated, id]); 
+  }, [isAuthenticated, id, getUser]);
 
   return (
-    <UserContext.Provider value={{ token, user, getUser, id }}>
+    <UserContext.Provider value={{ token, user, getUser, id, isAuthenticated, setIsAuthenticated }}>
       {children}
     </UserContext.Provider>
   );

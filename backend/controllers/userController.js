@@ -300,4 +300,43 @@ const getAllUser = async(req,res) =>{
    }
 }
 
+
+
+// Update User Controller
+export const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Only update allowed fields
+    const { name, email, gender, mobile, country, state } = req.body;
+
+    // Check if email or mobile is being used by another user
+    const emailExists = await userModel.findOne({ email, _id: { $ne: id } });
+    if (emailExists) {
+      return res.status(400).json({ success: false, message: "Email already exists" });
+    }
+
+    const mobileExists = await userModel.findOne({ mobile, _id: { $ne: id } });
+    if (mobileExists) {
+      return res.status(400).json({ success: false, message: "Mobile number already exists" });
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      id,
+      { name, email, gender, mobile, country, state },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Profile updated successfully", user: updatedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Something went wrong" });
+  }
+};
+
+
 export {registerUser,loginUser ,googleLogin, completeGoogleRegistration,getAllUser ,getSingleUser}
