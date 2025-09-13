@@ -1,4 +1,4 @@
-<div align="center"><img src="S.png" style="width: 220px; height: 220px;" /></div>
+<div align="center"><img src="S.png" style="width: 220px; height: 220px;"  alt="SaralSeva Logo" /></div>
 
 <h1 align="center">SaralSeva</h1>
 
