@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link2, ExternalLink, Shield, AlertTriangle, CheckCircle, XCircle, Globe, Users, Sun, Moon } from 'lucide-react';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
+
+const tooltipStyle = {
+  backgroundColor: "#FF9933",
+  color: "#1F2937",
+  padding: "8px 12px",
+  borderRadius: "12px",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  maxWidth: "220px",
+  whiteSpace: "pre-line",
+  zIndex: 9999,
+};
 
 const LinkingPolicy = () => {
   const [darkMode, setDarkMode] = useState(false);
 
-  // Persist theme in localStorage
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -15,7 +30,6 @@ const LinkingPolicy = () => {
     }
   }, [darkMode]);
 
-  // Load saved theme on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") setDarkMode(true);
@@ -24,25 +38,25 @@ const LinkingPolicy = () => {
   const linkingTypes = [
     {
       type: "Outbound Links",
-      icon: <ExternalLink className="w-6 h-6" />,
+      icon: <ExternalLink className="w-6 h-6" data-tooltip-id="tooltip-outbound" data-tooltip-content="External links from SaralSeva" />,
       description: "Links from SaralSeva to external websites",
       color: "bg-blue-500"
     },
     {
       type: "Inbound Links", 
-      icon: <Link2 className="w-6 h-6" />,
+      icon: <Link2 className="w-6 h-6" data-tooltip-id="tooltip-inbound" data-tooltip-content="Links coming to SaralSeva" />,
       description: "Links from external websites to SaralSeva",
       color: "bg-green-500"
     },
     {
       type: "Deep Links",
-      icon: <Globe className="w-6 h-6" />,
+      icon: <Globe className="w-6 h-6" data-tooltip-id="tooltip-deep" data-tooltip-content="Direct links to specific pages inside SaralSeva" />,
       description: "Direct links to specific pages within SaralSeva",
       color: "bg-orange-500"
     },
     {
       type: "API Integration",
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="w-6 h-6" data-tooltip-id="tooltip-api" data-tooltip-content="Integration via API with government systems" />,
       description: "Technical integration with government systems",
       color: "bg-purple-500"
     }
@@ -67,12 +81,12 @@ const LinkingPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
+   <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-center mb-6">
-            <Link2 className="w-12 h-12 mr-4" />
+            <Link2 className="w-12 h-12 mr-4" data-tooltip-id="tooltip-header" data-tooltip-content="SaralSeva Platform Icon" />
             <div>
               <h2 className="text-4xl font-bold mb-2">Linking Policy</h2>
             </div>
@@ -92,6 +106,8 @@ const LinkingPolicy = () => {
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
+            data-tooltip-id="tooltip-theme"
+            data-tooltip-content={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -401,6 +417,13 @@ const LinkingPolicy = () => {
             Last Updated: August 2025 | Next Review: February 2026 | Version: 2.1
           </p>
         </div>
+        {/* ReactTooltips with styling */}
+        <ReactTooltip id="tooltip-header" style={tooltipStyle} />
+        <ReactTooltip id="tooltip-theme" style={tooltipStyle} />
+        <ReactTooltip id="tooltip-outbound" style={tooltipStyle} />
+        <ReactTooltip id="tooltip-inbound" style={tooltipStyle} />
+        <ReactTooltip id="tooltip-deep" style={tooltipStyle} />
+        <ReactTooltip id="tooltip-api" style={tooltipStyle} />
       </div>
     </div>
   );
