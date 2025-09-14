@@ -40,7 +40,7 @@ const Contact = () => {
         style={{ backgroundImage: `url(${banner})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">
+        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider" autocomplete="off">
           Contact Us
         </h1>
       </div>
