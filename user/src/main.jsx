@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom"; // ✅ import BrowserRouter
 import App from "./App.jsx";
 import "./index.css";
 import { SchemeProvider } from "./components/context/SchemaContext.jsx";
@@ -11,7 +12,9 @@ createRoot(document.getElementById("root")).render(
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <UserProvider>
         <SchemeProvider>
-          <App />
+          <BrowserRouter> {/* ✅ Wrap App here */}
+            <App />
+          </BrowserRouter>
         </SchemeProvider>
       </UserProvider>
     </GoogleOAuthProvider>
