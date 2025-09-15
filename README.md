@@ -11,6 +11,7 @@
 - <a href="#screenshots"> Screenshots </a>
 - <a href="#key-features">Key Features</a>
 - <a href="#technologies-used"> Technologies Used </a>
+- <a href="#automated-dependency-management"> 🤖 Automated Dependency Management </a>
 - <a href="#installation-setup"> Installation and Setup </a>
 - <a href="#acknowledgments">Acknowledgments</a>
 - <a href="#contact">Contact</a>
@@ -169,6 +170,25 @@ SaralSeva is built on a robust three-tier architecture, providing distinct, secu
 ![Twilio](https://img.shields.io/badge/Twilio-F22F46?style=for-the-badge&logo=twilio&logoColor=white)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-0099FF?style=for-the-badge&logo=render&logoColor=white)
+
+### DevOps & Automation
+
+![Dependabot](https://img.shields.io/badge/Dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+## 🤖 Automated Dependency Management
+
+SaralSeva uses **GitHub Dependabot** for automated dependency updates and security vulnerability management:
+
+- 🔒 **Automatic security updates** - Immediate PRs for vulnerabilities
+- 📅 **Weekly dependency updates** - Scheduled maintenance every Monday
+- 🎯 **Smart grouping** - Related updates bundled together to reduce PR noise
+- 🏷️ **Auto-labeling** - Organized by module and update type
+- ⚡ **Zero maintenance** - Works automatically in the background
+
+[📖 Learn more about our Dependabot setup](./DEPENDABOT.md)
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
