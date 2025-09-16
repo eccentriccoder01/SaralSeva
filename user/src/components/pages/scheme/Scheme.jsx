@@ -31,44 +31,63 @@ const Scheme = () => {
   };
 
   return (
-    <div className="bg-orange-50/30 dark:bg-gray-900/30">
-      <div className="relative flex items-center justify-center h-48 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}>
-        <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">Government Schemes</h1>
+    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen">
+      <div className="relative flex items-center justify-center h-64 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
+        <div className="relative text-center">
+          <h1 className="text-6xl font-black text-white jost tracking-wider mb-4">Government Schemes</h1>
+          <p className="text-xl text-gray-200">Discover and apply for schemes that empower you</p>
+        </div>
       </div>
-      <div className="px-[5vw] py-10">
-        <h2 className="text-3xl font-bold text-orange-900 dark:text-amber-400 mb-6">Available Schemes & Programmes</h2>
-        <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg dark:shadow-black/40">
+      <div className="px-[5vw] py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-5xl font-black text-gradient jost mb-4">Available Schemes & Programmes</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Explore our comprehensive collection of government initiatives designed to support and empower citizens
+          </p>
+        </div>
+        <div className="overflow-hidden border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-modern bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
           <Table>
-            <TableHeader className="bg-orange-900 dark:bg-orange-800">
+            <TableHeader className="bg-gradient-to-r from-violet-900 via-purple-900 to-indigo-900 dark:from-gray-800">
               <TableRow>
-                <TableHead className="w-[100px] text-white font-semibold">Sl No</TableHead>
-                <TableHead className="text-white font-semibold">Title</TableHead>
-                <TableHead className="text-white font-semibold">Brochure</TableHead>
-                <TableHead className="text-white font-semibold text-right">Apply Now</TableHead>
+                <TableHead className="w-[100px] text-white font-bold text-center">#</TableHead>
+                <TableHead className="text-white font-bold">Scheme Details</TableHead>
+                <TableHead className="text-white font-bold text-center">Document</TableHead>
+                <TableHead className="text-white font-bold text-center">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {scheme.map((item, index) => (
-                <TableRow key={index} className="bg-white dark:bg-gray-800 hover:bg-orange-50/70 dark:hover:bg-gray-700">
-                  <TableCell className="font-medium text-gray-700 dark:text-gray-200">{index + 1}</TableCell>
-                  <TableCell>
+                <TableRow key={index} className="bg-white/60 dark:bg-gray-800/60 hover:bg-gradient-to-r hover:from-violet-50/50 hover:to-purple-50/50 dark:hover:from-violet-900/20 dark:hover:to-purple-900/20 transition-all duration-300 group">
+                  <TableCell className="font-bold text-gray-700 dark:text-gray-200 text-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-full flex items-center justify-center mx-auto">
+                      {index + 1}
+                    </div>
+                  </TableCell>
+                  <TableCell className="py-6">
                     <Link 
                       to={`/scheme/${item._id}`} 
-                      className='font-semibold text-lg text-stone-800 dark:text-stone-200 hover:text-orange-700 dark:hover:text-amber-400 hover:underline'
+                      className='font-bold text-xl text-gray-800 dark:text-white hover:text-gradient transition-all duration-300 group-hover:scale-105 inline-block'
                     >
                       {item?.scheme_name}
                     </Link>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Scheme Code: {item?.scheme_code}</p>
                   </TableCell>
-                  <TableCell>
-                    <Download className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110" onClick={() => handleClick(item?.scheme_brochure)} />
+                  <TableCell className="text-center">
+                    <button 
+                      onClick={() => handleClick(item?.scheme_brochure)} 
+                      className="group/btn p-3 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
+                    >
+                      <Download className="w-6 h-6 group-hover/btn:animate-bounce" />
+                    </button>
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-center">
                     <button 
                       onClick={() => handleSchemeForm(item?.scheme_name, item?.scheme_code)} 
-                      className="flex items-center gap-2 ml-auto font-bold text-orange-800 dark:text-amber-400 transition-transform rounded-full hover:scale-105"
+                      className="group/apply flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 mx-auto"
                     >
-                        Apply <ExternalLink size={20}/>
+                      Apply Now 
+                      <ExternalLink size={18} className="group-hover/apply:translate-x-1 transition-transform duration-300"/>
                     </button>
                   </TableCell>
                 </TableRow>

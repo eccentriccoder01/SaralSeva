@@ -6,19 +6,19 @@ import { FaInstagram, FaWhatsapp, FaFacebook, FaYoutube, FaXTwitter } from "reac
 
 const Footer = () => {
   return (
-    <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
+    <footer className="bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 dark:bg-gray-900 text-gray-200 dark:text-gray-300 relative overflow-hidden">
       <div className="container mx-auto px-5 py-16">
         <div className="flex flex-wrap md:text-left text-center order-first">
           {/* Mobile App & Social Section */}
           <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-            <h2 className="font-extrabold text-white dark:text-orange-400 text-lg mb-3 tracking-widest jost">
+            <h2 className="font-extrabold text-gradient text-lg mb-3 tracking-widest jost">
               DOWNLOAD SARALSEVA APP
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
               <img
                 src={qrcode}
                 alt="QR Code for Mobile App"
-                className="w-28 h-28 object-cover rounded-lg border-2 border-amber-500 p-1"
+                className="w-28 h-28 object-cover rounded-lg border-2 border-violet-500 p-1 hover:border-violet-400 transition-colors duration-300"
               />
               <div className="flex flex-col gap-2">
                 <img
@@ -91,7 +91,7 @@ const Footer = () => {
                 key={idx}
                 className="lg:w-1/3 md:w-full w-1/2 px-4 mb-10 md:mb-0"
               >
-                <h2 className="font-extrabold text-white dark:text-orange-400 text-lg mb-3 tracking-widest jost">
+                <h2 className="font-extrabold text-gradient text-lg mb-3 tracking-widest jost">
                   {section.title}
                 </h2>
                 {section.links && (
@@ -100,7 +100,7 @@ const Footer = () => {
                       <li key={i}>
                         <a
                           href={link.href}
-                          className="hover:text-amber-400 dark:hover:text-orange-400 transition-colors"
+                          className="hover:text-violet-400 dark:hover:text-violet-400 transition-colors duration-300"
                         >
                           {link.name}
                         </a>
@@ -119,7 +119,7 @@ const Footer = () => {
                         <a
                           key={i}
                           href={`mailto:${item.value}`}
-                          className="font-semibold hover:text-amber-400 dark:hover:text-orange-400 transition-colors"
+                          className="font-semibold hover:text-violet-400 dark:hover:text-violet-400 transition-colors duration-300"
                         >
                           {item.value}
                         </a>
@@ -140,9 +140,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-orange-900 dark:bg-gray-800">
+      <div className="bg-gradient-to-r from-violet-900 via-purple-900 to-indigo-900 dark:bg-gray-800">
         <div className="container mx-auto py-4 px-5">
-          <p className="text-orange-200 dark:text-gray-300 text-center text-sm">
+          <p className="text-gray-200 dark:text-gray-300 text-center text-sm">
             Copyright SaralSeva © {new Date().getFullYear()}. All Rights
             Reserved.
           </p>
