@@ -49,74 +49,21 @@ const Scheme = () => {
   };
 
   return (
-    <div className="bg-orange-50/30 dark:bg-gray-900/30">
-      <div
-        className="relative flex items-center justify-center h-48 bg-cover bg-center"
-        style={{ backgroundImage: `url(${banner})` }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">
-          Government Schemes
-        </h1>
-      </div>
-      <div className="px-[5vw] py-10">
-        <h2 className="text-3xl font-bold text-orange-900 dark:text-amber-400 mb-6">
-          Available Schemes & Programmes
-        </h2>
-        <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg dark:shadow-black/40">
           <Table>
-            <TableHeader className="bg-orange-900 dark:bg-orange-800">
+            <TableHeader className="bg-gradient-to-r from-violet-900 via-purple-900 to-indigo-900 dark:from-gray-800">
               <TableRow>
-                <TableHead className="w-[100px] text-white font-semibold">
-                  Sl No
-                </TableHead>
-                <TableHead className="text-white font-semibold">Title</TableHead>
-                <TableHead className="text-white font-semibold">Brochure</TableHead>
-                <TableHead className="text-white font-semibold text-right">
-                  Apply Now
-                </TableHead>
+
               </TableRow>
             </TableHeader>
             <TableBody>
               {scheme.map((item, index) => (
-                <TableRow
-                  key={index}
-                  className="bg-white dark:bg-gray-800 hover:bg-orange-50/70 dark:hover:bg-gray-700"
-                >
-                  <TableCell className="font-medium text-gray-700 dark:text-gray-200">
-                    {index + 1}
-                  </TableCell>
-                  <TableCell>
-                    <Link
-                      to={`/scheme/${item._id}`}
-                      className="font-semibold text-lg text-stone-800 dark:text-stone-200 hover:text-orange-700 dark:hover:text-amber-400 hover:underline"
+
                     >
                       {item?.scheme_name}
                     </Link>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Scheme Code: {item?.scheme_code}</p>
                   </TableCell>
-                  <TableCell>
-                    <Download
-                      className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110"
-                      onClick={() => handleClick(item?.scheme_brochure)}
-                      data-tooltip-id={`download-tooltip-${index}`}
-                      data-tooltip-content="Download brochure (PDF)"
-                    />
-                    <Tooltip
-                      id={`download-tooltip-${index}`}
-                      place="top"
-                      style={tooltipStyle}
-                    />
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <button
-                      onClick={() =>
-                        handleSchemeForm(item?.scheme_name, item?.scheme_code)
-                      }
-                      className="flex items-center gap-2 ml-auto font-bold text-orange-800 dark:text-amber-400 transition-transform rounded-full hover:scale-105"
-                      data-tooltip-id={`apply-tooltip-${index}`}
-                      data-tooltip-content="Apply for this scheme"
-                    >
-                      Apply <ExternalLink size={20} />
+
                     </button>
                     <Tooltip
                       id={`apply-tooltip-${index}`}

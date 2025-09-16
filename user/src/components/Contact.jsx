@@ -20,8 +20,10 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
+    preferredContactTime: "", // NEW: Let users specify when to be contacted
   });
 
   const handleChange = (e) => {
@@ -31,6 +33,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      
       const res = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
         {
