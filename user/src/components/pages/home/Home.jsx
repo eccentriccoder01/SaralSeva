@@ -148,7 +148,7 @@ const Home = () => {
       <div className="py-20 bg-white dark:bg-gray-900 relative overflow-hidden transition-colors duration-500">
         <WaveBackground />
         <div className="relative z-10 text-center">
-          <p className="text-lg font-semibold text-amber-600 dark:text-amber-400">HOW IT WORKS</p>
+          <p className="text-4xl font-bold text-amber-600 dark:text-amber-400 md:text-5xl lg:text-6xl tracking-widest">HOW IT WORKS</p>
           <h1 className="mt-2 text-4xl font-extrabold text-orange-900 dark:text-amber-100 jost md:text-5xl">
             Government Schemes, Simplified in 3 Steps
           </h1>
