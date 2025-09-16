@@ -34,6 +34,7 @@ import Faq from './components/Faq';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import LinkingPolicy from './components/LinkingPolicy';
 import EditProfile from './components/pages/EditProfile';
+import FeedbackButton from './components/FeedbackButton';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -76,7 +77,8 @@ function App() {
         <Route path='/linkingpolicy' element={<LinkingPolicy/>}/> 
         <Route path='/profile/edit' element={<EditProfile/>}/> 
       </Routes>
-
+      
+      <FeedbackButton />
       <Footer />
       <ScrollToTop />
       <ScrollToBottom />
