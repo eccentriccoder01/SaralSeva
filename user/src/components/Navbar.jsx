@@ -3,7 +3,27 @@ import { Button } from "./ui/button";
 import { Menu, ArrowRightFromLine, CircleUserRound } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+// Keep your custom tooltip import if needed for user icon
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
+// Rename react-tooltip import to avoid conflict
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+
+const tooltipStyle = {
+  backgroundColor: "#FF9933",
+  color: "#1F2937",
+  padding: "8px 12px",
+  borderRadius: "12px",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  maxWidth: "220px",
+  whiteSpace: "pre-line",
+  zIndex: 9999,
+};
+
 
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const location = useLocation();
@@ -29,12 +49,21 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
           <Menu className="h-7 w-7" />
         </button>
         {/* Desktop Links */}
-        <Link to="/" className={`hidden lg:block ${navLinkClasses}`}>Home</Link>
-        <Link to="/about" className={`hidden lg:block ${navLinkClasses}`}>About</Link>
-        <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`}>Schemes</Link>
-        <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`}>Dashboard</Link>
-        <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`}>Grievances</Link>
-        <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`}>Contact</Link>
+        <Link
+          to="/"
+          className={`hidden lg:block ${navLinkClasses}`}
+          data-tooltip-id="nav-home"
+          data-tooltip-content="Go to Home Page"
+        >
+          Home
+        </Link>
+
+        <Link to="/about" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-about" data-tooltip-content="Learn more About us">About</Link>
+        <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-schemes" data-tooltip-content="View Government Schemes">Schemes</Link>
+        <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-dashboard" data-tooltip-content="Go to Dashboard">Dashboard</Link>
+        <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-grievances" data-tooltip-content="View Grievances">Grievances</Link>
+        <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-contact" data-tooltip-content="Contact Us">Contact</Link>
+
       </div>
 
       <div className="flex items-center gap-3">
@@ -87,15 +116,17 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       {isMenuOpen && (
         <div className="absolute left-0 w-full bg-gradient-to-b from-violet-900/95 to-purple-900/95 dark:from-gray-900/95 dark:to-gray-800/95 backdrop-blur-xl top-20 lg:hidden shadow-modern animate-in slide-in-from-top-4 transition-all duration-500">
           <div className="flex flex-col p-4 gap-y-2">
-            <Link to="/" className="block px-4 py-3 rounded-lg hover:bg-violet-800/70 dark:hover:bg-gray-700/50 transition-all duration-300" onClick={toggleMenu}>Home</Link>
-            <Link to="/about" className="block px-4 py-3 rounded-lg hover:bg-violet-800/70 dark:hover:bg-gray-700/50 transition-all duration-300" onClick={toggleMenu}>About</Link>
-            <Link to="/schemes" className="block px-4 py-3 rounded-lg hover:bg-violet-800/70 dark:hover:bg-gray-700/50 transition-all duration-300" onClick={toggleMenu}>Schemes</Link>
-            <Link to="/dashboard" className="block px-4 py-3 rounded-lg hover:bg-violet-800/70 dark:hover:bg-gray-700/50 transition-all duration-300" onClick={toggleMenu}>Dashboard</Link>
-            <Link to="/grievances" className="block px-4 py-3 rounded-lg hover:bg-violet-800/70 dark:hover:bg-gray-700/50 transition-all duration-300" onClick={toggleMenu}>Grievances</Link>
-            <Link to="/contact" className="block px-4 py-3 rounded-lg hover:bg-violet-800/70 dark:hover:bg-gray-700/50 transition-all duration-300" onClick={toggleMenu}>Contact</Link>
-          </div>
+
         </div>
       )}
+      {/* Place after the entire navbar */}
+<ReactTooltip id="nav-home" style={tooltipStyle} />
+<ReactTooltip id="nav-about" style={tooltipStyle} />
+<ReactTooltip id="nav-schemes" style={tooltipStyle} />
+<ReactTooltip id="nav-dashboard" style={tooltipStyle} />
+<ReactTooltip id="nav-grievances" style={tooltipStyle} />
+<ReactTooltip id="nav-contact" style={tooltipStyle} />
+
     </div>
   );
 };

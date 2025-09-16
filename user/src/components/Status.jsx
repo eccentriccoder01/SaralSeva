@@ -1,6 +1,23 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+
+// Tooltip style (consistent across all pages)
+const tooltipStyle = {
+  backgroundColor: "#FF9933", // orange theme
+  color: "#1F2937", // dark text
+  padding: "8px 12px",
+  borderRadius: "12px",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  maxWidth: "220px",
+  whiteSpace: "pre-line",
+  zIndex: 9999,
+};
 
 const Status = () => {
   const [checked, setChecked] = useState("scheme");
@@ -8,9 +25,9 @@ const Status = () => {
   const [resultScheme, setResultScheme] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(true); // Initial state set to true for light mode
+  const [isLightMode, setIsLightMode] = useState(true);
 
-  // This useEffect handles setting the theme
+  // Persist theme
   useEffect(() => {
     if (isLightMode) {
       document.documentElement.classList.add("light");
@@ -23,14 +40,11 @@ const Status = () => {
     }
   }, [isLightMode]);
 
-  // This useEffect loads the saved theme on mount
+  // Load saved theme
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsLightMode(false); // Set to dark mode if saved theme is 'dark'
-    } else {
-      setIsLightMode(true); // Default to light mode or if saved theme is 'light'
-    }
+    if (savedTheme === "dark") setIsLightMode(false);
+    else setIsLightMode(true);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -51,15 +65,10 @@ const Status = () => {
 
       const res = await axios.post(url, payload);
 
-      if (checked === "scheme") {
-        setResultScheme(res.data.schemeApplied);
-      } else {
-        setResultScheme(res.data.grievance);
-      }
+      if (checked === "scheme") setResultScheme(res.data.schemeApplied);
+      else setResultScheme(res.data.grievance);
     } catch (err) {
-      setError(
-        err.response?.data?.message || `Could not find the ${checked}.`
-      );
+      setError(err.response?.data?.message || `Could not find the ${checked}.`);
     } finally {
       setLoading(false);
     }
@@ -73,21 +82,24 @@ const Status = () => {
             Check Application Status
           </h1>
           <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">
-            Enter your registration number below to track the progress of your
-            application.
+            Enter your registration number below to track the progress of your application.
           </p>
         </div>
 
-        {/* Toggle theme button */}
+        {/* Toggle theme button with tooltip */}
         <div className="flex justify-end mt-4">
           <button
             onClick={() => setIsLightMode(!isLightMode)}
             className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            data-tooltip-id="themeToggleTip"
+            data-tooltip-content="Toggle between Light and Dark mode"
           >
             {isLightMode ? "Dark Mode" : "Light Mode"}
           </button>
+          <Tooltip id="themeToggleTip" style={tooltipStyle} />
         </div>
 
+        {/* Scheme / Grievance toggle with tooltips */}
         <div className="flex bg-gray-200 dark:bg-gray-700 rounded-lg p-1 my-8 transition-colors duration-500">
           <button
             onClick={() => {
@@ -100,6 +112,8 @@ const Status = () => {
                 ? "bg-orange-600 text-white shadow"
                 : "text-gray-600 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
+            data-tooltip-id="schemeTip"
+            data-tooltip-content="Check the status of your scheme application"
           >
             Scheme Status
           </button>
@@ -114,24 +128,28 @@ const Status = () => {
                 ? "bg-orange-600 text-white shadow"
                 : "text-gray-600 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
+            data-tooltip-id="grievanceTip"
+            data-tooltip-content="Check the status of your grievance"
           >
             Grievance Status
           </button>
+          <Tooltip id="schemeTip" style={tooltipStyle} />
+          <Tooltip id="grievanceTip" style={tooltipStyle} />
         </div>
 
-        <form
-          className="flex flex-col sm:flex-row items-stretch gap-3"
-          onSubmit={handleSubmit}
-        >
+        {/* Input with tooltip */}
+        <form className="flex flex-col sm:flex-row items-stretch gap-3" onSubmit={handleSubmit}>
           <input
             type="text"
             className="flex-grow p-3 text-lg border border-gray-300 dark:border-gray-600 rounded-md outline-none focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-gray-200 transition-colors duration-500"
-            placeholder={`Enter ${
-              checked === "scheme" ? "Scheme" : "Grievance"
-            } Number`}
+            placeholder={`Enter ${checked === "scheme" ? "Scheme" : "Grievance"} Number`}
             onChange={(e) => setInputValue(e.target.value)}
             required
+            data-tooltip-id="inputTip"
+            data-tooltip-content={`Enter your ${checked} registration number exactly as provided.`}
           />
+          <Tooltip id="inputTip" style={tooltipStyle} />
+
           <Button
             className="p-3 text-lg font-bold text-white bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg shadow-md hover:shadow-lg"
             type="submit"
@@ -143,12 +161,24 @@ const Status = () => {
 
         <div className="mt-8 min-h-[100px]">
           {error && (
-            <p className="p-4 text-center text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/30 rounded-lg transition-colors duration-500">
+            <p
+              className="p-4 text-center text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/30 rounded-lg transition-colors duration-500"
+              data-tooltip-id="errorTip"
+              data-tooltip-content={error}
+            >
               {error}
             </p>
           )}
+          <Tooltip id="errorTip" style={tooltipStyle} />
+
           {resultScheme && (
-            <div className="p-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 rounded-r-lg transition-colors duration-500">
+            <div
+              className="p-6 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 rounded-r-lg transition-colors duration-500"
+              data-tooltip-id="resultTip"
+              data-tooltip-content={`Initial Status: ${resultScheme.initial_status || resultScheme.status}${
+                resultScheme.final_status ? `\nFinal Status: ${resultScheme.final_status}` : ""
+              }`}
+            >
               <h3 className="text-xl font-bold text-blue-900 dark:text-blue-300">
                 Application Status
               </h3>
@@ -161,11 +191,10 @@ const Status = () => {
               {resultScheme.final_status && (
                 <p className="mt-1 text-gray-700 dark:text-gray-200">
                   Final Status:{" "}
-                  <span className="font-semibold capitalize">
-                    {resultScheme.final_status}
-                  </span>
+                  <span className="font-semibold capitalize">{resultScheme.final_status}</span>
                 </p>
               )}
+              <Tooltip id="resultTip" style={tooltipStyle} />
             </div>
           )}
         </div>
