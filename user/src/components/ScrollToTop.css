@@ -1,33 +1,66 @@
-.scroll-to-top {
+/*
+ * === ELEGANT & PROFESSIONAL SCROLL TO TOP BUTTON ===
+ */
+
+.scroll-btn-professional.scroll-to-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 120px; /* Proper distance above scroll-to-bottom */
+  right: 40px;
   z-index: 100;
-  background-color: rgba(153, 27, 27, 0.9);
-  color: white;
-  border: none;
+
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  padding: 20px 20px;
-  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Professional styling */
+  background-color: rgba(153, 27, 27, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.scroll-to-top:hover {
-  background-color: rgb(154 52 18 / 0.7);
+/* SVG Icon Styling */
+.scroll-btn-professional.scroll-to-top svg path {
+  transition: transform 0.4s ease-out;
+  transform-origin: center;
 }
-.scroll-to-top.visible {
-  opacity: 1;
-  transform: translateY(0);
+
+/* Hover State */
+.scroll-btn-professional.scroll-to-top:hover {
+  background-color: rgb(123, 27, 27);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
-@media (max-width: 480px) {
-  .scroll-to-top {
-    width: 40px;
-    height: 40px;
-    padding: 12px;
-    font-size: 18px;
-    bottom: 15px;
-    right: 15px;
+
+/* Upward Cascading Chevron Animation */
+.scroll-btn-professional.scroll-to-top:hover svg path:nth-child(2) {
+  transform: translateY(-4px);
+}
+
+.scroll-btn-professional.scroll-to-top:hover svg path:nth-child(1) {
+  transition-delay: 0.1s;
+  transform: translateY(-4px);
+}
+
+/* Active Click Feedback */
+.scroll-btn-professional.scroll-to-top:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .scroll-btn-professional.scroll-to-top {
+    width: 48px;
+    height: 48px;
+    bottom: 95px; /* Maintain spacing above scroll-to-bottom */
+    right: 20px;
   }
 }

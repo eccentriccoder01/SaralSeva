@@ -1,35 +1,78 @@
-.scroll-to-bottom {
+/*
+ * === ELEGANT & PROFESSIONAL SCROLL BUTTON ===
+ */
+
+.scroll-btn-professional {
   position: fixed;
-  bottom: 90px; /* placed above scroll-to-top */
-  right: 30px;
+  bottom: 40px; /* Adjusted position for a modern look */
+  right: 40px;
   z-index: 100;
-  background-color: rgba(153, 27, 27, 0.9); /* 🔴 match scroll-to-top */
-  color: white;
-  border: none;
+
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  padding: 20px 20px;
-  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* --- Professional & Authoritative Styling --- */
+  background-color: rgba(153, 27, 27, 0.85); /* Solid, deep red */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle highlight border */
+  
+  /* Modern frosted glass effect for when it overlaps text/UI */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* For Safari */
+
+  /* A soft, professional shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  
+  /* Smooth transitions for a high-end feel */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.scroll-to-bottom:hover {
-  background-color: rgb(154 52 18 / 0.7); /* 🔴 same hover as scroll-to-top */
+/* --- SVG Icon Styling --- */
+.scroll-btn-professional svg {
+  transition: transform 0.3s ease-out;
 }
 
-.scroll-to-bottom.visible {
-  opacity: 1;
-  transform: translateY(0);
+.scroll-btn-professional svg path {
+  transition: transform 0.4s ease-out;
+  transform-origin: center;
 }
 
-@media (max-width: 480px) {
-  .scroll-to-bottom {
-    width: 40px;
-    height: 40px;
-    padding: 12px;
-    font-size: 18px;
-    bottom: 65px; /* adjusts for mobile */
-    right: 15px;
+/* --- THE INTERACTIVE HOVER STATE --- */
+.scroll-btn-professional:hover {
+  background-color: rgb(123, 27, 27); /* Darkens slightly on hover */
+  transform: translateY(-4px); /* A subtle lift */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Shadow enhances the lift */
+}
+
+/* --- The Cascading Chevron Animation --- */
+/* On hover, we move the top chevron down */
+.scroll-btn-professional:hover svg path:nth-child(1) {
+  transform: translateY(4px);
+}
+
+/* The bottom chevron moves down with a slight delay, creating the cascade */
+.scroll-btn-professional:hover svg path:nth-child(2) {
+  transition-delay: 0.1s;
+  transform: translateY(4px);
+}
+
+/* --- Active state for click feedback --- */
+.scroll-btn-professional:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 768px) {
+  .scroll-btn-professional {
+    width: 48px;
+    height: 48px;
+    bottom: 20px;
+    right: 20px;
   }
 }
