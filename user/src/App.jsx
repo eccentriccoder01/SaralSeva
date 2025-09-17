@@ -1,5 +1,7 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import "./App.css";
 
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToBottom from "./components/ScrollToBottom";
@@ -39,6 +41,9 @@ import Contact from "./components/Contact";
 import Faq from "./components/Faq";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import LinkingPolicy from "./components/LinkingPolicy";
+
+import FeedbackButton from "./components/FeedbackButton";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -89,7 +94,8 @@ function App() {
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/linkingpolicy" element={<LinkingPolicy />} />
       </Routes>
-
+      
+      <FeedbackButton />
       <Footer />
       <ScrollToTop />
       <ScrollToBottom />
