@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
-import { FaComment, FaPaperPlane, FaTimes } from 'react-icons/fa';
-
+import React, { useState } from "react";
+import { FaComment, FaPaperPlane, FaTimes } from "react-icons/fa";
+import { Tooltip } from "react-tooltip"; // ✅ make sure you have react-tooltip installed
 
 const FeedbackButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [feedback, setFeedback] = useState('');
-  
+  const [feedback, setFeedback] = useState("");
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ✅ Properly defined submit handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call - replace with actual endpoint
+
     try {
-      // Here you would typically send the feedback to your backend
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
-      
-      // Show success message
-      alert('Thank you for your feedback! We appreciate your input.');
-      setFeedback('');
-      setEmail('');
+      // Simulate API call - replace with actual backend endpoint
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      alert("Thank you for your feedback! We appreciate your input.");
+      setFeedback("");
+      setEmail("");
       setIsModalOpen(false);
     } catch (error) {
-      alert('Failed to submit feedback. Please try again.');
+      alert("Failed to submit feedback. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // ✅ Tooltip styling
+  const tooltipStyle = {
+    backgroundColor: "#1f2937",
+    color: "#fff",
+    fontSize: "12px",
+    borderRadius: "6px",
+    padding: "6px 10px",
   };
 
   return (
