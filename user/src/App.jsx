@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToBottom from "./components/ScrollToBottom";
-import Chatbot from "./components/Chatbot/Chatbot";
+import Chatbot from "./components/chatbot/Chatbot";
 
 import Topbar from "./components/Topbar";
 import Header from "./components/Header";
