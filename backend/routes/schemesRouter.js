@@ -1,5 +1,5 @@
 import express from 'express'
-import { addSchemeController, getSingleSchemeController, listSchemeController } from '../controllers/schesmesController.js';
+import { addSchemeController, getSingleSchemeController, listSchemeController } from '../controllers/schemesController.js';
 import upload from '../middleware/multer.js';
 import multerErrorHandle from '../middleware/multerErrorHandle.js';
 
