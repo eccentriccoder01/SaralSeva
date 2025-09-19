@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import qrcode from "./../../assets/QRcode.jpg";
 import app from "./../../assets/app_store.svg";
 import play from "./../../assets/play_store.svg";
@@ -7,8 +7,8 @@ import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';
 
 const tooltipStyle = {
-  backgroundColor: '#FF9933', // orange theme
-  color: '#1F2937', // dark text
+  backgroundColor: '#FF9933',
+  color: '#1F2937',
   padding: '8px 12px',
   borderRadius: '12px',
   fontSize: '14px',
@@ -21,6 +21,10 @@ const tooltipStyle = {
 };
 
 const Footer = () => {
+  const [isQRActive, setIsQRActive] = useState(false);
+
+  const toggleQR = () => setIsQRActive(!isQRActive);
+
   const socialLinks = [
     { icon: <FaFacebook />, link: "/", name: "Facebook" },
     { icon: <FaWhatsapp />, link: "/", name: "WhatsApp" },
@@ -33,34 +37,57 @@ const Footer = () => {
     <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
       <div className="container mx-auto px-5 py-16">
         <div className="flex flex-wrap md:text-left text-center order-first">
+
           {/* Mobile App & Social Section */}
           <div className="lg:w-1/3 md:w-1/2 w-full px-4">
             <h2 className="font-extrabold text-white dark:text-orange-400 text-lg mb-3 tracking-widest jost">
               DOWNLOAD SARALSEVA APP
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+
+              {/* QR Code */}
               <img
                 src={qrcode}
                 alt="QR Code for Mobile App"
-                className="w-28 h-28 object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer"
+                className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "fixed top-1/2 left-1/2 w-80 h-80 z-50 -translate-x-1/2 -translate-y-1/2 shadow-2xl bg-white" : "w-28 h-28"
+                  }`}
+                onClick={toggleQR}
                 data-tooltip-id="qr-tooltip"
                 data-tooltip-content="Scan this QR code to download the SaralSeva app"
               />
               <Tooltip id="qr-tooltip" place="top" style={tooltipStyle} />
 
+              {/* App Store / Play Store Links */}
               <div className="flex flex-col gap-2">
-                <img
-                  src={app}
-                  alt="App Store"
-                  className="w-36 cursor-pointer hover:opacity-80 transition-opacity"
-                />
-                <img
-                  src={play}
-                  alt="Play Store"
-                  className="w-36 cursor-pointer hover:opacity-80 transition-opacity"
-                />
+                {/* App Store */}
+                <a
+                  href="https://apps.apple.com" // placeholder, replace with real app URL later
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={app}
+                    alt="App Store"
+                    className="w-36 cursor-pointer hover:opacity-80 transition-opacity"
+                  />
+                </a>
+
+                {/* Play Store */}
+                <a
+                  href="https://play.google.com" // placeholder, replace with real app URL later
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={play}
+                    alt="Play Store"
+                    className="w-36 cursor-pointer hover:opacity-80 transition-opacity"
+                  />
+                </a>
               </div>
             </div>
+
+            {/* Social Links */}
             <div className="mt-8">
               <span className="inline-flex justify-center md:justify-start w-full gap-4">
                 {socialLinks.map((item, idx) => (
