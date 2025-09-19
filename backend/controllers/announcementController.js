@@ -11,7 +11,7 @@ const add_announcement = async (req, res) => {
         return (
             res.json({
                 success: true,
-                message: "announcement added succesfully"
+                message: "announcement added successfully"
             })
         )
     } catch (error) {
