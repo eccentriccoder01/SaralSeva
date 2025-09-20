@@ -31,7 +31,6 @@ const UserLogin = ({ setIsAuthenticated }) => {
         setError(res.data.message || "Login failed.");
       }
     } catch (err) {
-      console.log(err);
       setError(err.response?.data?.message || "An error occurred.");
     }
   };

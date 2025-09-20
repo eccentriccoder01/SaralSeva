@@ -23,6 +23,17 @@ const SingleGrievance = () => {
 
   useEffect(() => { getSingleGrievance(id); }, [id]);
 
+  const fetchSingleGrievance = async (id) => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getSingleGrievance/${id}`
+      );
+      setSingleGrievance(res.data.grievance);
+    } catch (error) {
+      // Error handling without console.log in production
+    }
+  };
+
   const handleSubmit = async () => {
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/changeGrievanceStatus`, formData);
@@ -32,7 +43,9 @@ const SingleGrievance = () => {
         setIsOpen(false);
         toast.success("Status changed successfully");
       }
-    } catch (error) { console.log(error); }
+    } catch (error) { 
+      // Error handling without console.log in production
+    }
   };
 
   return (
