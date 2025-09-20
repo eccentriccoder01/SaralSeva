@@ -116,7 +116,6 @@ const CompleteGoogleRegistration = ({ setIsAuthenticated }) => {
         });
       }
     } catch (err) {
-      console.log(err);
       const errorMessage = err.response?.data?.message || "An error occurred.";
       setError(errorMessage);
       toast.error(errorMessage, {

@@ -33,14 +33,11 @@ const AdminProvider = ({ children }) => {
 
 
   const login = async (formData) => {
-    console.log(formData);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/loginAdmin`,
         formData
       );
-
-      console.log(response);
 
       const { token, admin, id } = response.data;
 
@@ -60,7 +57,6 @@ const AdminProvider = ({ children }) => {
         return false;
       }
     } catch (error) {
-      console.log(error);
       const errorMessage = error.response?.data?.message || "An error occurred";
       setError(errorMessage);
       setIsAuthenticated(false);
@@ -84,11 +80,9 @@ const AdminProvider = ({ children }) => {
       const res = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/admin/getSingleAdmin/${id}`
       );
-      console.log(res);
       setAdmin(res.data.admin);
     } catch (error) {
-      console.error(error);
-      console.log("Something went wrong");
+      console.error("Error fetching admin data:", error);
     }
   };
 
@@ -101,10 +95,9 @@ const AdminProvider = ({ children }) => {
       const res = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/getEmployees`
       );
-      console.log(res);
       setEmployees(res.data.employees);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching employees:", error);
     }
   };
 
@@ -117,11 +110,10 @@ const AdminProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/getSingleEmployee/${id}`)
         .then((res) => {
-          console.log(res);
           setSingleEmployee(res.data.employee);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -143,8 +135,7 @@ const AdminProvider = ({ children }) => {
         );
       }
     } catch (error) {
-      console.error(error);
-      console.log("Something went wrong");
+      console.error("Error fetching schemes:", error);
     }
   };
 
@@ -157,7 +148,6 @@ const AdminProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getAllSchemes`)
         .then((res) => {
-          console.log(res);
           setTickets(res.data.schemes);
           let approved = 0;
           let pending = 0;
@@ -177,10 +167,9 @@ const AdminProvider = ({ children }) => {
           setTotalRejectedScheme(rejected);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
- 
 
   useEffect(() => {
     getAllSchemes();
@@ -191,11 +180,10 @@ const AdminProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getSingleScheme/${id}`)
         .then((res) => {
-          console.log(res);
           setSingleTicket(res.data.appliedScheme);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -209,7 +197,9 @@ const AdminProvider = ({ children }) => {
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getLimitAdminNotifications`
       );
       setLimitNotification(res.data.notifications);
-    } catch (error) {}
+    } catch (error) {
+      // Error handling without console.log in production
+    }
   };
 
   useEffect(() => {
@@ -221,21 +211,17 @@ const AdminProvider = ({ children }) => {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getAdminNotifications`
       );
-      console.log(res , localStorage.getItem("id"))
       const filteredNotifications = res.data?.notifications?.filter(
         (notification) => notification?.recipientId?._id === localStorage.getItem("id")
       );
-      console.log(filteredNotifications)
       setNotifications(filteredNotifications);
       const filterNotificationCount = res.data.notifications.filter(
         (notification) =>
           notification.recipientId._id === id && !notification.read
       );
-      console.log(filterNotificationCount);
       setNotificationCount(filterNotificationCount.length);
-      console.log(notificationCount);
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -253,7 +239,7 @@ const AdminProvider = ({ children }) => {
           getNotification();
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -266,7 +252,6 @@ const AdminProvider = ({ children }) => {
       const res = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getAllGrievance`
       );
-      console.log(res);
       setGrievance(res.data.grievance);
       setTotalGrievance(res.data.grievance.length);
       let open = 0;
@@ -281,7 +266,7 @@ const AdminProvider = ({ children }) => {
       setOpenGrievance(open);
       setCloseGrievance(closed);
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -310,11 +295,10 @@ const AdminProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getSingleGrievance/${id}`)
         .then((res) => {
-          console.log(res);
           setSingleGrievance(res.data.grievance);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -332,11 +316,10 @@ const AdminProvider = ({ children }) => {
           { sender, senderType }
         )
         .then((res) => {
-          console.log(res);
           setUniqueRecipients(res.data.recipients);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 

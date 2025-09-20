@@ -35,7 +35,9 @@ const SingleTicket = () => {
         setIsOpen(false);
         toast.success("Status changed successfully");
       }
-    } catch (error) { console.log(error); }
+    } catch (error) { 
+      // Error handling without console.log in production
+    }
   };
 
   return (
