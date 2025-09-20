@@ -40,8 +40,6 @@ const EmployeeProvider = ({ children }) => {
         }
       );
 
-      console.log(response.data);
-
       const { token, employee, id } = response.data;
 
       if (response.data.message === "Employee logged in successfully") {
@@ -90,11 +88,10 @@ const EmployeeProvider = ({ children }) => {
           )}`
         )
         .then((res) => {
-          // console.log(res);
           setEmployee(res.data.employee);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -103,13 +100,14 @@ const EmployeeProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getAllSchemes`)
         .then((res) => {
-          //   console.log(res)
           const filteredTickets = res.data.schemes.filter(
             (ticket) => ticket.assigned_to._id === id
           );
           setTickets(filteredTickets);
         });
-    } catch (error) {}
+    } catch (error) {
+      // Error handling without console.log in production
+    }
   };
 
   useEffect(() => {
@@ -121,10 +119,11 @@ const EmployeeProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/scheme/getSingleScheme/${id}`)
         .then((res) => {
-          //   console.log(res)
           setSingleTicket(res.data.appliedScheme);
         });
-    } catch (error) {}
+    } catch (error) {
+      // Error handling without console.log in production
+    }
   };
 
   useEffect(() => {
@@ -134,7 +133,6 @@ const EmployeeProvider = ({ children }) => {
  
 
   const getNotification = async () => {
-    console.log(id);
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getEmployeeNotifications`
@@ -147,11 +145,9 @@ const EmployeeProvider = ({ children }) => {
         (notification) =>
           notification.recipientId._id === id && !notification.read
       );
-      console.log(filterNotificationCount);
       setNotificationCount(filterNotificationCount.length);
-      console.log(notificationCount);
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -161,24 +157,20 @@ const EmployeeProvider = ({ children }) => {
 
 
   const getLimitNotifications = async () => {
-    console.log(id);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/notification/getLimitEmployeeNotifications`,{id}
       );
 
-      console.log(res)
       setLimitNotification(res.data.notifications);
       
       const filterNotificationCount = res.data.notifications.filter(
         (notification) =>
           notification.recipientId._id === id && !notification.read
       );
-      console.log(filterNotificationCount);
       setNotificationCount(filterNotificationCount.length);
-      console.log(notificationCount);
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   }
 
@@ -196,7 +188,7 @@ const EmployeeProvider = ({ children }) => {
           getNotification();
         });
     } catch (error) {
-      console.log(error)
+      // Error handling without console.log in production
     }
   };
 
@@ -209,7 +201,6 @@ const EmployeeProvider = ({ children }) => {
       `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeePerformance`,
       { id }
     );
-    console.log(res);
     // return res.data.data
     setPerformance(res.data.data);
   };
@@ -226,10 +217,11 @@ const EmployeeProvider = ({ children }) => {
           const filteredGrievance = res.data.grievance.filter(
             (grievance) => grievance.assigned_to._id === id
           );
-          console.log(filteredGrievance);
           setGrievance(filteredGrievance);
         });
-    } catch (error) {}
+    } catch (error) {
+      // Error handling without console.log in production
+    }
   };
 
   useEffect(() => {
@@ -241,11 +233,10 @@ const EmployeeProvider = ({ children }) => {
       await axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/grievances/getSingleGrievance/${id}`)
         .then((res) => {
-          console.log(res);
           setSingleGrievance(res.data.grievance);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 
@@ -258,7 +249,6 @@ const EmployeeProvider = ({ children }) => {
       `${import.meta.env.VITE_API_BASE_URL}/api/v1/employee/employeeGrievancePerformance`,
       { id }
     );
-    console.log(res);
     setGrievancePerformance(res.data.data);
   };
 
@@ -271,7 +261,6 @@ const EmployeeProvider = ({ children }) => {
     const close = performance[0].close + grievancePerformance[0].close;
     const open = performance[0].open + grievancePerformance[0].open;
     const progress = (close / total) * 100;
-    console.log(total, close, open);
     setOverallPerformance = [
       {
         total: total,
@@ -280,8 +269,6 @@ const EmployeeProvider = ({ children }) => {
       },
     ];
   };
-
-  console.log(overallPerformance);
 
   useEffect(() => {
     overallEmployeePerformance;
@@ -297,11 +284,10 @@ const EmployeeProvider = ({ children }) => {
           { sender, senderType }
         )
         .then((res) => {
-          console.log(res);
           setUniqueRecipients(res.data.recipients);
         });
     } catch (error) {
-      console.log(error);
+      // Error handling without console.log in production
     }
   };
 

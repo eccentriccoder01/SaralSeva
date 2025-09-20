@@ -14,7 +14,9 @@ const Announcement = () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/get_announcement`);
       setAnnouncements(res.data.announcement);
-    } catch (error) { console.log(error); }
+    } catch (error) { 
+      // Error handling without console.log in production
+    }
   };
 
   useEffect(() => {
@@ -24,13 +26,15 @@ const Announcement = () => {
   const handleAnnouncement = async () => {
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/announcement/add_announcement`, { announcement_details });
-      if (res.data.message === 'announcement added succesfully') {
+      if (res.data.message === 'announcement added successfully') {
         toast.success("Announcement added successfully!");
         setIsOpen(false);
         getAnnouncements();
         setAnnouncement_details("");
       }
-    } catch (error) { console.log(error); }
+    } catch (error) { 
+      // Error handling without console.log in production
+    }
   };
 
   return (
