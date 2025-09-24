@@ -38,7 +38,7 @@ const addSchemeController = async (req, res) => {
     } catch (error) {
         console.log(error)
         return ({
-            success: true,
+            success: false,
             message: "Scheme not added something went wrong"
         })
     }

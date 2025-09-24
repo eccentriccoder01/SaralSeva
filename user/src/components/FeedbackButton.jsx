@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaComment, FaPaperPlane, FaTimes } from "react-icons/fa";
-import { Tooltip } from "react-tooltip"; // ✅ make sure you have react-tooltip installed
+import { Tooltip } from "react-tooltip"; // ✅ make sure react-tooltip is installed
 
 const FeedbackButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -8,7 +8,7 @@ const FeedbackButton = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // ✅ Properly defined submit handler
+  // Submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -28,7 +28,7 @@ const FeedbackButton = () => {
     }
   };
 
-  // ✅ Tooltip styling
+  // Tooltip styling
   const tooltipStyle = {
     backgroundColor: "#1f2937",
     color: "#fff",
@@ -39,21 +39,22 @@ const FeedbackButton = () => {
 
   return (
     <>
-      {/* Feedback Button */}
-      <div className="fixed bottom-8 right-8 z-50">
+      {/* Feedback Button on Bottom-Left */}
+      <div className="fixed bottom-8 left-8 z-50">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2 group"
+          className="bg-orange-600 hover:bg-orange-700 text-white p-5 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2 group"
           data-tooltip-id="feedback-button"
           data-tooltip-content="Share your feedback or report issues"
         >
-          <FaComment className="text-xl" />
+          <FaComment className="text-2xl" /> {/* slightly bigger icon */}
           <span className="hidden group-hover:block text-sm font-medium whitespace-nowrap">
             Feedback
           </span>
         </button>
         <Tooltip id="feedback-button" place="top" style={tooltipStyle} />
       </div>
+
 
       {/* Feedback Modal */}
       {isModalOpen && (

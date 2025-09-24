@@ -20,9 +20,18 @@ const tooltipStyle = {
 };
 
 const Topbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // ✅ Initialize from localStorage or system preference
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) return savedTheme === "dark";
+      // fallback: system preference
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
 
-  // Persist theme in localStorage
+  // Apply theme whenever darkMode changes
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -33,16 +42,14 @@ const Topbar = () => {
     }
   }, [darkMode]);
 
-  // Load saved theme on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") setDarkMode(true);
-  }, []);
-
   return (
     <div
       className={`flex justify-between w-full items-center p-2 px-[5vw] shadow-md border-b-2 transition-colors duration-500
-        ${darkMode ? "bg-gray-900 border-gray-700 text-white" : "bg-gradient-to-r from-orange-500 to-amber-600 border-amber-800 text-white"}
+        ${
+          darkMode
+            ? "bg-gray-900 border-gray-700 text-white"
+            : "bg-gradient-to-r from-orange-500 to-amber-600 border-amber-800 text-white"
+        }
       `}
     >
       <div className="flex items-center font-semibold text-sm tracking-wider">
@@ -68,7 +75,7 @@ const Topbar = () => {
 
         {/* Theme toggle with tooltip */}
         <button
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={() => setDarkMode((prev) => !prev)}
           className="ml-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           data-tooltip-id="theme-tooltip"
           data-tooltip-content="Switch between Light and Dark mode"

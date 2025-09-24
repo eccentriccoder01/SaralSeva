@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tooltip } from "react-tooltip";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "react-tooltip/dist/react-tooltip.css";
 
-// Tooltip style (consistent across all pages)
+// Tooltip style
 const tooltipStyle = {
-  backgroundColor: "#FF9933", // orange theme
-  color: "#1F2937", // dark text
+  backgroundColor: "#FF9933",
+  color: "#1F2937",
   padding: "8px 12px",
   borderRadius: "12px",
   fontSize: "14px",
@@ -20,6 +22,7 @@ const tooltipStyle = {
 };
 
 const Status = () => {
+  const navigate = useNavigate();
   const [checked, setChecked] = useState("scheme");
   const [inputValue, setInputValue] = useState("");
   const [resultScheme, setResultScheme] = useState(null);
@@ -76,7 +79,18 @@ const Status = () => {
 
   return (
     <div className="flex flex-col items-center min-h-[80vh] py-12 px-4 bg-orange-50/30 dark:bg-gray-900/30 transition-colors duration-500">
-      <div className="w-full max-w-2xl p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-colors duration-500">
+      <div className="relative w-full max-w-2xl p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-colors duration-500">
+        
+{/* Go Back Arrow - aligned with heading */}
+<FaArrowLeft
+  className="absolute left-4 top-10 text-orange-500 hover:text-amber-400 cursor-pointer text-2xl"
+  onClick={() => navigate(-1)}
+  title="Go Back"
+/>
+
+
+
+        {/* Centered Heading */}
         <div className="text-center">
           <h1 className="text-4xl font-extrabold text-orange-900 dark:text-orange-400 jost">
             Check Application Status

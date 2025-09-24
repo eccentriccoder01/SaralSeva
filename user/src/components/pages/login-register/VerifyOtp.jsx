@@ -33,7 +33,6 @@ const VerifyOtp = ({ setIsAuthenticated }) => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
       form.setError("pin", { type: "manual", message: "Invalid OTP. Please try again." });
     }
   };
