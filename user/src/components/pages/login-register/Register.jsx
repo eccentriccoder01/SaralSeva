@@ -142,7 +142,6 @@ const onSubmit = async (data) => {
         }
       }
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/registerUser`, data);
-      console.log(res);
       if (res.data.success) {
         toast.success("User registered successfully!", {
           style: { background: '#166534', color: 'white', border: 'none' },

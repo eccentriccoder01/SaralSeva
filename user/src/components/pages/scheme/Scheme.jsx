@@ -32,7 +32,7 @@ const Scheme = () => {
       );
       setScheme(res.data.products);
     } catch (error) {
-      console.log(error, "Something went wrong");
+      // Error handling without console.log in production
     }
   };
 
