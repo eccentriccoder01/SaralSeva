@@ -4,6 +4,7 @@ import { Phone, Sun, Moon } from "lucide-react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
+
 // Tooltip style (same as Footer)
 const tooltipStyle = {
   backgroundColor: "#FF9933", // orange theme
@@ -18,6 +19,8 @@ const tooltipStyle = {
   whiteSpace: "pre-line",
   zIndex: 9999,
 };
+
+const [searchQuery, setSearchQuery] = useState("");
 
 const Topbar = () => {
   // ✅ Initialize from localStorage or system preference
@@ -42,6 +45,12 @@ const Topbar = () => {
     }
   }, [darkMode]);
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (onSearch) onSearch(value);
+  };
+
   return (
     <div
       className={`flex justify-between w-full items-center p-2 px-[5vw] shadow-md border-b-2 transition-colors duration-500
@@ -60,6 +69,14 @@ const Topbar = () => {
 
       <div className="flex items-center gap-4 text-sm">
         <span className="font-bold hidden sm:inline">सत्यमेव जयते</span>
+        <input
+         type="text"
+         placeholder="Search..."
+         className="ml-4 p-1 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors"
+         value={searchQuery}
+         onChange={(e) => setSearchQuery(e.target.value)}
+  />
+
 
         {/* Phone with tooltip */}
         <a
