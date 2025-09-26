@@ -41,8 +41,9 @@ If you discover a security vulnerability, please report it through one of these 
 3. **Issues**: For non-sensitive security discussions, create an issue with the `security` label
 
 **Please include:**
+
 - Detailed reproduction steps
-- Potential impact assessment  
+- Potential impact assessment
 - Affected components/versions
 - Suggested remediation (if known)
 
