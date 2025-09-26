@@ -36,21 +36,28 @@ If you discover a security vulnerability, please report it through one of these 
 
 #### For Manual Reports
 
-1. **GitHub Security Advisories**: Use GitHub's private security reporting
-2. **Email**: Contact the maintainer at [eccentriccoder01's GitHub profile]
+1. **GitHub Security Advisories**: Use GitHub's private security reporting (preferred)
+2. **Primary Contact**: [@eccentriccoder01](https://github.com/eccentriccoder01)
 3. **Issues**: For non-sensitive security discussions, create an issue with the `security` label
 
-### Response Timeline
+**Please include:**
+- Detailed reproduction steps
+- Potential impact assessment  
+- Affected components/versions
+- Suggested remediation (if known)
+
+### Response Timeline & Responsible Disclosure
 
 - **Automated (Dependabot)**: PRs created within 24 hours of vulnerability disclosure
 - **Manual Reports**:
-  - Acknowledgment: Within 48 hours
+  - Acknowledgment: Within 72 hours
   - Initial Assessment: Within 1 week
   - Fix Timeline: Varies by severity
     - Critical: Within 24-48 hours
     - High: Within 1 week
     - Medium: Within 1 month
     - Low: Next release cycle
+  - **Public Disclosure**: 90 days after initial report (coordinated with reporter)
 
 ### Security Best Practices
 
