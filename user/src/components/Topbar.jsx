@@ -72,7 +72,12 @@ const Topbar = ({ onSearch }) => {
         <input
           type="text"
           placeholder="Search..."
-          className="ml-4 p-1 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors"
+          className={`ml-4 p-2 rounded-md border w-48
+  ${darkMode 
+    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
+    : "bg-white border-gray-300 text-black placeholder-gray-500"
+  }
+  focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors`}
           value={searchQuery}
           onChange={handleSearchChange}
         />
