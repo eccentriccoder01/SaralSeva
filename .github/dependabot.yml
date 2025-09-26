@@ -1,0 +1,249 @@
+# Dependabot configuration for SaralSeva
+# This file configures automated dependency updates for all modules in the monorepo
+# Documentation: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Backend Node.js dependencies
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Kolkata"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "eccentriccoder01"
+    assignees:
+      - "eccentriccoder01"
+    commit-message:
+      prefix: "backend"
+      prefix-development: "backend-dev"
+      include: "scope"
+    labels:
+      - "backend"
+      - "dependencies"
+      - "security"
+    # Group minor and patch updates together to reduce PR volume
+    groups:
+      backend-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+      backend-security:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
+    # Ignore packages that might break functionality
+    ignore:
+      - dependency-name: "mongoose"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "express"
+        update-types: ["version-update:semver-major"]
+
+  # User Portal React dependencies
+  - package-ecosystem: "npm"
+    directory: "/user"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:30"
+      timezone: "Asia/Kolkata"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "eccentriccoder01"
+    assignees:
+      - "eccentriccoder01"
+    commit-message:
+      prefix: "user-portal"
+      prefix-development: "user-dev"
+      include: "scope"
+    labels:
+      - "user-portal"
+      - "frontend"
+      - "dependencies"
+    groups:
+      user-react-ecosystem:
+        patterns:
+          - "react*"
+          - "@types/react*"
+          - "react-dom"
+          - "react-router*"
+        update-types:
+          - "minor"
+          - "patch"
+      user-ui-components:
+        patterns:
+          - "@radix-ui/*"
+          - "lucide-react"
+          - "tailwind*"
+          - "@heroicons/*"
+        update-types:
+          - "minor"
+          - "patch"
+      user-build-tools:
+        patterns:
+          - "vite*"
+          - "eslint*"
+          - "@vitejs/*"
+          - "postcss"
+          - "autoprefixer"
+        update-types:
+          - "minor"
+          - "patch"
+      user-security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # Admin Portal React dependencies
+  - package-ecosystem: "npm"
+    directory: "/admin"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:00"
+      timezone: "Asia/Kolkata"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "eccentriccoder01"
+    assignees:
+      - "eccentriccoder01"
+    commit-message:
+      prefix: "admin-portal"
+      prefix-development: "admin-dev"
+      include: "scope"
+    labels:
+      - "admin-portal"
+      - "frontend"
+      - "dependencies"
+    groups:
+      admin-react-ecosystem:
+        patterns:
+          - "react*"
+          - "@types/react*"
+          - "react-dom"
+          - "react-router*"
+        update-types:
+          - "minor"
+          - "patch"
+      admin-ui-components:
+        patterns:
+          - "@radix-ui/*"
+          - "lucide-react"
+          - "tailwind*"
+          - "recharts"
+        update-types:
+          - "minor"
+          - "patch"
+      admin-build-tools:
+        patterns:
+          - "vite*"
+          - "eslint*"
+          - "@vitejs/*"
+          - "postcss"
+          - "autoprefixer"
+        update-types:
+          - "minor"
+          - "patch"
+      admin-security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # Employee Portal React dependencies
+  - package-ecosystem: "npm"
+    directory: "/employee"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:30"
+      timezone: "Asia/Kolkata"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "eccentriccoder01"
+    assignees:
+      - "eccentriccoder01"
+    commit-message:
+      prefix: "employee-portal"
+      prefix-development: "employee-dev"
+      include: "scope"
+    labels:
+      - "employee-portal"
+      - "frontend"
+      - "dependencies"
+    groups:
+      employee-react-ecosystem:
+        patterns:
+          - "react*"
+          - "@types/react*"
+          - "react-dom"
+          - "react-router*"
+        update-types:
+          - "minor"
+          - "patch"
+      employee-ui-components:
+        patterns:
+          - "@radix-ui/*"
+          - "lucide-react"
+          - "tailwind*"
+          - "recharts"
+          - "@react-pdf-viewer/*"
+        update-types:
+          - "minor"
+          - "patch"
+      employee-build-tools:
+        patterns:
+          - "vite*"
+          - "eslint*"
+          - "@vitejs/*"
+          - "postcss"
+          - "autoprefixer"
+        update-types:
+          - "minor"
+          - "patch"
+      employee-security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions workflow dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "monday"
+      time: "11:00"
+      timezone: "Asia/Kolkata"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "eccentriccoder01"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "ci"
+      - "dependencies"
