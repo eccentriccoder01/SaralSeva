@@ -4,7 +4,6 @@ import { Phone, Sun, Moon } from "lucide-react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
-
 // Tooltip style (same as Footer)
 const tooltipStyle = {
   backgroundColor: "#FF9933", // orange theme
@@ -20,15 +19,14 @@ const tooltipStyle = {
   zIndex: 9999,
 };
 
-const [searchQuery, setSearchQuery] = useState("");
+const Topbar = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState("");
 
-const Topbar = () => {
   // ✅ Initialize from localStorage or system preference
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme) return savedTheme === "dark";
-      // fallback: system preference
       return window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
     return false;
@@ -48,7 +46,7 @@ const Topbar = () => {
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
-    if (onSearch) onSearch(value);
+    if (onSearch) onSearch(value); // pass query up if needed
   };
 
   return (
@@ -69,14 +67,15 @@ const Topbar = () => {
 
       <div className="flex items-center gap-4 text-sm">
         <span className="font-bold hidden sm:inline">सत्यमेव जयते</span>
-        <input
-         type="text"
-         placeholder="Search..."
-         className="ml-4 p-1 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors"
-         value={searchQuery}
-         onChange={(e) => setSearchQuery(e.target.value)}
-  />
 
+        {/* ✅ Search bar */}
+        <input
+          type="text"
+          placeholder="Search..."
+          className="ml-4 p-1 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
 
         {/* Phone with tooltip */}
         <a
