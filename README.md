@@ -2,11 +2,11 @@
 
 <h1 align="center">SaralSeva</h1>
 
-<h3>📖 Table of Contents</h3> 
+<h3>📖 Table of Contents</h3>
 
 - <a href="#overview"> Overview </a>
 - <a href="#project-insights"> Project Insights </a>
-- <a href="#vision"> 🇮🇳 The Vision: Digitising Governance at the Gram Panchayat Level  </a>
+- <a href="#vision"> 🇮🇳 The Vision: Digitising Governance at the Gram Panchayat Level </a>
 - <a href="#demo"> Live Demo </a>
 - <a href="#screenshots"> Screenshots </a>
 - <a href="#key-features">Key Features</a>
@@ -73,11 +73,11 @@
 
 SaralSeva is more than just a software project; it's an initiative for social good, aimed at strengthening governance from the ground up. It directly contributes to building a more inclusive and transparent Digital India by focusing on:
 
-* By bringing government services online, SaralSeva makes them accessible to citizens 24/7 from anywhere, reducing the need for physical travel to government offices.
-* Every application and grievance is tracked digitally with a unique ID. This end-to-end visibility minimises ambiguity and holds the system accountable, building trust between the citizens and the administration.
-* The platform automates the workflow of application processing, reducing processing times and ensuring that benefits reach the intended recipients faster.
-* The platform serves as a central repository of information on all available government schemes. This empowers citizens with the information they need to claim their rights and improve their livelihoods.
-* With dedicated portals for employees and administrators, tasks are clearly assigned and tracked. The integrated grievance redressal system ensures that citizen concerns are heard and addressed in a structured manner.
+- By bringing government services online, SaralSeva makes them accessible to citizens 24/7 from anywhere, reducing the need for physical travel to government offices.
+- Every application and grievance is tracked digitally with a unique ID. This end-to-end visibility minimises ambiguity and holds the system accountable, building trust between the citizens and the administration.
+- The platform automates the workflow of application processing, reducing processing times and ensuring that benefits reach the intended recipients faster.
+- The platform serves as a central repository of information on all available government schemes. This empowers citizens with the information they need to claim their rights and improve their livelihoods.
+- With dedicated portals for employees and administrators, tasks are clearly assigned and tracked. The integrated grievance redressal system ensures that citizen concerns are heard and addressed in a structured manner.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -110,24 +110,27 @@ Experience SaralSeva live here:
 SaralSeva is built on a robust three-tier architecture, providing distinct, secure, and feature-rich portals for each user role.
 
 ### **Citizen Portal**
-* **User Registration & Authentication**: Secure registration and login system with JWT and OTP verification via Twilio.
-* **Scheme & Grievance Applications**: Users can easily apply for government schemes and submit grievances through intuitive forms.
-* **Real-time Status Tracking**: Users can track the progress of their applications and grievances with a unique ID.
-* **Personalised Dashboard**: A central place for users to view their application history and manage their profile.
-* **PDF Downloads**: Users can download their applications as PDFs via `jsPDF` for their records.
+
+- **User Registration & Authentication**: Secure registration and login system with JWT and OTP verification via Twilio.
+- **Scheme & Grievance Applications**: Users can easily apply for government schemes and submit grievances through intuitive forms.
+- **Real-time Status Tracking**: Users can track the progress of their applications and grievances with a unique ID.
+- **Personalised Dashboard**: A central place for users to view their application history and manage their profile.
+- **PDF Downloads**: Users can download their applications as PDFs via `jsPDF` for their records.
 
 ### **Employee Portal**
-* **Task-Oriented Dashboard**: A clear view of all assigned scheme applications (tickets) and grievances.
-* **Application Processing**: Tools to review applications, verify documents, and update statuses.
-* **Performance Insights**: Admins can track and visualise employee performance data.
-* **Secure Messaging**: Internal chat system for communication with the admin.
+
+- **Task-Oriented Dashboard**: A clear view of all assigned scheme applications (tickets) and grievances.
+- **Application Processing**: Tools to review applications, verify documents, and update statuses.
+- **Performance Insights**: Admins can track and visualise employee performance data.
+- **Secure Messaging**: Internal chat system for communication with the admin.
 
 ### **Admin Portal**
-* **Comprehensive Dashboard**: A high-level overview of all platform activity, including application statistics and employee performance.
-* **Scheme Management**: Full control to add, update, and manage all available government schemes.
-* **Automated Ticket Assignment**: Fair distribution of applications among employees.
-* **Final Approval Authority**: Power to give the final approval or rejection for all applications.
-* **Broadcast Announcements**: Create and display important updates for all citizens.
+
+- **Comprehensive Dashboard**: A high-level overview of all platform activity, including application statistics and employee performance.
+- **Scheme Management**: Full control to add, update, and manage all available government schemes.
+- **Automated Ticket Assignment**: Fair distribution of applications among employees.
+- **Final Approval Authority**: Power to give the final approval or rejection for all applications.
+- **Broadcast Announcements**: Create and display important updates for all citizens.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -135,7 +138,7 @@ SaralSeva is built on a robust three-tier architecture, providing distinct, secu
 
 🌟 **Exciting News...**
 
-🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow *SaralSeva!* Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
+🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow _SaralSeva!_ Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
 
 👩‍💻 GSSoC is one of India’s **largest 3-month-long open-source programs** that encourages developers of all levels to contribute to real-world projects 🌍 while learning, collaborating, and growing together. 🌱
 
@@ -199,6 +202,7 @@ SaralSeva uses **GitHub Dependabot** for automated dependency updates and securi
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - **Node.js** and **npm**
 - **MongoDB** (local or a cloud instance like MongoDB Atlas)
 
@@ -233,8 +237,8 @@ TWILIO_ACCOUNT_SID=YOUR_TWILIO_SID
 TWILIO_AUTH_TOKEN=YOUR_TWILIO_AUTH_TOKEN
 TWILIO_PHONE_NUMBER=YOUR_TWILIO_PHONE_NUMBER
 ```
- 
- Cloudinary Credentials
+
+Cloudinary Credentials
 
 ```bash
 CLOUDINARY_NAME=YOUR_CLOUDINARY_CLOUD_NAME
@@ -255,6 +259,7 @@ FIREBASE_MEASUREMENT_ID=YOUR_FIREBASE_MEASUREMENT_ID
 ```
 
 Google Cloud Console (Google OAuth Client ID)
+
 1. Application type: Web Application
 2. Authorized JavaScript origins:
    - http://localhost:5173 (local development)
@@ -280,14 +285,13 @@ npm start
 VITE_GOOGLE_CLIENT_ID=YOUR_GOOGLE_OAuth_CLIENT_ID (Same as Backend)
 ```
 
-
 > Repeat the following steps for each frontend directory (`user`, `employee`, and `admin`) in a **separate terminal**.
 
 a. Navigate to a frontend directory:
 
 ```bash
 # In a new terminal
-cd user 
+cd user
 ```
 
 b. Install dependencies and run the development server:
@@ -325,7 +329,7 @@ Your insights are invaluable to us. Reach out to us team for any inquiries, feed
 
 <h2 id="acknowledgments">🙏 Acknowledgments</h2>
 
-- Thanks to all contributors of this project 
+- Thanks to all contributors of this project
 - Special shoutout to **GirlScript Summer of Code (GSSoC’25)** for the amazing community and support!
 - Built with dedication, collaboration, and lots of chai
 
@@ -337,7 +341,7 @@ Your insights are invaluable to us. Reach out to us team for any inquiries, feed
 - **GitHub Issues**: [Report bugs or request features](https://github.com/eccentriccoder01/SaralSeva/issues)
 - **Email**: Contact the maintainers for collaboration opportunities
 
-*Feel free to reach out with any questions or feedback!*
+_Feel free to reach out with any questions or feedback!_
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -345,20 +349,20 @@ Your insights are invaluable to us. Reach out to us team for any inquiries, feed
 
 We love contributions from the community! Whether it's a bug report, a new feature, or a documentation improvement, we appreciate your help.
 
-***How to Contribute***
+**_How to Contribute_**
 
 1.  **Fork the repository** and create a new branch for your changes.
 2.  **Make your changes** and ensure everything is working as expected.
 3.  **Submit a pull request** with a clear description of your changes.
 
-***Found a Bug?***
+**_Found a Bug?_**
 
--   Check the [issue tracker](https://github.com/eccentriccoder01/SaralSeva/issues) to see if the bug has already been reported.
--   If not, open a new issue and provide as much detail as possible.
+- Check the [issue tracker](https://github.com/eccentriccoder01/SaralSeva/issues) to see if the bug has already been reported.
+- If not, open a new issue and provide as much detail as possible.
 
-***Have a Feature Idea?***
+**_Have a Feature Idea?_**
 
--   We'd love to hear it! Open an issue to discuss your idea.
+- We'd love to hear it! Open an issue to discuss your idea.
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -377,7 +381,7 @@ We welcome contributions from developers of all skill levels! Here are some ways
 - 📱 Mobile responsiveness - Improve the mobile experience
 - 🔒 Security enhancements - Help keep user data safe
 
-*Thank you to everyone who has made SaralSeva better! 💚*
+_Thank you to everyone who has made SaralSeva better! 💚_
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
@@ -391,7 +395,7 @@ Please refer to the [`Code of Conduct`](https://github.com/eccentriccoder01/Sara
 
 We love our contributors! If you'd like to help, please check out our [`CONTRIBUTE.md`](https://github.com/eccentriccoder01/SaralSeva/blob/main/CONTRIBUTING.md) file for guidelines.
 
->Thank you once again to all our contributors who has contributed to **SaralSeva!** Your efforts are truly appreciated. 💖👏
+> Thank you once again to all our contributors who has contributed to **SaralSeva!** Your efforts are truly appreciated. 💖👏
 
 <!-- Contributors badge (auto-updating) -->
 
@@ -423,7 +427,7 @@ Feel free to open issues or discussions if you have any feedback, feature sugges
 
 <h2 id="show-your-support">🙌 Show Your Support</h2>
 
-*If you find SaralSeva project helpful, give it a star! ⭐ to support more such educational initiatives:*
+_If you find SaralSeva project helpful, give it a star! ⭐ to support more such educational initiatives:_
 
 - ⭐ **Starring the repository**
 - 🐦 **Sharing on social media**

@@ -17,23 +17,25 @@ This repository uses GitHub Dependabot for automated security vulnerability mana
 
 We actively maintain security updates for:
 
-| Module | Version | Supported |
-| ------ | ------- | --------- |
-| Backend API | 1.0.x | ✅ |
-| User Portal | 0.0.x | ✅ |
-| Admin Portal | 0.0.x | ✅ |
-| Employee Portal | 0.0.x | ✅ |
+| Module          | Version | Supported |
+| --------------- | ------- | --------- |
+| Backend API     | 1.0.x   | ✅        |
+| User Portal     | 0.0.x   | ✅        |
+| Admin Portal    | 0.0.x   | ✅        |
+| Employee Portal | 0.0.x   | ✅        |
 
 ### Reporting a Vulnerability
 
 If you discover a security vulnerability, please report it through one of these channels:
 
 #### For Automated Issues (Preferred)
+
 - Dependabot will automatically detect and create PRs for known vulnerabilities
 - Monitor the [Security tab](../../security) for alerts
 - Review and approve Dependabot security PRs promptly
 
 #### For Manual Reports
+
 1. **GitHub Security Advisories**: Use GitHub's private security reporting
 2. **Email**: Contact the maintainer at [eccentriccoder01's GitHub profile]
 3. **Issues**: For non-sensitive security discussions, create an issue with the `security` label
@@ -41,7 +43,7 @@ If you discover a security vulnerability, please report it through one of these 
 ### Response Timeline
 
 - **Automated (Dependabot)**: PRs created within 24 hours of vulnerability disclosure
-- **Manual Reports**: 
+- **Manual Reports**:
   - Acknowledgment: Within 48 hours
   - Initial Assessment: Within 1 week
   - Fix Timeline: Varies by severity
@@ -55,6 +57,7 @@ If you discover a security vulnerability, please report it through one of these 
 This project follows these security practices:
 
 #### Backend Security
+
 - JWT token authentication
 - Password hashing with bcrypt
 - CORS configuration
@@ -62,6 +65,7 @@ This project follows these security practices:
 - Input validation and sanitization
 
 #### Frontend Security
+
 - Secure HTTP-only cookies
 - XSS prevention
 - CSRF protection
@@ -69,6 +73,7 @@ This project follows these security practices:
 - Input validation
 
 #### Infrastructure Security
+
 - Regular dependency updates via Dependabot
 - Automated vulnerability scanning
 - Secure deployment practices
@@ -80,13 +85,15 @@ Our automated dependency management includes:
 
 ```yaml
 Security Update Schedule:
-- Immediate: Critical and high severity
-- Weekly: Medium severity
-- Monthly: Low severity and maintenance
+  - Immediate: Critical and high severity
+  - Weekly: Medium severity
+  - Monthly: Low severity and maintenance
 ```
 
 #### Current Security Focus Areas
+
 Based on recent vulnerability scans, we prioritize:
+
 - **HTTP Client Security**: Axios and related networking libraries
 - **PDF Processing**: PDF.js and related document processing
 - **Build Tools**: Vite, ESLint, and development dependencies
@@ -95,6 +102,7 @@ Based on recent vulnerability scans, we prioritize:
 ### Security Configuration
 
 The repository includes:
+
 - **Dependabot configuration** (`.github/dependabot.yml`)
 - **Security documentation** (`DEPENDABOT.md`)
 - **Automated vulnerability scanning**
@@ -103,6 +111,7 @@ The repository includes:
 ### Coordinated Disclosure
 
 For sensitive vulnerabilities:
+
 1. Report privately first
 2. Allow reasonable time for fixes
 3. Coordinate public disclosure
@@ -111,6 +120,7 @@ For sensitive vulnerabilities:
 ### Security Updates
 
 Stay informed about security updates:
+
 - Watch this repository for security alerts
 - Monitor Dependabot PRs with `security` labels
 - Check the [Security Advisory page](../../security/advisories)

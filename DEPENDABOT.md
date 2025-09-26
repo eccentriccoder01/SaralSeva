@@ -13,8 +13,9 @@ This repository uses GitHub's Dependabot to automatically manage dependencies an
 ## 📁 Coverage
 
 Dependabot monitors and updates dependencies in:
+
 - `/backend` - Node.js/Express API dependencies
-- `/user` - User portal React dependencies  
+- `/user` - User portal React dependencies
 - `/admin` - Admin portal React dependencies
 - `/employee` - Employee portal React dependencies
 - GitHub Actions workflows
@@ -22,19 +23,24 @@ Dependabot monitors and updates dependencies in:
 ## ⚙️ Configuration Features
 
 ### **Grouped Updates**
+
 Updates are intelligently grouped to reduce PR volume:
+
 - **React Ecosystem**: React, React-DOM, React Router updates together
-- **UI Components**: Radix UI, Lucide, Tailwind updates together  
+- **UI Components**: Radix UI, Lucide, Tailwind updates together
 - **Build Tools**: Vite, ESLint, PostCSS updates together
 - **Security Updates**: All security fixes get immediate priority
 
 ### **Safety Measures**
+
 - Major version updates for critical packages (React, Express, Mongoose) are ignored by default
 - Each module has a maximum of 10 open PRs to prevent overwhelming maintainers
 - Updates are scheduled during Indian business hours for better response times
 
 ### **Automatic Labeling**
+
 All Dependabot PRs are automatically labeled with:
+
 - Module name (`backend`, `user-portal`, `admin-portal`, `employee-portal`)
 - Type (`dependencies`, `frontend`, `security`, `ci`)
 - Component category for better organization
@@ -42,12 +48,15 @@ All Dependabot PRs are automatically labeled with:
 ## 🔒 Security Benefits
 
 ### **Immediate Vulnerability Fixes**
+
 - Security updates are created as soon as vulnerabilities are detected
 - No waiting for weekly schedules - security PRs are created immediately
 - Grouped separately from feature updates for priority handling
 
 ### **Current Vulnerability Coverage**
+
 Based on recent audit, Dependabot will automatically address:
+
 - **High Priority**: Axios DoS vulnerabilities, PDF.js XSS risks
 - **Medium Priority**: Build tool vulnerabilities (esbuild, rollup)
 - **Critical**: Form-data security issues
@@ -56,17 +65,19 @@ Based on recent audit, Dependabot will automatically address:
 ## 📋 Developer Workflow
 
 ### **When Dependabot Creates a PR**
+
 1. **Review the PR**: Check changelog and breaking changes
 2. **Test locally**: Run tests if available
 3. **Merge or close**: Approve safe updates, investigate breaking changes
 
 ### **Handling Updates**
+
 ```bash
 # For minor/patch updates (usually safe)
 - Review the changelog
 - Merge if tests pass
 
-# For security updates (high priority) 
+# For security updates (high priority)
 - Test functionality briefly
 - Merge immediately if no issues
 
@@ -77,6 +88,7 @@ Based on recent audit, Dependabot will automatically address:
 ```
 
 ### **Managing PR Volume**
+
 - **Grouped updates** reduce individual PRs
 - **Maximum 10 PRs** per module prevents overwhelming
 - **Weekly schedule** provides predictable update cycles
@@ -85,12 +97,14 @@ Based on recent audit, Dependabot will automatically address:
 ## 📊 Expected Impact
 
 ### **Before Dependabot**
+
 - 78+ total vulnerabilities across all modules
 - Manual monitoring required
 - Inconsistent update schedule
 - Risk of missing critical security updates
 
 ### **After Dependabot**
+
 - Automatic vulnerability detection and fixes
 - Consistent weekly maintenance
 - Reduced security exposure time
