@@ -96,6 +96,14 @@ const GrievancesRegistrationForm = ({ isAuthenticated }) => {
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/30 py-12 transition-colors duration-300">
         <Toaster position="top-center" richColors />
+        <button
+          type="button"
+          onClick={() => window.history.back()} // or use router navigation
+          className="items-center px-4 border border-orange-600 dark:border-orange-400 
+               text-orange-600 dark:text-orange-400 rounded-lg font-semibold
+               hover:bg-orange-600 hover:text-white dark:hover:bg-orange-400 dark:hover:text-gray-900 
+               transition-colors duration-200 ml-8 mb-2 py-2"
+        >Back</button>
         <form className="p-4 sm:p-8 space-y-8 max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-colors duration-300" onSubmit={handleSubmit(onSubmit)}>
             <h1 className="text-4xl font-extrabold text-center text-orange-900 dark:text-orange-400 jost">Grievance Registration Form</h1>
             
