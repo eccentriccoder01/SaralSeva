@@ -191,8 +191,8 @@
 /* --- MOBILE ADJUSTMENTS --- */
 @media (max-width: 480px) {
   .chatbot-container {
-    bottom: 20px;
-    left: 20px;
+    bottom: 108px;
+    left: 40px;
   }
   .chatbot-window {
     width: calc(100vw - 40px);
