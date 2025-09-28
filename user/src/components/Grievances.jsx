@@ -70,7 +70,7 @@ const Grievances = () => {
       </div>
 
       {/* Action Cards */}
-      <div className="flex flex-col justify-center gap-8 py-16 md:flex-row bg-white dark:bg-gray-800 transition-colors duration-300">
+      <div className="max-w-5xl mx-auto flex flex-col justify-center gap-8 py-16 md:flex-row items-center bg-white dark:bg-gray-800 transition-colors duration-300">
         
         {/* Lodge Grievance */}
         <div
@@ -78,7 +78,7 @@ const Grievances = () => {
           data-tooltip-id="tooltip-lodge"
           data-tooltip-content="Click to lodge a new grievance"
         >
-            <FileSignature className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400"/>
+            <FileSignature className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400 "/>
             <h3 className="mt-4 text-2xl font-bold text-stone-800 dark:text-gray-200">Lodge a Grievance</h3>
             <p className="mt-2 text-gray-600 dark:text-gray-300">Submit a new grievance through our simplified form.</p>
             <Link to='/grievances/grievances_registration_form'>
