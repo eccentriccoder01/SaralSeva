@@ -28,24 +28,33 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-      const data = await res.json();
-      alert(data.message); 
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = await res.json();
+    alert(data.message);
+
+    // ✅ Reset form fields after success
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong. Please try again.");
+  }
+};
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
