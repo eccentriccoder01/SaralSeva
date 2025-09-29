@@ -100,19 +100,6 @@ const Status = () => {
           </p>
         </div>
 
-        {/* Toggle theme button with tooltip */}
-        <div className="flex justify-end mt-4">
-          <button
-            onClick={() => setIsLightMode(!isLightMode)}
-            className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            data-tooltip-id="themeToggleTip"
-            data-tooltip-content="Toggle between Light and Dark mode"
-          >
-            {isLightMode ? "Dark Mode" : "Light Mode"}
-          </button>
-          <Tooltip id="themeToggleTip" style={tooltipStyle} />
-        </div>
-
         {/* Scheme / Grievance toggle with tooltips */}
         <div className="flex bg-gray-200 dark:bg-gray-700 rounded-lg p-1 my-8 transition-colors duration-500">
           <button
