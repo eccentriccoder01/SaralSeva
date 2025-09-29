@@ -17,11 +17,21 @@ import grievanceRouter from './routes/grievanceRouter.js';
 import messageRouter from './routes/messageRouter.js';
 import contactRouter from "./routes/contactRoutes.js";
 
+// importSecurity
+import { securityMiddleware } from './middleware/security.js';
+
+// Monitoring
+import healthRoute from "./routes/health.js"
+
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 app.use(cors());
+
+// added hpp+helmet
+securityMiddleware(app);
 
 connectDb();
 connectCloudinary();
@@ -29,19 +39,19 @@ connectCloudinary();
 app.use('/api/v1/schemes', schemesRouter)
 app.use('/api/v1/announcement', announcementRouter)
 app.use('/api/v1/user', userRouter)
-app.use('/api/v1/admin',adminRouter)
-app.use('/api/v1/employee',employeeRouter)
+app.use('/api/v1/admin', adminRouter)
+app.use('/api/v1/employee', employeeRouter)
 app.use('/api/v1/user/scheme', schemeAppliedRouter)
 app.use('/api/v1/notification', notificationRouter)
-app.use('/api/v1/grievances' , grievanceRouter)
-app.use('/api/v1/messages' , messageRouter)
+app.use('/api/v1/grievances', grievanceRouter)
+app.use('/api/v1/messages', messageRouter)
 app.use("/api/v1/contact", contactRouter);
 
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
+app.post('/api/v1/user/auth/generate-otp', async(req, res) => {
     const { mobile } = req.body;
     const user = await userModel.findOne({ mobile });
     if (!user) {
@@ -55,11 +65,7 @@ app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
     const otp_expiry = new Date(Date.now() + 20 * 60000); // 10 minutes expiry
 
     try {
-        const  user = await userModel.findOneAndUpdate(
-            { mobile },
-            { otp, otp_expiry: otp_expiry },
-            { upsert: true, new: true }
-        );
+        const user = await userModel.findOneAndUpdate({ mobile }, { otp, otp_expiry: otp_expiry }, { upsert: true, new: true });
         await twilioClient.messages.create({
             body: `Your OTP code is ${otp}`,
             from: process.env.TWILIO_PHONE_NUMBER,
@@ -71,7 +77,7 @@ app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
             message: 'OTP sent successfully',
             user,
         })
-        
+
     } catch (error) {
         console.error('Failed to send OTP:', error);
         res.status(500).send('Failed to send OTP');
@@ -79,7 +85,7 @@ app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
 
 });
 
-app.post('/api/v1/user/auth/verify-otp', async (req, res) => {
+app.post('/api/v1/user/auth/verify-otp', async(req, res) => {
     const { mobile, otp } = req.body;
     try {
         const user = await userModel.findOne({ mobile, otp, otp_expiry: { $gte: new Date() } });
@@ -93,12 +99,16 @@ app.post('/api/v1/user/auth/verify-otp', async (req, res) => {
         await user.save();
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ message: 'OTP verified', token , user });
+        res.json({ message: 'OTP verified', token, user });
     } catch (error) {
         console.error('Failed to verify OTP:', error);
         res.status(500).send('Failed to verify OTP');
     }
 });
+
+
+// Monitor
+app.use("/health", healthRoute);
 
 app.get('/', (req, res) => {
     res.send(`API is running`)
