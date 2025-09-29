@@ -19,7 +19,8 @@ import contactRouter from "./routes/contactRoutes.js";
 
 // importSecurity
 import { securityMiddleware } from './middleware/security.js';
-
+// Monitoring
+import healthRoute from "./routes/health.js"
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -102,6 +103,10 @@ app.post('/api/v1/user/auth/verify-otp', async(req, res) => {
         res.status(500).send('Failed to verify OTP');
     }
 });
+
+
+// Monitor
+app.use("/health", healthRoute);
 
 app.get('/', (req, res) => {
     res.send(`API is running`)
