@@ -134,7 +134,8 @@ const UserLogin = ({ setIsAuthenticated }) => {
                 <form onSubmit={handleOtpLogin} className="space-y-4 animate-in fade-in duration-300">
                     <div className="space-y-1">
                         <label htmlFor="mobile" className="font-medium text-gray-700">Mobile Number</label>
-                        <input id="mobile" type="tel" onChange={(e) => setMobile(e.target.value)} placeholder="Enter 10-digit mobile number" required className={inputClasses} />
+                        <input id="mobile" type="tel" onChange={(e) => setMobile(e.target.value)} placeholder="Enter 10-digit mobile number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" className={inputClasses} 
+                        />
                     </div>
                     <Button className="w-full text-lg py-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all" type="submit">Get OTP</Button>
                 </form>
