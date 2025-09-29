@@ -1,0 +1,95 @@
+name: CI
+on: [push,pull_request]
+jobs:
+  Backend:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:6 # Specify the desired MongoDB version
+        ports:
+          - 27017:27017 # Expose the default MongoDB port
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      PORT: 8000
+      MONGODB_URL: mongodb://mongo:27017/testdb
+      JWT_SECRET: dummy
+      
+      TWILIO_ACCOUNT_SID: ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      TWILIO_AUTH_TOKEN: dummy
+      TWILIO_PHONE_NUMBER: dummy
+
+      CLOUDINARY_NAME: dummy
+      CLOUDINARY_API_KEY: dummy
+      CLOUDINARY_SECRET_KEY: dummy
+
+      FIREBASE_API_KEY: dummy
+      FIREBASE_AUTH_DOMAIN: dummy
+      FIREBASE_PROJECT_ID: dummy
+      FIREBASE_STORAGE_BUCKET: dummy
+      FIREBASE_MESSAGING_SENDER_ID: dummy
+      FIREBASE_APP_ID: dummy
+      FIREBASE_MEASUREMENT_ID: dummy
+
+      GOOGLE_CLIENT_ID: dummy
+    steps:
+      -  name: Checkout
+         uses: actions/checkout@v5.0.0
+         with:
+           repository: eccentriccoder01/SaralSeva
+           path: .
+      - name: Setup Node
+        uses: actions/setup-node@v5.0.0
+      - name: Install Dependencies and Run
+        run: |
+          cd backend
+          npm install
+          npm start &      
+          sleep 5
+          curl -f http://localhost:${{ env.PORT }} || exit 1
+          pkill -f "node"
+
+
+  Frontend:
+    runs-on: ubuntu-latest
+    env:
+      VITE_GOOGLE_CLIENT_ID: dummy
+    steps:
+      -  name: Checkout
+         uses: actions/checkout@v5.0.0
+         with:
+           repository: eccentriccoder01/SaralSeva
+           path: .
+      - name: Setup Node
+        uses: actions/setup-node@v5.0.0
+      - name: Install Dependencies and Run #User
+        run: |
+          cd user
+          npm install
+          npm run dev &      
+          sleep 5
+          curl -f http://localhost:5173 || exit 1
+          pkill -f "node"
+      - name: Install Dependencies and Run #Employee
+        run: |
+          cd employee
+          npm install
+          npm run dev &      
+          sleep 5
+          curl -f http://localhost:5173 || exit 1
+          pkill -f "node"
+      - name: Install Dependencies and Run #Admin
+        run: |
+          cd admin
+          npm install
+          npm run dev &      
+          sleep 5
+          curl -f http://localhost:5173 || exit 1
+          pkill -f "node"
+
+      
+      
+  
