@@ -1,0 +1,64 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: Run Backend Tests
+        working-directory: ./backend
+        run: npm test --if-present
+
+      - name: Install Admin Dependencies
+        working-directory: ./admin
+        run: npm install
+
+      - name: Build Admin React App
+        working-directory: ./admin
+        run: npm run build
+
+      - name: Install Employee Dependencies
+        working-directory: ./employee
+        run: npm install
+
+      - name: Build Employee React App
+        working-directory: ./employee
+        run: npm run build
+
+      - name: Install User Dependencies
+        working-directory: ./user
+        run: npm install
+
+      - name: Build User React App
+        working-directory: ./user
+        run: npm run build
+
+      - name: Copy Builds to Backend
+        run: |
+          rm -rf ./backend/public
+          mkdir -p ./backend/public
+          cp -r ./admin/build ./backend/public/admin
+          cp -r ./employee/build ./backend/public/employee
+          cp -r ./user/build ./backend/public/user
