@@ -45,16 +45,47 @@ const Footer = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
 
-              {/* QR Code */}
-              <img
-                src={qrcode}
-                alt="QR Code for Mobile App"
-                className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "fixed top-1/2 left-1/2 w-80 h-80 z-50 -translate-x-1/2 -translate-y-1/2 shadow-2xl bg-white" : "w-28 h-28"}`}
-                onClick={toggleQR}
-                data-tooltip-id="qr-tooltip"
-                data-tooltip-content="Scan this QR code to download the SaralSeva app"
-              />
-              <Tooltip id="qr-tooltip" place="top" style={tooltipStyle} />
+            {/* QR Code */}
+{isQRActive && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center"
+    onClick={toggleQR} // Clicking overlay closes it
+  >
+    <div
+      className="relative"
+      onClick={(e) => e.stopPropagation()} // Prevent closing when clicking QR itself
+    >
+      {/* Close Button */}
+      <button
+        onClick={toggleQR}
+        className="absolute -top-4 -right-4 bg-white rounded-full shadow-md text-black font-bold px-2"
+      >
+        ×
+      </button>
+
+      {/* QR Image */}
+      <img
+        src={qrcode}
+        alt="QR Code for Mobile App"
+        className="w-80 h-80 object-cover rounded-lg border-2 border-amber-500 p-1 shadow-2xl bg-white"
+      />
+    </div>
+  </div>
+)}
+
+{/* Small QR (default view) */}
+{!isQRActive && (
+  <img
+    src={qrcode}
+    alt="QR Code for Mobile App"
+    className="w-28 h-28 object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300"
+    onClick={toggleQR}
+    data-tooltip-id="qr-tooltip"
+    data-tooltip-content="Scan this QR code to download the SaralSeva app"
+  />
+)}
+
+<Tooltip id="qr-tooltip" place="top" style={tooltipStyle} />
 
               {/* App Store / Play Store Links */}
               <div className="flex flex-col gap-2">
