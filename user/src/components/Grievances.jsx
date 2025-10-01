@@ -70,7 +70,7 @@ const Grievances = () => {
       </div>
 
       {/* Action Cards */}
-      <div className="max-w-5xl mx-auto flex flex-col justify-center gap-8 py-16 md:flex-row items-center bg-white dark:bg-gray-800 transition-colors duration-300">
+  <div className="max-w-7xl mx-auto flex flex-col justify-center gap-8 py-16 md:flex-row items-center bg-white dark:bg-gray-800 transition-colors duration-300 mb-12">
         
         {/* Lodge Grievance */}
         <div
