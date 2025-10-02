@@ -45,7 +45,7 @@ const Footer = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
 
-            {/* QR Code */}
+  {/* QR Code */}
 {isQRActive && (
   <div
     className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center"
@@ -58,7 +58,7 @@ const Footer = () => {
       {/* Close Button */}
       <button
         onClick={toggleQR}
-        className="absolute -top-4 -right-4 bg-white rounded-full shadow-md text-black font-bold px-2"
+        className="absolute -top-4 -right-4 bg-orange-500 text-white rounded-full shadow-md font-bold px-2 hover:bg-orange-600 transition"
       >
         ×
       </button>
@@ -69,6 +69,7 @@ const Footer = () => {
         alt="QR Code for Mobile App"
         className="w-80 h-80 object-cover rounded-lg border-2 border-amber-500 p-1 shadow-2xl bg-white"
       />
+      
     </div>
   </div>
 )}
