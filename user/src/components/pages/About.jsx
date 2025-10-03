@@ -67,7 +67,7 @@ const About = () => {
             <img
               src={about}
               alt="About SaralSeva"
-              className='w-full h-auto rounded-2xl shadow-xl dark:shadow-black/50 hover:scale-105 transition-transform duration-300'
+              className='w-full h-auto rounded-2xl shadow-xl dark:shadow-black/50 hover:scale-105 transition-transform duration-300 border-2 border-orange-200'
               data-tooltip-id="about-img-tooltip"
               data-tooltip-content="SaralSeva provides a unified digital platform for governance."
             />
