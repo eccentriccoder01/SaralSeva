@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 import SingleGrievance from "./components/SingleGrievance";
 import Notifications from "./components/Notifications";
 import Message from "./components/Message";
+import NotFound from "./components/NotFound";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useContext(EmployeeContext);
@@ -51,6 +52,7 @@ function App() {
           <Route path="/grievance/:id" element={<SingleGrievance/>}/>
           <Route path='/notifications' element={<Notifications/>}/>
           <Route path='/messages' element={<Message/>}/>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
