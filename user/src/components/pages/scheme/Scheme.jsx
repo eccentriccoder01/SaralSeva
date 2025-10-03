@@ -8,8 +8,8 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
 const tooltipStyle = {
-  backgroundColor: "#FF9933", // orange theme
-  color: "#1F2937", // dark text
+  backgroundColor: "#FF9933",
+  color: "#1F2937",
   padding: "8px 12px",
   borderRadius: "12px",
   fontSize: "14px",
@@ -78,60 +78,51 @@ const Scheme = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {scheme.map((item, index) => (
-                <TableRow
-                  key={index}
-                  className="bg-white dark:bg-gray-800 hover:bg-orange-50/70 dark:hover:bg-gray-700"
-                >
-                  <TableCell className="font-medium text-gray-700 dark:text-gray-200">
-                    {index + 1}
-                  </TableCell>
-                  <TableCell>
-                    <Link
-                      to={`/scheme/${item._id}`}
-                      className="font-semibold text-lg text-stone-800 dark:text-stone-200 hover:text-orange-700 dark:hover:text-amber-400 hover:underline"
-                    >
-                      {item?.scheme_name}
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <Download
-                      className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110"
-                      onClick={() => handleClick(item?.scheme_brochure)}
-                      data-tooltip-id={`download-tooltip-${index}`}
-                      data-tooltip-content="Download brochure (PDF)"
-                    />
-                    <Tooltip
-                      id={`download-tooltip-${index}`}
-                      place="top"
-                      style={tooltipStyle}
-                    />
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <button
-                      onClick={() =>
-                        handleSchemeForm(item?.scheme_name, item?.scheme_code)
-                      }
-                      className="flex items-center gap-2 ml-auto font-bold text-orange-800 dark:text-amber-400 transition-transform rounded-full hover:scale-105"
-                      data-tooltip-id={`apply-tooltip-${index}`}
-                      data-tooltip-content="Apply for this scheme"
-                    >
-                      Apply <ExternalLink size={20} />
-                    </button>
-                    <Tooltip
-                      id={`apply-tooltip-${index}`}
-                      place="top"
-                      style={tooltipStyle}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
-    </div>
-  );
+  {scheme.map((item, index) => (
+    <TableRow
+      key={index}
+      className="bg-white dark:bg-gray-800 hover:bg-orange-50/70 dark:hover:bg-gray-700"
+    >
+      <TableCell className="font-medium text-gray-700 dark:text-gray-200">
+        {index + 1}
+      </TableCell>
+      <TableCell>
+        <Link
+          to={`/scheme/${item._id}`}
+          className="font-semibold text-lg text-stone-800 dark:text-stone-200 hover:text-orange-700 dark:hover:text-amber-400 hover:underline"
+        >
+          {item?.scheme_name}
+        </Link>
+      </TableCell>
+      <TableCell>
+        <Download
+          className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110"
+          onClick={() => handleClick(item?.scheme_brochure)}
+          data-tooltip-id={`download-tooltip-${index}`}
+          data-tooltip-content="Download brochure (PDF)"
+        />
+        <Tooltip
+          id={`download-tooltip-${index}`}
+          place="top"
+          style={tooltipStyle}
+        />
+      </TableCell>
+      <TableCell className="text-right">
+        <button
+          className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+          onClick={() => handleSchemeForm(item?.scheme_name, item?.scheme_code)}
+        >
+          Apply Now
+        </button>
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+</Table>
+</div>
+</div>
+</div>
+);
 };
 
 export default Scheme;
