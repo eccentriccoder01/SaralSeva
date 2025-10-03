@@ -327,7 +327,7 @@ const onSubmit = async (data) => {
               {/* Country + State */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 dark:text-black">
                   <div>
-                    <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" />
+                  <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" showFlag={false} />                    {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
                     {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
                   </div>
                   <div>
