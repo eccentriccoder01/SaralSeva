@@ -24,37 +24,96 @@ const Contact = () => {
     message: "",
   });
 
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
+      newErrors.name = 'Name can only contain letters and spaces';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+      
+      const data = await res.json();
+      
+      if (res.ok) {
+        alert(data.message || "Message sent successfully!");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+        setErrors({});
+      } else {
+        throw new Error(data.message || "Failed to send message");
       }
-    );
-    const data = await res.json();
-    alert(data.message);
-
-    // ✅ Reset form fields after success
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
-
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong. Please try again.");
-  }
-};
+    } catch (err) {
+      console.error("Contact form error:", err);
+      alert(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
@@ -81,7 +140,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 w-full max-w-6xl">
           <div className="flex flex-col gap-8">
             {/* Email & Phone Card */}
             <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
@@ -162,66 +221,95 @@ const Contact = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Full Name
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Full Name *
                   </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     placeholder="Enter your name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
-                    required
+                    className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors duration-200 ${
+                      errors.name ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                    }`}
                   />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.name}</p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Email Address
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Email Address *
                   </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
-                    required
+                    className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors duration-200 ${
+                      errors.email ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.email}</p>
+                  )}
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Subject
                 </label>
                 <input
+                  id="subject"
                   type="text"
                   name="subject"
                   placeholder="Enter subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                  className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors duration-200"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Message
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Message *
                 </label>
                 <textarea
+                  id="message"
                   name="message"
                   placeholder="Write your message here..."
                   value={formData.message}
                   onChange={handleChange}
-                  className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
-                  required
-                ></textarea>
+                  rows={5}
+                  className={`mt-1 w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none transition-colors duration-200 resize-none ${
+                    errors.message ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                  }`}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.message}</p>
+                )}
               </div>
               <div className="text-center">
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105"
+                  disabled={isSubmitting}
+                  className={`px-8 py-3 bg-amber-500 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 ${
+                    isSubmitting 
+                      ? 'opacity-50 cursor-not-allowed hover:scale-100' 
+                      : 'hover:bg-amber-600'
+                  }`}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
               </div>
             </form>
