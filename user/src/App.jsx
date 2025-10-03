@@ -55,6 +55,10 @@ function App() {
     setIsAuthenticated(!!token);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   // Show Chatbot on all pages except login/register/userlogin
   const showChatbot = !["/login", "/register", "/userlogin"].includes(location.pathname);
 
