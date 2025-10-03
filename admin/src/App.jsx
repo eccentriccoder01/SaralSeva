@@ -20,6 +20,7 @@ import Profile from "./components/Profile";
 import SingleGrievance from "./components/SingleGrievance";
 import Message from "./components/Message";
 import SingleScheme from "./components/SingleScheme";
+import NotFound from "./components/NotFound";
 
 const ProtectedRoutes = ({ children }) => {
   const { isAuthenticated ,token} = useContext(AdminContext);
@@ -61,6 +62,7 @@ function App() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/grievance/:id' element={<SingleGrievance/>}/>
           <Route path='/message' element={<Message/>}/>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

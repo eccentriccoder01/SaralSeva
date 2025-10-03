@@ -18,6 +18,7 @@ import UserLogin from "./components/pages/login-register/UserLogin";
 import CompleteGoogleRegistration from "./components/pages/login-register/CompleteGoogleRegistration";
 import Register from "./components/pages/login-register/Register";
 import VerifyOtp from "./components/pages/login-register/VerifyOtp";
+import NotFound from "./components/NotFound";
 
 import About from "./components/pages/About";
 import SchemeEligibilty from "./components/pages/scheme/SchemeEligibilty";
@@ -93,6 +94,7 @@ function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/linkingpolicy" element={<LinkingPolicy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       
       <FeedbackButton />
