@@ -19,6 +19,11 @@ import contactRouter from "./routes/contactRoutes.js";
 
 // importSecurity
 import { securityMiddleware } from './middleware/security.js';
+
+
+// Monitoring
+import healthRoute from "./routes/health.js"
+
 // Monitoring
 import healthRoute from "./routes/health.js"
 
