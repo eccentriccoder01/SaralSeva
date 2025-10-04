@@ -287,14 +287,7 @@ const FAQ = [
   response: `
 <div>
   <p>I'm sorry, I did not understand your query.</p>
-  <p>You can select from the <strong>Help Menu</strong> 
-    <span style="display:inline-flex; align-items:center; margin-left:4px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M9 9a3 3 0 0 1 6 0c0 3-3 3-3 6"/>
-        <circle cx="12" cy="17" r="1"/>
-      </svg>
-    </span> for quick guidance or try rephrasing your question.
+  <p>You can select from the <strong class="help-menu-link" style="cursor:pointer; text-decoration:underline;">Help Menu</strong> for quick guidance or try rephrasing your question.
   </p>
 </div>
 `
@@ -327,6 +320,7 @@ const Chatbot = () => {
   ]);
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
+  const chatBodyRef = useRef(null);
 
   // Disable page scroll when chatbot is open
   useEffect(() => {
@@ -336,6 +330,23 @@ const Chatbot = () => {
 
   const scrollToBottom = () => chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   useEffect(() => scrollToBottom(), [messages]);
+
+  // Handle clicks on inline links inside bot responses (event delegation)
+  useEffect(() => {
+    const node = chatBodyRef.current;
+    if (!node) return;
+
+    const handleClick = (e) => {
+      const target = e.target.closest('.help-menu-link');
+      if (target) {
+        e.preventDefault();
+        setShowQuick(true);
+      }
+    };
+
+    node.addEventListener('click', handleClick);
+    return () => node.removeEventListener('click', handleClick);
+  }, []);
 
   const toggleChat = () => setIsOpen(!isOpen);
   const toggleQuick = () => setShowQuick(!showQuick);
@@ -390,7 +401,7 @@ const Chatbot = () => {
         </div>
 
         {/* Chat Messages */}
-        <div className="chatbot-body">
+        <div className="chatbot-body" ref={chatBodyRef}>
           {messages.map((msg, idx) => (
             <div
               key={idx}

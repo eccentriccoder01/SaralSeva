@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import "./App.css";
@@ -47,15 +47,14 @@ import FeedbackButton from "./components/FeedbackButton";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const location = useLocation();
+  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
   }, []);
 
-  // Show Chatbot on all pages except login/register/userlogin
-  const showChatbot = !["/login", "/register", "/userlogin"].includes(location.pathname);
+  
 
   return (
     <>
@@ -99,7 +98,7 @@ function App() {
       <Footer />
       <ScrollToTop />
       <ScrollToBottom />
-      {showChatbot && <Chatbot />}
+      <Chatbot />
     </>
   );
 }
