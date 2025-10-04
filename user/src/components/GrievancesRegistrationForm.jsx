@@ -11,8 +11,8 @@ import loader from './../assets/loader.json';
 
 const schema = z.object({
   name: z.string().min(3, { message: "Name is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  mobile: z.string().regex(/^[0-9]{10}$/, { message: "Must be 10 digits" }),
+  email: z.string().email({ message: "Please enter a valid email" }),
+  mobile: z.string().regex(/^[0-9]{10}$/, { message: "Mobile number must be exactly 10 digits" }),
   country: z.string().min(1, { message: "Country is required" }),
   state: z.string().min(1, { message: "State is required" }),
   district: z.string().min(1, { message: "District is required" }),
