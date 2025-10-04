@@ -1,6 +1,20 @@
 import banner from "./../assets/header-banner2.jpg";
 import { Mail, MapPin } from "lucide-react";
 import { useState } from "react";
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css'; 
+
+const tooltipStyle = {
+  backgroundColor: "#FF9933",
+  color: "#1F2937",
+  padding: "8px 12px",
+  borderRadius: "12px",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  zIndex: 9999,
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,27 +28,37 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-      const data = await res.json();
-      alert(data.message); // show success message
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = await res.json();
+    alert(data.message);
+
+    // ✅ Reset form fields after success
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong. Please try again.");
+  }
+};
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
+      {/* Banner */}
       <div
         className="relative flex items-center justify-center h-48 bg-cover bg-center"
         style={{ backgroundImage: `url(${banner})` }}
@@ -56,14 +80,24 @@ const Contact = () => {
             service. Here are the ways to contact us:
           </p>
         </div>
+
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="flex flex-col gap-8">
             {/* Email & Phone Card */}
             <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center gap-6">
-                <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
+                <div 
+                  data-tooltip-id="emailTooltip" 
+                  data-tooltip-content="Reach us by email or phone" 
+                  className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+                >
                   <Mail className="w-10 h-10 text-amber-600 dark:text-amber-300" />
                 </div>
+                <Tooltip 
+                  id="emailTooltip" 
+                  style={tooltipStyle} 
+                  place="top"
+                />
                 <div>
                   <h3 className="text-xl font-bold text-stone-800 dark:text-gray-200">
                     By Email & Phone
@@ -90,9 +124,18 @@ const Contact = () => {
             {/* Address Card */}
             <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center gap-6">
-                <div className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full">
+                <div 
+                  data-tooltip-id="addressTooltip" 
+                  data-tooltip-content="Visit our office at CGO Complex" 
+                  className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+                >
                   <MapPin className="w-10 h-10 text-amber-600 dark:text-amber-300" />
                 </div>
+                <Tooltip 
+                  id="addressTooltip" 
+                  style={tooltipStyle} 
+                  place="top"
+                />
                 <div>
                   <h3 className="text-xl font-bold text-stone-800 dark:text-gray-200">
                     Our Address
@@ -110,14 +153,14 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          {/* Right Side: Contact Form */}
+
+          {/* Contact Form */}
           <div className="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500">
             <h3 className="text-2xl font-bold text-center text-orange-900 dark:text-orange-400 mb-6">
               Send Us a Message
             </h3>
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Name */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Full Name
@@ -132,7 +175,6 @@ const Contact = () => {
                     required
                   />
                 </div>
-                {/* Email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Email Address
@@ -148,7 +190,6 @@ const Contact = () => {
                   />
                 </div>
               </div>
-              {/* Subject */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Subject
@@ -162,7 +203,6 @@ const Contact = () => {
                   className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                 />
               </div>
-              {/* Message */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Message
@@ -176,7 +216,6 @@ const Contact = () => {
                   required
                 ></textarea>
               </div>
-              {/* Submit */}
               <div className="text-center">
                 <button
                   type="submit"

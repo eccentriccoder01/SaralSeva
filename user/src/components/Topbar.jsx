@@ -1,11 +1,37 @@
 import React, { useState, useEffect } from "react";
 import india from "./../assets/india.svg";
 import { Phone, Sun, Moon } from "lucide-react";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+
+// Tooltip style (same as Footer)
+const tooltipStyle = {
+  backgroundColor: "#FF9933", // orange theme
+  color: "#1F2937", // dark text
+  padding: "8px 12px",
+  borderRadius: "12px",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  maxWidth: "220px",
+  whiteSpace: "pre-line",
+  zIndex: 9999,
+};
 
 const Topbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // ✅ Initialize from localStorage or system preference
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) return savedTheme === "dark";
+      // fallback: system preference
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
 
-  // Persist theme in localStorage
+  // Apply theme whenever darkMode changes
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -16,16 +42,14 @@ const Topbar = () => {
     }
   }, [darkMode]);
 
-  // Load saved theme on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") setDarkMode(true);
-  }, []);
-
   return (
     <div
       className={`flex justify-between w-full items-center p-2 px-[5vw] shadow-md border-b-2 transition-colors duration-500
-        ${darkMode ? "bg-gray-900 border-gray-700 text-white" : "bg-gradient-to-r from-orange-500 to-amber-600 border-amber-800 text-white"}
+        ${
+          darkMode
+            ? "bg-gray-900 border-gray-700 text-white"
+            : "bg-gradient-to-r from-orange-500 to-amber-600 border-amber-800 text-white"
+        }
       `}
     >
       <div className="flex items-center font-semibold text-sm tracking-wider">
@@ -33,19 +57,32 @@ const Topbar = () => {
         <span className="hidden md:inline">भारत सरकार | Government of India</span>
         <span className="md:hidden">भारत सरकार</span>
       </div>
+
       <div className="flex items-center gap-4 text-sm">
         <span className="font-bold hidden sm:inline">सत्यमेव जयते</span>
-        <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
+
+        {/* Phone with tooltip */}
+        <a
+          href="tel:9876543210"
+          className="flex items-center gap-2 hover:scale-105 transition-transform duration-300"
+          data-tooltip-id="phone-tooltip"
+          data-tooltip-content="Click to call the helpline"
+        >
           <Phone size={18} />
           <span className="font-semibold">9876543210</span>
-        </div>
-        {/* Theme toggle button */}
+        </a>
+        <Tooltip id="phone-tooltip" place="bottom" style={tooltipStyle} />
+
+        {/* Theme toggle with tooltip */}
         <button
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={() => setDarkMode((prev) => !prev)}
           className="ml-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          data-tooltip-id="theme-tooltip"
+          data-tooltip-content="Switch between Light and Dark mode"
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
         </button>
+        <Tooltip id="theme-tooltip" place="bottom" style={tooltipStyle} />
       </div>
     </div>
   );

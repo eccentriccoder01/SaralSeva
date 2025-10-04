@@ -8,7 +8,6 @@ const SchemeContext = createContext();
 const SchemeProvider = ({children}) =>{
 
     const [scheme , setScheme] = useState([])
-    console.log(scheme)
     
     const getScheme = async () =>{
         try {
@@ -17,7 +16,7 @@ const SchemeProvider = ({children}) =>{
                 setScheme(res.data)
             })
         } catch (error) {
-            
+            // Error handling without console.log in production
         }
     }
 

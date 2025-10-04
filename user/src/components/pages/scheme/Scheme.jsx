@@ -4,6 +4,22 @@ import axios from "axios";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Link, useNavigate } from "react-router-dom";
 import { Download, ExternalLink } from "lucide-react";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+
+const tooltipStyle = {
+  backgroundColor: "#FF9933",
+  color: "#1F2937",
+  padding: "8px 12px",
+  borderRadius: "12px",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  maxWidth: "220px",
+  whiteSpace: "pre-line",
+  zIndex: 9999,
+};
 
 const Scheme = () => {
   const [scheme, setScheme] = useState([]);
@@ -11,10 +27,12 @@ const Scheme = () => {
 
   const listSchemes = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/schemes/list_scheme`
+      );
       setScheme(res.data.products);
     } catch (error) {
-      console.log(error, "Something went wrong");
+      // Error handling without console.log in production
     }
   };
 
@@ -23,62 +41,88 @@ const Scheme = () => {
   }, []);
 
   const handleSchemeForm = (scheme_name, scheme_code) => {
-    navigate('/apply', { state: { scheme_name, scheme_code } });
+    navigate("/apply", { state: { scheme_name, scheme_code } });
   };
 
   const handleClick = (pdfUrl) => {
-    window.open(pdfUrl, '_blank');
+    window.open(pdfUrl, "_blank");
   };
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/30">
-      <div className="relative flex items-center justify-center h-48 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}>
+      <div
+        className="relative flex items-center justify-center h-48 bg-cover bg-center"
+        style={{ backgroundImage: `url(${banner})` }}
+      >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">Government Schemes</h1>
+        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">
+          Government Schemes
+        </h1>
       </div>
       <div className="px-[5vw] py-10">
-        <h2 className="text-3xl font-bold text-orange-900 dark:text-amber-400 mb-6">Available Schemes & Programmes</h2>
+        <h2 className="text-3xl font-bold text-orange-900 dark:text-amber-400 mb-6">
+          Available Schemes & Programmes
+        </h2>
         <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg dark:shadow-black/40">
           <Table>
             <TableHeader className="bg-orange-900 dark:bg-orange-800">
               <TableRow>
-                <TableHead className="w-[100px] text-white font-semibold">Sl No</TableHead>
+                <TableHead className="w-[100px] text-white font-semibold">
+                  Sl No
+                </TableHead>
                 <TableHead className="text-white font-semibold">Title</TableHead>
                 <TableHead className="text-white font-semibold">Brochure</TableHead>
-                <TableHead className="text-white font-semibold text-right">Apply Now</TableHead>
+                <TableHead className="text-white font-semibold text-right">
+                  Apply Now
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {scheme.map((item, index) => (
-                <TableRow key={index} className="bg-white dark:bg-gray-800 hover:bg-orange-50/70 dark:hover:bg-gray-700">
-                  <TableCell className="font-medium text-gray-700 dark:text-gray-200">{index + 1}</TableCell>
-                  <TableCell>
-                    <Link 
-                      to={`/scheme/${item._id}`} 
-                      className='font-semibold text-lg text-stone-800 dark:text-stone-200 hover:text-orange-700 dark:hover:text-amber-400 hover:underline'
-                    >
-                      {item?.scheme_name}
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <Download className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110" onClick={() => handleClick(item?.scheme_brochure)} />
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <button 
-                      onClick={() => handleSchemeForm(item?.scheme_name, item?.scheme_code)} 
-                      className="flex items-center gap-2 ml-auto font-bold text-orange-800 dark:text-amber-400 transition-transform rounded-full hover:scale-105"
-                    >
-                        Apply <ExternalLink size={20}/>
-                    </button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
-    </div>
-  );
+  {scheme.map((item, index) => (
+    <TableRow
+      key={index}
+      className="bg-white dark:bg-gray-800 hover:bg-orange-50/70 dark:hover:bg-gray-700"
+    >
+      <TableCell className="font-medium text-gray-700 dark:text-gray-200">
+        {index + 1}
+      </TableCell>
+      <TableCell>
+        <Link
+          to={`/scheme/${item._id}`}
+          className="font-semibold text-lg text-stone-800 dark:text-stone-200 hover:text-orange-700 dark:hover:text-amber-400 hover:underline"
+        >
+          {item?.scheme_name}
+        </Link>
+      </TableCell>
+      <TableCell>
+        <Download
+          className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110"
+          onClick={() => handleClick(item?.scheme_brochure)}
+          data-tooltip-id={`download-tooltip-${index}`}
+          data-tooltip-content="Download brochure (PDF)"
+        />
+        <Tooltip
+          id={`download-tooltip-${index}`}
+          place="top"
+          style={tooltipStyle}
+        />
+      </TableCell>
+      <TableCell className="text-right">
+        <button
+          className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+          onClick={() => handleSchemeForm(item?.scheme_name, item?.scheme_code)}
+        >
+          Apply Now
+        </button>
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+</Table>
+</div>
+</div>
+</div>
+);
 };
 
 export default Scheme;

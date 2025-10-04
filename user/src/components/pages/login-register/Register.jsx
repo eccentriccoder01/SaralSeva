@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // 👁 for toggle
+import { GoogleLogin } from "@react-oauth/google"; // Google OAuth
 
 // ✅ Schema with confirmPassword + refine
 const schema = z.object({
@@ -26,12 +27,20 @@ const schema = z.object({
   path: ["confirmPassword"]  
 });
 
-const RegisterForm = () => {
+// Calculates how many of the 5 passwoord criteria are met
+const getPasswordScore = (strength) => {
+  return Object.values(strength).filter(Boolean).length;
+};
+
+const RegisterForm = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
   const [countryid, setCountryid] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isTypingPassword, setIsTypingPassword] = useState(false);
+
   
   // ✅ Password toggle state
   const [showPassword, setShowPassword] = useState(false);
@@ -53,15 +62,54 @@ const RegisterForm = () => {
 
   // Track password strength
   React.useEffect(() => {
-    if (!password) return;
-    setPasswordStrength({
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /\d/.test(password),
-      symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-    });
+    if (password && password.length > 0) {
+      setIsTypingPassword(true);
+      setPasswordStrength({
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      });
+    } else {
+      setIsTypingPassword(false); // hide when password is empty
+    }
   }, [password]);
+
+
+  // Google Sign-Up Handler
+  const handleGoogleSignUp = async (id_token) => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/google`,
+        { id_token, isRegistering: true }
+      );
+
+      if (res.data.success) {
+        if (res.data.incomplete) {
+          // User needs to complete registration
+          toast.success("Please complete your profile to finish registration");
+          navigate("/auth/complete-registration", {
+            state: {
+              user: res.data.user,
+              googleId: res.data.user.googleId,
+            },
+          });
+        } else {
+          // User already exists and is complete
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("id", res.data.user._id);
+          setIsAuthenticated && setIsAuthenticated(true);
+          toast.success("Signed up with Google successfully!");
+          navigate("/");
+        }
+      } else {
+        toast.error(res.data.message || "Google sign-up failed.");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Google sign-up failed.");
+    }
+  };
 
   // ✅ Send OTP
   const handleSendOtp = async (mobile) => {
@@ -106,11 +154,11 @@ const onSubmit = async (data) => {
         }
       }
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/registerUser`, data);
-      console.log(res);
       if (res.data.success) {
         toast.success("User registered successfully!", {
           style: { background: '#166534', color: 'white', border: 'none' },
         });
+        setTimeout(() => navigate("/userlogin"), 2000); // Redirect after 2 seconds
       } else {
         toast.error(res.data.message || "Registration failed.", {
           style: { background: '#991B1B', color: 'white', border: 'none' },
@@ -141,6 +189,41 @@ const onSubmit = async (data) => {
           </div>
           {/* Right Side Form */}
           <div className="w-full max-w-lg p-8 bg-white rounded-2xl shadow-2xl">
+
+            {/* Google Sign-Up Button */}
+            <div className="mb-6">
+              <div className="mb-6">
+                <div className="w-full [&>div]:!w-full [&>div>div]:!w-full [&_iframe]:!w-full">
+                  <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      const id_token = credentialResponse.credential;
+                      handleGoogleSignUp(id_token);
+                    }}
+                    onError={() => toast.error("Google sign-up failed")}
+                    useOneTap
+                    text="continue_with"
+                    shape="rectangular"
+                    logo_alignment="center"
+                    style={{
+                      width: '100%',
+                      maxWidth: '400px'
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or register with email
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Name + Gender */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -173,13 +256,27 @@ const onSubmit = async (data) => {
                   {showPassword ? <EyeSlashIcon className="w-5 h-5 text-gray-600" /> : <EyeIcon className="w-5 h-5 text-gray-600" />}
                 </button>
               {errors.password && <p className={errorClasses}>{errors.password.message}</p>}
-              <div className="mt-2 text-sm grid grid-cols-2 gap-2">
-                  <span className={getPasswordStrengthColor(passwordStrength.length)}>8 characters</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.uppercase)}>Uppercase</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.lowercase)}>Lowercase</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.number)}>Number</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.symbol)}>Symbol</span>
+              {/* Password Strength Progress Bar + Label */}
+              {isTypingPassword && (
+                <div className="mt-3">
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full transition-all duration-500 ${
+                        getPasswordScore(passwordStrength) <= 2
+                          ? "bg-red-500 w-1/5"
+                          : getPasswordScore(passwordStrength) === 3
+                          ? "bg-yellow-500 w-3/5"
+                          : "bg-green-500 w-full"
+                      }`}
+                    />
+                  </div>
+                  <p className="text-sm mt-1 font-medium text-gray-700">
+                    Strength: {
+                      ["Too Weak", "Too Weak", "Weak", "Medium", "Strong"][getPasswordScore(passwordStrength)] || "Too Weak"
+                    }
+                  </p>
                 </div>
+              )}
               </div>
 
               {/* Confirm Password */}
@@ -197,11 +294,22 @@ const onSubmit = async (data) => {
               </div>
 
               {/* Mobile + OTP */}
-              <div className="flex gap-2"></div>
-              <input type="tel" placeholder="Enter your Mobile Number" {...register("mobile")} className={inputClasses} />
-              <Button type="button" onClick={() => handleSendOtp(watch("mobile"))} disabled={otpSent || loading}>
+              <div className="flex gap-2">
+                <input
+                  type="tel"
+                  placeholder="Enter your Mobile Number"
+                  {...register("mobile")}
+                  className={`${inputClasses} flex-grow`} 
+                />
+              <Button
+                type="button"
+                onClick={() => handleSendOtp(watch("mobile"))}
+                disabled={otpSent || loading}
+                className="p-3 min-w-[100px] h-full whitespace-nowrap"
+              >
                 {otpSent ? "OTP Sent" : "Send OTP"}
               </Button>
+              </div>
               {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
               {otpSent && !isPhoneVerified && (
@@ -214,7 +322,7 @@ const onSubmit = async (data) => {
               )}
 
               {/* Profile Picture */}
-              <input type="file" {...register("profilePicture")} className={inputClasses} />
+              {/* <input type="file" {...register("profilePicture")} className={inputClasses} /> */}
               
               {/* Country + State */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 dark:text-black">
