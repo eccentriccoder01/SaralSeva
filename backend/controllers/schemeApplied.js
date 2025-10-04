@@ -12,6 +12,28 @@ const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_A
 const applyScheme = async (req, res) => {
     const { name, email, mobile, scheme_name, scheme_code, DOB, gender, occupation, panNo, address, aadharNo, nationality, income, bank_account_no, ifsc_code, bank_name, bank_branch, govt_officials, id } = req.body;
 
+    // Server-side validation
+    const errors = {};
+    const validateEmail = (value) => /^\S+@\S+\.\S+$/.test(String(value || "").trim());
+    const validateMobile = (value) => /^[0-9]{10}$/.test(String(value || "").trim());
+
+    if (!name || String(name).trim().length < 3) errors.name = 'Name is required and must be at least 3 characters';
+    if (!email || !validateEmail(email)) errors.email = 'Please enter a valid email';
+    if (!mobile || !validateMobile(mobile)) errors.mobile = 'Mobile number must be exactly 10 digits';
+    if (!scheme_name) errors.scheme_name = 'Scheme name is required';
+    if (!scheme_code) errors.scheme_code = 'Scheme code is required';
+    if (!occupation || String(occupation).trim().length === 0) {
+        errors.occupation = 'Occupation is required';
+    }
+
+    // Aadhar and PAN basic length checks if provided
+    if (aadharNo && String(aadharNo).trim().length !== 12) errors.aadharNo = 'Aadhar number must be 12 digits';
+    if (panNo && String(panNo).trim().length !== 10) errors.panNo = 'PAN must be 10 characters';
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({ success: false, message: 'Validation failed', errors });
+    }
+
     try {
         const generateRegistrationNo = async () => {
             const prefix = scheme_code?.split('/')[0];

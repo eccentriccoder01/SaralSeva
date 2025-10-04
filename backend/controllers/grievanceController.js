@@ -9,6 +9,22 @@ const applyGrievance = async (req, res) => {
    const { name, email, mobile, address, gender, grievance_type, grievance_category, description, country, state, district, DOB, id } = req.body;
    const userId = id;
 
+   // Server-side validation
+   const errors = {};
+   const validateEmail = (value) => /^\S+@\S+\.\S+$/.test(String(value || "").trim());
+   const validateMobile = (value) => /^[0-9]{10}$/.test(String(value || "").trim());
+
+   if (!name || String(name).trim().length < 3) errors.name = 'Name is required and must be at least 3 characters';
+   if (!email || !validateEmail(email)) errors.email = 'Please enter a valid email';
+   if (!mobile || !validateMobile(mobile)) errors.mobile = 'Mobile number must be exactly 10 digits';
+   if (!description || String(description).trim().length < 10) errors.description = 'Description must be at least 10 characters';
+   if (!grievance_category) errors.grievance_category = 'Grievance category is required';
+   if (!grievance_type) errors.grievance_type = 'Grievance type is required';
+
+   if (Object.keys(errors).length > 0) {
+      return res.status(400).json({ success: false, message: 'Validation failed', errors });
+   }
+
    try {
       const user = await userModel.findById(userId)
       if (!user) {
