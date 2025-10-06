@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import qrcode from "./../../assets/QRcode.jpg";
 import app from "./../../assets/app_store.svg";
 import play from "./../../assets/play_store.svg";
@@ -23,6 +23,27 @@ const tooltipStyle = {
 const Footer = () => {
   const [isQRActive, setIsQRActive] = useState(false);
   const toggleQR = () => setIsQRActive(!isQRActive);
+  const closeQR = () => setIsQRActive(false);
+
+  // Handle ESC key to close popup
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isQRActive) {
+        closeQR();
+      }
+    };
+    
+    if (isQRActive) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll when popup is open
+      document.body.style.overflow = 'hidden';
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isQRActive]);
 
   const socialLinks = [
     { icon: <FaFacebook />, link: "/", name: "Facebook" },
@@ -50,12 +71,52 @@ const Footer = () => {
               <img
                 src={qrcode}
                 alt="QR Code for Mobile App"
-                className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "fixed top-1/2 left-1/2 w-80 h-80 z-50 -translate-x-1/2 -translate-y-1/2 shadow-2xl bg-white" : "w-28 h-28"}`}
+                className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "w-28 h-28 invisible" : "w-28 h-28"}`}
                 onClick={toggleQR}
                 data-tooltip-id="qr-tooltip"
-                data-tooltip-content="Scan this QR code to download the SaralSeva app"
+                data-tooltip-content="Click to enlarge QR code"
               />
               <Tooltip id="qr-tooltip" place="top" style={tooltipStyle} />
+
+              {/* QR Code Popup Overlay */}
+              {isQRActive && (
+                <>
+                  {/* Semi-transparent backdrop */}
+                  <div 
+                    className="fixed inset-0 bg-black bg-opacity-70 z-[9998] backdrop-blur-sm transition-opacity duration-300"
+                    onClick={closeQR}
+                  />
+                  
+                  {/* QR Code Popup */}
+                  <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] animate-in fade-in zoom-in duration-300">
+                    <div className="relative">
+                      {/* Close Button */}
+                      <button
+                        onClick={closeQR}
+                        className="absolute -top-4 -right-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110 z-10"
+                        aria-label="Close QR code"
+                      >
+                        <span className="text-2xl font-bold leading-none">&times;</span>
+                      </button>
+                      
+                      {/* QR Code Image */}
+                      <img
+                        src={qrcode}
+                        alt="QR Code for Mobile App"
+                        className="w-80 h-80 object-cover rounded-lg border-4 border-amber-500 p-2 shadow-2xl bg-white"
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      
+                      {/* Instruction Text */}
+                      <p className="text-center mt-4 text-white text-sm bg-black bg-opacity-60 py-2 px-4 rounded-lg">
+                        Scan to download the app 
+                        <br />
+                        Press ESC or click outside to close
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
 
               {/* App Store / Play Store Links */}
               <div className="flex flex-col gap-2">
