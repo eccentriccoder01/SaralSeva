@@ -52,7 +52,7 @@ const Contact = () => {
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
     } else if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
-      newErrors.name = 'Name can only contain letters and spaces';
+      newErrors.name = 'Name only contain letters and spaces';
     }
 
     // Email validation
