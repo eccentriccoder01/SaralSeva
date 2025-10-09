@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import "./App.css";
@@ -50,11 +50,13 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
 
+  // Check auth token on load
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
   }, []);
 
+  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -105,7 +107,7 @@ function App() {
       <Footer />
       <ScrollToTop />
       <ScrollToBottom />
-      {showChatbot && <Chatbot />}
+      <Chatbot />
     </>
   );
 }
