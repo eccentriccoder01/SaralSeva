@@ -47,7 +47,6 @@ const EditProfile = () => {
   }, [user, setValue]);
 
   const onSubmit = (data) => {
-    // Show pre-update confirmation modal
     setFormData(data);
     setConfirmModal(true);
   };
@@ -70,8 +69,20 @@ const EditProfile = () => {
     }
   };
 
-  const inputClasses = "w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 outline-none";
-  const errorClasses = "text-red-600 text-sm mt-1";
+  // Input field classes
+  const inputClasses =
+    "w-full p-3 border rounded-md focus:ring-2 focus:ring-amber-500 outline-none transition-colors " +
+    "bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-600 " +
+    "placeholder-gray-400 dark:placeholder-gray-400";
+
+  const selectWrapperClasses =
+    "w-full border rounded-md focus-within:ring-2 focus-within:ring-amber-500 transition-colors " +
+    "bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-100";
+
+  const selectClasses =
+    "w-full p-3 bg-transparent text-gray-800 dark:text-gray-100 outline-none";
+
+  const errorClasses = "text-red-600 dark:text-red-400 text-sm mt-1";
 
   return (
     <div className="relative max-w-xl mx-auto mt-16">
@@ -82,19 +93,22 @@ const EditProfile = () => {
       />
 
       <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
-        <h1 className="text-2xl font-bold mb-4 ml-8">Edit Profile</h1>
+        <h1 className="text-2xl font-bold mb-4 ml-8 text-gray-800 dark:text-gray-100">Edit Profile</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Name */}
           <div className="relative" data-tooltip-id="name-tooltip" data-tooltip-content="Enter your full name">
             <input {...register("name")} placeholder="Name" className={inputClasses} />
           </div>
           {errors.name && <p className={errorClasses}>{errors.name.message}</p>}
 
+          {/* Email */}
           <div className="relative" data-tooltip-id="email-tooltip" data-tooltip-content="Enter a valid email address">
             <input {...register("email")} placeholder="Email" className={inputClasses} />
           </div>
           {errors.email && <p className={errorClasses}>{errors.email.message}</p>}
 
+          {/* Gender */}
           <div className="relative" data-tooltip-id="gender-tooltip" data-tooltip-content="Select your gender">
             <select {...register("gender")} className={inputClasses}>
               <option value="">Select Gender</option>
@@ -104,15 +118,18 @@ const EditProfile = () => {
           </div>
           {errors.gender && <p className={errorClasses}>{errors.gender.message}</p>}
 
+          {/* Mobile */}
           <div className="relative" data-tooltip-id="mobile-tooltip" data-tooltip-content="Enter 10-digit mobile number">
             <input {...register("mobile")} placeholder="Mobile" className={inputClasses} />
           </div>
           {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
-          <div className="relative" data-tooltip-id="country-tooltip" data-tooltip-content="Select your country">
+          {/* Country */}
+          <div className={`${selectWrapperClasses} dark-theme-input`} data-tooltip-id="country-tooltip" data-tooltip-content="Select your country">
             <CountrySelect
               placeHolder={user?.country || "Select Country"}
               value=""
+              className={selectClasses}
               onChange={(e) => {
                 setCountryId(e.id);
                 setValue("country", e.name);
@@ -121,19 +138,22 @@ const EditProfile = () => {
           </div>
           {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
 
-          <div className="relative" data-tooltip-id="state-tooltip" data-tooltip-content="Select your state">
+          {/* State */}
+          <div className={`${selectWrapperClasses} dark-theme-input`} data-tooltip-id="state-tooltip" data-tooltip-content="Select your state">
             <StateSelect
               countryid={countryId}
               placeHolder={user?.state || "Select State"}
               value=""
+              className={selectClasses}
               onChange={(e) => setValue("state", e.name)}
             />
           </div>
           {errors.state && <p className={errorClasses}>{errors.state.message}</p>}
 
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg"
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition-colors"
             data-tooltip-id="update-tooltip"
             data-tooltip-content="Click to update your profile information"
           >
@@ -142,18 +162,19 @@ const EditProfile = () => {
         </form>
 
         {/* Tooltips */}
-        <Tooltip id="name-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
-        <Tooltip id="email-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
-        <Tooltip id="gender-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
-        <Tooltip id="mobile-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
-        <Tooltip id="country-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
-        <Tooltip id="state-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
-        <Tooltip id="update-tooltip" className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center" multiline />
+        {["name", "email", "gender", "mobile", "country", "state", "update"].map(id => (
+          <Tooltip
+            key={id}
+            id={`${id}-tooltip`}
+            className="max-w-xs bg-orange-900 text-white p-2 rounded-lg shadow-lg text-center"
+            multiline
+          />
+        ))}
       </div>
 
-      {/* Pre-Update Confirmation Modal */}
+      {/* Modals */}
       {confirmModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity backdrop-blur-sm">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg max-w-sm text-center animate-fadeIn">
             <p className="mb-4 font-semibold text-gray-800 dark:text-gray-100">
               Are you sure you want to update your profile?
@@ -161,13 +182,13 @@ const EditProfile = () => {
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleConfirmUpdate}
-                className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-bold"
+                className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-bold transition-colors"
               >
                 Yes
               </button>
               <button
                 onClick={() => setConfirmModal(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg font-bold"
+                className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg font-bold transition-colors"
               >
                 No
               </button>
@@ -176,16 +197,15 @@ const EditProfile = () => {
         </div>
       )}
 
-      {/* Post-Update Success Modal */}
       {successModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity backdrop-blur-sm">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg max-w-sm text-center animate-fadeIn">
             <p className="mb-4 font-semibold text-gray-800 dark:text-gray-100">
               Profile updated successfully!
             </p>
             <button
               onClick={() => navigate("/profile")}
-              className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-bold"
+              className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-bold transition-colors"
             >
               OK
             </button>
@@ -193,6 +213,7 @@ const EditProfile = () => {
         </div>
       )}
 
+      {/* Styles */}
       <style>{`
         .animate-fadeIn {
           animation: fadeIn 0.3s ease forwards;
@@ -200,6 +221,49 @@ const EditProfile = () => {
         @keyframes fadeIn {
           0% { opacity: 0; transform: translateY(-10px); }
           100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dark mode for custom react-country-state-city dropdowns */
+        .dark-theme-input {
+          background-color: #374151 !important;
+          color: #f3f4f6 !important;
+          border-color: #4b5563 !important;
+          border-radius: 0.5rem;
+          padding: 0.25rem 0.75rem;
+        }
+        .dark-theme-input input,
+        .dark-theme-input .select__single-value,
+        .dark-theme-input .select__placeholder {
+          color: #f3f4f6 !important;
+          background-color: #374151 !important;
+        }
+        .dark-theme-input [class*="select__menu"] {
+          background-color: #374151 !important;
+          color: #f3f4f6 !important;
+        }
+        .dark-theme-input [class*="select__option"] {
+          background-color: #374151 !important;
+          color: #f3f4f6 !important;
+        }
+        .dark-theme-input [class*="select__option"]:hover {
+          background-color: #4b5563 !important;
+        }
+        .dark-theme-input [class*="select__control"] {
+          background-color: #374151 !important;
+          border-color: #4b5563 !important;
+          color: #f3f4f6 !important;
+        }
+        .dark-theme-input [class*="select__indicator"] {
+          color: #f3f4f6 !important;
+        }
+        .dark-theme-input select {
+          -webkit-appearance: none !important;
+          -moz-appearance: none !important;
+          appearance: none !important;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+          background-repeat: no-repeat !important;
+          background-position: right 0.75rem center !important;
+          background-size: 1.25rem 1.25rem !important;
         }
       `}</style>
     </div>
