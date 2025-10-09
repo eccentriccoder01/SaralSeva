@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 
+
 const sanitizeInputs = (obj) => {
   if (typeof obj === 'object' && obj !== null) {
     for (const key in obj) {
