@@ -18,6 +18,7 @@ import UserLogin from "./components/pages/login-register/UserLogin";
 import CompleteGoogleRegistration from "./components/pages/login-register/CompleteGoogleRegistration";
 import Register from "./components/pages/login-register/Register";
 import VerifyOtp from "./components/pages/login-register/VerifyOtp";
+import NotFound from "./components/NotFound";
 
 import About from "./components/pages/About";
 import SchemeEligibilty from "./components/pages/scheme/SchemeEligibilty";
@@ -47,14 +48,21 @@ import FeedbackButton from "./components/FeedbackButton";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+  const location = useLocation();
 
+  // Check auth token on load
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
   }, []);
 
-  
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  // Show Chatbot on all pages except login/register/userlogin
+  const showChatbot = !["/login", "/register", "/userlogin"].includes(location.pathname);
 
   return (
     <>
@@ -92,6 +100,7 @@ function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/linkingpolicy" element={<LinkingPolicy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       
       <FeedbackButton />

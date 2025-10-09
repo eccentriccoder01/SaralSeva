@@ -27,6 +27,11 @@ const schema = z.object({
   path: ["confirmPassword"]  
 });
 
+// Calculates how many of the 5 passwoord criteria are met
+const getPasswordScore = (strength) => {
+  return Object.values(strength).filter(Boolean).length;
+};
+
 const RegisterForm = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [countryid, setCountryid] = useState("");
@@ -34,6 +39,8 @@ const RegisterForm = ({ setIsAuthenticated }) => {
   const [otp, setOtp] = useState("");
   const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isTypingPassword, setIsTypingPassword] = useState(false);
+
   
   // ✅ Password toggle state
   const [showPassword, setShowPassword] = useState(false);
@@ -55,15 +62,20 @@ const RegisterForm = ({ setIsAuthenticated }) => {
 
   // Track password strength
   React.useEffect(() => {
-    if (!password) return;
-    setPasswordStrength({
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /\d/.test(password),
-      symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-    });
+    if (password && password.length > 0) {
+      setIsTypingPassword(true);
+      setPasswordStrength({
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      });
+    } else {
+      setIsTypingPassword(false); // hide when password is empty
+    }
   }, [password]);
+
 
   // Google Sign-Up Handler
   const handleGoogleSignUp = async (id_token) => {
@@ -244,13 +256,27 @@ const onSubmit = async (data) => {
                   {showPassword ? <EyeSlashIcon className="w-5 h-5 text-gray-600" /> : <EyeIcon className="w-5 h-5 text-gray-600" />}
                 </button>
               {errors.password && <p className={errorClasses}>{errors.password.message}</p>}
-              <div className="mt-2 text-sm grid grid-cols-2 gap-2">
-                  <span className={getPasswordStrengthColor(passwordStrength.length)}>8 characters</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.uppercase)}>Uppercase</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.lowercase)}>Lowercase</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.number)}>Number</span>
-                  <span className={getPasswordStrengthColor(passwordStrength.symbol)}>Symbol</span>
+              {/* Password Strength Progress Bar + Label */}
+              {isTypingPassword && (
+                <div className="mt-3">
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full transition-all duration-500 ${
+                        getPasswordScore(passwordStrength) <= 2
+                          ? "bg-red-500 w-1/5"
+                          : getPasswordScore(passwordStrength) === 3
+                          ? "bg-yellow-500 w-3/5"
+                          : "bg-green-500 w-full"
+                      }`}
+                    />
+                  </div>
+                  <p className="text-sm mt-1 font-medium text-gray-700">
+                    Strength: {
+                      ["Too Weak", "Too Weak", "Weak", "Medium", "Strong"][getPasswordScore(passwordStrength)] || "Too Weak"
+                    }
+                  </p>
                 </div>
+              )}
               </div>
 
               {/* Confirm Password */}
@@ -268,11 +294,22 @@ const onSubmit = async (data) => {
               </div>
 
               {/* Mobile + OTP */}
-              <div className="flex gap-2"></div>
-              <input type="tel" placeholder="Enter your Mobile Number" {...register("mobile")} className={inputClasses} />
-              <Button type="button" onClick={() => handleSendOtp(watch("mobile"))} disabled={otpSent || loading}>
+              <div className="flex gap-2">
+                <input
+                  type="tel"
+                  placeholder="Enter your Mobile Number"
+                  {...register("mobile")}
+                  className={`${inputClasses} flex-grow`} 
+                />
+              <Button
+                type="button"
+                onClick={() => handleSendOtp(watch("mobile"))}
+                disabled={otpSent || loading}
+                className="p-3 min-w-[100px] h-full whitespace-nowrap"
+              >
                 {otpSent ? "OTP Sent" : "Send OTP"}
               </Button>
+              </div>
               {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
               {otpSent && !isPhoneVerified && (
@@ -285,12 +322,12 @@ const onSubmit = async (data) => {
               )}
 
               {/* Profile Picture */}
-              <input type="file" {...register("profilePicture")} className={inputClasses} />
+              {/* <input type="file" {...register("profilePicture")} className={inputClasses} /> */}
               
               {/* Country + State */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 dark:text-black">
                   <div>
-                    <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" />
+                  <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" showFlag={false} />                    {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
                     {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
                   </div>
                   <div>

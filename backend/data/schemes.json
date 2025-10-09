@@ -1,0 +1,1017 @@
+
+
+
+
+[
+  {
+    "scheme_name": "National Rural Health Mission",
+    "scheme_dept": "Ministry of Health and Family Welfare",
+    "scheme_code": "NRHM001",
+    "scheme_details": "Provides effective healthcare to rural populations focusing on 18 states.",
+    "scheme_benefits": ["Healthcare services", "Maternal and child health", "Immunization"],
+    "scheme_eligibility": ["Rural population", "Pregnant women", "Children"],
+    "scheme_documents_required": ["ID proof", "Address proof"],
+    "scheme_brochure": "https://www.nhm.gov.in/images/pdf/guidelines/nrhm-guidelines/mission_document.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Awas Yojana – Urban 2.0",
+    "scheme_dept": "Ministry of Housing and Urban Affairs",
+    "scheme_code": "PMAYU002",
+    "scheme_details": "Central assistance for affordable housing in urban areas.",
+    "scheme_benefits": ["Affordable housing", "Subsidy benefits"],
+    "scheme_eligibility": ["Urban poor", "EWS families", "LIG families"],
+    "scheme_documents_required": ["ID proof", "Income proof", "Property documents"],
+    "scheme_brochure": "https://pmay-urban.gov.in/uploads/guidelines/Operational-Guidelines-of-PMAY-U-2.pdf"
+  },
+  {
+    "scheme_name": "Digital India Initiative",
+    "scheme_dept": "Ministry of Electronics and Information Technology",
+    "scheme_code": "DI003",
+    "scheme_details": "Transforms India into a digitally empowered society and knowledge economy.",
+    "scheme_benefits": ["Digital services", "e-Governance", "Broadband access"],
+    "scheme_eligibility": ["All Indian citizens"],
+    "scheme_documents_required": ["Not required"],
+    "scheme_brochure": "https://www.meity.gov.in/static/uploads/2024/03/Running-single-file.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana (PMKVY)",
+    "scheme_dept": "Ministry of Skill Development and Entrepreneurship",
+    "scheme_code": "PMKVY004",
+    "scheme_details": "Skill certification and reward scheme to train Indian youth.",
+    "scheme_benefits": ["Skill training", "Certification", "Monetary reward"],
+    "scheme_eligibility": ["Youth aged 15-35"],
+    "scheme_documents_required": ["ID proof", "Educational certificates"],
+    "scheme_brochure": "https://www.msde.gov.in/static/uploads/2024/02/PMKVY-4.0-Guidelines_final-copy.pdf"
+  },
+  {
+    "scheme_name": "Jan Dhan Yojana",
+    "scheme_dept": "Ministry of Finance",
+    "scheme_code": "JDY005",
+    "scheme_details": "Financial inclusion scheme providing bank accounts to every citizen.",
+    "scheme_benefits": ["Zero balance bank account", "Accidental insurance", "Direct benefit transfer"],
+    "scheme_eligibility": ["All Indian citizens"],
+    "scheme_documents_required": ["ID proof", "Address proof", "Photograph"],
+    "scheme_brochure": "https://pmjdy.gov.in/files/E-Documents/PMJDY_BROCHURE_ENG.pdf"
+  },
+  {
+    "scheme_name": "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)",
+    "scheme_dept": "Ministry of Rural Development",
+    "scheme_code": "MGNREGA006",
+    "scheme_details": "Guarantees 100 days of wage employment in rural areas.",
+    "scheme_benefits": ["Employment guarantee", "Rural development", "Social security"],
+    "scheme_eligibility": ["Adult rural citizens willing to do unskilled work"],
+    "scheme_documents_required": ["ID proof", "Address proof", "Bank account"],
+    "scheme_brochure": "https://nrega.nic.in/netnrega/home.aspx"
+  },
+  {
+    "scheme_name": "Swachh Bharat Mission",
+    "scheme_dept": "Ministry of Housing and Urban Affairs",
+    "scheme_code": "SBM007",
+    "scheme_details": "Promotes sanitation and cleanliness in India.",
+    "scheme_benefits": ["Sanitation facilities", "Awareness programs", "Cleanliness drives"],
+    "scheme_eligibility": ["All citizens"],
+    "scheme_documents_required": ["Not required"],
+    "scheme_brochure": "https://swachhbharatmission.ddws.gov.in/sites/default/files/communication-material/SHS_brochure_0.pdf"
+  },
+  {
+    "scheme_name": "Ayushman Bharat – PMJAY",
+    "scheme_dept": "Ministry of Health and Family Welfare",
+    "scheme_code": "ABPMJAY008",
+    "scheme_details": "Health insurance scheme providing up to ₹5 lakh per family per year for secondary and tertiary care hospitalization.",
+    "scheme_benefits": ["Health insurance", "Cashless treatment", "Wide hospital network"],
+    "scheme_eligibility": ["Poor and vulnerable families as per SECC database"],
+    "scheme_documents_required": ["Aadhaar card", "Family ID"],
+    "scheme_brochure": "https://nha.gov.in/img/pmjay-files/STG-Manual-Booklet-final.pdf"
+  },
+  {
+    "scheme_name": "Stand Up India Scheme",
+    "scheme_dept": "Ministry of Finance",
+    "scheme_code": "SUI009",
+    "scheme_details": "Promotes entrepreneurship among women and SC/ST communities by providing bank loans.",
+    "scheme_benefits": ["Bank loan for business", "Mentorship support"],
+    "scheme_eligibility": ["Women entrepreneurs", "SC/ST entrepreneurs aged 18+ years"],
+    "scheme_documents_required": ["ID proof", "Business plan", "Collateral documents"],
+    "scheme_brochure": "https://www.standupmitra.in"
+  },
+  
+
+
+
+{
+  
+  "scheme_name": "Pradhan Mantri Kisan Samman Nidhi",
+  "scheme_dept": "Ministry of Agriculture",
+  "scheme_code": "PMKISAN001",
+  "scheme_details": "Provides financial assistance of ₹6,000 per year to small and marginal farmers.",
+  "scheme_benefits": ["₹6,000/year direct benefit; 3 installments of ₹2,000 each"],
+  "scheme_eligibility": ["Small and marginal farmers with up to 2 hectares of land"],
+  "scheme_documents_required": ["Aadhar Card", "Bank Passbook", "Land Ownership Proof"],
+  "scheme_brochure": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2021/nov/doc2021112361.pdf"
+},
+
+  {
+    "scheme_name": "Ayushman Bharat Pradhan Mantri Jan Arogya Yojana",
+    "scheme_dept": "Ministry of Health and Family Welfare",
+    "scheme_code": "PMJAY001",
+    "scheme_details": "Provides health insurance coverage of ₹5 lakh per family per year for secondary and tertiary care hospitalization.",
+    "scheme_benefits": ["Free hospitalization", "Cashless treatment at empanelled hospitals"],
+    "scheme_eligibility": ["Families identified through SECC 2011 data", "Frontline workers", "Senior citizens", "Marginalized groups"],
+    "scheme_documents_required": ["Aadhar Card", "Ration Card", "Income Certificate"],
+    "scheme_brochure": "https://nha.gov.in/img/pmjay-files/STG-Manual-Booklet-final.pdf"
+  },
+  
+  {
+    "scheme_name": "Beti Bachao Beti Padhao",
+    "scheme_dept": "Ministry of Women and Child Development",
+    "scheme_code": "BBBP001",
+    "scheme_details": "Promotes education and welfare of the girl child.",
+    "scheme_benefits": ["Scholarships", "Awareness programs", "Financial incentives for families"],
+    "scheme_eligibility": ["Parents of girl child in target areas"],
+    "scheme_documents_required": ["Aadhar Card", "Birth Certificate"],
+    "scheme_brochure": "https://iria.org.in/wp-content/uploads/2022/01/BBBP_Scheme_Brochure_English.pdf"
+  }
+
+,
+ {
+    "scheme_name": "PM Vishwakarma Yojana",
+    "scheme_dept": "Ministry of Skill Development and Entrepreneurship",
+    "scheme_code": "PMVY001",
+    "scheme_details": "Provides skill and credit support to traditional artisans.",
+    "scheme_benefits": ["Skill development training", "Credit facilities"],
+    "scheme_eligibility": ["Traditional artisans", "Craftspeople"],
+    "scheme_documents_required": ["Aadhar Card", "Artisan Identification"],
+    "scheme_brochure": "https://pmvishwakarma.gov.in/Home/EbookPdf"
+  },
+  {
+    "scheme_name": "PM Vikas Yojana",
+    "scheme_dept": "Ministry of Social Justice and Empowerment",
+    "scheme_code": "PMVY002",
+    "scheme_details": "Welfare scheme for backward and minority communities.",
+    "scheme_benefits": ["Financial assistance", "Skill development"],
+    "scheme_eligibility": ["Backward communities", "Minority communities"],
+    "scheme_documents_required": ["Aadhar Card", "Community Certificate"],
+    "scheme_brochure": "https://manipurminority.gov.in/wp-content/uploads/2025/06/Guidelines-PM-VIKAS-2.pdf"
+  },
+  {
+    "scheme_name": "Green India Digital Mission",
+    "scheme_dept": "Ministry of Environment",
+    "scheme_code": "GIDM001",
+    "scheme_details": "AI-driven forest conservation and monitoring mission.",
+    "scheme_benefits": ["AI-based forest conservation monitoring"],
+    "scheme_eligibility": ["Forest departments", "Environmental agencies"],
+    "scheme_documents_required": ["Aadhar Card", "Employment ID"],
+    "scheme_brochure": "https://moef.gov.in/uploads/2017/08/Revised%20Mission%20Document.pdf"
+  },
+  {
+    "scheme_name": "Bharat Skill Connect Portal",
+    "scheme_dept": "Ministry of Skill Development and Entrepreneurship",
+    "scheme_code": "BSC001",
+    "scheme_details": "AI-driven job and skilling platform.",
+    "scheme_benefits": ["Job matching", "Skill development resources"],
+    "scheme_eligibility": ["Job seekers", "Skill aspirants"],
+    "scheme_documents_required": ["Aadhar Card", "Educational Certificates"],
+    "scheme_brochure": "https://bharatskills.gov.in/"
+  },
+  {
+    "scheme_name": "PM Surakshit Mahila Yojana",
+    "scheme_dept": "Ministry of Women and Child Development",
+    "scheme_code": "PMSMY001",
+    "scheme_details": "Safety support, helpline, and legal aid for women.",
+    "scheme_benefits": ["24/7 helpline", "Legal assistance"],
+    "scheme_eligibility": ["All women in India"],
+    "scheme_documents_required": ["Aadhar Card", "Police Verification"],
+    "scheme_brochure": "https://www.pmsurakshitmahila.gov.in/"
+  },
+  {
+    "scheme_name": "Mission Shakti 2.0",
+    "scheme_dept": "Ministry of Women and Child Development",
+    "scheme_code": "MSY002",
+    "scheme_details": "Comprehensive women's empowerment package.",
+    "scheme_benefits": ["Financial aid", "Skill development"],
+    "scheme_eligibility": ["Women from marginalized communities"],
+    "scheme_documents_required": ["Aadhar Card", "Community Certificate"],
+    "scheme_brochure": "https://missionshakti.wcd.gov.in/public/documents/whatsnew/Mission_Shakti_Guidelines.pdf"
+  },
+  {
+    "scheme_name": "PM e-Bus Sewa Scheme",
+    "scheme_dept": "Ministry of Heavy Industries and Public Enterprises",
+    "scheme_code": "PMEBS001",
+    "scheme_details": "Electric buses for urban transport.",
+    "scheme_benefits": ["Subsidized electric buses", "Charging infrastructure support"],
+    "scheme_eligibility": ["Urban local bodies"],
+    "scheme_documents_required": ["Aadhar Card", "Municipal Approval"],
+    "scheme_brochure": "https://heavyindustries.gov.in/sites/default/files/2024-10/annexure_c-pm-ebus-psm_scheme_guidelines_v2.pdf"
+  },
+  {
+    "scheme_name": "PM Janjati Nyay Maha Abhiyan",
+    "scheme_dept": "Ministry of Tribal Affairs",
+    "scheme_code": "PMJNMA001",
+    "scheme_details": "Focus on tribal development and habitation coverage.",
+    "scheme_benefits": ["Infrastructure development", "Educational support"],
+    "scheme_eligibility": ["Tribal communities"],
+    "scheme_documents_required": ["Aadhar Card", "Tribal Certificate"],
+    "scheme_brochure": "https://adiprasaran.tribal.gov.in/pm-janman/janman_Download/PM-JANMAN-Operational%20Guidelines.pdf"
+  },
+  {
+    "scheme_name": "National Digital Nagrik Mission",
+    "scheme_dept": "Ministry of Electronics and Information Technology",
+    "scheme_code": "NDNM001",
+    "scheme_details": "Unified digital identity and service delivery.",
+    "scheme_benefits": ["Digital identity", "Access to government services"],
+    "scheme_eligibility": ["All citizens of India"],
+    "scheme_documents_required": ["Aadhar Card", "Mobile Number"],
+    "scheme_brochure": "https://moef.gov.in/uploads/2017/08/Revised%20Mission%20Document.pdf"
+  },
+{
+    "scheme_name": "PM Vishwakarma Yojana",
+    "scheme_dept": "Ministry of Skill Development and Entrepreneurship",
+    "scheme_code": "PMVY001",
+    "scheme_details": "Provides skill and credit support to traditional artisans.",
+    "scheme_benefits": ["Skill development training", "Credit facilities"],
+    "scheme_eligibility": ["Traditional artisans and craftspeople"],
+    "scheme_documents_required": ["Aadhar Card", "Artisan Identification"],
+    "scheme_brochure": "https://pmvishwakarma.gov.in/Home/EbookPdf"
+  },
+  {
+    "scheme_name": "PM Vikas Yojana",
+    "scheme_dept": "Ministry of Social Justice and Empowerment",
+    "scheme_code": "PMVY002",
+    "scheme_details": "Welfare scheme for backward and minority communities.",
+    "scheme_benefits": ["Financial assistance", "Skill development"],
+    "scheme_eligibility": ["Backward and minority communities"],
+    "scheme_documents_required": ["Aadhar Card", "Community Certificate"],
+    "scheme_brochure": "https://manipurminority.gov.in/wp-content/uploads/2025/06/Guidelines-PM-VIKAS-2.pdf"
+  },
+  {
+    "scheme_name": "Green India Digital Mission",
+    "scheme_dept": "Ministry of Environment, Forest and Climate Change",
+    "scheme_code": "GIDM001",
+    "scheme_details": "AI-based forest conservation monitoring.",
+    "scheme_benefits": ["AI-based forest conservation monitoring"],
+    "scheme_eligibility": ["AI-driven monitoring", "Data analytics for forest conservation"],
+    "scheme_documents_required": ["Forest departments and environmental agencies"],
+    "scheme_brochure": "https://moef.gov.in/uploads/2017/08/Revised%20Mission%20Document.pdf"
+  },
+  {
+    "scheme_name": "Bharat Skill Connect Portal",
+    "scheme_dept": "Ministry of Skill Development and Entrepreneurship",
+    "scheme_code": "BSC001",
+    "scheme_details": "AI-driven job and skilling platform.",
+    "scheme_benefits": ["Job matching", "Skill development resources"],
+    "scheme_eligibility": ["Job seekers and skill aspirants"],
+    "scheme_documents_required": ["Aadhar Card", "Educational Certificates"],
+    "scheme_brochure": "https://bharatskills.gov.in/"
+  },
+  {
+    "scheme_name": "PM Surakshit Mahila Yojana",
+    "scheme_dept": "Ministry of Women and Child Development",
+    "scheme_code": "PMSMY001",
+    "scheme_details": "Safety support, helpline, and legal aid for women.",
+    "scheme_benefits": ["24/7 helpline", "Legal assistance"],
+    "scheme_eligibility": ["All women in India"],
+    "scheme_documents_required": ["Aadhar Card", "Police Verification"],
+    "scheme_brochure": "https://www.pmsurakshitmahila.gov.in/"
+  },
+  {
+    "scheme_name": "Mission Shakti 2.0",
+    "scheme_dept": "Ministry of Women and Child Development",
+    "scheme_code": "MSY002",
+    "scheme_details": "Comprehensive women's empowerment package.",
+    "scheme_benefits": ["Financial aid", "Skill development"],
+    "scheme_eligibility": ["Women from marginalized communities"],
+    "scheme_documents_required": ["Aadhar Card", "Community Certificate"],
+    "scheme_brochure": "https://missionshakti.wcd.gov.in/public/documents/whatsnew/Mission_Shakti_Guidelines.pdf"
+  },
+  {
+    "scheme_name": "PM e-Bus Sewa Scheme",
+    "scheme_dept": "Ministry of Heavy Industries and Public Enterprises",
+    "scheme_code": "PMEBS001",
+    "scheme_details": "Electric buses for urban transport.",
+    "scheme_benefits": ["Subsidized electric buses", "Charging infrastructure support"],
+    "scheme_eligibility": ["Urban local bodies"],
+    "scheme_documents_required": ["Aadhar Card", "Municipal Approval"],
+    "scheme_brochure": "https://heavyindustries.gov.in/sites/default/files/2024-10/annexure_c-pm-ebus-psm_scheme_guidelines_v2.pdf"
+  },
+  {
+    "scheme_name": "PM Janjati Nyay Maha Abhiyan",
+    "scheme_dept": "Ministry of Tribal Affairs",
+    "scheme_code": "PMJNMA001",
+    "scheme_details": "Focus on tribal development and habitation coverage.",
+    "scheme_benefits": ["Infrastructure development", "Educational support"],
+    "scheme_eligibility": ["Tribal communities"],
+    "scheme_documents_required": ["Aadhar Card", "Tribal Certificate"],
+    "scheme_brochure": "https://adiprasaran.tribal.gov.in/pm-janman/janman_Download/PM-JANMAN-Operational%20Guidelines.pdf"
+  },
+  {
+    "scheme_name": "National Digital Nagrik Mission",
+    "scheme_dept": "Ministry of Electronics and Information Technology",
+    "scheme_code": "NDNM001",
+    "scheme_details": "Unified digital identity and service delivery.",
+    "scheme_benefits": ["Digital identity", "Access to government services"],
+    "scheme_eligibility": ["All citizens of India"],
+    "scheme_documents_required": ["Aadhar Card", "Mobile Number"],
+    "scheme_brochure": "https://www.ndnm.gov.in/"
+  },
+  
+  {
+    "scheme_name": "Pradhan Mantri Awas Yojana – Urban 2.0",
+    "scheme_dept": "Ministry of Housing and Urban Affairs",
+    "scheme_code": "PMAYU002",
+    "scheme_details": "Provides central assistance for affordable housing in urban areas.",
+    "scheme_benefits": ["Affordable housing", "Subsidy benefits"],
+    "scheme_eligibility": ["Urban poor", "EWS", "LIG families"],
+    "scheme_documents_required": ["ID proof", "Income proof", "Property documents"],
+    "scheme_brochure": "https://pmay-urban.gov.in/uploads/guidelines/Operational-Guidelines-of-PMAY-U-2.pdf"
+  },
+
+  {
+    "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana (PMKVY)",
+    "scheme_dept": "Ministry of Skill Development and Entrepreneurship",
+    "scheme_code": "PMKVY004",
+    "scheme_details": "Skill certification and reward scheme to train Indian youth.",
+    "scheme_benefits": ["Skill training", "Certification", "Monetary reward"],
+    "scheme_eligibility": ["Youth aged 15-35"],
+    "scheme_documents_required": ["ID proof", "Educational certificates"],
+    "scheme_brochure": "https://www.msde.gov.in/static/uploads/2024/02/PMKVY-4.0-Guidelines_final-copy.pdf"
+  },
+  {
+    "scheme_name": "National Mission for a Green India",
+    "scheme_dept": "Ministry of Environment, Forest and Climate Change",
+    "scheme_code": "GIM005",
+    "scheme_details": "Increase forest/tree cover, restore degraded ecosystems, and enhance carbon sinks.",
+    "scheme_benefits": ["Environmental restoration", "Afforestation", "Livelihood support"],
+    "scheme_eligibility": ["Rural communities", "Farmers", "Local bodies"],
+    "scheme_documents_required": ["ID proof", "Land ownership documents"],
+    "scheme_brochure": "https://moef.gov.in/uploads/2017/08/Revised%20Mission%20Document.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Awas Yojana",
+    "scheme_dept": "Housing and Urban Affairs",
+    "scheme_code": "PMAY",
+    "scheme_details": "Affordable housing for all.",
+    "scheme_benefits": ["Subsidy on home loans"],
+    "scheme_eligibility": ["Low-income families", "EWS", "MIG"],
+    "scheme_documents_required": ["ID proof", "Income certificate"],
+    "scheme_brochure": "https://pmay-urban.gov.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Jan Dhan Yojana",
+    "scheme_dept": "Finance",
+    "scheme_code": "PMJDY",
+    "scheme_details": "Financial inclusion by opening bank accounts.",
+    "scheme_benefits": ["Accidental insurance cover", "Rupay debit card"],
+    "scheme_eligibility": ["All Indian citizens"],
+    "scheme_documents_required": ["Aadhaar", "identity proof"],
+    "scheme_brochure": "https://pmjdy.gov.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana",
+    "scheme_dept": "Skill Development & Entrepreneurship",
+    "scheme_code": "PMKVY",
+    "scheme_details": "Skill development & training.",
+    "scheme_benefits": ["Free skill courses", "Certification"],
+    "scheme_eligibility": ["Youth 18–35 years"],
+    "scheme_documents_required": ["Aadhaar", "Educational certificates"],
+    "scheme_brochure": "https://www.msde.gov.in/"
+  },{
+    "scheme_name": "National Digital Health Mission",
+    "scheme_dept": "Health",
+    "scheme_code": "NDHM",
+    "scheme_details": "Digital health infrastructure & services.",
+    "scheme_benefits": ["Digital health ID", "e-health records"],
+    "scheme_eligibility": ["All citizens"],
+    "scheme_documents_required": ["Aadhaar", "Mobile number"],
+    "scheme_brochure": "https://ndhm.gov.in/"
+  },
+  {
+    "scheme_name": "Ayushman Bharat",
+    "scheme_dept": "Health",
+    "scheme_code": "AB-NHPM",
+    "scheme_details": "Health coverage for poor families.",
+    "scheme_benefits": ["Coverage up to 5 lakh per family per year"],
+    "scheme_eligibility": ["Eligible BPL families"],
+    "scheme_documents_required": ["Aadhaar", "Income certificate"],
+    "scheme_brochure": "https://www.pmjay.gov.in/"
+  },
+  {
+    "scheme_name": "Beti Bachao Beti Padhao",
+    "scheme_dept": "Women & Child Development",
+    "scheme_code": "BBBP",
+    "scheme_details": "Promote girl child education & survival.",
+    "scheme_benefits": ["Awareness campaigns", "Scholarships"],
+    "scheme_eligibility": ["Girls in selected districts"],
+    "scheme_documents_required": ["School certificates", "Identity proof"],
+    "scheme_brochure": "https://wcd.nic.in/bbbp"
+  },
+  {
+    "scheme_name": "Digital India",
+    "scheme_dept": "Electronics & IT",
+    "scheme_code": "DI",
+    "scheme_details": "Transform India into a digitally empowered society.",
+    "scheme_benefits": ["Digital infrastructure", "e-services"],
+    "scheme_eligibility": ["All citizens"],
+    "scheme_documents_required": ["Aadhaar", "Internet access"],
+    "scheme_brochure": "https://www.digitalindia.gov.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Suraksha Bima Yojana",
+    "scheme_dept": "Finance",
+    "scheme_code": "PMSBY",
+    "scheme_details": "Accidental insurance at low cost.",
+    "scheme_benefits": ["Insurance cover of 2 lakh"],
+    "scheme_eligibility": ["Bank account holders 18–70 years"],
+    "scheme_documents_required": ["Bank account details", "Aadhaar"],
+    "scheme_brochure": "https://www.jansuraksha.gov.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+    "scheme_dept": "Finance",
+    "scheme_code": "PMJJBY",
+    "scheme_details": "Life insurance scheme.",
+    "scheme_benefits": ["Life insurance cover 2 lakh"],
+    "scheme_eligibility": ["Bank account holders 18–50 years"],
+    "scheme_documents_required": ["Bank account details", "Aadhaar"],
+    "scheme_brochure": "https://www.jansuraksha.gov.in/"
+  },
+  {
+    "scheme_name": "Stand Up India",
+    "scheme_dept": "Finance",
+    "scheme_code": "StandUpIndia",
+    "scheme_details": "Facilitate bank loans for SC/ST & women entrepreneurs.",
+    "scheme_benefits": ["Loans 10–100 lakh"],
+    "scheme_eligibility": ["SC/ST and women entrepreneurs"],
+    "scheme_documents_required": ["Business plan", "Identity proof", "Collateral"],
+    "scheme_brochure": "https://www.standupmitra.in/"
+  },
+  {
+    "scheme_name": "National Health Mission",
+    "scheme_dept": "Ministry of Health & Family Welfare",
+    "scheme_code": "NHM001",
+    "scheme_details": "Provides accessible, affordable, and quality healthcare to rural population.",
+    "scheme_benefits": ["Healthcare services", "Free medical checkups"],
+    "scheme_eligibility": ["Residents of India, especially rural areas"],
+    "scheme_documents_required": ["Aadhaar", "Proof of residence"],
+    "scheme_brochure": "https://nhm.gov.in/index1.php?lang=1&level=1&sublinkid=969&lid=49"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana",
+    "scheme_dept": "Ministry of Skill Development & Entrepreneurship",
+    "scheme_code": "PMKVY002",
+    "scheme_details": "Skill training and certification program for youth.",
+    "scheme_benefits": ["Skill certification", "Employment opportunities"],
+    "scheme_eligibility": ["Indian youth aged 18-35"],
+    "scheme_documents_required": ["Aadhaar", "Age proof"],
+    "scheme_brochure": "https://www.pmkvyofficial.org/PMKVY/index"
+  },
+  {
+    "scheme_name": "National Digital Health Mission",
+    "scheme_dept": "Ministry of Health & Family Welfare",
+    "scheme_code": "NDHM003",
+    "scheme_details": "Digital health ID for every citizen.",
+    "scheme_benefits": ["Digital health records", "Telemedicine"],
+    "scheme_eligibility": ["All Indian citizens"],
+    "scheme_documents_required": ["Aadhaar or any valid ID"],
+    "scheme_brochure": "https://ndhm.gov.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Gram Sadak Yojana",
+    "scheme_dept": "Ministry of Rural Development",
+    "scheme_code": "PMGSY004",
+    "scheme_details": "Rural road connectivity project.",
+    "scheme_benefits": ["Better roads", "Improved transport"],
+    "scheme_eligibility": ["Rural residents"],
+    "scheme_documents_required": ["Residence proof"],
+    "scheme_brochure": "https://pmgsy.nic.in/"
+  },
+  {
+    "scheme_name": "National Social Assistance Programme",
+    "scheme_dept": "Ministry of Rural Development",
+    "scheme_code": "NSAP005",
+    "scheme_details": "Financial assistance to elderly, widows, disabled.",
+    "scheme_benefits": ["Pension", "Financial aid"],
+    "scheme_eligibility": ["Eligible senior citizens", "Widows", "Disabled persons"],
+    "scheme_documents_required": ["Proof of age", "Identity"],
+    "scheme_brochure": "https://nsap.nic.in/nsapdata.aspx"
+  },
+  {
+    "scheme_name": "Ayushman Bharat - PM-JAY",
+    "scheme_dept": "Ministry of Health & Family Welfare",
+    "scheme_code": "AB-PMJAY006",
+    "scheme_details": "Health insurance scheme covering hospitalization.",
+    "scheme_benefits": ["Health insurance", "Free treatment"],
+    "scheme_eligibility": ["Poor and vulnerable families"],
+    "scheme_documents_required": ["Ration card", "SECC ID"],
+    "scheme_brochure": "https://www.pmjay.gov.in/"
+  },
+  {
+    "scheme_name": "Mahatma Gandhi National Rural Employment Guarantee Act",
+    "scheme_dept": "Ministry of Rural Development",
+    "scheme_code": "MGNREGA007",
+    "scheme_details": "Provides 100 days of wage employment.",
+    "scheme_benefits": ["Employment", "Income security"],
+    "scheme_eligibility": ["Rural households"],
+    "scheme_documents_required": ["Proof of residence", "Aadhaar"],
+    "scheme_brochure": "https://nrega.nic.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Ujjwala Yojana",
+    "scheme_dept": "Ministry of Petroleum & Natural Gas",
+    "scheme_code": "PMUY008",
+    "scheme_details": "Free LPG connections for women from BPL families.",
+    "scheme_benefits": ["LPG connection", "Clean fuel"],
+    "scheme_eligibility": ["Women from BPL households"],
+    "scheme_documents_required": ["BPL card", "Aadhaar"],
+    "scheme_brochure": "https://www.pmuy.gov.in/"
+  },
+{
+    "scheme_name": "Digital India Programme",
+    "scheme_dept": "Ministry of Electronics & IT",
+    "scheme_code": "DIP009",
+    "scheme_details": "Promote digital infrastructure and services",
+    "scheme_benefits": ["Digital literacy", "e-governance"],
+    "scheme_eligibility": ["All citizens"],
+    "scheme_documents_required": ["None"],
+    "scheme_brochure": "https://www.digitalindia.gov.in/"
+  },
+  {
+    "scheme_name": "Swachh Bharat Mission",
+    "scheme_dept": "Ministry of Jal Shakti",
+    "scheme_code": "SBM010",
+    "scheme_details": "Sanitation and cleanliness in India",
+    "scheme_benefits": ["Toilets", "Clean environment"],
+    "scheme_eligibility": ["All citizens"],
+    "scheme_documents_required": ["None"],
+    "scheme_brochure": "https://swachhbharatmission.gov.in/sbmcms/index.htm"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Digital Health Mission",
+    "scheme_dept": "Health",
+    "scheme_code": "PM-DHM-2025",
+    "scheme_details": "Provides digital health IDs and online health records for citizens",
+    "scheme_benefits": ["Easy access to health records", "Telemedicine", "Faster treatment"],
+    "scheme_eligibility": ["All Indian citizens"],
+    "scheme_documents_required": ["Aadhaar Card", "Mobile Number"],
+    "scheme_brochure": "https://gmch.gov.in/sites/default/files/documents/Brochure%20NDHM%20%28Patient%29%20General%20Public.pdf"
+  },
+  {
+    "scheme_name": "National Urban Livelihood Mission",
+    "scheme_dept": "Labour",
+    "scheme_code": "NULM-2025",
+    "scheme_details": "Supports urban poor to enhance livelihood opportunities",
+    "scheme_benefits": ["Skill training", "Self-employment", "Financial assistance"],
+    "scheme_eligibility": ["Urban poor"],
+    "scheme_documents_required": ["ID proof", "Income certificate"],
+    "scheme_brochure": "https://nulm.gov.in/PDF/NULM_Mission/NULM_mission_document.pdf"
+  },
+  {
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "scheme_dept": "Agriculture",
+    "scheme_code": "PM-KISAN-2025",
+    "scheme_details": "Provides income support of ₹6000 per year to farmers",
+    "scheme_benefits": ["Financial support for small and marginal farmers"],
+    "scheme_eligibility": ["All farmers"],
+    "scheme_documents_required": ["Land ownership proof", "Bank account"],
+    "scheme_brochure": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2021/nov/doc2021112361.pdf"
+  },
+  {
+    "scheme_name": "Sukanya Samriddhi Yojana",
+    "scheme_dept": "Women & Child Development",
+    "scheme_code": "SSY-2025",
+    "scheme_details": "Savings scheme for the girl child to encourage education and marriage fund",
+    "scheme_benefits": ["Tax benefits", "High-interest savings", "Education funding"],
+    "scheme_eligibility": ["Parents of girl child"],
+    "scheme_documents_required": ["Birth certificate of girl child", "Bank account"],
+    "scheme_brochure": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/jan/doc2025121487401.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Awas Yojana",
+    "scheme_dept": "Housing",
+    "scheme_code": "PMAWY-2025",
+    "scheme_details": "Affordable housing for urban and rural poor",
+    "scheme_benefits": ["Subsidy on home loan", "Affordable housing"],
+    "scheme_eligibility": ["Low-income families"],
+    "scheme_documents_required": ["Income certificate", "Ration card"],
+    "scheme_brochure": "https://pmay-urban.gov.in/uploads/guidelines/Operational-Guidelines-of-PMAY-U-2.pdf"
+  },
+  {
+    "scheme_name": "Startup India",
+    "scheme_dept": "Commerce & Industry",
+    "scheme_code": "SI-2025",
+    "scheme_details": "Promotes entrepreneurship and supports startups",
+    "scheme_benefits": ["Funding support", "Tax exemptions", "Mentorship"],
+    "scheme_eligibility": ["Indian startups"],
+    "scheme_documents_required": ["Company registration", "PAN Card"],
+    "scheme_brochure": "https://www.startupindia.gov.in/content/dam/invest-india/Templates/public/Startup%20India%20Kit_v5.pdf"
+  },
+  {
+    "scheme_name": "Atal Pension Yojana",
+    "scheme_dept": "Finance",
+    "scheme_code": "APY-2025",
+    "scheme_details": "Provides pension to workers in unorganized sector",
+    "scheme_benefits": ["Guaranteed monthly pension after retirement"],
+    "scheme_eligibility": ["Workers aged 18-40"],
+    "scheme_documents_required": ["Bank account", "Aadhaar"],
+    "scheme_brochure": "https://npscra.nsdl.co.in/nsdl/scheme-details/APY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "National Digital Literacy Mission",
+    "scheme_dept": "Electronics & IT",
+    "scheme_code": "NDLM-2025",
+    "scheme_details": "Enhances digital literacy among citizens",
+    "scheme_benefits": ["Computer literacy", "Skill development", "Employability"],
+    "scheme_eligibility": ["All citizens above 14"],
+    "scheme_documents_required": ["ID proof"],
+    "scheme_brochure": "https://iitcomputers.org/ndlm/engbrochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Jan Dhan Yojana",
+    "scheme_dept": "Finance",
+    "scheme_code": "PMJDY-2025",
+    "scheme_details": "Financial inclusion by opening bank accounts for all",
+    "scheme_benefits": ["Access to banking", "Insurance", "Credit"],
+    "scheme_eligibility": ["All citizens"],
+    "scheme_documents_required": ["Aadhaar", "Bank account"],
+    "scheme_brochure": "https://pmjdy.gov.in/english/schemes"
+  },
+  {
+    "scheme_name": "Deen Dayal Upadhyaya Gram Jyoti Yojana",
+    "scheme_dept": "Power",
+    "scheme_code": "DDUGJY-2025",
+    "scheme_details": "Rural electrification and infrastructure development",
+    "scheme_benefits": ["Electricity access", "Improved rural infrastructure"],
+    "scheme_eligibility": ["Rural households"],
+    "scheme_documents_required": ["Ration card", "Address proof"],
+    "scheme_brochure": "https://ddugjy.gov.in/"
+  },
+  {
+    "scheme_name": "Stand Up India",
+    "scheme_dept": "Commerce & Industry",
+    "scheme_code": "SUI-2025",
+    "scheme_details": "Provides loans and support to women and SC/ST entrepreneurs",
+    "scheme_benefits": ["Financial assistance", "Mentorship", "Business support"],
+    "scheme_eligibility": ["Women entrepreneurs"],
+    "scheme_documents_required": ["ID proof", "Business plan"],
+    "scheme_brochure": "https://www.standupmitra.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana",
+    "scheme_dept": "Labour",
+    "scheme_code": "PMKVY-2025",
+    "scheme_details": "Provides skill training to unemployed youth",
+    "scheme_benefits": ["Skill development", "Employment opportunities", "Certification"],
+    "scheme_eligibility": ["Youth aged 18-35"],
+    "scheme_documents_required": ["ID proof", "Education certificate"],
+    "scheme_brochure": "https://pmkvyofficial.org/"
+  },
+  {
+    "scheme_name": "Ayushman Bharat",
+    "scheme_dept": "Health",
+    "scheme_code": "AB-2025",
+    "scheme_details": "Health insurance coverage for economically weaker sections",
+    "scheme_benefits": ["Cashless treatment", "Health insurance"],
+    "scheme_eligibility": ["BPL families"],
+    "scheme_documents_required": ["Ration card", "Aadhaar"],
+    "scheme_brochure": "https://pmjay.gov.in/"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Shram Yogi Maandhan Yojana",
+    "scheme_dept": "Labour",
+    "scheme_code": "PM-SYM-2025",
+    "scheme_details": "Voluntary pension scheme for unorganised workers",
+    "scheme_benefits": ["Minimum assured pension of ₹3,000 per month after 60 years"],
+    "scheme_eligibility": ["Unorganised sector workers aged 18-40 with monthly income up to ₹15,000"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank Account", "Mobile Number"],
+    "scheme_brochure": "https://www.epfindia.gov.in/site_docs/PDFs/MiscPDFs/Scheme_PM-SYM.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Gramin Digital Saksharta Abhiyan",
+    "scheme_dept": "Electronics & IT",
+    "scheme_code": "PMGDISHA-2025",
+    "scheme_details": "Digital literacy training for rural citizens",
+    "scheme_benefits": ["Enables use of computers, smartphones, internet, and digital payments"],
+    "scheme_eligibility": ["Rural citizens aged 14-60"],
+    "scheme_documents_required": ["Aadhaar Card", "Residential Proof"],
+    "scheme_brochure": "https://it.assam.gov.in/sites/default/files/public_utility/PMGDISHA%20scheme%20detail%20booklet.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Garib Kalyan Yojana",
+    "scheme_dept": "Finance",
+    "scheme_code": "PMGKY-2025",
+    "scheme_details": "Financial assistance to the poor during COVID-19 pandemic",
+    "scheme_benefits": ["Direct cash transfers", "Food grain distribution"],
+    "scheme_eligibility": ["Low-income families affected by COVID-19"],
+    "scheme_documents_required": ["Aadhaar Card", "Ration Card"],
+    "scheme_brochure": "https://www.epfindia.gov.in/site_docs/PDFs/Circulars/Y2020-2021/SchemeCOVID_24_10042020.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Awas Yojana – Gramin",
+    "scheme_dept": "Rural Development",
+    "scheme_code": "PMAY-G-2025",
+    "scheme_details": "Provision of pucca houses with basic amenities to rural families",
+    "scheme_benefits": ["Financial assistance for construction of houses"],
+    "scheme_eligibility": ["Houseless families and those living in kutcha houses"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank Account", "Residential Proof"],
+    "scheme_brochure": "https://pmayg.dord.gov.in/netiayHome/Document/Pahal.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Ujjwala Yojana",
+    "scheme_dept": "Ministry of Petroleum & Natural Gas",
+    "scheme_code": "PMUY",
+    "scheme_details": "Provides LPG connections to women from below poverty line households.",
+    "scheme_benefits": ["Free LPG connection", "Subsidy on cylinders"],
+    "scheme_eligibility": ["Women above 18 years", "BPL households"],
+    "scheme_documents_required": ["Ration card", "Aadhaar card"],
+    "scheme_brochure": "https://www.pmuy.gov.in/wp-content/uploads/2020/11/PMUY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Sukanya Samriddhi Yojana",
+    "scheme_dept": "Ministry of Finance",
+    "scheme_code": "SSY",
+    "scheme_details": "Encourages parents to save for the education and marriage of their girl child.",
+    "scheme_benefits": ["High interest savings", "Tax benefits under section 80C"],
+    "scheme_eligibility": ["Girl child below 10 years", "Parents/guardians"],
+    "scheme_documents_required": ["Birth certificate of girl child", "Parent ID proof"],
+    "scheme_brochure": "https://www.nsiindia.gov.in/WriteReadData/userfiles/file/Sukanya%20Samriddhi%20Yojana.pdf"
+  },
+  {
+    "scheme_name": "Startup India",
+    "scheme_dept": "Department for Promotion of Industry and Internal Trade",
+    "scheme_code": "SI",
+    "scheme_details": "Supports new startups with funding, tax exemptions, and incubation.",
+    "scheme_benefits": ["Funding support", "Tax exemptions", "Easier compliance"],
+    "scheme_eligibility": ["Innovative startups", "Registered in India"],
+    "scheme_documents_required": ["Incorporation certificate", "PAN card"],
+    "scheme_brochure": "https://www.startupindia.gov.in/content/dam/invest-india/Templates/public/Startup_India_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Atal Pension Yojana",
+    "scheme_dept": "Pension Fund Regulatory and Development Authority",
+    "scheme_code": "APY",
+    "scheme_details": "Provides defined pension benefits to workers in the unorganized sector.",
+    "scheme_benefits": ["Guaranteed pension up to Rs. 5000/month", "Government co-contribution"],
+    "scheme_eligibility": ["Workers aged 18-40 years", "Bank account holders"],
+    "scheme_documents_required": ["Bank account", "KYC documents"],
+    "scheme_brochure": "https://www.npscra.nsdl.co.in/downloads/Atal-Pension-Yojana-Booklet.pdf"
+  },
+  {
+    "scheme_name": "National Digital Literacy Mission",
+    "scheme_dept": "Ministry of Electronics & IT",
+    "scheme_code": "NDLM",
+    "scheme_details": "Aims to provide digital literacy to citizens across India.",
+    "scheme_benefits": ["Digital literacy training", "Certificate after completion"],
+    "scheme_eligibility": ["Anyone above 14 years", "Residents of India"],
+    "scheme_documents_required": ["Aadhaar card or ID proof"],
+    "scheme_brochure": "https://www.ndlm.in/sites/default/files/ndlm_brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Matsya Sampada Yojana",
+    "scheme_dept": "Ministry of Fisheries, Animal Husbandry and Dairying",
+    "scheme_code": "PMMSY001",
+    "scheme_details": "Aims to enhance fish production, modernize the fish supply chain, and improve fishers' livelihoods.",
+    "scheme_benefits": ["Financial assistance", "Infrastructure support", "Skill development"],
+    "scheme_eligibility": ["Fishermen", "Fish farmers", "Aquaculture entrepreneurs"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank account", "Proof of fishing activity"],
+    "scheme_brochure": "https://pmmsy.gov.in/assets/pdf/PMMSY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Fasal Bima Yojana",
+    "scheme_dept": "Ministry of Agriculture & Farmers Welfare",
+    "scheme_code": "PMFBY001",
+    "scheme_details": "Provides crop insurance to protect farmers against crop losses due to natural calamities, pests, and diseases.",
+    "scheme_benefits": ["Insurance coverage for crops", "Compensation for crop loss"],
+    "scheme_eligibility": ["Registered farmers", "Owners of insured crops"],
+    "scheme_documents_required": ["Aadhaar Card", "Land ownership proof", "Crop details"],
+    "scheme_brochure": "https://pmfby.gov.in/pdf/PMFBY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "National Apprenticeship Promotion Scheme",
+    "scheme_dept": "Ministry of Skill Development & Entrepreneurship",
+    "scheme_code": "NAPS001",
+    "scheme_details": "Encourages employers to hire apprentices by providing financial support for training and stipend.",
+    "scheme_benefits": ["Stipend support", "Training assistance", "Skill development"],
+    "scheme_eligibility": ["Employers", "Apprentices"],
+    "scheme_documents_required": ["Aadhaar Card", "Employer registration", "Training plan"],
+    "scheme_brochure": "https://www.apprenticeshipindia.org/pdf/NAPS_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Street Vendor's AtmaNirbhar Nidhi",
+    "scheme_dept": "Ministry of Housing and Urban Affairs",
+    "scheme_code": "PMSVAN001",
+    "scheme_details": "Provides financial assistance to street vendors for working capital needs during emergencies.",
+    "scheme_benefits": ["Working capital loan", "Subsidy support"],
+    "scheme_eligibility": ["Street vendors registered under the scheme"],
+    "scheme_documents_required": ["Aadhaar Card", "Vendor certificate", "Bank account"],
+    "scheme_brochure": "https://pmgsy.gov.in/pm-svan-brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Ujjwala Yojana 2.0",
+    "scheme_dept": "Ministry of Petroleum & Natural Gas",
+    "scheme_code": "PMUY002",
+    "scheme_details": "Provides LPG connections to poor households and promotes clean cooking fuel.",
+    "scheme_benefits": ["LPG connection", "Subsidy for refills"],
+    "scheme_eligibility": ["BPL families", "Women-headed households"],
+    "scheme_documents_required": ["Aadhaar Card", "Ration card", "Bank account"],
+    "scheme_brochure": "https://www.pmuy.gov.in/pdf/PMUY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Startup India Seed Fund Scheme",
+    "scheme_dept": "Department for Promotion of Industry and Internal Trade",
+    "scheme_code": "SISFS001",
+    "scheme_details": "Provides financial assistance to startups for proof of concept, prototype development, and commercialization.",
+    "scheme_benefits": ["Seed funding", "Mentorship support"],
+    "scheme_eligibility": ["Recognized startups under Startup India"],
+    "scheme_documents_required": ["Startup recognition certificate", "Bank account", "Business plan"],
+    "scheme_brochure": "https://www.startupindia.gov.in/content/dam/invest-india/Templates/public/StartupIndiaSeedFundScheme.pdf"
+  },
+  {
+    "scheme_name": "National Education Policy 2020 Scholarship",
+    "scheme_dept": "Ministry of Education",
+    "scheme_code": "NEPS001",
+    "scheme_details": "Provides scholarships to students in higher education under NEP 2020 guidelines.",
+    "scheme_benefits": ["Tuition fee waiver", "Merit-based scholarship"],
+    "scheme_eligibility": ["Students enrolled in higher education institutions"],
+    "scheme_documents_required": ["Aadhaar Card", "Admission proof", "Income certificate"],
+    "scheme_brochure": "https://www.mhrd.gov.in/sites/upload_files/mhrd/files/NEP_Scholarship.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan",
+    "scheme_dept": "Ministry of New and Renewable Energy",
+    "scheme_code": "PMKUSUM001",
+    "scheme_details": "Promotes solar energy use among farmers for irrigation and electricity generation.",
+    "scheme_benefits": ["Subsidy on solar pumps", "Financial support for solar projects"],
+    "scheme_eligibility": ["Farmers with landholding"],
+    "scheme_documents_required": ["Aadhaar Card", "Land ownership proof", "Bank account"],
+    "scheme_brochure": "https://mnre.gov.in/sites/default/files/Scheme_PM_KUSUM.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Shiksha Protsahan Yojana",
+    "scheme_dept": "Ministry of Education",
+    "scheme_code": "PMSPY001",
+    "scheme_details": "Encourages students to pursue education in high-demand skills with financial incentives.",
+    "scheme_benefits": ["Scholarship", "Skill-based training"],
+    "scheme_eligibility": ["Students in secondary and higher education"],
+    "scheme_documents_required": ["Aadhaar Card", "School/College ID", "Income certificate"],
+    "scheme_brochure": "https://www.mhrd.gov.in/sites/upload_files/mhrd/files/PM_Shyiksha_Protsahan_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Gram Sadak Yojana – Rural Connectivity Upgrade",
+    "scheme_dept": "Ministry of Rural Development",
+    "scheme_code": "PMGSY002",
+    "scheme_details": "Improves rural road connectivity and ensures all-weather roads to villages.",
+    "scheme_benefits": ["Road construction", "Infrastructure funding"],
+    "scheme_eligibility": ["Rural areas with approved road plans"],
+    "scheme_documents_required": ["Village map", "Panchayat approval", "Project proposal"],
+    "scheme_brochure": "https://pmgsy.gov.in/pdf/PMGSY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Atmanirbhar Bharat Rojgar Yojana",
+    "scheme_dept": "Ministry of Labour and Employment",
+    "scheme_code": "ABRY001",
+    "scheme_details": "A scheme to incentivize employers for creation of new employment and restoration of loss of employment during the COVID-19 pandemic.",
+    "scheme_benefits": ["Subsidy for new employment", "Support for restoration of lost employment"],
+    "scheme_eligibility": ["Employers", "Employees registered under EPFO"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank account details", "Employee details"],
+    "scheme_brochure": "https://labour.gov.in/sites/default/files/ABRY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Rojgar Protsahan Yojana",
+    "scheme_dept": "Ministry of Labour and Employment",
+    "scheme_code": "PMRPY001",
+    "scheme_details": "A scheme to incentivize employers for creation of new employment by providing subsidy for new employees.",
+    "scheme_benefits": ["Subsidy for new employment", "Support for employee provident fund contributions"],
+    "scheme_eligibility": ["Employers", "Employees not covered under EPF"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank account details", "Employee details"],
+    "scheme_brochure": "https://www.india.gov.in/sites/default/files/PMRPY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Mahila Samman Savings Certificate",
+    "scheme_dept": "Ministry of Finance",
+    "scheme_code": "MSSC001",
+    "scheme_details": "A savings scheme aimed at empowering women by providing a safe and secure investment option with attractive interest rates.",
+    "scheme_benefits": ["Attractive interest rates", "Tax benefits", "Safe investment option"],
+    "scheme_eligibility": ["Women above 18 years of age"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank account details", "Photograph"],
+    "scheme_brochure": "https://www.savings.gov.in/sites/default/files/MSSC_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Formalization of Micro Food Processing Enterprises Scheme",
+    "scheme_dept": "Ministry of Food Processing Industries",
+    "scheme_code": "PMFME001",
+    "scheme_details": "A scheme to enhance the competitiveness of micro food processing enterprises by providing financial, technical, and business support.",
+    "scheme_benefits": ["Financial assistance", "Technical support", "Business development support"],
+    "scheme_eligibility": ["Micro food processing enterprises", "Self-help groups", "Producer organizations"],
+    "scheme_documents_required": ["Aadhaar Card", "Business registration", "Bank account details"],
+    "scheme_brochure": "https://mofpi.nic.in/sites/default/files/PMFME_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Shram Yogi Maandhan Yojana",
+    "scheme_dept": "Ministry of Labour and Employment",
+    "scheme_code": "PMSYMY001",
+    "scheme_details": "A pension scheme for unorganized sector workers to provide them with a monthly pension after the age of 60.",
+    "scheme_benefits": ["Monthly pension", "Government contribution", "Life insurance cover"],
+    "scheme_eligibility": ["Unorganized sector workers", "Age between 18 to 40 years"],
+    "scheme_documents_required": ["Aadhaar Card", "Bank account details", "Income certificate"],
+    "scheme_brochure": "https://labour.gov.in/sites/default/files/PMSYMY_Brochure.pdf"
+  },
+  {
+    "scheme_name": "National Social Assistance Programme",
+    "scheme_dept": "Ministry of Rural Development",
+    "scheme_code": "NSAP001",
+    "scheme_details": "A scheme to provide social assistance to the elderly, widows, and persons with disabilities in the form of pensions.",
+    "scheme_benefits": ["Monthly pension", "Support for elderly, widows, and disabled persons"],
+    "scheme_eligibility": ["Elderly persons", "Widows", "Persons with disabilities"],
+    "scheme_documents_required": ["Aadhaar Card", "Age proof", "Disability certificate"],
+    "scheme_brochure": "https://rural.nic.in/sites/default/files/NSAP_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Soil Health Card Scheme",
+    "scheme_dept": "Ministry of Agriculture & Farmers Welfare",
+    "scheme_code": "SHC001",
+    "scheme_details": "A scheme to provide farmers with a soil health card containing information on soil health and recommended dosages of fertilizers.",
+    "scheme_benefits": ["Soil health assessment", "Recommendations for fertilizers", "Improved crop yield"],
+    "scheme_eligibility": ["Farmers with agricultural land"],
+    "scheme_documents_required": ["Aadhaar Card", "Land ownership proof", "Soil sample"],
+    "scheme_brochure": "https://agricoop.nic.in/sites/default/files/SHC_Brochure.pdf"
+  },
+  {
+    "scheme_name": "National AYUSH Mission",
+    "scheme_dept": "Ministry of AYUSH",
+    "scheme_code": "NAM001",
+    "scheme_details": "A scheme to promote the AYUSH systems of healthcare through cost-effective AYUSH services, strengthening of educational systems, and quality control of drugs.",
+    "scheme_benefits": ["AYUSH services", "Educational support", "Quality control of AYUSH drugs"],
+    "scheme_eligibility": ["AYUSH practitioners", "Educational institutions", "Drug manufacturers"],
+    "scheme_documents_required": ["Aadhaar Card", "Registration certificate", "Educational qualifications"],
+    "scheme_brochure": "https://ayush.gov.in/sites/default/files/NAM_Brochure.pdf"
+  },
+  {
+    "scheme_name": "National Ganga Mission",
+    "scheme_dept": "Ministry of Jal Shakti",
+    "scheme_code": "NGM001",
+    "scheme_details": "A mission to rejuvenate the river Ganga by ensuring its pollution-free status and conserving its biodiversity.",
+    "scheme_benefits": ["Pollution control", "Biodiversity conservation", "Riverfront development"],
+    "scheme_eligibility": ["State governments", "Municipalities", "NGOs"],
+    "scheme_documents_required": ["Project proposal", "Environmental clearance", "Financial plan"],
+    "scheme_brochure": "https://jalshakti-ddws.gov.in/sites/default/files/NGM_Brochure.pdf"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Bhartiya Janaushadhi Pariyojana",
+    "scheme_dept": "Department of Pharmaceuticals",
+    "scheme_code": "PMBJP001",
+    "scheme_details": "A scheme to provide quality medicines at affordable prices through dedicated outlets known as Janaushadhi Kendras.",
+    "scheme_benefits": ["Affordable medicines", "Quality assurance", "Wide accessibility"],
+    "scheme_eligibility": ["Pharmacy owners", "Entrepreneurs"],
+    "scheme_documents_required": ["Aadhaar Card", "Shop registration", "Bank account details"],
+    "scheme_brochure": "https://janaushadhi.gov.in/sites/default/files/PMBJP_Brochure.pdf"
+  },
+  {
+    "scheme_name": "PM E-DRIVE Scheme",
+    "scheme_dept": "Ministry of Power",
+    "scheme_code": "PMED001",
+    "scheme_details": "A nationwide initiative to establish approximately 72,300 public electric vehicle (EV) charging stations across cities and highways, aiming to promote the adoption of electric vehicles and reduce carbon emissions.",
+    "scheme_benefits": ["Enhanced EV infrastructure", "Reduced charging time", "Increased adoption of electric vehicles"],
+    "scheme_eligibility": ["EV owners", "Charging station operators"],
+    "scheme_documents_required": ["Aadhaar Card", "Vehicle registration", "Proof of residence"],
+    "scheme_brochure": "https://timesofindia.indiatimes.com/business/india-business/pm-e-drive-scheme-govt-issues-new-guidelines-for-ev-charging-stations-rollout-to-cover-cities-and-highways/articleshow/124197543.cms"
+  },
+  {
+    "scheme_name": "Azim Premji Scholarship 2025",
+    "scheme_dept": "Azim Premji Foundation",
+    "scheme_code": "APS2025",
+    "scheme_details": "A scholarship program aimed at supporting girl students from economically weaker sections (EWS) who are currently studying in government schools, providing financial assistance for their education.",
+    "scheme_benefits": ["₹30,000 scholarship credited directly to the beneficiary's bank account for the full course duration"],
+    "scheme_eligibility": ["Girl students from EWS currently enrolled in government schools"],
+    "scheme_documents_required": ["Aadhaar Card", "School enrollment proof", "Bank account details"],
+    "scheme_brochure": "https://m.economictimes.com/news/new-updates/azim-premji-scholarship-2025-check-last-date-to-register-eligibility-steps-to-apply-at-azimpremjifoundation-org/articleshow/124208058.cms"
+  },
+  {
+    "scheme_name": "National Ropeways Development Programme (Parvatmala Pariyojana)",
+    "scheme_dept": "Ministry of Civil Aviation",
+    "scheme_code": "NRDP001",
+    "scheme_details": "A transformative initiative to develop ropeway systems in hilly and mountainous regions to improve connectivity and promote tourism.",
+    "scheme_benefits": ["Reduced travel time", "Enhanced tourism", "Improved connectivity in remote areas"],
+    "scheme_eligibility": ["State governments", "Private developers"],
+    "scheme_documents_required": ["Project proposal", "Environmental clearance", "Financial plan"],
+    "scheme_brochure": "https://timesofindia.indiatimes.com/city/dehradun/indias-costliest-ropeway-to-come-up-between-sonprayag-and-kedarnath-rs-4081-crore-ppp-project-to-give-govt-42-revenue-share-without-funding-13km-link-to-reduce-journey-to-just-36-minutes/photostory/124210238.cms"
+  },
+  {
+    "scheme_name": "Development of Rural Household Storage Facilities",
+    "scheme_dept": "Ministry of Consumer Affairs, Food & Public Distribution",
+    "scheme_code": "DRHSF001",
+    "scheme_details": "A scheme to provide financial assistance for the construction of household storage facilities in rural areas to reduce post-harvest losses and improve food security.",
+    "scheme_benefits": ["Reduced food wastage", "Improved food security", "Enhanced income for farmers"],
+    "scheme_eligibility": ["Farmers", "Self-Help Groups (SHGs)", "Producer Organizations"],
+    "scheme_documents_required": ["Aadhaar Card", "Land ownership proof", "Bank account details"],
+    "scheme_brochure": "https://pib.gov.in/PressReleasePage.aspx?PRID=1573351"
+  },
+  {
+    "scheme_name": "National Career Service (NCS) Portal",
+    "scheme_dept": "Ministry of Labour and Employment",
+    "scheme_code": "NCSPORTAL001",
+    "scheme_details": "An online platform that connects job seekers with employers, providing career counseling, skill development, and job matching services.",
+    "scheme_benefits": ["Access to job listings", "Career counseling", "Skill development resources"],
+    "scheme_eligibility": ["Job seekers", "Employers", "Training providers"],
+    "scheme_documents_required": ["Aadhaar Card", "Resume", "Educational certificates"],
+    "scheme_brochure": "https://ncs.gov.in/"
+  }
+
+]

@@ -249,7 +249,7 @@ const sections = [
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Theme Toggle Button */}
-        <div className="flex justify-end mb-6">
+        {/* <div className="flex justify-end mb-6">
           <button
   onClick={() => setDarkMode(!darkMode)}
   data-tooltip-id="themeToggleTip"
@@ -258,10 +258,10 @@ const sections = [
 >
   {darkMode ? <Sun size={20} /> : <Moon size={20} />}
 </button>
-{/* Tooltips */}
+Tooltips
 <Tooltip id="themeToggleTip" style={tooltipStyle} />
 
-        </div>
+        </div> */}
 
         {/* Introduction */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 transition-colors duration-500">

@@ -282,7 +282,8 @@ npm start
 > **Note:** The following `.env` configuration is **only for the `/user`**:
 
 ```bash
-VITE_GOOGLE_CLIENT_ID=YOUR_GOOGLE_OAuth_CLIENT_ID (Same as Backend)
+VITE_API_BASE_URL=http://localhost:8000   # URL of your backend
+VITE_GOOGLE_CLIENT_ID=YOUR_GOOGLE_OAuth_CLIENT_ID  # Must match backend
 ```
 
 > Repeat the following steps for each frontend directory (`user`, `employee`, and `admin`) in a **separate terminal**.
