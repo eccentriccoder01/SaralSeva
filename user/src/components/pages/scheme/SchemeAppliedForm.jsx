@@ -12,10 +12,8 @@ import loader from "./../../../assets/loader.json";
 // --- Zod Validation Schema ---
 const schema = z.object({
   name: z.string().min(3, { message: "Name is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  mobile: z
-    .string()
-    .regex(/^[0-9]{10}$/, { message: "Mobile number must be 10 digits" }),
+  email: z.string().email({ message: "Please enter a valid email" }),
+  mobile: z.string().regex(/^[0-9]{10}$/, { message: "Mobile number must be exactly 10 digits" }),
   scheme_name: z.string().min(1, { message: "Scheme name is required" }),
   scheme_code: z.string().min(1, { message: "Scheme code is required" }),
   DOB: z.string().min(1, { message: "Date of birth is required" }),
