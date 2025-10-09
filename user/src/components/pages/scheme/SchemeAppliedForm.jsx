@@ -40,18 +40,78 @@ const FormField = ({ id, label, register, errors, ...props }) => {
   const inputClasses =
     "w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
   const errorClasses = "text-red-600 text-sm mt-1";
+  const [preview, setPreview] = useState(null);
+  
+  // Handle file validation and preview
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file size (2MB limit)
+    if (file.size > 2 * 1024 * 1024) {
+      e.target.value = "";
+      toast.error("File size must be less than 2MB");
+      return;
+    }
+
+    // Validate file type
+    if (props.type === "file") {
+      const allowedTypes = props.accept ? props.accept.split(",") : [".pdf", ".jpg", ".jpeg", ".png"];
+      const fileType = "." + file.name.split(".").pop().toLowerCase();
+      if (!allowedTypes.includes(fileType)) {
+        e.target.value = "";
+        toast.error(`Invalid file type. Allowed types: ${allowedTypes.join(", ")}`);
+        return;
+      }
+
+      // Create preview for images
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        setPreview(null);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="font-medium text-gray-700 mb-1">{label}</label>
+      <label htmlFor={id} className="font-medium text-gray-700 mb-1">
+        {label}
+        {props.type === "file" && (
+          <span className="text-sm text-gray-500 ml-2">
+            (Max: 2MB{props.accept ? `, Types: ${props.accept}` : ""})
+          </span>
+        )}
+      </label>
       <input
         id={id}
         {...register(id)}
         className={inputClasses}
         {...props}
-        onInput={(e) => {
-          if (id === "panNo") e.target.value = e.target.value.toUpperCase();
+        onChange={(e) => {
+          if (props.type === "file") {
+            handleFileChange(e);
+          } else if (id === "panNo") {
+            e.target.value = e.target.value.toUpperCase();
+          }
         }}
       />
+      {/* Show preview for images */}
+      {preview && (
+        <div className="mt-2">
+          <img src={preview} alt="Preview" className="max-h-32 rounded-lg border border-gray-200" />
+        </div>
+      )}
+      {/* Show file name for PDFs */}
+      {props.type === "file" && !preview && props.value && (
+        <div className="mt-2 text-sm text-gray-600">
+          Selected file: {props.value.split("\\").pop()}
+        </div>
+      )}
       {errors[id] && <p className={errorClasses}>{errors[id].message}</p>}
     </div>
   );
@@ -188,10 +248,38 @@ const SchemeAppliedForm = () => {
         <fieldset className="p-6 border border-gray-300 rounded-lg">
           <legend className="px-2 text-xl font-bold text-orange-800">Upload Documents</legend>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <FormField id="photo" label="Passport Photo" type="file" register={register} errors={errors} />
-            <FormField id="aadharPhoto" label="Aadhar Card" type="file" register={register} errors={errors} />
-            <FormField id="panPhoto" label="PAN Card" type="file" register={register} errors={errors} />
-            <FormField id="bank_passbook" label="Bank Passbook" type="file" register={register} errors={errors} />
+            <FormField 
+              id="photo" 
+              label="Passport Photo" 
+              type="file" 
+              accept=".jpg,.jpeg,.png" 
+              register={register} 
+              errors={errors} 
+            />
+            <FormField 
+              id="aadharPhoto" 
+              label="Aadhar Card" 
+              type="file" 
+              accept=".jpg,.jpeg,.png,.pdf" 
+              register={register} 
+              errors={errors} 
+            />
+            <FormField 
+              id="panPhoto" 
+              label="PAN Card" 
+              type="file" 
+              accept=".jpg,.jpeg,.png,.pdf" 
+              register={register} 
+              errors={errors} 
+            />
+            <FormField 
+              id="bank_passbook" 
+              label="Bank Passbook" 
+              type="file" 
+              accept=".jpg,.jpeg,.png,.pdf" 
+              register={register} 
+              errors={errors} 
+            />
           </div>
         </fieldset>
 
