@@ -55,6 +55,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
+      <hr className="border-t-4 border-orange-900 dark:border-gray-800 mb-4" />
       <div className="container mx-auto px-5 py-16">
         <div className="flex flex-wrap md:text-left text-center order-first">
 
