@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaComment, FaPaperPlane, FaTimes, FaStar } from "react-icons/fa";
-import { Tooltip } from "react-tooltip"; // ✅ make sure react-tooltip is installed
+import { Tooltip } from "react-tooltip";
 
 const FeedbackButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,38 +10,53 @@ const FeedbackButton = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Submit handler
+  // ✅ New state for notification system
+  const [notification, setNotification] = useState({
+    isOpen: false,
+    message: "",
+    type: "success", // success | error | warning
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!feedback.trim() && rating === 0) {
-      alert("Please provide feedback or a rating before submitting.");
+      setNotification({
+        isOpen: true,
+        message: "Please provide feedback or a rating before submitting.",
+        type: "error",
+      });
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Simulate API call - replace with actual backend endpoint
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      alert(
-        `Thank you for your feedback! ${
+      setNotification({
+        isOpen: true,
+        message: `Thank you for your feedback! ${
           rating > 0 ? `Rating: ${rating} star(s).` : ""
-        } We appreciate your input.`
-      );
+        } We appreciate your input.`,
+        type: "success",
+      });
+
       setFeedback("");
       setEmail("");
       setRating(0);
       setHoverRating(0);
       setIsModalOpen(false);
     } catch (error) {
-      alert("Failed to submit feedback. Please try again.");
+      setNotification({
+        isOpen: true,
+        message: "Failed to submit feedback. Please try again.",
+        type: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Tooltip styling
   const tooltipStyle = {
     backgroundColor: "#1f2937",
     color: "#fff",
@@ -50,16 +65,19 @@ const FeedbackButton = () => {
     padding: "6px 10px",
   };
 
-  // Reset modal state
   const closeModal = () => {
     setIsModalOpen(false);
     setRating(0);
     setHoverRating(0);
   };
 
+  const closeNotification = () => {
+    setNotification({ ...notification, isOpen: false });
+  };
+
   return (
     <>
-      {/* Feedback Button on Bottom-Left */}
+      {/* Feedback Button */}
       <div className="fixed bottom-8 left-8 z-50">
         <button
           onClick={() => setIsModalOpen(true)}
@@ -110,7 +128,7 @@ const FeedbackButton = () => {
                   />
                 </div>
 
-                {/* Feedback Text */}
+                {/* Feedback */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Your Feedback
@@ -118,7 +136,7 @@ const FeedbackButton = () => {
                   <textarea
                     value={feedback}
                     onChange={(e) => setFeedback(e.target.value)}
-                    placeholder="Optional: Share suggestions, report issues, or let us know how we can improve..."
+                    placeholder="Optional: Share suggestions, report issues..."
                     rows="4"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent dark:bg-gray-700 dark:text-white resize-none transition-all"
                   />
@@ -127,7 +145,7 @@ const FeedbackButton = () => {
                   </div>
                 </div>
 
-                {/* Star Rating */}
+                {/* Rating */}
                 <div className="flex flex-col items-center mt-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Rate Your Experience
@@ -149,7 +167,7 @@ const FeedbackButton = () => {
                     ))}
                   </div>
                   <div
-                    className={`mt-2 text-lg font-semibold transition-colors text-center ${
+                    className={`mt-2 text-lg font-semibold text-center ${
                       (hoverRating > 0 ? hoverRating : rating) > 0
                         ? "text-orange-600 dark:text-amber-400"
                         : "text-gray-500 dark:text-gray-400"
@@ -167,14 +185,14 @@ const FeedbackButton = () => {
                 <div className="flex gap-3 pt-4">
                   <button
                     type="button"
-                    onClick={closeModal} // reset on cancel too
+                    onClick={closeModal}
                     className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    disabled={!feedback.trim() && rating === 0 || isSubmitting}
+                    disabled={(!feedback.trim() && rating === 0) || isSubmitting}
                     className="flex-1 px-4 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
                   >
                     {isSubmitting ? (
@@ -192,13 +210,35 @@ const FeedbackButton = () => {
                 </div>
               </form>
 
-              {/* Footer */}
               <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
                 <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                   Your feedback helps us improve SaralSeva for everyone
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ✅ Custom Notification Modal */}
+      {notification.isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[100]">
+          <div
+            className={`rounded-xl shadow-2xl max-w-sm w-full p-6 text-center ${
+              notification.type === "success"
+                ? "bg-green-100 text-green-900 dark:bg-green-900 dark:text-green-100"
+                : notification.type === "error"
+                ? "bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-100"
+                : "bg-yellow-100 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-100"
+            }`}
+          >
+            <p className="text-lg font-semibold">{notification.message}</p>
+            <button
+              onClick={closeNotification}
+              className="mt-4 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+            >
+              OK
+            </button>
           </div>
         </div>
       )}
