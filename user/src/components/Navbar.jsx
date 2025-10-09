@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Menu, ArrowRightFromLine, CircleUserRound } from "lucide-react";
+import { Menu, ArrowRightFromLine, CircleUserRound, Sun, Moon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   DropdownMenu,
@@ -33,6 +33,27 @@ const tooltipStyle = {
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // ✅ Theme toggle state
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) return savedTheme === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  // Apply theme whenever darkMode changes
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   // Clear dropdown focus when route changes
   useEffect(() => {
@@ -67,57 +88,32 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         </button>
 
         {/* Desktop Links */}
-        <Link
-          to="/"
-          className={`hidden lg:block ${navLinkClasses}`}
-          data-tooltip-id="nav-home"
-          data-tooltip-content="Go to Home Page"
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          className={`hidden lg:block ${navLinkClasses}`}
-          data-tooltip-id="nav-about"
-          data-tooltip-content="Learn more About us"
-        >
-          About
-        </Link>
-        <Link
-          to="/schemes"
-          className={`hidden lg:block ${navLinkClasses}`}
-          data-tooltip-id="nav-schemes"
-          data-tooltip-content="View Government Schemes"
-        >
-          Schemes
-        </Link>
-        <Link
-          to="/dashboard"
-          className={`hidden lg:block ${navLinkClasses}`}
-          data-tooltip-id="nav-dashboard"
-          data-tooltip-content="Go to Dashboard"
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/grievances"
-          className={`hidden lg:block ${navLinkClasses}`}
-          data-tooltip-id="nav-grievances"
-          data-tooltip-content="View Grievances"
-        >
-          Grievances
-        </Link>
-        <Link
-          to="/contact"
-          className={`hidden lg:block ${navLinkClasses}`}
-          data-tooltip-id="nav-contact"
-          data-tooltip-content="Contact Us"
-        >
-          Contact
-        </Link>
+        <Link to="/" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-home" data-tooltip-content="Go to Home Page">Home</Link>
+        <Link to="/about" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-about" data-tooltip-content="Learn more About us">About</Link>
+        <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-schemes" data-tooltip-content="View Government Schemes">Schemes</Link>
+        <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-dashboard" data-tooltip-content="Go to Dashboard">Dashboard</Link>
+        <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-grievances" data-tooltip-content="View Grievances">Grievances</Link>
+        <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-contact" data-tooltip-content="Contact Us">Contact</Link>
       </div>
 
       <div className="flex items-center gap-3">
+        {/* ✅ Theme toggle with tooltip */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={() => setDarkMode((prev) => !prev)}
+                className="p-2 rounded-full hover:bg-orange-800/70 dark:hover:bg-gray-700/50 transition-colors"
+              >
+                {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent className="bg-orange-800 dark:bg-gray-800 text-white border-orange-700 dark:border-gray-700">
+              <p>Switch theme</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         {!isAuthenticated ? (
           <>
             {location.pathname !== "/login" && (
@@ -153,37 +149,14 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
               </TooltipProvider>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mt-2 bg-orange-900/95 dark:bg-gray-900/95 backdrop-blur-md text-white border-orange-800 dark:border-gray-700 w-56 transition-colors duration-500">
-              <DropdownMenuLabel className="font-bold text-amber-400 dark:text-amber-300">
-                My Account
-              </DropdownMenuLabel>
+              <DropdownMenuLabel className="font-bold text-amber-400 dark:text-amber-300">My Account</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-orange-800 dark:bg-gray-700" />
-              <Link to="/profile">
-                <DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">
-                  Profile
-                </DropdownMenuItem>
-              </Link>
-              <Link to="/schemeApplied">
-                <DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">
-                  Scheme Applied
-                </DropdownMenuItem>
-              </Link>
-              <Link to="/grievancesApplied">
-                <DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">
-                  Grievances
-                </DropdownMenuItem>
-              </Link>
-              <Link to="/status">
-                <DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">
-                  Status
-                </DropdownMenuItem>
-              </Link>
+              <Link to="/profile"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Profile</DropdownMenuItem></Link>
+              <Link to="/schemeApplied"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Scheme Applied</DropdownMenuItem></Link>
+              <Link to="/grievancesApplied"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Grievances</DropdownMenuItem></Link>
+              <Link to="/status"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Status</DropdownMenuItem></Link>
               <DropdownMenuSeparator className="bg-orange-800 dark:bg-gray-700" />
-              <DropdownMenuItem
-                onClick={handleLogout}
-                className="font-bold text-red-400 dark:text-red-300 cursor-pointer focus:bg-red-500/20 dark:focus:bg-red-700/20 focus:text-red-300 dark:focus:text-red-200"
-              >
-                Logout
-              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout} className="font-bold text-red-400 dark:text-red-300 cursor-pointer focus:bg-red-500/20 dark:focus:bg-red-700/20 focus:text-red-300 dark:focus:text-red-200">Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
@@ -193,60 +166,12 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       {isMenuOpen && (
         <div className="absolute left-0 w-full bg-orange-900 dark:bg-gray-900 top-20 lg:hidden shadow-xl animate-in slide-in-from-top-4 transition-colors duration-500">
           <div className="flex flex-col p-4 gap-y-2">
-            <Link
-              to="/"
-              className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50"
-              onClick={toggleMenu}
-              data-tooltip-id="nav-home"
-              data-tooltip-content="Go to Home Page"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50"
-              onClick={toggleMenu}
-              data-tooltip-id="nav-about"
-              data-tooltip-content="Learn more About us"
-            >
-              About
-            </Link>
-            <Link
-              to="/schemes"
-              className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50"
-              onClick={toggleMenu}
-              data-tooltip-id="nav-schemes"
-              data-tooltip-content="View Government Schemes"
-            >
-              Schemes
-            </Link>
-            <Link
-              to="/dashboard"
-              className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50"
-              onClick={toggleMenu}
-              data-tooltip-id="nav-dashboard"
-              data-tooltip-content="Go to Dashboard"
-            >
-              Dashboard
-            </Link>
-            <Link
-              to="/grievances"
-              className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50"
-              onClick={toggleMenu}
-              data-tooltip-id="nav-grievances"
-              data-tooltip-content="View Grievances"
-            >
-              Grievances
-            </Link>
-            <Link
-              to="/contact"
-              className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50"
-              onClick={toggleMenu}
-              data-tooltip-id="nav-contact"
-              data-tooltip-content="Contact Us"
-            >
-              Contact
-            </Link>
+            <Link to="/" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Home</Link>
+            <Link to="/about" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>About</Link>
+            <Link to="/schemes" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Schemes</Link>
+            <Link to="/dashboard" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Dashboard</Link>
+            <Link to="/grievances" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Grievances</Link>
+            <Link to="/contact" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Contact</Link>
           </div>
         </div>
       )}
