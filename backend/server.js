@@ -23,6 +23,9 @@ import { securityMiddleware } from './middleware/security.js';
 // Monitoring
 import healthRoute from "./routes/health.js"
 
+// SanitizeMiddleware
+import { sanitizeMiddleware } from './middleware/sanitizeMiddleware.js';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -31,6 +34,9 @@ app.use(cors());
 
 // added hpp+helmet
 securityMiddleware(app);
+
+// apply sanitizeMiddleware
+app.use(sanitizeMiddleware)
 
 connectDb();
 connectCloudinary();
