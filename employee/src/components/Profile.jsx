@@ -78,7 +78,7 @@ const Profile = () => {
     <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-2xl">
       <Toaster position="top-center" richColors />
       <div className="text-center">
-          <h1 className="text-3xl font-bold text-orange-900 jost">Welcome, {employee?.name}!</h1>
+          <h2 className="text-3xl font-bold text-orange-900 jost">Welcome, {employee?.name}!</h2>
           <p className="mt-1 text-gray-500">Please complete your profile to continue.</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
