@@ -63,11 +63,11 @@ const About = () => {
               This application has been monumental in bringing together a tech-based, integrated system for the 2.7 Lakh PRIs across India, fostering a new era of digital governance from the ground up.
             </p>
           </div>
-          <div>
+          <div className='relative'>
             <img
               src={about}
               alt="About SaralSeva"
-              className='w-full h-auto rounded-2xl shadow-xl dark:shadow-black/50 hover:scale-105 transition-transform duration-300 border-2 border-orange-200'
+              className='w-full h-auto rounded-2xl shadow-xl dark:shadow-black/50 hover:scale-105 transition-transform duration-300 border-2 border-orange-200 dark:border-orange-400 dark:invert dark:brightness-300'
               data-tooltip-id="about-img-tooltip"
               data-tooltip-content="SaralSeva provides a unified digital platform for governance."
             />
