@@ -38,8 +38,11 @@ const schema = z.object({
 // --- Reusable FormField Component ---
 const FormField = ({ id, label, register, errors, ...props }) => {
   const inputClasses =
-    "w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
-  const errorClasses = "text-red-600 text-sm mt-1";
+    "w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md transition-all duration-300 " +
+    "focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-amber-500 outline-none " +
+    "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 " +
+    "placeholder-gray-400 dark:placeholder-gray-500";
+  const errorClasses = "text-red-600 dark:text-red-400 text-sm mt-1";
   const [preview, setPreview] = useState(null);
   
   // Handle file validation and preview
@@ -79,10 +82,10 @@ const FormField = ({ id, label, register, errors, ...props }) => {
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="font-medium text-gray-700 mb-1">
+      <label htmlFor={id} className="font-medium text-gray-700 dark:text-gray-300 mb-1">
         {label}
         {props.type === "file" && (
-          <span className="text-sm text-gray-500 ml-2">
+          <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">
             (Max: 2MB{props.accept ? `, Types: ${props.accept}` : ""})
           </span>
         )}
@@ -103,12 +106,16 @@ const FormField = ({ id, label, register, errors, ...props }) => {
       {/* Show preview for images */}
       {preview && (
         <div className="mt-2">
-          <img src={preview} alt="Preview" className="max-h-32 rounded-lg border border-gray-200" />
+          <img 
+            src={preview} 
+            alt="Preview" 
+            className="max-h-32 rounded-lg border border-gray-200 dark:border-gray-600" 
+          />
         </div>
       )}
       {/* Show file name for PDFs */}
       {props.type === "file" && !preview && props.value && (
-        <div className="mt-2 text-sm text-gray-600">
+        <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           Selected file: {props.value.split("\\").pop()}
         </div>
       )}
@@ -120,11 +127,15 @@ const FormField = ({ id, label, register, errors, ...props }) => {
 // --- Reusable SelectField Component ---
 const SelectField = ({ id, label, register, errors, children, ...props }) => {
   const selectClasses =
-    "w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
-  const errorClasses = "text-red-600 text-sm mt-1";
+    "w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md transition-all duration-300 " +
+    "focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-amber-500 outline-none " +
+    "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100";
+  const errorClasses = "text-red-600 dark:text-red-400 text-sm mt-1";
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="font-medium text-gray-700 mb-1">{label}</label>
+      <label htmlFor={id} className="font-medium text-gray-700 dark:text-gray-300 mb-1">
+        {label}
+      </label>
       <select id={id} {...register(id)} className={selectClasses} {...props}>
         {children}
       </select>
@@ -173,80 +184,182 @@ const SchemeAppliedForm = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen h-screen bg-white/80">
+      <div className="flex flex-col items-center justify-center w-screen h-screen bg-white/80 dark:bg-gray-900/80 transition-colors duration-300">
         <Lottie animationData={loader} className="w-40 lg:w-80 md:w-60" />
-        <p className="text-xl text-orange-800 font-semibold mt-4">Submitting Application...</p>
+        <p className="text-xl text-orange-800 dark:text-orange-400 font-semibold mt-4">
+          Submitting Application...
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="bg-orange-50/30 py-12">
+    <div className="bg-orange-50/30 dark:bg-gray-900 py-12 min-h-screen transition-colors duration-300">
       <Toaster position="top-center" richColors />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="p-4 sm:p-6 space-y-8 max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl"
+        className="p-4 sm:p-6 space-y-8 max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-colors duration-300"
       >
-        <h1 className="text-4xl font-extrabold text-center text-orange-900 jost">
+        <h1 className="text-4xl font-extrabold text-center text-orange-900 dark:text-orange-400 jost">
           {scheme_name} Registration Form
         </h1>
 
         {/* Scheme Details */}
-        <fieldset className="p-6 border border-gray-300 rounded-lg">
-          <legend className="px-2 text-xl font-bold text-orange-800">Scheme Details</legend>
+        <fieldset className="p-6 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-300">
+          <legend className="px-2 text-xl font-bold text-orange-800 dark:text-orange-400">
+            Scheme Details
+          </legend>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <FormField id="scheme_name" label="Scheme Name" defaultValue={scheme_name} register={register} errors={errors} readOnly />
-            <FormField id="scheme_code" label="Scheme Code" defaultValue={scheme_code} register={register} errors={errors} readOnly />
+            <FormField 
+              id="scheme_name" 
+              label="Scheme Name" 
+              defaultValue={scheme_name} 
+              register={register} 
+              errors={errors} 
+              readOnly 
+            />
+            <FormField 
+              id="scheme_code" 
+              label="Scheme Code" 
+              defaultValue={scheme_code} 
+              register={register} 
+              errors={errors} 
+              readOnly 
+            />
           </div>
         </fieldset>
 
         {/* User Details */}
-        <fieldset className="p-6 border border-gray-300 rounded-lg">
-          <legend className="px-2 text-xl font-bold text-orange-800">User Details</legend>
+        <fieldset className="p-6 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-300">
+          <legend className="px-2 text-xl font-bold text-orange-800 dark:text-orange-400">
+            User Details
+          </legend>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            <FormField id="name" label="Full Name" placeholder="Enter your full name" register={register} errors={errors} />
-            <FormField id="email" label="Email" placeholder="Enter your Email" register={register} errors={errors} />
-            <FormField id="mobile" label="Phone Number" placeholder="Enter your 10-digit number" type="tel" register={register} errors={errors} />
+            <FormField 
+              id="name" 
+              label="Full Name" 
+              placeholder="Enter your full name" 
+              register={register} 
+              errors={errors} 
+            />
+            <FormField 
+              id="email" 
+              label="Email" 
+              placeholder="Enter your Email" 
+              register={register} 
+              errors={errors} 
+            />
+            <FormField 
+              id="mobile" 
+              label="Phone Number" 
+              placeholder="Enter your 10-digit number" 
+              type="tel" 
+              register={register} 
+              errors={errors} 
+            />
             <SelectField id="gender" label="Gender" register={register} errors={errors}>
-              <option value="">Choose Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="transgender">Transgender</option>
+              <option value="" className="bg-white dark:bg-gray-700">Choose Gender</option>
+              <option value="male" className="bg-white dark:bg-gray-700">Male</option>
+              <option value="female" className="bg-white dark:bg-gray-700">Female</option>
+              <option value="transgender" className="bg-white dark:bg-gray-700">Transgender</option>
             </SelectField>
-            <FormField id="DOB" label="Date of Birth" type="date" register={register} errors={errors} />
+            <FormField 
+              id="DOB" 
+              label="Date of Birth" 
+              type="date" 
+              register={register} 
+              errors={errors} 
+            />
             <SelectField id="nationality" label="Nationality" register={register} errors={errors}>
-              <option value="">Choose Nationality</option>
-              <option value="Indian">Indian</option>
-              <option value="Others">Other</option>
+              <option value="" className="bg-white dark:bg-gray-700">Choose Nationality</option>
+              <option value="Indian" className="bg-white dark:bg-gray-700">Indian</option>
+              <option value="Others" className="bg-white dark:bg-gray-700">Other</option>
             </SelectField>
           </div>
         </fieldset>
 
         {/* Personal & Bank Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <fieldset className="p-6 border border-gray-300 rounded-lg">
-            <legend className="px-2 text-xl font-bold text-orange-800">Personal Details</legend>
+          <fieldset className="p-6 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-300">
+            <legend className="px-2 text-xl font-bold text-orange-800 dark:text-orange-400">
+              Personal Details
+            </legend>
             <div className="space-y-4 mt-4">
-              <FormField id="aadharNo" label="Aadhar Number" placeholder="Enter 12-digit Aadhar" type="text" register={register} errors={errors} inputMode="numeric" pattern="\d{12}" />
-              <FormField id="panNo" label="PAN Number" placeholder="Enter 10-character PAN" register={register} errors={errors} />
-              <FormField id="occupation" label="Occupation" placeholder="Enter Occupation" register={register} errors={errors} />
-              <FormField id="income" label="Income" placeholder="Enter Income" register={register} errors={errors} />
+              <FormField 
+                id="aadharNo" 
+                label="Aadhar Number" 
+                placeholder="Enter 12-digit Aadhar" 
+                type="text" 
+                register={register} 
+                errors={errors} 
+                inputMode="numeric" 
+                pattern="\d{12}" 
+              />
+              <FormField 
+                id="panNo" 
+                label="PAN Number" 
+                placeholder="Enter 10-character PAN" 
+                register={register} 
+                errors={errors} 
+              />
+              <FormField 
+                id="occupation" 
+                label="Occupation" 
+                placeholder="Enter Occupation" 
+                register={register} 
+                errors={errors} 
+              />
+              <FormField 
+                id="income" 
+                label="Income" 
+                placeholder="Enter Income" 
+                register={register} 
+                errors={errors} 
+              />
             </div>
           </fieldset>
-          <fieldset className="p-6 border border-gray-300 rounded-lg">
-            <legend className="px-2 text-xl font-bold text-orange-800">Bank Details</legend>
+          <fieldset className="p-6 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-300">
+            <legend className="px-2 text-xl font-bold text-orange-800 dark:text-orange-400">
+              Bank Details
+            </legend>
             <div className="space-y-4 mt-4">
-              <FormField id="bank_name" label="Bank Name" placeholder="Enter your Bank Name" register={register} errors={errors} />
-              <FormField id="bank_account_no" label="Account Number" placeholder="Enter your Account Number" register={register} errors={errors} />
-              <FormField id="ifsc_code" label="IFSC Code" placeholder="Enter IFSC Code" register={register} errors={errors} />
-              <FormField id="bank_branch" label="Branch" placeholder="Enter Bank Branch" register={register} errors={errors} />
+              <FormField 
+                id="bank_name" 
+                label="Bank Name" 
+                placeholder="Enter your Bank Name" 
+                register={register} 
+                errors={errors} 
+              />
+              <FormField 
+                id="bank_account_no" 
+                label="Account Number" 
+                placeholder="Enter your Account Number" 
+                register={register} 
+                errors={errors} 
+              />
+              <FormField 
+                id="ifsc_code" 
+                label="IFSC Code" 
+                placeholder="Enter IFSC Code" 
+                register={register} 
+                errors={errors} 
+              />
+              <FormField 
+                id="bank_branch" 
+                label="Branch" 
+                placeholder="Enter Bank Branch" 
+                register={register} 
+                errors={errors} 
+              />
             </div>
           </fieldset>
         </div>
 
         {/* Upload Documents */}
-        <fieldset className="p-6 border border-gray-300 rounded-lg">
-          <legend className="px-2 text-xl font-bold text-orange-800">Upload Documents</legend>
+        <fieldset className="p-6 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors duration-300">
+          <legend className="px-2 text-xl font-bold text-orange-800 dark:text-orange-400">
+            Upload Documents
+          </legend>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             <FormField 
               id="photo" 
@@ -284,7 +397,12 @@ const SchemeAppliedForm = () => {
         </fieldset>
 
         <div className="text-center pt-6">
-          <Button type="submit" className="w-full max-w-xs text-xl py-7 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all">
+          <Button 
+            type="submit" 
+            className="w-full max-w-xs text-xl py-7 bg-gradient-to-r from-orange-600 to-amber-600 
+                     hover:from-orange-700 hover:to-amber-700 text-white rounded-lg shadow-lg 
+                     hover:shadow-xl transform hover:-translate-y-px transition-all duration-300"
+          >
             Submit Application
           </Button>
         </div>
