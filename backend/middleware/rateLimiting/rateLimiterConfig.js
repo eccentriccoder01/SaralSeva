@@ -1,4 +1,5 @@
-module.exports = {
+// backend/middleware/rateLimiting/rateLimiterConfig.js
+export default {
   strict: {
     points: 5,
     duration: 60,
