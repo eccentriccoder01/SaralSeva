@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Menu, ArrowRightFromLine, CircleUserRound, Sun, Moon } from "lucide-react";
+import { Menu, ArrowRightFromLine, CircleUserRound } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   DropdownMenu,
@@ -11,8 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-
-// Rename react-tooltip import to avoid conflict
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
@@ -30,11 +28,35 @@ const tooltipStyle = {
   zIndex: 9999,
 };
 
+// ✅ Theme toggle switch component
+function ThemeToggle({ darkMode, setDarkMode }) {
+  return (
+    <button
+      onClick={() => setDarkMode((prev) => !prev)}
+      className={`relative w-16 h-8 flex items-center rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-orange-900 dark:focus:ring-offset-gray-900 ${
+        darkMode ? "bg-gray-700" : "bg-amber-500"
+      }`}
+      aria-label="Toggle theme"
+    >
+      {/* Sun icon */}
+      <span className="absolute left-1 text-yellow-300 text-lg select-none pointer-events-none">☀️</span>
+      {/* Moon icon */}
+      <span className="absolute right-1 text-gray-200 text-lg select-none pointer-events-none">🌙</span>
+      {/* Toggle handle */}
+      <span
+        className={`bg-white w-7 h-7 rounded-full shadow-md transform transition-transform duration-300 ${
+          darkMode ? "translate-x-8" : "translate-x-0"
+        }`}
+      />
+    </button>
+  );
+}
+
+
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // ✅ Theme toggle state
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
@@ -44,7 +66,6 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     return false;
   });
 
-  // Apply theme whenever darkMode changes
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -55,17 +76,12 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     }
   }, [darkMode]);
 
-  // Clear dropdown focus when route changes
   useEffect(() => {
     const dropdownTrigger = document.querySelector("[data-dropdown-trigger]");
-    if (dropdownTrigger) {
-      dropdownTrigger.blur();
-    }
+    if (dropdownTrigger) dropdownTrigger.blur();
   }, [location]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -97,16 +113,11 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       </div>
 
       <div className="flex items-center gap-3">
-        {/* ✅ Theme toggle with tooltip */}
+        {/* Theme toggle switch */}
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <button
-                onClick={() => setDarkMode((prev) => !prev)}
-                className="p-2 rounded-full hover:bg-orange-800/70 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                {darkMode ? <Sun size={24} /> : <Moon size={24} />}
-              </button>
+              <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
             </TooltipTrigger>
             <TooltipContent className="bg-orange-800 dark:bg-gray-800 text-white border-orange-700 dark:border-gray-700">
               <p>Switch theme</p>
@@ -133,10 +144,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
           </>
         ) : (
           <DropdownMenu>
-            <DropdownMenuTrigger
-              className="p-2 rounded-full outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-orange-900 dark:focus:ring-offset-gray-900"
-              data-dropdown-trigger
-            >
+            <DropdownMenuTrigger className="p-2 rounded-full outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-orange-900 dark:focus:ring-offset-gray-900" data-dropdown-trigger>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
