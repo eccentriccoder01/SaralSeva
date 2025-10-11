@@ -3,12 +3,13 @@ import { UserContext } from "../context/UserContext";
 import { Button } from "../ui/button";
 import { Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';
 
 const tooltipStyle = {
-  backgroundColor: '#FF9933', // orange theme
-  color: '#1F2937', // dark text
+  backgroundColor: '#FF9933',
+  color: '#1F2937',
   padding: '8px 12px',
   borderRadius: '12px',
   fontSize: '14px',
@@ -59,10 +60,22 @@ const Profile = () => {
     <div className="px-[5vw] py-12 bg-orange-50/30 dark:bg-gray-900/30">
       <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl dark:shadow-black/40 overflow-hidden">
         <div className="p-6 sm:p-8 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-orange-900 dark:text-amber-400 jost">My Profile</h1>
-            <p className="mt-1 text-gray-500 dark:text-gray-400">Your personal details and information.</p>
+        <div className="flex items-center gap-4 relative">
+          {/* Back Button */}
+          <FaArrowLeft
+            onClick={() => navigate(-1)}
+            title="Go Back"
+            className="relative -top-3 text-3xl text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300 cursor-pointer transition-colors"
+          />
+          <div className="ml-4">
+            <h1 className="text-3xl font-bold text-orange-900 dark:text-amber-400 jost">
+              My Profile
+            </h1>
+            <p className="mt-1 text-gray-500 dark:text-gray-400">
+              Your personal details and information.
+            </p>
           </div>
+        </div>
           <Button
             className="gap-2 bg-amber-500 hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-700 text-orange-900 dark:text-gray-900 font-bold shadow-md hover:shadow-lg transition-all"
             onClick={() => navigate("/profile/edit")}
