@@ -53,7 +53,7 @@ const Message = () => {
     <div className="flex flex-col lg:flex-row gap-6 h-[85vh]">
       <Toaster position="top-center" richColors />
       <div className="border border-gray-200 lg:w-[30%] bg-white rounded-2xl shadow-lg flex flex-col">
-        <h2 className="p-4 text-xl font-bold text-orange-900 border-b">Conversations</h2>
+        <h1 className="p-4 text-xl font-bold text-orange-900 border-b">Conversations</h1>
         <div className="overflow-y-auto">
           {uniqueRecipients.map((data) => (
             <div key={data?.recipient?._id} className={`flex gap-4 p-4 cursor-pointer border-l-4 ${selectedRecipient?._id === data?.recipient?._id ? "bg-amber-50 border-amber-500" : "border-transparent hover:bg-gray-50"}`} onClick={() => setSelectedRecipient(data?.recipient)}>

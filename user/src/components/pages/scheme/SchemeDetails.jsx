@@ -244,7 +244,7 @@ const SchemeDetails = () => {
               data-tooltip-id="share-fb"
               data-tooltip-content="Share on Facebook"
             >
-              <img src={facebook} alt="Facebook" />
+              <img src={facebook} alt="Follow SaralSeva on Facebook" />
             </a>
             <Tooltip id="share-fb" place="top" style={tooltipStyle} />
 
@@ -254,7 +254,7 @@ const SchemeDetails = () => {
               data-tooltip-id="share-insta"
               data-tooltip-content="Share on Instagram"
             >
-              <img src={instagram} alt="Instagram" />
+              <img src={instagram} alt="Follow SaralSeva on Instagram" />
             </a>
             <Tooltip id="share-insta" place="top" style={tooltipStyle} />
 
@@ -264,7 +264,7 @@ const SchemeDetails = () => {
               data-tooltip-id="share-x"
               data-tooltip-content="Share on X (Twitter)"
             >
-              <img src={x} alt="X / Twitter" />
+              <img src={x} alt="Follow SaralSeva on X / Twitter" />
             </a>
             <Tooltip id="share-x" place="top" style={tooltipStyle} />
 
@@ -274,7 +274,7 @@ const SchemeDetails = () => {
               data-tooltip-id="share-yt"
               data-tooltip-content="Share on YouTube"
             >
-              <img src={youtube} alt="YouTube" />
+              <img src={youtube} alt="Subscribe to SaralSeva on YouTube" />
             </a>
             <Tooltip id="share-yt" place="top" style={tooltipStyle} />
           </div>

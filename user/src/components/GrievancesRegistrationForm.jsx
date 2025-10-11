@@ -122,9 +122,9 @@ const GrievancesRegistrationForm = ({ isAuthenticated }) => {
 />
 
         {/* Heading */}
-        <h1 className="text-4xl font-extrabold text-center text-orange-900 dark:text-orange-400 jost mb-8">
+        <h2 className="text-4xl font-extrabold text-center text-orange-900 dark:text-orange-400 jost mb-8">
           Grievance Registration Form
-        </h1>
+        </h2>
 
         <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           

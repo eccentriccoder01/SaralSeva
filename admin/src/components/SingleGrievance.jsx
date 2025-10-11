@@ -23,7 +23,7 @@ const SingleGrievance = () => {
         Grievance No - {singleGrievance?.grievance_registered_number}
       </div>
       <div className="bg-white p-6 rounded-2xl shadow-lg">
-        <h2 className='text-2xl font-bold text-orange-900 border-b pb-2 mb-4 jost'>Grievance Details</h2>
+        <h1 className='text-2xl font-bold text-orange-900 border-b pb-2 mb-4 jost'>Grievance Details</h1>
         <div className="divide-y divide-gray-200">
             <InfoRow label="Name" value={singleGrievance?.name} />
             <InfoRow label="DOB" value={moment(singleGrievance?.DOB).format("DD-MM-YYYY")} />
