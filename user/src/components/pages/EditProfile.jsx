@@ -75,6 +75,13 @@ const EditProfile = () => {
     "bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-600 " +
     "placeholder-gray-400 dark:placeholder-gray-400";
 
+  const selectWrapperClasses =
+    "w-full border rounded-md focus-within:ring-2 focus-within:ring-amber-500 transition-colors " +
+    "bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-100";
+
+  const selectClasses =
+    "w-full p-3 bg-transparent text-gray-800 dark:text-gray-100 outline-none";
+
   const errorClasses = "text-red-600 dark:text-red-400 text-sm mt-1";
 
   return (
@@ -103,18 +110,11 @@ const EditProfile = () => {
 
           {/* Gender */}
           <div className="relative" data-tooltip-id="gender-tooltip" data-tooltip-content="Select your gender">
-            <div className="relative">
-              <select {...register("gender")} className={`${inputClasses} appearance-none cursor-pointer pr-10`}>
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
+            <select {...register("gender")} className={inputClasses}>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
           </div>
           {errors.gender && <p className={errorClasses}>{errors.gender.message}</p>}
 
@@ -125,31 +125,28 @@ const EditProfile = () => {
           {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
           {/* Country */}
-          <div className="relative" data-tooltip-id="country-tooltip" data-tooltip-content="Select your country">
-            <div className="country-select-wrapper">
-              <CountrySelect
-                placeHolder={user?.country || "Select Country"}
-                value=""
-                showFlag={false}
-                onChange={(e) => {
-                  setCountryId(e.id);
-                  setValue("country", e.name);
-                }}
-              />
-            </div>
+          <div className={`${selectWrapperClasses} dark-theme-input`} data-tooltip-id="country-tooltip" data-tooltip-content="Select your country">
+            <CountrySelect
+              placeHolder={user?.country || "Select Country"}
+              value=""
+              className={selectClasses}
+              onChange={(e) => {
+                setCountryId(e.id);
+                setValue("country", e.name);
+              }}
+            />
           </div>
           {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
 
           {/* State */}
-          <div className="relative" data-tooltip-id="state-tooltip" data-tooltip-content="Select your state">
-            <div className="state-select-wrapper">
-              <StateSelect
-                countryid={countryId}
-                placeHolder={user?.state || "Select State"}
-                value=""
-                onChange={(e) => setValue("state", e.name)}
-              />
-            </div>
+          <div className={`${selectWrapperClasses} dark-theme-input`} data-tooltip-id="state-tooltip" data-tooltip-content="Select your state">
+            <StateSelect
+              countryid={countryId}
+              placeHolder={user?.state || "Select State"}
+              value=""
+              className={selectClasses}
+              onChange={(e) => setValue("state", e.name)}
+            />
           </div>
           {errors.state && <p className={errorClasses}>{errors.state.message}</p>}
 
@@ -226,172 +223,52 @@ const EditProfile = () => {
           100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ✅ NUCLEAR OPTION: Target ALL elements within country/state select */
-        .country-select-wrapper *,
-        .state-select-wrapper * {
-          color: inherit !important;
-        }
-
-        /* Hide ISO codes - they usually appear before country names */
-        :is(.dark) .country-select-wrapper li::before,
-        :is(.dark) .state-select-wrapper li::before,
-        .country-select-wrapper li::before,
-        .state-select-wrapper li::before {
-          display: none !important;
-        }
-
-        /* Hide any span/element containing ISO codes (usually 2-3 char codes) */
-        .country-select-wrapper li > span:first-child,
-        .state-select-wrapper li > span:first-child {
-          display: none !important;
-        }
-
-        /* Alternative: Hide short text nodes (ISO codes are typically 2-3 chars) */
-        .country-select-wrapper li > *:not(:last-child),
-        .state-select-wrapper li > *:not(:last-child) {
-          margin-right: 0 !important;
-        }
-
-        /* Make country/state selects look like the gender select */
-        .country-select-wrapper,
-        .state-select-wrapper {
-          border-radius: 0.375rem;
-        }
-
-        .country-select-wrapper > div,
-        .state-select-wrapper > div {
-          border-radius: 0.375rem !important;
-        }
-
-        /* Match the input field height and padding */
-        .country-select-wrapper input,
-        .state-select-wrapper input {
-          padding: 0.75rem !important;
-          height: auto !important;
-          min-height: 48px;
-        }
-
-        /* Wrapper styling for dark mode */
-        :is(.dark) .country-select-wrapper,
-        :is(.dark) .state-select-wrapper {
-          background-color: #374151 !important;
-          border-radius: 0.375rem;
-          border: 1px solid #4b5563;
-        }
-
-        /* Control box (the main input area) */
-        :is(.dark) .country-select-wrapper input,
-        :is(.dark) .state-select-wrapper input,
-        :is(.dark) .country-select-wrapper select,
-        :is(.dark) .state-select-wrapper select {
+        /* Dark mode for custom react-country-state-city dropdowns */
+        .dark-theme-input {
           background-color: #374151 !important;
           color: #f3f4f6 !important;
           border-color: #4b5563 !important;
+          border-radius: 0.5rem;
+          padding: 0.25rem 0.75rem;
         }
-
-        /* Dropdown menu portal - this might render outside the wrapper */
-        :is(.dark) .csc-dropdown,
-        :is(.dark) .csc-menu,
-        :is(.dark) [class*="dropdown"],
-        :is(.dark) [class*="menu"],
-        :is(.dark) ul[role="listbox"],
-        :is(.dark) div[role="listbox"] {
+        .dark-theme-input input,
+        .dark-theme-input .select__single-value,
+        .dark-theme-input .select__placeholder {
+          color: #f3f4f6 !important;
           background-color: #374151 !important;
-          border: 1px solid #4b5563 !important;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
         }
-
-        /* Dropdown options */
-        :is(.dark) .csc-option,
-        :is(.dark) [class*="option"],
-        :is(.dark) li[role="option"],
-        :is(.dark) div[role="option"] {
+        .dark-theme-input [class*="select__menu"] {
           background-color: #374151 !important;
           color: #f3f4f6 !important;
         }
-
-        /* Hover state for options */
-        :is(.dark) .csc-option:hover,
-        :is(.dark) [class*="option"]:hover,
-        :is(.dark) li[role="option"]:hover,
-        :is(.dark) div[role="option"]:hover {
-          background-color: #4b5563 !important;
-          color: #ffffff !important;
-        }
-
-        /* Selected option */
-        :is(.dark) .csc-option.selected,
-        :is(.dark) [class*="option"][class*="selected"],
-        :is(.dark) li[role="option"][aria-selected="true"],
-        :is(.dark) div[role="option"][aria-selected="true"] {
-          background-color: #d97706 !important;
-          color: #ffffff !important;
-        }
-
-        /* Additional aggressive targeting */
-        :is(.dark) .country-select-wrapper div,
-        :is(.dark) .state-select-wrapper div {
-          background-color: transparent;
-        }
-
-        :is(.dark) .country-select-wrapper div:has(> ul),
-        :is(.dark) .state-select-wrapper div:has(> ul) {
-          background-color: #374151 !important;
-        }
-
-        /* Target UL lists */
-        :is(.dark) .country-select-wrapper ul,
-        :is(.dark) .state-select-wrapper ul {
-          background-color: #374151 !important;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        /* Target LI items */
-        :is(.dark) .country-select-wrapper li,
-        :is(.dark) .state-select-wrapper li {
-          background-color: #374151 !important;
-          color: #f3f4f6 !important;
-          padding: 8px 12px;
-          cursor: pointer;
-        }
-
-        :is(.dark) .country-select-wrapper li:hover,
-        :is(.dark) .state-select-wrapper li:hover {
-          background-color: #4b5563 !important;
-          color: #ffffff !important;
-        }
-
-        /* Absolutely positioned dropdown panels */
-        :is(.dark) body > div[style*="position: absolute"],
-        :is(.dark) body > div[style*="position: fixed"] {
-          background-color: #374151 !important;
-        }
-
-        :is(.dark) body > div[style*="position: absolute"] ul,
-        :is(.dark) body > div[style*="position: fixed"] ul {
-          background-color: #374151 !important;
-        }
-
-        :is(.dark) body > div[style*="position: absolute"] li,
-        :is(.dark) body > div[style*="position: fixed"] li {
+        .dark-theme-input [class*="select__option"] {
           background-color: #374151 !important;
           color: #f3f4f6 !important;
         }
-
-        :is(.dark) body > div[style*="position: absolute"] li:hover,
-        :is(.dark) body > div[style*="position: fixed"] li:hover {
+        .dark-theme-input [class*="select__option"]:hover {
           background-color: #4b5563 !important;
-          color: #ffffff !important;
+        }
+        .dark-theme-input [class*="select__control"] {
+          background-color: #374151 !important;
+          border-color: #4b5563 !important;
+          color: #f3f4f6 !important;
+        }
+        .dark-theme-input [class*="select__indicator"] {
+          color: #f3f4f6 !important;
+        }
+        .dark-theme-input select {
+          -webkit-appearance: none !important;
+          -moz-appearance: none !important;
+          appearance: none !important;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+          background-repeat: no-repeat !important;
+          background-position: right 0.75rem center !important;
+          background-size: 1.25rem 1.25rem !important;
         }
       `}</style>
     </div>
   );
 };
 
-
 export default EditProfile;
-
-export default EditProfile;
-
+                         
