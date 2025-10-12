@@ -32,21 +32,21 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:to-black flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg font-medium">Loading your profile...</p>
+          <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">Loading your profile...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:to-black py-8 px-4">
       <div className="max-w-4xl mx-auto">
         
         {/* Header with Stats */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-6 border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 mb-6 border border-gray-100 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button 
@@ -56,8 +56,8 @@ const Profile = () => {
                 <ArrowLeft size={20} />
               </button>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-                <p className="text-gray-600">Manage your personal information</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Profile</h1>
+                <p className="text-gray-600 dark:text-gray-300">Manage your personal information</p>
               </div>
             </div>
             
@@ -65,11 +65,11 @@ const Profile = () => {
             <div className="flex gap-6">
               <div className="text-center">
                 <div className="text-2xl font-bold text-orange-500">Active</div>
-                <div className="text-sm text-gray-500">Status</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Status</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-orange-500">Today</div>
-                <div className="text-sm text-gray-500">Last Login</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Last Login</div>
               </div>
             </div>
           </div>
@@ -80,10 +80,10 @@ const Profile = () => {
           
           {/* Left Column - Profile Overview */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+            <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-8 border border-gray-100 dark:border-gray-700">
               {/* Profile Image */}
               <div className="relative mx-auto w-32 h-32 mb-6">
-                <div className="w-full h-full rounded-2xl border-4 border-white shadow-2xl overflow-hidden bg-gradient-to-br from-orange-400 to-amber-500">
+                <div className="w-full h-full rounded-2xl border-4 border-white dark:border-gray-800 shadow-2xl overflow-hidden bg-gradient-to-br from-orange-400 to-amber-500">
                   {profileImage ? (
                     <img 
                       src={profileImage} 
@@ -98,7 +98,7 @@ const Profile = () => {
                 </div>
                 
                 {/* Upload Button */}
-                <label className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-xl flex items-center justify-center cursor-pointer shadow-xl border-2 border-orange-500 hover:bg-orange-500 hover:scale-110 transition-all duration-300">
+                <label className="absolute -bottom-2 -right-2 w-10 h-10 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center cursor-pointer shadow-xl border-2 border-orange-500 hover:bg-orange-500 hover:scale-110 transition-all duration-300">
                   <input
                     type="file"
                     className="hidden"
@@ -111,8 +111,8 @@ const Profile = () => {
 
               {/* User Info */}
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{user.name}</h2>
-                <p className="text-gray-600 mb-4">{user.email}</p>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{user.name}</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{user.email}</p>
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg">
                   <Shield size={14} />
                   Verified Account
@@ -120,14 +120,14 @@ const Profile = () => {
               </div>
 
               {/* Member Since */}
-              <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-4 border border-orange-100">
+              <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-4 border border-orange-100 dark:border-orange-800/30">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
                     <Calendar size={20} className="text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600">Member since</div>
-                    <div className="text-lg font-bold text-gray-900">October 2025</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">Member since</div>
+                    <div className="text-lg font-bold text-gray-900 dark:text-white">October 2025</div>
                   </div>
                 </div>
               </div>
@@ -139,8 +139,8 @@ const Profile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               {/* Personal Information */}
-              <div className="bg-white rounded-3xl shadow-xl p-6 border border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-6 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
                   <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center">
                     <User size={20} className="text-white" />
                   </div>
@@ -148,18 +148,18 @@ const Profile = () => {
                 </h3>
                 
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 hover:bg-orange-50 transition-colors duration-300">
+                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors duration-300">
                     <div>
-                      <div className="text-sm text-gray-600 font-medium">Full Name</div>
-                      <div className="text-lg font-semibold text-gray-900">{user.name}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">Full Name</div>
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white">{user.name}</div>
                     </div>
                     <User size={20} className="text-orange-500" />
                   </div>
 
-                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 hover:bg-orange-50 transition-colors duration-300">
+                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors duration-300">
                     <div>
-                      <div className="text-sm text-gray-600 font-medium">Gender</div>
-                      <div className="text-lg font-semibold text-gray-900">
+                      <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">Gender</div>
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white">
                         {user.gender ? user.gender.charAt(0).toUpperCase() + user.gender.slice(1) : "Not specified"}
                       </div>
                     </div>
@@ -169,8 +169,8 @@ const Profile = () => {
               </div>
 
               {/* Contact Information */}
-              <div className="bg-white rounded-3xl shadow-xl p-6 border border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-6 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center">
                     <Mail size={20} className="text-white" />
                   </div>
@@ -180,11 +180,11 @@ const Profile = () => {
                 <div className="space-y-4">
                   <a 
                     href={`mailto:${user.email}`}
-                    className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors duration-300 group"
+                    className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-300 group"
                   >
                     <div>
-                      <div className="text-sm text-gray-600 font-medium">Email Address</div>
-                      <div className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">Email Address</div>
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {user.email}
                       </div>
                     </div>
@@ -193,11 +193,11 @@ const Profile = () => {
 
                   <a 
                     href={`tel:${user.mobile}`}
-                    className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors duration-300 group"
+                    className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-300 group"
                   >
                     <div>
-                      <div className="text-sm text-gray-600 font-medium">Mobile Number</div>
-                      <div className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">Mobile Number</div>
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {user.mobile || "Not provided"}
                       </div>
                     </div>
@@ -207,8 +207,8 @@ const Profile = () => {
               </div>
 
               {/* Location Information */}
-              <div className="bg-white rounded-3xl shadow-xl p-6 border border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl p-6 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
                   <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center">
                     <MapPin size={20} className="text-white" />
                   </div>
@@ -216,18 +216,18 @@ const Profile = () => {
                 </h3>
                 
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 hover:bg-green-50 transition-colors duration-300">
+                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors duration-300">
                     <div>
-                      <div className="text-sm text-gray-600 font-medium">Country</div>
-                      <div className="text-lg font-semibold text-gray-900">{user.country || "Not specified"}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">Country</div>
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white">{user.country || "Not specified"}</div>
                     </div>
                     <Globe size={20} className="text-green-500" />
                   </div>
 
-                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 hover:bg-green-50 transition-colors duration-300">
+                  <div className="flex justify-between items-center p-4 rounded-2xl bg-gray-50 dark:bg-gray-700 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors duration-300">
                     <div>
-                      <div className="text-sm text-gray-600 font-medium">State/Region</div>
-                      <div className="text-lg font-semibold text-gray-900">{user.state || "Not specified"}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">State/Region</div>
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white">{user.state || "Not specified"}</div>
                     </div>
                     <MapPin size={20} className="text-green-500" />
                   </div>
@@ -246,14 +246,7 @@ const Profile = () => {
                     <Edit size={20} />
                     Edit Profile
                   </Button>
-                  
-                  {/* <Button
-                    className="w-full gap-3 bg-white text-orange-600 hover:bg-gray-100 font-semibold py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg"
-                    onClick={() => navigate("/change-password")}
-                  >
-                    <Key size={20} />
-                    Change Password
-                  </Button> */}
+
                 </div>
 
                 {/* Security Status */}
