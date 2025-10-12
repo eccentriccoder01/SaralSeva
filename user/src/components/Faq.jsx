@@ -75,12 +75,7 @@ export default function Faq() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#7b3f00] text-white py-6 mt-10">
-        <div className="container mx-auto px-4 text-center text-sm">
-          &copy; {new Date().getFullYear()} SaralSeva. All rights reserved.
-        </div>
-      </footer>
+      {/* Footer is rendered globally in App.jsx */}
     </div>
   );
 }
