@@ -23,8 +23,11 @@ const tooltipStyle = {
 
 const Footer = () => {
   const [isQRActive, setIsQRActive] = useState(false);
+  const [isSocialQROpen, setIsSocialQROpen] = useState(false);
   const toggleQR = () => setIsQRActive(!isQRActive);
   const closeQR = () => setIsQRActive(false);
+  const openSocialQR = () => setIsSocialQROpen(true);
+  const closeSocialQR = () => setIsSocialQROpen(false);
 
   // Handle ESC key to close popup
   useEffect(() => {
@@ -199,6 +202,9 @@ const Footer = () => {
                           </a>
                         ))}
                       </span>
+                      <div className="mt-4">
+                        <button onClick={() => { openSocialQR(); }} className="px-2 py-1 bg-white text-gray-800 rounded-md shadow-sm text-xs">Social QR</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -233,6 +239,17 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      {/* Social QR Modal (shared) */}
+      {isSocialQROpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black opacity-60" onClick={closeSocialQR} />
+          <div className="relative bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
+            <button className="absolute -top-3 -right-3 bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center" onClick={closeSocialQR}>✕</button>
+            <img src={qrcode} alt="Social QR large" className="w-80 h-80 object-cover rounded-md" />
+            <p className="text-sm text-gray-600 mt-3 text-center">Scan to open our social hub</p>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };
