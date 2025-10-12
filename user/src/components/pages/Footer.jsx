@@ -54,6 +54,112 @@ const Footer = () => {
     { icon: <FaXTwitter />, link: "/social", name: "X (Twitter)" },
   ];
 
+  const sections = [
+    {
+      title: 'DOWNLOAD',
+      custom: true,
+    },
+    {
+      title: 'COMPANY',
+      links: [
+        { name: 'Blog', to: '/blog' },
+        { name: 'Careers', to: '/careers' },
+        { name: 'Contact Us', to: '/contact' },
+      ],
+    },
+    {
+      title: 'SUPPORT',
+      links: [
+        { name: 'Help Center', to: '/help' },
+        { name: 'FAQs', to: '/faq' },
+      ],
+    },
+    {
+      title: 'FEATURES',
+      links: [
+        { name: 'Features Overview', to: '/features' },
+      ],
+    },
+    {
+      title: 'COMMUNITY & SOCIAL',
+      links: [
+        { name: 'Community', to: '/community' },
+        { name: 'Social Media', to: '/social' },
+        { name: 'Newsletter Signup', to: '/newsletter' },
+      ],
+      inline: false,
+    },
+    {
+      title: 'LEGAL',
+      links: [
+        { name: 'Privacy Policy', to: '/privacypolicy' },
+        { name: 'Terms of Service', to: '/terms' },
+        { name: 'Disclaimer', to: '/disclaimer' },
+        { name: 'Cookie Policy', to: '/cookie-policy' },
+        { name: 'Copyright Notice', to: '/copyright' },
+      ],
+      inline: false,
+    },
+  ];
+
+  function renderSection(section, idx) {
+    if (section.custom) {
+      return (
+        <div key={idx} className={`lg:flex-shrink-0 lg:w-auto md:w-1/2 w-1/2 px-1 mb-2 md:mb-0`}>
+          <h2 className="font-extrabold text-white dark:text-orange-400 text-sm mb-1 tracking-widest jost">
+            DOWNLOAD SARALSEVA APP
+          </h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <img
+              src={qrcode}
+              alt="QR Code for Mobile App"
+              className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "w-20 h-20 invisible" : "w-20 h-20"}`}
+              onClick={toggleQR}
+              data-tooltip-id="qr-tooltip"
+              data-tooltip-content="Click to enlarge QR code"
+            />
+            <div className="flex flex-col gap-1">
+              <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
+                <img src={app} alt="App Store" className="w-24 cursor-pointer hover:opacity-80 transition-opacity" />
+              </a>
+              <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+                <img src={play} alt="Play Store" className="w-24 cursor-pointer hover:opacity-80 transition-opacity" />
+              </a>
+            </div>
+            <div className="hidden sm:block">
+              <span className="inline-flex gap-2 text-xl">
+                {socialLinks.map((item, i) => (
+                  <a key={i} href={item.link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 dark:hover:text-orange-400 transition-colors">
+                    {item.icon}
+                  </a>
+                ))}
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div key={idx} className={`lg:flex-shrink-0 lg:w-auto md:w-1/2 w-1/2 px-1 mb-2 md:mb-0`}>
+        <h2 className="font-extrabold text-white dark:text-orange-400 text-sm mb-1 tracking-widest jost">
+          {section.title}
+        </h2>
+        {section.links && (
+          <nav className={`list-none mb-2 ${section.inline ? 'flex flex-row items-center gap-3 justify-start whitespace-nowrap' : 'flex flex-col gap-1'} ${section.nowrap ? 'overflow-x-auto' : ''}`}>
+            {section.links.map((link, i) => (
+              <li key={i} className={`${section.inline ? 'inline-flex' : ''} ${section.nowrap ? 'whitespace-nowrap' : ''}`}>
+                <Link to={link.to} className="hover:text-amber-400 dark:hover:text-orange-400 transition-colors text-sm">
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </nav>
+        )}
+      </div>
+    );
+  }
+
   return (
     <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
       <hr className="border-t-4 border-orange-900 dark:border-gray-800 mb-4" />
@@ -62,118 +168,61 @@ const Footer = () => {
 
           {/* Links Sections - revamped with more categories */}
           <div className="lg:w-full md:w-full w-full px-1 flex flex-wrap lg:flex-nowrap lg:justify-between justify-center gap-12">
-            {[
-              {
-                title: 'COMPANY',
-                links: [
-                  { name: 'Blog', to: '/blog' },
-                  { name: 'Careers', to: '/careers' },
-                  { name: 'Contact Us', to: '/contact' },
-                ],
-              },
-              {
-                title: 'SUPPORT',
-                links: [
-                  { name: 'Help Center', to: '/help' },
-                  { name: 'FAQs', to: '/faq' },
-                ],
-              },
-              {
-                title: 'FEATURES',
-                links: [
-                  { name: 'Features Overview', to: '/features' },
-                ],
-              },
-              {
-                title: 'COMMUNITY & SOCIAL',
-                links: [
-                  { name: 'Community', to: '/community' },
-                  { name: 'Social Media', to: '/social' },
-                  { name: 'Newsletter Signup', to: '/newsletter' },
-                ],
-                inline: false,
-              },
-              {
-                title: 'LEGAL',
-                links: [
-                  { name: 'Privacy Policy', to: '/privacypolicy' },
-                  { name: 'Terms of Service', to: '/terms' },
-                  { name: 'Disclaimer', to: '/disclaimer' },
-                  { name: 'Cookie Policy', to: '/cookie-policy' },
-                  { name: 'Copyright Notice', to: '/copyright' },
-                ],
-                inline: false,
-              },
-            ].map((section, idx) => (
-              <div key={idx} className={`lg:flex-shrink-0 lg:w-auto md:w-1/2 w-1/2 px-1 mb-2 md:mb-0`}>
-                <h2 className="font-extrabold text-white dark:text-orange-400 text-sm mb-1 tracking-widest jost">
-                  {section.title}
-                </h2>
-                {section.links && (
-                  <nav className={`list-none mb-2 ${section.inline ? 'flex flex-row items-center gap-3 justify-start whitespace-nowrap' : 'flex flex-col gap-1'} ${section.nowrap ? 'overflow-x-auto' : ''}`}>
-                    {section.links.map((link, i) => (
-                      <li key={i} className={`${section.inline ? 'inline-flex' : ''} ${section.nowrap ? 'whitespace-nowrap' : ''}`}>
-                        <Link to={link.to} className="hover:text-amber-400 dark:hover:text-orange-400 transition-colors text-sm">
-                          {link.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </nav>
-                )}
-              </div>
+            {sections.map((section, idx) => (
+              section.custom ? (
+                <div key={idx} className={`lg:flex-shrink-0 lg:w-auto md:w-1/2 w-1/2 px-1 mb-2 md:mb-0`}>
+                  <h2 className="font-extrabold text-white dark:text-orange-400 text-sm mb-1 tracking-widest jost">
+                    DOWNLOAD SARALSEVA APP
+                  </h2>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                    <img
+                      src={qrcode}
+                      alt="QR Code for Mobile App"
+                      className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "w-20 h-20 invisible" : "w-20 h-20"}`}
+                      onClick={toggleQR}
+                      data-tooltip-id="qr-tooltip"
+                      data-tooltip-content="Click to enlarge QR code"
+                    />
+                    <div className="flex flex-col gap-1">
+                      <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
+                        <img src={app} alt="App Store" className="w-24 cursor-pointer hover:opacity-80 transition-opacity" />
+                      </a>
+                      <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+                        <img src={play} alt="Play Store" className="w-24 cursor-pointer hover:opacity-80 transition-opacity" />
+                      </a>
+                    </div>
+                    <div className="hidden sm:block">
+                      <span className="inline-flex gap-2 text-xl">
+                        {socialLinks.map((item, i) => (
+                          <a key={i} href={item.link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 dark:hover:text-orange-400 transition-colors">
+                            {item.icon}
+                          </a>
+                        ))}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div key={idx} className={`lg:flex-shrink-0 lg:w-auto md:w-1/2 w-1/2 px-1 mb-2 md:mb-0`}>
+                  <h2 className="font-extrabold text-white dark:text-orange-400 text-sm mb-1 tracking-widest jost">
+                    {section.title}
+                  </h2>
+                  {section.links && (
+                    <nav className={`list-none mb-2 ${section.inline ? 'flex flex-row items-center gap-3 justify-start whitespace-nowrap' : 'flex flex-col gap-1'} ${section.nowrap ? 'overflow-x-auto' : ''}`}>
+                      {section.links.map((link, i) => (
+                        <li key={i} className={`${section.inline ? 'inline-flex' : ''} ${section.nowrap ? 'whitespace-nowrap' : ''}`}>
+                          <Link to={link.to} className="hover:text-amber-400 dark:hover:text-orange-400 transition-colors text-sm">
+                            {link.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </nav>
+                  )}
+                </div>
+              )
             ))}
           </div>
         </div>
-
-          {/* Centered Download & Social Block (moved below columns) */}
-          <div className="w-full mt-6 flex flex-col items-center text-center px-2">
-            <h2 className="font-extrabold text-white dark:text-orange-400 text-sm mb-1 tracking-widest jost">
-              DOWNLOAD SARALSEVA APP
-            </h2>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-              <img
-                src={qrcode}
-                alt="QR Code for Mobile App"
-                className={`object-cover rounded-lg border-2 border-amber-500 p-1 cursor-pointer transition-all duration-300 ${isQRActive ? "w-20 h-20 invisible" : "w-20 h-20"}`}
-                onClick={toggleQR}
-                data-tooltip-id="qr-tooltip"
-                data-tooltip-content="Click to enlarge QR code"
-              />
-              <Tooltip id="qr-tooltip" place="top" style={tooltipStyle} />
-
-              {/* App Store / Play Store Links */}
-              <div className="flex flex-row gap-2 items-center">
-                <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
-                  <img src={app} alt="App Store" className="w-24 cursor-pointer hover:opacity-80 transition-opacity" />
-                </a>
-                <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
-                  <img src={play} alt="Play Store" className="w-24 cursor-pointer hover:opacity-80 transition-opacity" />
-                </a>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="mt-4">
-              <span className="inline-flex justify-center w-full gap-2 text-xl">
-                {socialLinks.map((item, idx) => (
-                  <React.Fragment key={idx}>
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-amber-400 dark:hover:text-orange-400 transition-colors"
-                      data-tooltip-id={`social-${idx}`}
-                      data-tooltip-content={`Follow us on ${item.name}`}
-                    >
-                      {item.icon}
-                    </a>
-                    <Tooltip id={`social-${idx}`} place="top" style={tooltipStyle} />
-                  </React.Fragment>
-                ))}
-              </span>
-            </div>
-          </div>
       </div>
 
       {/* Footer Bottom */}
