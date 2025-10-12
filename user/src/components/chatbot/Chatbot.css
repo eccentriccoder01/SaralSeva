@@ -165,6 +165,7 @@
   outline: none;
   transition: border-color 0.2s;
   margin-right: 8px;
+  color:var(--text-primary);
 }
 
 .chatbot-input-container input:focus {

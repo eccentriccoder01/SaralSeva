@@ -18,8 +18,25 @@ const tooltipStyle = {
 };
 
 const LinkingPolicy = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // ✅ FIX: Initialize dark mode from localStorage immediately
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark";
+  });
 
+  // ✅ FIX: Apply theme immediately on mount (before first render)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+  }, []); // Run only once on mount
+
+  // Update theme when darkMode state changes
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -29,11 +46,6 @@ const LinkingPolicy = () => {
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") setDarkMode(true);
-  }, []);
 
   const linkingTypes = [
     {
@@ -417,6 +429,7 @@ const LinkingPolicy = () => {
             Last Updated: August 2025 | Next Review: February 2026 | Version: 2.1
           </p>
         </div>
+
         {/* ReactTooltips with styling */}
         <ReactTooltip id="tooltip-header" style={tooltipStyle} />
         <ReactTooltip id="tooltip-theme" style={tooltipStyle} />

@@ -1,14 +1,8 @@
 import banner from "./../assets/header-banner2.jpg";
-import { 
-  Mail,
-  MapPin,
-  User,
-  BookUser,
-  MessageSquare
-} from "lucide-react";
-import { useState } from "react";
+import { Mail, MapPin, User, BookUser, MessageSquare, CheckCircle, XCircle, AlertTriangle, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Tooltip } from "react-tooltip";
-import 'react-tooltip/dist/react-tooltip.css'; 
+import "react-tooltip/dist/react-tooltip.css";
 
 const tooltipStyle = {
   backgroundColor: "#FF9933",
@@ -30,37 +24,56 @@ const Contact = () => {
     message: "",
   });
 
+  const [notification, setNotification] = useState(null);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`,
-      {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      }
-    );
-    const data = await res.json();
-    alert(data.message);
+      });
+      const data = await res.json();
 
-    // ✅ Reset form fields after success
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+      setNotification({ type: "success", message: data.message });
 
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong. Please try again.");
-  }
-};
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error(err);
+      setNotification({ type: "error", message: "Something went wrong. Please try again." });
+    }
+  };
+
+  // Auto close modal after 3 seconds
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => setNotification(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
+
+  const renderIcon = (type) => {
+    switch (type) {
+      case "success":
+        return <CheckCircle className="w-10 h-10 text-green-500" />;
+      case "error":
+        return <XCircle className="w-10 h-10 text-red-500" />;
+      case "warning":
+        return <AlertTriangle className="w-10 h-10 text-yellow-500" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
@@ -92,18 +105,14 @@ const Contact = () => {
             {/* Email & Phone Card */}
             <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center gap-6">
-                <div 
-                  data-tooltip-id="emailTooltip" 
-                  data-tooltip-content="Reach us by email or phone" 
+                <div
+                  data-tooltip-id="emailTooltip"
+                  data-tooltip-content="Reach us by email or phone"
                   className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
                 >
                   <Mail className="w-10 h-10 text-amber-600 dark:text-amber-300" />
                 </div>
-                <Tooltip 
-                  id="emailTooltip" 
-                  style={tooltipStyle} 
-                  place="top"
-                />
+                <Tooltip id="emailTooltip" style={tooltipStyle} place="top" />
                 <div>
                   <h3 className="text-2xl font-bold text-stone-800 dark:text-gray-200">
                     By Email & Phone
@@ -130,18 +139,14 @@ const Contact = () => {
             {/* Address Card */}
             <div className="flex-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center gap-6">
-                <div 
-                  data-tooltip-id="addressTooltip" 
-                  data-tooltip-content="Visit our office at CGO Complex" 
+                <div
+                  data-tooltip-id="addressTooltip"
+                  data-tooltip-content="Visit our office at CGO Complex"
                   className="p-4 bg-amber-100 dark:bg-amber-700 rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
                 >
                   <MapPin className="w-10 h-10 text-amber-600 dark:text-amber-300" />
                 </div>
-                <Tooltip 
-                  id="addressTooltip" 
-                  style={tooltipStyle} 
-                  place="top"
-                />
+                <Tooltip id="addressTooltip" style={tooltipStyle} place="top" />
                 <div>
                   <h3 className="text-2xl font-bold text-stone-800 dark:text-gray-200">
                     Our Address
@@ -247,6 +252,39 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* Notification Modal */}
+      {notification && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 px-8 py-6 text-center w-[90%] sm:w-[380px] animate-fadeIn">
+            <button
+              onClick={() => setNotification(null)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex flex-col items-center space-y-4">
+              {renderIcon(notification.type)}
+              <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                {notification.message}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>
+        {`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease forwards;
+        }
+      `}
+      </style>
     </div>
   );
 };
