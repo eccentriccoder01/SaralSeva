@@ -32,6 +32,11 @@ const schema = z.object({
   path: ["confirmPassword"]  
 });
 
+// Calculates how many of the 5 passwoord criteria are met
+const getPasswordScore = (strength) => {
+  return Object.values(strength).filter(Boolean).length;
+};
+
 const RegisterForm = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [countryid, setCountryid] = useState("");
@@ -39,6 +44,8 @@ const RegisterForm = ({ setIsAuthenticated }) => {
   const [otp, setOtp] = useState("");
   const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isTypingPassword, setIsTypingPassword] = useState(false);
+
   
   // ✅ Password toggle state
   const [showPassword, setShowPassword] = useState(false);
@@ -68,15 +75,20 @@ const RegisterForm = ({ setIsAuthenticated }) => {
 
   // Track password strength
   React.useEffect(() => {
-    if (!password) return;
-    setPasswordStrength({
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /\d/.test(password),
-      symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-    });
+    if (password && password.length > 0) {
+      setIsTypingPassword(true);
+      setPasswordStrength({
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      });
+    } else {
+      setIsTypingPassword(false); // hide when password is empty
+    }
   }, [password]);
+
 
   // Google Sign-Up Handler
   const handleGoogleSignUp = async (id_token) => {
@@ -328,6 +340,31 @@ const RegisterForm = ({ setIsAuthenticated }) => {
                     </div>
                   </div>
                 )}
+              <button type="button" className="absolute right-3 top-3" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <EyeSlashIcon className="w-5 h-5 text-gray-600" /> : <EyeIcon className="w-5 h-5 text-gray-600" />}
+                </button>
+              {errors.password && <p className={errorClasses}>{errors.password.message}</p>}
+              {/* Password Strength Progress Bar + Label */}
+              {isTypingPassword && (
+                <div className="mt-3">
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full transition-all duration-500 ${
+                        getPasswordScore(passwordStrength) <= 2
+                          ? "bg-red-500 w-1/5"
+                          : getPasswordScore(passwordStrength) === 3
+                          ? "bg-yellow-500 w-3/5"
+                          : "bg-green-500 w-full"
+                      }`}
+                    />
+                  </div>
+                  <p className="text-sm mt-1 font-medium text-gray-700">
+                    Strength: {
+                      ["Too Weak", "Too Weak", "Weak", "Medium", "Strong"][getPasswordScore(passwordStrength)] || "Too Weak"
+                    }
+                  </p>
+                </div>
+              )}
               </div>
 
               {/* Confirm Password */}
@@ -386,6 +423,23 @@ const RegisterForm = ({ setIsAuthenticated }) => {
                   </Button>
                 </div>
               </div>
+              <div className="flex gap-2">
+                <input
+                  type="tel"
+                  placeholder="Enter your Mobile Number"
+                  {...register("mobile")}
+                  className={`${inputClasses} flex-grow`} 
+                />
+              <Button
+                type="button"
+                onClick={() => handleSendOtp(watch("mobile"))}
+                disabled={otpSent || loading}
+                className="p-3 min-w-[100px] h-full whitespace-nowrap"
+              >
+                {otpSent ? "OTP Sent" : "Send OTP"}
+              </Button>
+              </div>
+              {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
               {otpSent && !isPhoneVerified && (
                 <div className="flex gap-2">
@@ -451,6 +505,18 @@ const RegisterForm = ({ setIsAuthenticated }) => {
                   />
                   {errors.state && <p className={errorClasses}>{errors.state.message}</p>}
                 </div>
+              {/* <input type="file" {...register("profilePicture")} className={inputClasses} /> */}
+              
+              {/* Country + State */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 dark:text-black">
+                  <div>
+                  <CountrySelect onChange={(e) => { setCountryid(e.id); setValue("country", e.name); }} placeHolder="Select Country" showFlag={false} />                    {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
+                    {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
+                  </div>
+                  <div>
+                    <StateSelect countryid={countryid} onChange={(e) => { setValue("state", e.name); }} placeHolder="Select State"/>
+                    {errors.state && <p className={errorClasses}>{errors.state.message}</p>}
+                  </div>
               </div>
 
               <Button 

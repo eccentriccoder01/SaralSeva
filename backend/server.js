@@ -19,8 +19,14 @@ import contactRouter from "./routes/contactRoutes.js";
 
 // importSecurity
 import { securityMiddleware } from './middleware/security.js';
+
 // Monitoring
 import healthRoute from "./routes/health.js"
+
+// RateLimiter 
+import { createRateLimiter } from './middleware/rateLimiting/rateLimiter.js'
+// SanitizeMiddleware
+import { sanitizeMiddleware } from './middleware/sanitizeMiddleware.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,19 +37,35 @@ app.use(cors());
 // added hpp+helmet
 securityMiddleware(app);
 
+// apply sanitizeMiddleware
+app.use(sanitizeMiddleware)
+
 connectDb();
 connectCloudinary();
 
-app.use('/api/v1/schemes', schemesRouter)
-app.use('/api/v1/announcement', announcementRouter)
-app.use('/api/v1/user', userRouter)
-app.use('/api/v1/admin', adminRouter)
-app.use('/api/v1/employee', employeeRouter)
-app.use('/api/v1/user/scheme', schemeAppliedRouter)
-app.use('/api/v1/notification', notificationRouter)
-app.use('/api/v1/grievances', grievanceRouter)
-app.use('/api/v1/messages', messageRouter)
-app.use("/api/v1/contact", contactRouter);
+
+
+// app.use('/api/v1/schemes', schemesRouter)
+// app.use('/api/v1/announcement', announcementRouter)
+// app.use('/api/v1/user', userRouter)
+// app.use('/api/v1/admin', adminRouter)
+// app.use('/api/v1/employee', employeeRouter)
+// app.use('/api/v1/user/scheme', schemeAppliedRouter)
+// app.use('/api/v1/notification', notificationRouter)
+// app.use('/api/v1/grievances', grievanceRouter)
+// app.use('/api/v1/messages', messageRouter)
+// app.use("/api/v1/contact", contactRouter);
+
+// RateLimiter + Routes
+app.use('/api/v1/schemes', createRateLimiter('light'), schemesRouter);
+app.use('/api/v1/announcement', createRateLimiter('light'), announcementRouter);
+app.use('/api/v1/user/login', createRateLimiter('strict'), userRouter);
+app.use('/api/v1/admin', createRateLimiter('strict'), adminRouter);
+app.use('/api/v1/user/scheme', createRateLimiter('moderate'), schemeAppliedRouter);
+app.use('/api/v1/messages', createRateLimiter('moderate'), messageRouter);
+app.use('/api/v1/notification', createRateLimiter('moderate'), notificationRouter);
+app.use('/api/v1/grievances', createRateLimiter('moderate'), grievanceRouter);
+app.use('/api/v1/contact', createRateLimiter('light'), contactRouter);
 
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 

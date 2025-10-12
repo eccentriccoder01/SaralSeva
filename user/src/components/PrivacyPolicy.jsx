@@ -17,11 +17,26 @@ const tooltipStyle = {
   zIndex: 9999,
 };
 
-
 const PrivacyPolicy = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // ✅ FIX: Initialize dark mode from localStorage immediately
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark";
+  });
 
-  // Persist theme in localStorage
+  // ✅ FIX: Apply theme immediately on mount (before first render)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+  }, []); // Run only once on mount
+
+  // Update theme when darkMode state changes
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -32,200 +47,194 @@ const PrivacyPolicy = () => {
     }
   }, [darkMode]);
 
-  // Load saved theme on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") setDarkMode(true);
-  }, []);
-
-const sections = [
-  {
-    id: "information-collection",
-    title: "Information We Collect",
-    icon: <Database
-      className="w-6 h-6"
-      data-tooltip-id="infoCollectTip"
-      data-tooltip-content="This icon represents the types of information we collect"
-    />,
-    content: [
-      {
-        subtitle: "Personal Information",
-        items: [
-          "Name, address, phone number, and email address",
-          "Government-issued identification numbers (Aadhaar, PAN, etc.)",
-          "Bank account details for scheme benefit transfers",
-          "Demographic information (age, gender, category, income details)",
-          "Family composition and dependent information"
-        ]
-      },
-      {
-        subtitle: "Application Data",
-        items: [
-          "Scheme application details and supporting documents",
-          "Grievance submissions and communication records",
-          "Application status and processing history",
-          "Digital signatures and authentication data"
-        ]
-      },
-      {
-        subtitle: "Technical Information",
-        items: [
-          "Device information and browser type",
-          "IP address and location data (for security purposes)",
-          "Login timestamps and session data",
-          "Platform usage analytics for service improvement"
-        ]
-      }
-    ]
-  },
-  {
-    id: "information-use",
-    title: "How We Use Your Information",
-    icon: <FileText
-      className="w-6 h-6"
-      data-tooltip-id="infoUseTip"
-      data-tooltip-content="This icon shows how your data is used by SaralSeva"
-    />,
-    content: [
-      {
-        subtitle: "Primary Purposes",
-        items: [
-          "Processing government scheme applications and benefit distribution",
-          "Verifying eligibility and conducting background checks",
-          "Tracking application progress and providing status updates",
-          "Facilitating communication between citizens and government officials",
-          "Resolving grievances and addressing citizen concerns"
-        ]
-      },
-      {
-        subtitle: "Secondary Purposes",
-        items: [
-          "Generating reports for administrative and policy planning",
-          "Improving platform functionality and user experience",
-          "Ensuring compliance with government regulations and audit requirements",
-          "Preventing fraud and maintaining system security"
-        ]
-      }
-    ]
-  },
-  {
-    id: "information-sharing",
-    title: "Information Sharing and Disclosure",
-    icon: <Users
-      className="w-6 h-6"
-      data-tooltip-id="infoShareTip"
-      data-tooltip-content="This icon represents with whom your data is shared"
-    />,
-    content: [
-      {
-        subtitle: "Government Agencies",
-        items: [
-          "Relevant central and state government departments for scheme processing",
-          "Gram Panchayat officials and local administrative bodies",
-          "Banking partners for direct benefit transfers",
-          "Verification agencies for document and eligibility checks"
-        ]
-      },
-      {
-        subtitle: "Legal Requirements",
-        items: [
-          "Court orders, legal proceedings, or regulatory compliance",
-          "Law enforcement agencies for investigation purposes",
-          "Audit bodies for transparency and accountability measures",
-          "RTI (Right to Information) requests as per applicable laws"
-        ]
-      }
-    ]
-  },
-  {
-    id: "data-security",
-    title: "Data Security and Protection",
-    icon: <Lock
-      className="w-6 h-6"
-      data-tooltip-id="dataSecurityTip"
-      data-tooltip-content="This icon shows measures taken to protect your data"
-    />,
-    content: [
-      {
-        subtitle: "Technical Safeguards",
-        items: [
-          "End-to-end encryption for sensitive data transmission",
-          "Secure servers with regular security updates and patches",
-          "Multi-factor authentication for user accounts",
-          "Regular security audits and vulnerability assessments",
-          "Backup and disaster recovery systems"
-        ]
-      },
-      {
-        subtitle: "Administrative Safeguards",
-        items: [
-          "Role-based access control for employees and administrators",
-          "Regular training on data protection and privacy practices",
-          "Incident response procedures for security breaches",
-          "Compliance with government data protection standards"
-        ]
-      }
-    ]
-  },
-  {
-    id: "user-rights",
-    title: "Your Rights and Choices",
-    icon: <Eye
-      className="w-6 h-6"
-      data-tooltip-id="userRightsTip"
-      data-tooltip-content="This icon represents your rights regarding your data"
-    />,
-    content: [
-      {
-        subtitle: "Access and Transparency",
-        items: [
-          "Right to access your personal information stored on the platform",
-          "Right to track the status and progress of your applications",
-          "Right to receive copies of submitted documents and forms",
-          "Right to know how your data is being processed and shared"
-        ]
-      },
-      {
-        subtitle: "Control and Correction",
-        items: [
-          "Right to update or correct inaccurate personal information",
-          "Right to withdraw applications (subject to processing stage)",
-          "Right to file grievances regarding data handling",
-          "Right to opt-out of non-essential communications"
-        ]
-      }
-    ]
-  },
-  {
-    id: "data-retention",
-    title: "Data Retention and Deletion",
-    icon: <AlertTriangle
-      className="w-6 h-6"
-      data-tooltip-id="dataRetentionTip"
-      data-tooltip-content="This icon represents how long data is kept and deleted securely"
-    />,
-    content: [
-      {
-        subtitle: "Retention Periods",
-        items: [
-          "Active application data: Retained until scheme completion or rejection",
-          "Processed applications: Retained for 7 years as per government guidelines",
-          "Grievance records: Retained for 5 years after resolution",
-          "User account data: Retained as long as the account remains active"
-        ]
-      },
-      {
-        subtitle: "Secure Deletion",
-        items: [
-          "Data is securely deleted after retention period expires",
-          "Multiple verification steps before permanent deletion",
-          "Anonymization of data used for statistical purposes",
-          "Compliance with government record-keeping requirements"
-        ]
-      }
-    ]
-  }
-];
+  const sections = [
+    {
+      id: "information-collection",
+      title: "Information We Collect",
+      icon: <Database
+        className="w-6 h-6"
+        data-tooltip-id="infoCollectTip"
+        data-tooltip-content="This icon represents the types of information we collect"
+      />,
+      content: [
+        {
+          subtitle: "Personal Information",
+          items: [
+            "Name, address, phone number, and email address",
+            "Government-issued identification numbers (Aadhaar, PAN, etc.)",
+            "Bank account details for scheme benefit transfers",
+            "Demographic information (age, gender, category, income details)",
+            "Family composition and dependent information"
+          ]
+        },
+        {
+          subtitle: "Application Data",
+          items: [
+            "Scheme application details and supporting documents",
+            "Grievance submissions and communication records",
+            "Application status and processing history",
+            "Digital signatures and authentication data"
+          ]
+        },
+        {
+          subtitle: "Technical Information",
+          items: [
+            "Device information and browser type",
+            "IP address and location data (for security purposes)",
+            "Login timestamps and session data",
+            "Platform usage analytics for service improvement"
+          ]
+        }
+      ]
+    },
+    {
+      id: "information-use",
+      title: "How We Use Your Information",
+      icon: <FileText
+        className="w-6 h-6"
+        data-tooltip-id="infoUseTip"
+        data-tooltip-content="This icon shows how your data is used by SaralSeva"
+      />,
+      content: [
+        {
+          subtitle: "Primary Purposes",
+          items: [
+            "Processing government scheme applications and benefit distribution",
+            "Verifying eligibility and conducting background checks",
+            "Tracking application progress and providing status updates",
+            "Facilitating communication between citizens and government officials",
+            "Resolving grievances and addressing citizen concerns"
+          ]
+        },
+        {
+          subtitle: "Secondary Purposes",
+          items: [
+            "Generating reports for administrative and policy planning",
+            "Improving platform functionality and user experience",
+            "Ensuring compliance with government regulations and audit requirements",
+            "Preventing fraud and maintaining system security"
+          ]
+        }
+      ]
+    },
+    {
+      id: "information-sharing",
+      title: "Information Sharing and Disclosure",
+      icon: <Users
+        className="w-6 h-6"
+        data-tooltip-id="infoShareTip"
+        data-tooltip-content="This icon represents with whom your data is shared"
+      />,
+      content: [
+        {
+          subtitle: "Government Agencies",
+          items: [
+            "Relevant central and state government departments for scheme processing",
+            "Gram Panchayat officials and local administrative bodies",
+            "Banking partners for direct benefit transfers",
+            "Verification agencies for document and eligibility checks"
+          ]
+        },
+        {
+          subtitle: "Legal Requirements",
+          items: [
+            "Court orders, legal proceedings, or regulatory compliance",
+            "Law enforcement agencies for investigation purposes",
+            "Audit bodies for transparency and accountability measures",
+            "RTI (Right to Information) requests as per applicable laws"
+          ]
+        }
+      ]
+    },
+    {
+      id: "data-security",
+      title: "Data Security and Protection",
+      icon: <Lock
+        className="w-6 h-6"
+        data-tooltip-id="dataSecurityTip"
+        data-tooltip-content="This icon shows measures taken to protect your data"
+      />,
+      content: [
+        {
+          subtitle: "Technical Safeguards",
+          items: [
+            "End-to-end encryption for sensitive data transmission",
+            "Secure servers with regular security updates and patches",
+            "Multi-factor authentication for user accounts",
+            "Regular security audits and vulnerability assessments",
+            "Backup and disaster recovery systems"
+          ]
+        },
+        {
+          subtitle: "Administrative Safeguards",
+          items: [
+            "Role-based access control for employees and administrators",
+            "Regular training on data protection and privacy practices",
+            "Incident response procedures for security breaches",
+            "Compliance with government data protection standards"
+          ]
+        }
+      ]
+    },
+    {
+      id: "user-rights",
+      title: "Your Rights and Choices",
+      icon: <Eye
+        className="w-6 h-6"
+        data-tooltip-id="userRightsTip"
+        data-tooltip-content="This icon represents your rights regarding your data"
+      />,
+      content: [
+        {
+          subtitle: "Access and Transparency",
+          items: [
+            "Right to access your personal information stored on the platform",
+            "Right to track the status and progress of your applications",
+            "Right to receive copies of submitted documents and forms",
+            "Right to know how your data is being processed and shared"
+          ]
+        },
+        {
+          subtitle: "Control and Correction",
+          items: [
+            "Right to update or correct inaccurate personal information",
+            "Right to withdraw applications (subject to processing stage)",
+            "Right to file grievances regarding data handling",
+            "Right to opt-out of non-essential communications"
+          ]
+        }
+      ]
+    },
+    {
+      id: "data-retention",
+      title: "Data Retention and Deletion",
+      icon: <AlertTriangle
+        className="w-6 h-6"
+        data-tooltip-id="dataRetentionTip"
+        data-tooltip-content="This icon represents how long data is kept and deleted securely"
+      />,
+      content: [
+        {
+          subtitle: "Retention Periods",
+          items: [
+            "Active application data: Retained until scheme completion or rejection",
+            "Processed applications: Retained for 7 years as per government guidelines",
+            "Grievance records: Retained for 5 years after resolution",
+            "User account data: Retained as long as the account remains active"
+          ]
+        },
+        {
+          subtitle: "Secure Deletion",
+          items: [
+            "Data is securely deleted after retention period expires",
+            "Multiple verification steps before permanent deletion",
+            "Anonymization of data used for statistical purposes",
+            "Compliance with government record-keeping requirements"
+          ]
+        }
+      ]
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
@@ -251,16 +260,13 @@ const sections = [
         {/* Theme Toggle Button */}
         <div className="flex justify-end mb-6">
           <button
-  onClick={() => setDarkMode(!darkMode)}
-  data-tooltip-id="themeToggleTip"
-  data-tooltip-content="Toggle Light/Dark Mode"
-  className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
->
-  {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-</button>
-{/* Tooltips */}
-<Tooltip id="themeToggleTip" style={tooltipStyle} />
-
+            onClick={() => setDarkMode(!darkMode)}
+            data-tooltip-id="themeToggleTip"
+            data-tooltip-content={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
+          >
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
         </div>
 
         {/* Introduction */}
@@ -367,6 +373,9 @@ const sections = [
             <span>Citizen First</span>
           </div>
         </div>
+
+        {/* Tooltips */}
+        <Tooltip id="themeToggleTip" style={tooltipStyle} />
         <Tooltip id="infoCollectTip" style={tooltipStyle} />
         <Tooltip id="infoUseTip" style={tooltipStyle} />
         <Tooltip id="infoShareTip" style={tooltipStyle} />

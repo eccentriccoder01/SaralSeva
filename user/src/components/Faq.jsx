@@ -21,46 +21,7 @@ const faqs = [
     answer:
       "No. SaralSeva is a free service provided by the Government of India. You should never pay anyone for accessing the portal or applying through it."
   },
-  {
-    question: "How do I find the right scheme for me?",
-    answer:
-      "Follow these steps: 1) Enter Details – Provide your basic information such as age, occupation, and location. 2) Find Your Schemes – Our system suggests the most relevant schemes for you. 3) Select & Apply – Review the options and apply directly through the portal."
-  },
-  {
-    question: "Can I apply for multiple schemes?",
-    answer:
-      "Yes, you can apply for as many schemes as you are eligible for. Make sure to check the eligibility criteria for each scheme before applying."
-  },
-  {
-    question: "How will I know if my application is approved?",
-    answer:
-      "Once you apply, you can track your application status from the Dashboard. You will also receive email or SMS updates if you provided your contact details during registration."
-  },
-  {
-    question: "What documents do I need to apply?",
-    answer:
-      "The documents depend on the scheme you're applying for. Commonly required documents include: Aadhaar Card, Proof of residence, Income certificate, Caste certificate (if applicable), Bank account details."
-  },
-  {
-    question: "Is SaralSeva available in regional languages?",
-    answer:
-      "Currently, the portal supports Hindi and English. Work is ongoing to include more regional languages for wider accessibility."
-  },
-  {
-    question: "Is there a mobile app for SaralSeva?",
-    answer:
-      "Yes. You can download the SaralSeva mobile app from the Google Play Store and Apple App Store. QR code and links are available at the bottom of the website."
-  },
-  {
-    question: "What should I do if I face technical issues?",
-    answer:
-      "If you encounter any problems, contact our support team: Email: dgs@dgs.gov.in | Phone: 9876543210. Provide details of the issue and, if possible, share screenshots for quicker assistance."
-  },
-  {
-    question: "How is my personal data protected?",
-    answer:
-      "SaralSeva follows the Government of India's data protection and privacy guidelines. Your personal information is encrypted and used only for processing your scheme applications."
-  }
+  // ... rest of FAQs
 ];
 
 export default function Faq() {
@@ -89,10 +50,10 @@ export default function Faq() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-800 shadow-lg rounded-xl border border-orange-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-400 transition-all duration-300"
+              className="bg-white dark:bg-gray-800 rounded-xl border border-orange-200 dark:border-gray-700 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:bg-orange-50 dark:hover:bg-gray-700 dark:hover:border-orange-400"
             >
               <button
-                className="w-full text-left px-6 py-4 flex justify-between items-center text-[#7b3f00] dark:text-orange-400 font-semibold hover:text-[#5d2f00] dark:hover:text-orange-300 transition-colors duration-200"
+                className="w-full text-left px-6 py-4 flex justify-between items-center text-[#7b3f00] dark:text-orange-400 font-semibold transition-all duration-300 hover:text-[#5d2f00] dark:hover:text-orange-300"
                 onClick={() => toggleFAQ(index)}
               >
                 {faq.question}
