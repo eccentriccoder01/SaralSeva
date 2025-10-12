@@ -41,6 +41,7 @@
 .chatbot-toggle-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 8px 25px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
 /* --- CHAT WINDOW --- */
@@ -187,6 +188,9 @@
 
 .chatbot-send-btn:hover {
   background-color: var(--primary-hover-color);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
 /* --- MOBILE ADJUSTMENTS --- */
@@ -234,6 +238,8 @@
 .quick-question-btn:hover {
   background-color: var(--primary-hover-color);
   transform: scale(1.03);
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
 /* Scrollbar for quick questions */
@@ -318,5 +324,8 @@
 .chatbot-quick-btn:hover {
   border-color: var(--primary-color);
   background-color: var(--user-msg-bg); /* subtle highlight */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
