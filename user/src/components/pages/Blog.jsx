@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import banner from './../../assets/header-banner2.jpg';
 
 const SAMPLE_POSTS = [
   {
@@ -53,54 +54,62 @@ export default function Blog() {
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Blog</h1>
-
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <p className="text-gray-700">Read the latest posts, tips and how-tos about using SaralSeva.</p>
-        <div className="flex items-center gap-2">
-          <label htmlFor="search" className="sr-only">Search posts</label>
-          <input
-            id="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="px-3 py-2 border rounded-md w-56 text-sm"
-            placeholder="Search posts, tags..."
-            aria-label="Search blog posts"
-          />
-        </div>
+    <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
+      <div
+        className="relative flex items-center justify-center h-48 bg-cover bg-center"
+        style={{ backgroundImage: `url(${banner})` }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">Blog</h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {posts.map((post) => (
-          <article key={post.id} className="border rounded-lg p-4 bg-white dark:bg-gray-800">
-            <header className="flex items-start justify-between">
-              <div>
-                <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
-                <div className="text-xs text-gray-500 mb-2">
-                  <time dateTime={post.date}>{post.date}</time> • {post.tags.join(', ')}
+      <div className="container mx-auto p-6">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="text-gray-700">Read the latest posts, tips and how-tos about using SaralSeva.</p>
+          <div className="flex items-center gap-2">
+            <label htmlFor="search" className="sr-only">Search posts</label>
+            <input
+              id="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="px-3 py-2 border rounded-md w-56 text-sm"
+              placeholder="Search posts, tags..."
+              aria-label="Search blog posts"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {posts.map((post) => (
+            <article key={post.id} className="border rounded-lg p-4 bg-white dark:bg-gray-800">
+              <header className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
+                  <div className="text-xs text-gray-500 mb-2">
+                    <time dateTime={post.date}>{post.date}</time> • {post.tags.join(', ')}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <button
-                  onClick={() => toggleExpand(post.id)}
-                  className="text-sm text-amber-500 hover:underline"
-                  aria-expanded={!!expanded[post.id]}
-                >
-                  {expanded[post.id] ? 'Show less' : 'Read more'}
-                </button>
-              </div>
-            </header>
+                <div>
+                  <button
+                    onClick={() => toggleExpand(post.id)}
+                    className="text-sm text-amber-500 hover:underline"
+                    aria-expanded={!!expanded[post.id]}
+                  >
+                    {expanded[post.id] ? 'Show less' : 'Read more'}
+                  </button>
+                </div>
+              </header>
 
-            <section className="mt-2 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">
-              {expanded[post.id] ? post.content : post.excerpt}
-            </section>
-          </article>
-        ))}
+              <section className="mt-2 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">
+                {expanded[post.id] ? post.content : post.excerpt}
+              </section>
+            </article>
+          ))}
 
-        {posts.length === 0 && (
-          <div className="col-span-full text-center text-gray-500">No posts found. Try a different search.</div>
-        )}
+          {posts.length === 0 && (
+            <div className="col-span-full text-center text-gray-500">No posts found. Try a different search.</div>
+          )}
+        </div>
       </div>
     </div>
   );
