@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import banner from "../../assets/header-banner2.jpg";
 
 const FEATURE_LIST = [
   {
@@ -68,34 +69,41 @@ export default function Features() {
   }), []);
 
   return (
-    <div className="container mx-auto p-6">
-      <header className="mb-8 flex items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">{strings[lang].title}</h1>
-          <p className="text-gray-600 mt-2 max-w-2xl">{strings[lang].subtitle}</p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <label className="text-sm">EN</label>
-          <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-          <label className="text-sm">HI</label>
-          <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+    <div className="min-h-screen bg-gray-50 dark:bg-[#07132f] text-gray-900 dark:text-gray-100">
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Features banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/15" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+              {strings[lang].title}
+            </h1>
+            <p className="mt-2 text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+            <div className="mt-4 flex items-center justify-center gap-2">
+              <label className="text-sm">EN</label>
+              <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+              <label className="text-sm">HI</label>
+              <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+            </div>
+          </div>
         </div>
       </header>
 
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {FEATURE_LIST.map((f) => (
-          <div key={f.id} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
-            <div className="text-3xl mb-3">{f.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{lang === 'hi' ? f.hiTitle : f.title}</h3>
-            <p className="text-sm text-gray-700">{lang === 'hi' ? f.hiDesc : f.desc}</p>
-          </div>
-        ))}
-      </section>
+      <main className="max-w-6xl mx-auto px-4 py-12">
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {FEATURE_LIST.map((f) => (
+            <article key={f.id} className="bg-white dark:bg-[#082040] border border-gray-100 dark:border-transparent shadow-sm rounded-lg p-6">
+              <div className="text-3xl">{f.icon}</div>
+              <h3 className="mt-4 text-lg font-semibold">{lang === 'hi' ? f.hiTitle : f.title}</h3>
+              <p className="mt-2 text-sm opacity-90">{lang === 'hi' ? f.hiDesc : f.desc}</p>
+            </article>
+          ))}
+        </section>
 
-      <div className="mt-8 text-center">
-        <a href="/schemes" className="px-6 py-3 bg-amber-500 text-white rounded-md">{strings[lang].cta}</a>
-      </div>
+        <section className="mt-12 text-center">
+          <a href="/schemes" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md">{strings[lang].cta}</a>
+        </section>
+      </main>
     </div>
   );
 }

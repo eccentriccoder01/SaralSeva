@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import banner from './../../assets/header-banner2.jpg';
+import banner from '../../assets/header-banner2.jpg';
 
-const SAMPLE_POSTS = [
+const SAMPLE_POSTS_EN = [
   {
     id: 1,
     slug: 'how-to-apply-for-scheme',
@@ -37,35 +37,83 @@ const SAMPLE_POSTS = [
   },
 ];
 
+const SAMPLE_POSTS_HI = [
+  {
+    id: 1,
+    slug: 'how-to-apply-for-scheme',
+    title: 'SaralSeva योजना के लिए कैसे आवेदन करें',
+    date: '10 अक्टूबर, 2025',
+    tags: ['मार्गदर्शिका', 'योजनाएँ'],
+    excerpt:
+      'यह छोटा मार्गदर्शक आपको SaralSeva पर योजना के लिए आवेदन करने के चरणों से परिचित कराता है — किन दस्तावेज़ों की आवश्यकता है और सामान्य गलतियाँ।',
+    content:
+      `चरण-दर-चरण विवरण:\n\n1. अपना खाता पंजीकृत या लॉगिन करें।\n2. योजनाएँ पृष्ठ पर जाएँ।\n3. आवेदन फॉर्म भरें और आवश्यक दस्तावेज़ अपलोड करें।\n4. सबमिट करें और अपने डैशबोर्ड से आवेदन ट्रैक करें।\n\nसमस्याओं के मामले में, सहायता से संपर्क करें या हमारी सहायता केंद्र (Help Center) देखें।`,
+  },
+  {
+    id: 2,
+    slug: 'making-most-of-saralseva',
+    title: 'SaralSeva का बेहतर उपयोग: टिप्स और ट्रिक्स',
+    date: '3 सितंबर, 2025',
+    tags: ['टिप्स', 'प्लेटफ़ॉर्म'],
+    excerpt:
+      'नोटिफिकेशन से लेकर प्रोफ़ाइल सेटिंग्स तक छोटे-छोटे सुझाव ताकि आप SaralSeva का अधिकतम लाभ उठा सकें।',
+    content:
+      `हम सुझाव देते हैं कि अपनी प्रोफ़ाइल अपडेट रखें और उन योजनाओं के लिए नोटिफिकेशन सक्षम करें जिनमें आपकी रुचि है। लंबी फॉर्म्स जमा करने से पहले ड्राफ्ट सहेजें।`,
+  },
+  {
+    id: 3,
+    slug: 'faq-highlights',
+    title: 'पहली बार आवेदन करने वालों के लिए मुख्य प्रश्न',
+    date: '20 अगस्त, 2025',
+    tags: ['सामान्य प्रश्न', 'सहायता'],
+    excerpt:
+      'नई आवेदकों के अक्सर पूछे जाने वाले प्रश्नों की एक सूची — सामान्य गलतियों को कम करने और आवेदन तेज़ करने में मदद करती है।',
+    content:
+      `सामान्य प्रश्नों में पात्रता मानदंड, दस्तावेज़ प्रारूप और जमा किए गए फॉर्म में त्रुटियाँ कैसे सुधारे जाएँ शामिल हैं। प्रत्येक योजना के पृष्ठ पर योजना-विशिष्ट नियम देखें।`,
+  },
+];
+
 export default function Blog() {
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState({});
+  const [lang, setLang] = useState('en');
+
+  const source = lang === 'hi' ? SAMPLE_POSTS_HI : SAMPLE_POSTS_EN;
 
   const posts = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return SAMPLE_POSTS;
-    return SAMPLE_POSTS.filter(
+    if (!q) return source;
+    return source.filter(
       (p) => p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q) || p.tags.join(' ').toLowerCase().includes(q)
     );
-  }, [query]);
+  }, [query, source]);
 
   function toggleExpand(id) {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
   return (
-    <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
-      <div
-        className="relative flex items-center justify-center h-48 bg-cover bg-center"
-        style={{ backgroundImage: `url(${banner})` }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">Blog</h1>
-      </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-[#07132f] text-gray-900 dark:text-gray-100">
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Blog banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold">{lang === 'hi' ? 'ब्लॉग' : 'Blog'}</h1>
+            <p className="mt-2 text-sm md:text-base opacity-90">{lang === 'hi' ? 'SaralSeva पर नवीनतम पोस्ट, सुझाव और मार्गदर्शिकाएँ।' : 'Read the latest posts, tips and how-tos about using SaralSeva.'}</p>
+          </div>
+          <div className="absolute right-4 top-4 flex items-center gap-2">
+            <label className="text-sm text-white">EN</label>
+            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <label className="text-sm text-white">HI</label>
+            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+          </div>
+        </div>
+      </header>
 
-      <div className="container mx-auto p-6">
+      <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <p className="text-gray-700">Read the latest posts, tips and how-tos about using SaralSeva.</p>
+          <p className="text-gray-700 dark:text-gray-300">{lang === 'hi' ? 'ब्लॉग पोस्ट, सुझाव और मार्गदर्शिकाएँ पढ़ें।' : 'Read the latest posts, tips and how-tos about using SaralSeva.'}</p>
           <div className="flex items-center gap-2">
             <label htmlFor="search" className="sr-only">Search posts</label>
             <input
@@ -73,8 +121,8 @@ export default function Blog() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="px-3 py-2 border rounded-md w-56 text-sm"
-              placeholder="Search posts, tags..."
-              aria-label="Search blog posts"
+              placeholder={lang === 'hi' ? 'पोस्ट, टैग खोजें...' : 'Search posts, tags...'}
+              aria-label={lang === 'hi' ? 'ब्लॉग पोस्ट खोजें' : 'Search blog posts'}
             />
           </div>
         </div>
@@ -95,7 +143,7 @@ export default function Blog() {
                     className="text-sm text-amber-500 hover:underline"
                     aria-expanded={!!expanded[post.id]}
                   >
-                    {expanded[post.id] ? 'Show less' : 'Read more'}
+                    {expanded[post.id] ? (lang === 'hi' ? 'कम दिखाएँ' : 'Show less') : (lang === 'hi' ? 'और पढ़ें' : 'Read more')}
                   </button>
                 </div>
               </header>
@@ -107,10 +155,10 @@ export default function Blog() {
           ))}
 
           {posts.length === 0 && (
-            <div className="col-span-full text-center text-gray-500">No posts found. Try a different search.</div>
+            <div className="col-span-full text-center text-gray-500">{lang === 'hi' ? 'कोई पोस्ट नहीं मिली। अलग खोज आज़माएँ।' : 'No posts found. Try a different search.'}</div>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }
