@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import banner from "../assets/header-banner2.jpg";
 
 const faqs = [
   {
@@ -33,18 +34,17 @@ export default function Faq() {
 
   return (
     <div className="bg-[#fdfaf6] dark:bg-gray-900 min-h-screen transition-colors duration-300">
-      {/* Header */}
-      <header className="bg-[#7b3f00] text-white py-4 shadow-lg">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">FAQs - SaralSeva</h1>
-        </div>
-      </header>
+      <div
+        className="relative flex items-center justify-center h-48 bg-cover bg-center"
+        style={{ backgroundImage: `url(${banner})` }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">FAQs - SaralSeva</h1>
+      </div>
 
       {/* Main FAQ Section */}
       <main className="container mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold text-center text-[#7b3f00] dark:text-orange-400 mb-8 transition-colors duration-300">
-          Frequently Asked Questions
-        </h2>
+        <h2 className="text-3xl font-bold text-center text-[#7b3f00] dark:text-orange-400 mb-8 transition-colors duration-300">Frequently Asked Questions</h2>
 
         <div className="space-y-4 max-w-4xl mx-auto">
           {faqs.map((faq, index) => (
