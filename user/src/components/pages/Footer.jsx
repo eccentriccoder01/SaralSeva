@@ -165,12 +165,12 @@ const Footer = () => {
 
   return (
     <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
-      <hr className="border-t-4 border-orange-900 dark:border-gray-800 mb-4" />
-  <div className="container mx-auto px-3 py-8">
-        <div className="flex flex-wrap md:text-left text-center order-first">
+  <hr className="border-t-2 border-orange-900 dark:border-gray-800 mb-3" />
+  <div className="container mx-auto px-3 py-6">
+    <div className="flex flex-wrap md:text-left text-center order-first">
 
           {/* Links Sections - revamped with more categories */}
-          <div className="lg:w-full md:w-full w-full px-1 flex flex-wrap lg:flex-nowrap lg:justify-between justify-center gap-12">
+          <div className="lg:w-full md:w-full w-full px-1 flex flex-wrap lg:flex-nowrap lg:justify-between justify-center gap-8">
             {sections.map((section, idx) => (
               section.custom ? (
                 <div key={idx} className={`lg:flex-shrink-0 lg:w-auto md:w-1/2 w-1/2 px-1 mb-2 md:mb-0`}>
