@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import banner from '../../assets/header-banner2.jpg';
 
 const GROUPS = [
   { id: 'g1', name: 'Panchayat Admins', hiName: 'पंचायत प्रशासन', description: 'Discussions for Gram Panchayat officials and coordinators.' , hiDesc: 'ग्राम पंचायत अधिकारियों और समन्वयकों के लिए चर्चा।'},
@@ -29,17 +30,21 @@ export default function Community() {
   const matchedGroups = useMemo(() => GROUPS.filter(g => (g.name + ' ' + (g.description || '') + ' ' + (g.hiName || '') + ' ' + (g.hiDesc || '')).toLowerCase().includes(query.toLowerCase())), [query]);
 
   return (
-    <div className="container mx-auto p-6">
-      <header className="mb-6 flex items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">{strings[lang].title}</h1>
-          <p className="text-gray-600 mt-2 max-w-2xl">{strings[lang].subtitle}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <label className="text-sm">EN</label>
-          <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-          <label className="text-sm">HI</label>
-          <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+    <div className="min-h-screen bg-gray-50 dark:bg-[#07132f] text-gray-900 dark:text-gray-100">
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Community banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold">{strings[lang].title}</h1>
+            <p className="mt-2 text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+          </div>
+          <div className="absolute right-4 top-4 flex items-center gap-2">
+            <label className="text-sm text-white">EN</label>
+            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <label className="text-sm text-white">HI</label>
+            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+          </div>
         </div>
       </header>
 
