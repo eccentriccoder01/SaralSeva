@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { FaFacebook, FaWhatsapp, FaYoutube, FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import qrcode from '../../assets/QRcode.jpg';
+import banner from '../../assets/header-banner2.jpg';
 
 const CHANNELS = [
   { id: 'c1', name: 'Facebook', url: 'https://facebook.com', icon: <FaFacebook /> },
@@ -47,20 +48,23 @@ export default function Social() {
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <header className="mb-6 flex items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">{strings[lang].title}</h1>
-          <p className="text-gray-600 mt-2">{strings[lang].subtitle}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <label className="text-sm">EN</label>
-          <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-          <label className="text-sm">HI</label>
-          <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+    <div className="min-h-screen bg-gray-50 dark:bg-[#07132f] text-gray-900 dark:text-gray-100">
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Social banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold">{strings[lang].title}</h1>
+            <p className="mt-2 text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+          </div>
+          <div className="absolute right-4 top-4 flex items-center gap-2">
+            <label className="text-sm text-white">EN</label>
+            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <label className="text-sm text-white">HI</label>
+            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+          </div>
         </div>
       </header>
-
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 space-y-4">
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
