@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import banner from './../../assets/header-banner2.jpg';
 
 const JOBS = [
   {
@@ -194,19 +195,27 @@ export default function Careers() {
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <header className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">{strings[lang].title}</h1>
-          <p className="text-gray-600 mt-2">{strings[lang].subtitle}</p>
+    <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
+      <div
+        className="relative flex items-center justify-center h-48 bg-cover bg-center"
+        style={{ backgroundImage: `url(${banner})` }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">{strings[lang].title}</h1>
+      </div>
+
+      <div className="container mx-auto p-6">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <p className="text-gray-600 mt-1">{strings[lang].subtitle}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-sm">EN</label>
+            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <label className="text-sm">HI</label>
+            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <label className="text-sm">EN</label>
-          <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-          <label className="text-sm">HI</label>
-          <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
-        </div>
-      </header>
 
       <section className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -287,6 +296,7 @@ export default function Careers() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
