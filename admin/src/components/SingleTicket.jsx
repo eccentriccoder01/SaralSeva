@@ -46,7 +46,7 @@ const SingleTicket = () => {
       </div>
       {/* Fieldsets replaced by styled cards */}
       <div className="p-6 bg-white rounded-2xl shadow-lg">
-          <h2 className="text-2xl font-bold text-orange-900 border-b pb-2 mb-4 jost">Applicant Details</h2>
+          <h1 className="text-2xl font-bold text-orange-900 border-b pb-2 mb-4 jost">Applicant Details</h1>
           <div className="flex flex-col items-center gap-8 md:flex-row">
               <img src={singleTicket?.photo} alt="Applicant" className="w-40 h-40 rounded-full object-cover border-4 border-amber-300" />
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 flex-1">
