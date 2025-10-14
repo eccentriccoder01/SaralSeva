@@ -2,15 +2,21 @@ import React from "react";
 import qrcode from "./../../assets/QRcode.jpg";
 import app from "./../../assets/app_store.svg";
 import play from "./../../assets/play_store.svg";
-import { FaInstagram, FaWhatsapp, FaFacebook, FaYoutube, FaXTwitter } from "react-icons/fa6";
+import {
+  FaInstagram,
+  FaWhatsapp,
+  FaFacebook,
+  FaYoutube,
+  FaXTwitter,
+} from "react-icons/fa6";
 
 const Footer = () => {
   return (
     <footer className="bg-orange-950 dark:bg-gray-900 text-orange-200 dark:text-gray-300">
       <div className="container mx-auto px-5 py-16">
-        <div className="flex flex-wrap md:text-left text-center order-first">
+        <div className="flex flex-col md:flex-row flex-wrap md:text-left text-center order-first md:justify-between">
           {/* Mobile App & Social Section */}
-          <div className="lg:w-1/3 md:w-1/2 w-full px-4">
+          <div className="lg:w-1/3 md:w-1/2  w-full px-4 mb-10 md:mb-0">
             <h2 className="font-extrabold text-white dark:text-orange-400 text-lg mb-3 tracking-widest jost">
               DOWNLOAD SARALSEVA APP
             </h2>
@@ -57,7 +63,7 @@ const Footer = () => {
           </div>
 
           {/* Links Sections */}
-          <div className="lg:w-2/3 md:w-1/2 w-full px-4 flex flex-wrap justify-end">
+          <div className="bg-slate-500 lg:w-2/3 md:w-1/2 w-full px-4 flex flex-col md:flex-row flex-wrap justify-center md:justify-between items-center md:items-start text-center md:text-left">
             {[
               {
                 title: "QUICK LINKS",
@@ -89,7 +95,7 @@ const Footer = () => {
             ].map((section, idx) => (
               <div
                 key={idx}
-                className="lg:w-1/3 md:w-full w-1/2 px-4 mb-10 md:mb-0"
+                className="lg:w-1/3 md:w-full w-4/5 px-4 mb-10 md:mb-0"
               >
                 <h2 className="font-extrabold text-white dark:text-orange-400 text-lg mb-3 tracking-widest jost">
                   {section.title}
@@ -124,7 +130,11 @@ const Footer = () => {
                           {item.value}
                         </a>
                       ) : item.type === "phone" ? (
-                        <a key={i} className="font-semibold" href={`tel:${item.value}`}>
+                        <a
+                          key={i}
+                          className="font-semibold"
+                          href={`tel:${item.value}`}
+                        >
                           {item.value}
                         </a>
                       ) : (
