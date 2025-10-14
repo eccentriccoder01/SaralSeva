@@ -63,7 +63,7 @@ const Footer = () => {
           </div>
 
           {/* Links Sections */}
-          <div className="bg-slate-500 lg:w-2/3 md:w-1/2 w-full px-4 flex flex-col md:flex-row flex-wrap justify-center md:justify-between items-center md:items-start text-center md:text-left">
+          <div className=" lg:w-2/3 md:w-1/2 w-full px-4 flex flex-col md:flex-row flex-wrap justify-center md:justify-between items-center md:items-start text-center md:text-left">
             {[
               {
                 title: "QUICK LINKS",
