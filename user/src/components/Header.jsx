@@ -60,20 +60,24 @@ const Header = () => {
 
         {/* Right - Logos */}
         <div className='flex items-center gap-4 md:gap-6'>
-          <img 
-            src={swachh} 
-            alt="Swachh Bharat" 
-            data-tooltip-id="tooltip-swachh"
-            data-tooltip-content="Swachh Bharat Logo - Clean India Mission"
-            className='w-20 lg:w-24 transition-transform duration-300 hover:scale-105'
-          />
-          <img 
-            src={amrit} 
-            alt="Azadi Ka Amrit Mahotsav" 
-            data-tooltip-id="tooltip-amrit"
-            data-tooltip-content="Azadi Ka Amrit Mahotsav - Celebration of 75 Years of Independence"
-            className='w-24 lg:w-32 transition-transform duration-300 hover:scale-105'
-          />
+          <div className='dark:bg-white dark:p-3 dark:rounded-xl dark:border-2 dark:border-orange-500 transition-all duration-300 dark:w-32 dark:h-24 dark:flex dark:items-center dark:justify-center lg:dark:w-36 lg:dark:h-28'>
+            <img 
+              src={swachh} 
+              alt="Swachh Bharat" 
+              data-tooltip-id="tooltip-swachh"
+              data-tooltip-content="Swachh Bharat Logo - Clean India Mission"
+              className='w-20 lg:w-24 transition-transform duration-300 hover:scale-105'
+            />
+          </div>
+          <div className='dark:bg-white dark:p-3 dark:rounded-xl dark:border-2 dark:border-orange-500 transition-all duration-300 dark:w-32 dark:h-24 dark:flex dark:items-center dark:justify-center lg:dark:w-36 lg:dark:h-28'>
+            <img 
+              src={amrit} 
+              alt="Azadi Ka Amrit Mahotsav" 
+              data-tooltip-id="tooltip-amrit"
+              data-tooltip-content="Azadi Ka Amrit Mahotsav - Celebration of 75 Years of Independence"
+              className='w-24 lg:w-32 transition-transform duration-300 hover:scale-105'
+            />
+          </div>
         </div>
       </div>
 
@@ -112,24 +116,28 @@ const Header = () => {
 
         {/* Swachh Bharat */}
         <div className="flex justify-center col-span-1">
-          <img
-            src={swachh}
-            alt="Swachh Bharat"
-            data-tooltip-id="tooltip-swachh"
-            data-tooltip-content="Swachh Bharat Logo - Clean India Mission"
-            className='w-24 sm:w-28 h-auto transition-transform duration-300 hover:scale-105'
-          />
+          <div className='dark:bg-white dark:p-2 dark:rounded-lg dark:border-2 dark:border-orange-500 transition-all duration-300 dark:w-32 dark:h-28 dark:flex dark:items-center dark:justify-center sm:dark:w-36 sm:dark:h-32'>
+            <img
+              src={swachh}
+              alt="Swachh Bharat"
+              data-tooltip-id="tooltip-swachh"
+              data-tooltip-content="Swachh Bharat Logo - Clean India Mission"
+              className='w-24 sm:w-28 h-auto transition-transform duration-300 hover:scale-105'
+            />
+          </div>
         </div>
 
         {/* Amrit */}
         <div className="flex justify-center col-span-1">
-          <img
-            src={amrit}
-            alt="Azadi Ka Amrit Mahotsav"
-            data-tooltip-id="tooltip-amrit"
-            data-tooltip-content="Azadi Ka Amrit Mahotsav - 75 Years of Independence"
-            className='w-28 sm:w-32 h-auto transition-transform duration-300 hover:scale-105'
-          />
+          <div className='dark:bg-white dark:p-2 dark:rounded-lg dark:border-2 dark:border-orange-500 transition-all duration-300 dark:w-32 dark:h-28 dark:flex dark:items-center dark:justify-center sm:dark:w-36 sm:dark:h-32'>
+            <img
+              src={amrit}
+              alt="Azadi Ka Amrit Mahotsav"
+              data-tooltip-id="tooltip-amrit"
+              data-tooltip-content="Azadi Ka Amrit Mahotsav - 75 Years of Independence"
+              className='w-28 sm:w-32 h-auto transition-transform duration-300 hover:scale-105'
+            />
+          </div>
         </div>
       </div>
 

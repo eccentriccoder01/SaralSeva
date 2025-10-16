@@ -86,7 +86,7 @@ const Home = () => {
                 <div key={index} className="flex flex-row items-center gap-3">
                   <img 
                     src={announcement_icon} 
-                    alt="" 
+                    alt="Latest Announcement" 
                     className="w-6 h-6"
                     data-tooltip-id={`announcement-${index}`}
                     data-tooltip-content="Latest announcement"
