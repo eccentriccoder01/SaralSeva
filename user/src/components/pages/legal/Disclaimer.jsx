@@ -1,94 +1,92 @@
 import React, { useState } from 'react';
+import banner from '../../../assets/header-banner2.jpg';
+import { Printer, Database, FileText, Users, Lock, Eye, Mail } from 'lucide-react';
 
 export default function Disclaimer() {
   const [lang, setLang] = useState('en');
 
-  const simple = {
+  const TEXT = {
     en: {
       title: 'Disclaimer',
-      text: {
-        accuracy: 'The content on SaralSeva is provided for general informational purposes. While we try to keep information current, we do not guarantee its completeness or accuracy.',
-        professional: 'The site does not provide medical, legal, financial, or other professional advice. For specific advice, consult a qualified professional.',
-        external: 'SaralSeva may link to external sites. We are not responsible for the content, practices, or privacy policies of those sites.',
-        endorsement: 'Links or mentions do not imply endorsement. Any reliance on information found on this site is at your own risk.',
-        changes: 'We may update content at any time. Continued use after changes means you accept the updated information.',
-        liability: 'To the fullest extent permitted by law, SaralSeva and its contributors are not liable for any damages resulting from use of the site.',
-        contact: 'If you have concerns about content, contact us at support@saralseva.example (replace with a real address).',
-      },
+      subtitle: 'Important information about the content on SaralSeva',
+      sections: [
+        { id: 'accuracy', title: 'Accuracy', body: 'The content on SaralSeva is provided for general informational purposes. While we try to keep information current, we do not guarantee its completeness or accuracy.' },
+        { id: 'professional', title: 'Not professional advice', body: 'The site does not provide medical, legal, financial, or other professional advice. For specific advice, consult a qualified professional.' },
+        { id: 'links', title: 'External links', body: 'SaralSeva may link to external sites. We are not responsible for the content, practices, or privacy policies of those sites.' },
+        { id: 'endorsement', title: 'No endorsement', body: 'Links or mentions do not imply endorsement. Any reliance on information found on this site is at your own risk.' },
+        { id: 'changes', title: 'Changes', body: 'We may update content at any time. Continued use after changes means you accept the updated information.' },
+        { id: 'liability', title: 'Limitation of liability', body: 'To the fullest extent permitted by law, SaralSeva and its contributors are not liable for any damages resulting from use of the site.' },
+      ],
+  // contact removed per request
     },
     hi: {
       title: 'अस्वीकरण',
-      text: {
-        accuracy: 'SaralSeva पर दी गई जानकारी केवल सामान्य प्रयोजनों के लिए है। हम जानकारी की पूर्णता या सटीकता की गारंटी नहीं देते।',
-        professional: 'यह साइट चिकित्सा, कानूनी, वित्तीय या अन्य पेशेवर सलाह प्रदान नहीं करती। विशिष्ट मामलों के लिए योग्य पेशेवर से परामर्श लें।',
-        external: 'SaralSeva बाहरी साइटों के लिंक रख सकता है। हम उन साइटों की सामग्री, प्रथाओं या गोपनीयता नीतियों के लिए उत्तरदायी नहीं हैं।',
-        endorsement: 'किसी लिंक या उल्लेख का समर्थन होना आवश्यक नहीं है। इस साइट पर मिली जानकारी पर भरोसा आपकी जिम्मेदारी है।',
-        changes: 'हम किसी भी समय सामग्री अपडेट कर सकते हैं। बदलावों के बाद साइट का निरंतर उपयोग अपडेट जानकारी की स्वीकृति माना जाएगा।',
-        liability: 'कानून द्वारा अनुमति की अधिकतम सीमा तक, SaralSeva और इसके योगदानकर्ता साइट के उपयोग से होने वाले किसी भी नुकसान के लिए उत्तरदायी नहीं होंगे।',
-        contact: 'सामग्री के बारे में चिंता के लिए हमें support@saralseva.example पर संपर्क करें (इसे वास्तविक पते से बदलें)।',
-      },
+      subtitle: 'SaralSeva पर सामग्री के बारे में महत्वपूर्ण जानकारी',
+      sections: [
+        { id: 'accuracy', title: 'सटीकता', body: 'SaralSeva पर दी गई जानकारी केवल सामान्य प्रयोजनों के लिए है। हम जानकारी की पूर्णता या सटीकता की गारंटी नहीं देते।' },
+        { id: 'professional', title: 'पेशेवर सलाह नहीं', body: 'यह साइट चिकित्सा, कानूनी, वित्तीय या अन्य पेशेवर सलाह प्रदान नहीं करती। विशिष्ट मामलों के लिए योग्य पेशेवर से परामर्श लें।' },
+        { id: 'links', title: 'बाहरी लिंक', body: 'SaralSeva बाहरी साइटों के लिंक रख सकता है। हम उन साइटों की सामग्री, प्रथाओं या गोपनीयता नीतियों के लिए उत्तरदायी नहीं हैं।' },
+        { id: 'endorsement', title: 'समर्थन नहीं', body: 'किसी लिंक या उल्लेख का समर्थन होना आवश्यक नहीं है। इस साइट पर मिली जानकारी पर भरोसा आपकी जिम्मेदारी है।' },
+        { id: 'changes', title: 'बदलाव', body: 'हम किसी भी समय सामग्री अपडेट कर सकते हैं। बदलावों के बाद साइट का निरंतर उपयोग अपडेट जानकारी की स्वीकृति माना जाएगा।' },
+        { id: 'liability', title: 'दायित्व की सीमा', body: 'कानून द्वारा अनुमति की अधिकतम सीमा तक, SaralSeva और इसके योगदानकर्ता साइट के उपयोग से होने वाले किसी भी नुकसान के लिए उत्तरदायी नहीं होंगे।' },
+      ],
+  // contact removed per request
     },
   };
 
-  const S = simple[lang];
-
-  const sections = [
-    { id: 'accuracy', title: lang === 'en' ? 'Accuracy' : 'सटीकता', body: S.text.accuracy },
-    { id: 'professional', title: lang === 'en' ? 'Not professional advice' : 'पेशेवर सलाह नहीं', body: S.text.professional },
-    { id: 'links', title: lang === 'en' ? 'External links' : 'बाहरी लिंक', body: S.text.external },
-    { id: 'endorsement', title: lang === 'en' ? 'No endorsement' : 'समर्थन नहीं', body: S.text.endorsement },
-    { id: 'changes', title: lang === 'en' ? 'Changes' : 'बदलाव', body: S.text.changes },
-    { id: 'liability', title: lang === 'en' ? 'Limitation of liability' : 'दायित्व की सीमा', body: S.text.liability },
-  ];
+  const data = TEXT[lang];
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">{S.title}</h1>
-          <p className="text-sm text-gray-500 mt-1">Last updated: October 13, 2025</p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button onClick={() => window.print()} className="text-sm px-3 py-1 border rounded">Print</button>
-          <div className="flex items-center gap-2">
-            <label className="text-sm">EN</label>
-            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-            <label className="text-sm">HI</label>
-            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+    <div className="min-h-screen bg-gray-50 dark:bg-[#061325] text-gray-900 dark:text-gray-100">
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Disclaimer banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">{data.title}</h1>
+            <p className="mt-2 text-sm md:text-base text-white/90">{data.subtitle}</p>
+          </div>
+          <div className="absolute right-4 top-4 flex items-center gap-3">
+            <label className="text-sm text-white">EN</label>
+            <input type="radio" name="disclaimer-lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <label className="text-sm text-white">HI</label>
+            <input type="radio" name="disclaimer-lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+            <button
+              onClick={() => window.print()}
+              title={lang === 'hi' ? 'छापें' : 'Print'}
+              className="bg-white/10 hover:bg-white/20 text-white rounded px-2 py-1 text-sm flex items-center gap-2"
+            >
+              <Printer className="w-4 h-4" />
+            </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="md:flex gap-8">
-        <aside className="md:w-1/4 mb-6 md:mb-0">
-          <nav className="sticky top-6 bg-white p-4 rounded shadow-sm">
-            <h3 className="font-semibold mb-3">{lang === 'en' ? 'Contents' : 'अनुक्रमणिका'}</h3>
-            <ul className="space-y-2 text-sm">
-              {sections.map((s) => (
-                <li key={s.id}>
-                  <a className="text-amber-600 hover:underline" href={`#${s.id}`}>{s.title}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
+      <main className="max-w-6xl mx-auto px-6 py-10">
+        <div className="space-y-6">
+          {data.sections.map((s) => (
+            <article key={s.id} id={s.id} className="relative overflow-hidden rounded-lg p-6 shadow-sm ring-1 ring-gray-100 dark:ring-0 bg-white dark:bg-[#071322]">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-amber-500" aria-hidden />
+              <div className="flex items-start gap-4 ml-4">
+                <div className="flex-shrink-0 text-amber-500 mt-1">
+                  {s.id === 'accuracy' && <Database className="w-6 h-6 text-amber-500" />}
+                  {s.id === 'professional' && <FileText className="w-6 h-6 text-amber-500" />}
+                  {s.id === 'links' && <Users className="w-6 h-6 text-amber-500" />}
+                  {s.id === 'endorsement' && <Lock className="w-6 h-6 text-amber-500" />}
+                  {s.id === 'changes' && <Eye className="w-6 h-6 text-amber-500" />}
+                  {s.id === 'liability' && <Mail className="w-6 h-6 text-amber-500" />}
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-900 dark:text-white">{s.title}</h3>
+                  <p className="text-gray-700 dark:text-gray-200 mb-3">{s.body}</p>
+                </div>
+              </div>
+            </article>
+          ))}
 
-        <main className="md:flex-1 prose max-w-none">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            {sections.map((sec) => (
-              <section id={sec.id} key={sec.id} className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">{sec.title}</h2>
-                <p className="text-gray-700 whitespace-pre-line">{sec.body}</p>
-              </section>
-            ))}
-
-            <div className="mt-4 text-sm text-gray-600">
-              <p>{S.text.contact}</p>
-            </div>
-          </div>
-        </main>
-      </div>
+          {/* contact line removed */}
+        </div>
+      </main>
     </div>
   );
 }
