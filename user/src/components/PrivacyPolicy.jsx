@@ -1,390 +1,109 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Lock, Eye, Users, Database, FileText, AlertTriangle, Mail, Sun, Moon } from 'lucide-react';
-import { Tooltip } from 'react-tooltip';
-import 'react-tooltip/dist/react-tooltip.css';
+import banner from '../assets/header-banner2.jpg';
+import { Shield, Mail, Moon, Sun, Database, FileText, Users, Lock, Eye, AlertTriangle, Printer } from 'lucide-react';
 
-const tooltipStyle = {
-  backgroundColor: "#FF9933",
-  color: "#1F2937",
-  padding: "8px 12px",
-  borderRadius: "12px",
-  fontSize: "14px",
-  fontWeight: 500,
-  textAlign: "center",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-  maxWidth: "220px",
-  whiteSpace: "pre-line",
-  zIndex: 9999,
+const TEXT = {
+  en: {
+    title: 'Privacy Policy',
+    subtitle: 'How SaralSeva collects, uses and protects your information',
+    intro: 'SaralSeva is committed to providing secure, transparent access to government schemes. This policy explains what we collect, why, and how you can control your data.',
+    toc: 'Contents',
+    sections: [
+      { id: 'collect', title: 'Information We Collect', body: 'We collect minimal personal information necessary to provide services: name, contact details, identity numbers (when required), application documents, and limited technical data for security.' },
+      { id: 'use', title: 'How We Use Data', body: 'We use data to process applications, verify eligibility, transfer benefits, send status updates, detect fraud, and improve the platform. Aggregated data is used for analytics.' },
+      { id: 'share', title: 'Sharing & Disclosure', body: 'We share data with government departments and banking partners strictly for service delivery. We disclose data only when required by law or to protect rights and safety.' },
+      { id: 'security', title: 'Security & Storage', body: 'We use encryption, access control and audits to protect data. Sensitive documents are processed per government guidelines and access is restricted.' },
+      { id: 'rights', title: 'Your Rights', body: 'You can access, correct, or request deletion of your personal data where allowed by law. You may opt-out of non-essential communications and raise grievances via the platform.' },
+      { id: 'contact', title: 'Contact', body: 'Privacy Officer — privacy@saralseva.gov.in | Toll Free: 1800-XXX-XXXX' },
+    ],
+    footer: '🇮🇳 Proudly Indian • Digital India Initiative',
+  },
+  hi: {
+    title: 'गोपनीयता नीति',
+    subtitle: 'SaralSeva आपकी जानकारी को कैसे एकत्र, उपयोग और सुरक्षित करता है',
+    intro: 'SaralSeva सुरक्षित और पारदर्शी रूप से सरकारी योजनाओं तक पहुंच प्रदान करने के लिए प्रतिबद्ध है। यह नीति बताती है कि हम क्या एकत्र करते हैं, क्यों और आप अपने डेटा को कैसे नियंत्रित कर सकते हैं।',
+    toc: 'अनुक्रमणिका',
+    sections: [
+      { id: 'collect', title: 'हम जो जानकारी एकत्र करते हैं', body: 'हम सेवाएँ प्रदान करने के लिए न्यूनतम व्यक्तिगत जानकारी एकत्र करते हैं: नाम, संपर्क विवरण, पहचान संख्या (जब आवश्यक हो), आवेदन दस्तावेज़ और सुरक्षा हेतु सीमित तकनीकी डेटा।' },
+      { id: 'use', title: 'हम डेटा का उपयोग कैसे करते हैं', body: 'हम डेटा का उपयोग आवेदन प्रोसेस करने, पात्रता सत्यापित करने, लाभ ट्रांसफर करने, स्थिति अपडेट भेजने, धोखाधड़ी का पता लगाने और प्लेटफ़ॉर्म को बेहतर बनाने के लिए करते हैं। समेकित डेटा विश्लेषण के लिए उपयोग किया जाता है।' },
+      { id: 'share', title: 'साझा करना और प्रकटीकरण', body: 'हम सेवा प्रदान करने के लिए डेटा सरकारी विभागों और बैंकिंग भागीदारों के साथ साझा करते हैं। केवल कानूनी आवश्यकता या अधिकारों/सुरक्षा की रक्षा के लिए ही डेटा साझा किया जाता है।' },
+      { id: 'security', title: 'सुरक्षा और भंडारण', body: 'हम डेटा की सुरक्षा के लिए एन्क्रिप्शन, एक्सेस नियंत्रण और ऑडिट का उपयोग करते हैं। संवेदनशील दस्तावेज़ सरकारी दिशानिर्देशों के अनुसार संसाधित किए जाते हैं।' },
+      { id: 'rights', title: 'आपके अधिकार', body: 'आप कानूनी तौर पर जहाँ संभव हो अपने व्यक्तिगत डेटा तक पहुँच, उसे सुधारने या हटाने का अनुरोध कर सकते हैं। आप गैर-आवश्यक संचार से ऑप्ट-आउट कर सकते हैं और प्लेटफ़ॉर्म पर शिकायत दर्ज कर सकते हैं।' },
+      { id: 'contact', title: 'संपर्क', body: 'गोपनीयता अधिकारी — privacy@saralseva.gov.in | टोल फ्री: 1800-XXX-XXXX' },
+    ],
+    footer: '🇮🇳 गर्व से भारतीय • डिजिटल इंडिया पहल',
+  },
 };
 
-const PrivacyPolicy = () => {
-  // ✅ FIX: Initialize dark mode from localStorage immediately
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark";
-  });
+export default function PrivacyPolicy() {
+  const [lang, setLang] = useState('en');
+  const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark');
 
-  // ✅ FIX: Apply theme immediately on mount (before first render)
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      setDarkMode(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      setDarkMode(false);
-    }
-  }, []); // Run only once on mount
+    if (dark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }, [dark]);
 
-  // Update theme when darkMode state changes
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
-  const sections = [
-    {
-      id: "information-collection",
-      title: "Information We Collect",
-      icon: <Database
-        className="w-6 h-6"
-        data-tooltip-id="infoCollectTip"
-        data-tooltip-content="This icon represents the types of information we collect"
-      />,
-      content: [
-        {
-          subtitle: "Personal Information",
-          items: [
-            "Name, address, phone number, and email address",
-            "Government-issued identification numbers (Aadhaar, PAN, etc.)",
-            "Bank account details for scheme benefit transfers",
-            "Demographic information (age, gender, category, income details)",
-            "Family composition and dependent information"
-          ]
-        },
-        {
-          subtitle: "Application Data",
-          items: [
-            "Scheme application details and supporting documents",
-            "Grievance submissions and communication records",
-            "Application status and processing history",
-            "Digital signatures and authentication data"
-          ]
-        },
-        {
-          subtitle: "Technical Information",
-          items: [
-            "Device information and browser type",
-            "IP address and location data (for security purposes)",
-            "Login timestamps and session data",
-            "Platform usage analytics for service improvement"
-          ]
-        }
-      ]
-    },
-    {
-      id: "information-use",
-      title: "How We Use Your Information",
-      icon: <FileText
-        className="w-6 h-6"
-        data-tooltip-id="infoUseTip"
-        data-tooltip-content="This icon shows how your data is used by SaralSeva"
-      />,
-      content: [
-        {
-          subtitle: "Primary Purposes",
-          items: [
-            "Processing government scheme applications and benefit distribution",
-            "Verifying eligibility and conducting background checks",
-            "Tracking application progress and providing status updates",
-            "Facilitating communication between citizens and government officials",
-            "Resolving grievances and addressing citizen concerns"
-          ]
-        },
-        {
-          subtitle: "Secondary Purposes",
-          items: [
-            "Generating reports for administrative and policy planning",
-            "Improving platform functionality and user experience",
-            "Ensuring compliance with government regulations and audit requirements",
-            "Preventing fraud and maintaining system security"
-          ]
-        }
-      ]
-    },
-    {
-      id: "information-sharing",
-      title: "Information Sharing and Disclosure",
-      icon: <Users
-        className="w-6 h-6"
-        data-tooltip-id="infoShareTip"
-        data-tooltip-content="This icon represents with whom your data is shared"
-      />,
-      content: [
-        {
-          subtitle: "Government Agencies",
-          items: [
-            "Relevant central and state government departments for scheme processing",
-            "Gram Panchayat officials and local administrative bodies",
-            "Banking partners for direct benefit transfers",
-            "Verification agencies for document and eligibility checks"
-          ]
-        },
-        {
-          subtitle: "Legal Requirements",
-          items: [
-            "Court orders, legal proceedings, or regulatory compliance",
-            "Law enforcement agencies for investigation purposes",
-            "Audit bodies for transparency and accountability measures",
-            "RTI (Right to Information) requests as per applicable laws"
-          ]
-        }
-      ]
-    },
-    {
-      id: "data-security",
-      title: "Data Security and Protection",
-      icon: <Lock
-        className="w-6 h-6"
-        data-tooltip-id="dataSecurityTip"
-        data-tooltip-content="This icon shows measures taken to protect your data"
-      />,
-      content: [
-        {
-          subtitle: "Technical Safeguards",
-          items: [
-            "End-to-end encryption for sensitive data transmission",
-            "Secure servers with regular security updates and patches",
-            "Multi-factor authentication for user accounts",
-            "Regular security audits and vulnerability assessments",
-            "Backup and disaster recovery systems"
-          ]
-        },
-        {
-          subtitle: "Administrative Safeguards",
-          items: [
-            "Role-based access control for employees and administrators",
-            "Regular training on data protection and privacy practices",
-            "Incident response procedures for security breaches",
-            "Compliance with government data protection standards"
-          ]
-        }
-      ]
-    },
-    {
-      id: "user-rights",
-      title: "Your Rights and Choices",
-      icon: <Eye
-        className="w-6 h-6"
-        data-tooltip-id="userRightsTip"
-        data-tooltip-content="This icon represents your rights regarding your data"
-      />,
-      content: [
-        {
-          subtitle: "Access and Transparency",
-          items: [
-            "Right to access your personal information stored on the platform",
-            "Right to track the status and progress of your applications",
-            "Right to receive copies of submitted documents and forms",
-            "Right to know how your data is being processed and shared"
-          ]
-        },
-        {
-          subtitle: "Control and Correction",
-          items: [
-            "Right to update or correct inaccurate personal information",
-            "Right to withdraw applications (subject to processing stage)",
-            "Right to file grievances regarding data handling",
-            "Right to opt-out of non-essential communications"
-          ]
-        }
-      ]
-    },
-    {
-      id: "data-retention",
-      title: "Data Retention and Deletion",
-      icon: <AlertTriangle
-        className="w-6 h-6"
-        data-tooltip-id="dataRetentionTip"
-        data-tooltip-content="This icon represents how long data is kept and deleted securely"
-      />,
-      content: [
-        {
-          subtitle: "Retention Periods",
-          items: [
-            "Active application data: Retained until scheme completion or rejection",
-            "Processed applications: Retained for 7 years as per government guidelines",
-            "Grievance records: Retained for 5 years after resolution",
-            "User account data: Retained as long as the account remains active"
-          ]
-        },
-        {
-          subtitle: "Secure Deletion",
-          items: [
-            "Data is securely deleted after retention period expires",
-            "Multiple verification steps before permanent deletion",
-            "Anonymization of data used for statistical purposes",
-            "Compliance with government record-keeping requirements"
-          ]
-        }
-      ]
-    }
-  ];
+  const data = TEXT[lang];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex items-center justify-center mb-6">
-            <Shield className="w-12 h-12 mr-4" />
-            <div>
-              <h2 className="text-4xl font-bold mb-2">Privacy Policy</h2>
-            </div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors">
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Privacy banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">{data.title}</h1>
+            <p className="mt-2 text-sm md:text-base text-white/90">{data.subtitle}</p>
           </div>
-          <div className="text-center max-w-4xl mx-auto">
-            <p className="text-lg opacity-95 leading-relaxed">
-              Committed to protecting your privacy while digitizing governance at the Gram Panchayat level. 
-              Your trust is fundamental to building a transparent Digital India.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Theme Toggle Button */}
-        <div className="flex justify-end mb-6">
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            data-tooltip-id="themeToggleTip"
-            data-tooltip-content={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-        </div>
-
-        {/* Introduction */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 transition-colors duration-500">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Our Commitment to Your Privacy</h2>
-          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
-            <p className="mb-4">
-              SaralSeva is dedicated to strengthening governance from the ground up by providing transparent, 
-              accessible, and secure digital services for rural government schemes. This Privacy Policy explains 
-              how we collect, use, protect, and share your personal information in accordance with applicable 
-              Indian data protection laws and government guidelines.
-            </p>
-            <p className="mb-4">
-              As a platform serving citizens, government employees, and administrators, we understand the 
-              critical importance of maintaining the confidentiality and integrity of your personal information 
-              while ensuring transparency in government operations.
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-              <strong>Last Updated:</strong> August 2025 | <strong>Effective Date:</strong> August 19, 2025
-            </p>
+          <div className="absolute right-4 top-4 flex items-center gap-3">
+            <label className="text-sm text-white">EN</label>
+            <input type="radio" name="pp-lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <label className="text-sm text-white">HI</label>
+            <input type="radio" name="pp-lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+            <button
+              onClick={() => window.print()}
+              title={lang === 'hi' ? 'छापें' : 'Print'}
+              className="bg-white/10 hover:bg-white/20 text-white rounded px-2 py-1 text-sm flex items-center gap-2"
+            >
+              <Printer className="w-4 h-4" />
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Sections */}
-        <div className="space-y-8">
-          {sections.map((section, index) => (
-            <div key={section.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-colors duration-500">
-              <div className="bg-gradient-to-r from-blue-500 to-orange-400 text-white p-6">
-                <div className="flex items-center">
-                  {section.icon}
-                  <h2 className="text-2xl font-bold ml-3">{section.title}</h2>
-                </div>
-              </div>
-              
-              <div className="p-8">
-                <div className="space-y-8">
-                  {section.content.map((subsection, subIndex) => (
-                    <div key={subIndex}>
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                        <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
-                        {subsection.subtitle}
-                      </h3>
-                      <ul className="space-y-3">
-                        {subsection.items.map((item, itemIndex) => (
-                          <li key={itemIndex} className="flex items-start">
-                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+      <main className="max-w-6xl mx-auto px-6 py-10">
+        <div className="grid grid-cols-1 gap-8">
+          <section>
+
+            <div className="space-y-6">
+              {data.sections.map((s) => (
+                <article id={s.id} key={s.id} className="relative overflow-hidden rounded-lg p-6 shadow-sm ring-1 ring-gray-100 dark:ring-0 bg-white dark:bg-[#071322]">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-amber-500" aria-hidden />
+                  <div className="flex items-start gap-4 ml-4">
+                    <div className="flex-shrink-0 text-amber-500 mt-1">
+                      {s.id === 'collect' && <Database className="w-6 h-6 text-amber-500" />}
+                      {s.id === 'use' && <FileText className="w-6 h-6 text-amber-500" />}
+                      {s.id === 'share' && <Users className="w-6 h-6 text-amber-500" />}
+                      {s.id === 'security' && <Lock className="w-6 h-6 text-amber-500" />}
+                      {s.id === 'rights' && <Eye className="w-6 h-6 text-amber-500" />}
+                      {s.id === 'contact' && <Mail className="w-6 h-6 text-amber-500" />}
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <div>
+                      <h4 className="font-semibold text-lg mb-2 text-gray-900 dark:text-white">{s.title}</h4>
+                      <p className="text-gray-700 dark:text-gray-200 mb-3">{s.body}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Contact and Grievance */}
-        <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-2xl p-8 mt-12">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <Mail className="w-6 h-6 mr-3" />
-                <h3 className="text-xl font-bold">Privacy Officer Contact</h3>
-              </div>
-              <div className="space-y-2 text-blue-100">
-                <p>Email: privacy@saralseva.gov.in</p>
-                <p>Phone: 1800-XXX-XXXX (Toll Free)</p>
-                <p>Address: National Portal Secretariat CGO Complex, Lodhi Road, New Delhi - 110 003, India.</p>
-                <p>Response Time: Within 30 days of receipt</p>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center mb-4">
-                <AlertTriangle className="w-6 h-6 mr-3" />
-                <h3 className="text-xl font-bold">Data Protection Grievances</h3>
-              </div>
-              <div className="space-y-2 text-blue-100">
-                <p>Online Grievance Portal: Available through your SaralSeva account</p>
-                <p>Escalation: District Collector's Office</p>
-                <p>External Authority: Data Protection Authority of India (when established)</p>
-                <p>Emergency Contact: 9876543210</p>
-              </div>
-            </div>
-          </div>
+            <div className="mt-8 text-sm text-center text-gray-600 dark:text-gray-300">{data.footer}</div>
+          </section>
         </div>
-
-        {/* Footer Note */}
-        <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 mt-8 text-center transition-colors duration-500">
-          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-            This Privacy Policy is part of SaralSeva's commitment to building a transparent, accountable, 
-            and citizen-centric digital governance ecosystem. Regular updates ensure compliance with 
-            evolving data protection regulations and government guidelines.
-          </p>
-          <div className="flex flex-wrap justify-center items-center mt-4 space-x-4 text-xs text-gray-500 dark:text-gray-400">
-            <span>🇮🇳 Proudly Indian</span>
-            <span>•</span>
-            <span>Digital India Initiative</span>
-            <span>•</span>
-            <span>Transparent Governance</span>
-            <span>•</span>
-            <span>Citizen First</span>
-          </div>
-        </div>
-
-        {/* Tooltips */}
-        <Tooltip id="themeToggleTip" style={tooltipStyle} />
-        <Tooltip id="infoCollectTip" style={tooltipStyle} />
-        <Tooltip id="infoUseTip" style={tooltipStyle} />
-        <Tooltip id="infoShareTip" style={tooltipStyle} />
-        <Tooltip id="dataSecurityTip" style={tooltipStyle} />
-        <Tooltip id="userRightsTip" style={tooltipStyle} />
-        <Tooltip id="dataRetentionTip" style={tooltipStyle} />
-      </div>
+      </main>
     </div>
   );
-};
+}
 
-export default PrivacyPolicy;

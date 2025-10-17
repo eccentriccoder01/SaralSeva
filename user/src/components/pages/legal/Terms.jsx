@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import banner from '../../../assets/header-banner2.jpg';
 
 export default function Terms() {
   const [lang, setLang] = useState('en');
@@ -82,22 +83,25 @@ export default function Terms() {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">{S.title}</h1>
-          <p className="text-sm text-gray-500 mt-1">{S.lastUpdated}</p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button onClick={() => window.print()} className="text-sm px-3 py-1 border rounded">{S.print}</button>
-          <div className="flex items-center gap-1">
-            <label className="text-sm">EN</label>
-            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-            <label className="text-sm">HI</label>
-            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+        <img src={banner} alt="Terms banner" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">{S.title}</h1>
+            <p className="mt-2 text-sm md:text-base text-white/90">{S.lastUpdated}</p>
+          </div>
+          <div className="absolute right-4 top-4 flex items-center gap-3">
+            <button onClick={() => window.print()} className="text-sm px-3 py-1 border rounded text-white/90">{S.print}</button>
+            <div className="flex items-center gap-2 text-white/90">
+              <label className="text-sm">EN</label>
+              <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+              <label className="text-sm">HI</label>
+              <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+            </div>
           </div>
         </div>
-      </div>
+      </header>
 
       <div className="md:flex gap-8">
         <aside className="md:w-1/4 mb-6 md:mb-0">
