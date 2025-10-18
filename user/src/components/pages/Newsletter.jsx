@@ -10,6 +10,7 @@ export default function Newsletter() {
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
+  const [showNotice, setShowNotice] = useState(true);
 
   const countries = [
     { code: 'IN', name: 'India', dial: '+91', flag: '🇮🇳' },
@@ -24,6 +25,8 @@ export default function Newsletter() {
       en: {
         title: 'Newsletter Signup',
         subtitle: 'Get monthly updates about new schemes, guides and community news.',
+        noticeTitle: 'Newsletter notice',
+        noticeText: 'Subscribe to receive important updates and new scheme alerts. You can unsubscribe anytime.',
         name: 'Full name (optional)',
         email: 'Email address',
         phone: 'Phone (optional)',
@@ -39,6 +42,8 @@ export default function Newsletter() {
       hi: {
         title: 'न्यूज़लैटर साइनअप',
         subtitle: 'नए योजनाओं, मार्गदर्शिकाओं और समुदाय समाचारों के मासिक अपडेट पाएं।',
+        noticeTitle: 'न्यूज़लैटर सूचना',
+        noticeText: 'महत्वपूर्ण अपडेट और नई योजना सूचनाएं प्राप्त करने के लिए सदस्यता लें। आप कभी भी अनसब्सक्राइब कर सकते हैं।',
         name: 'पूरा नाम (वैकल्पिक)',
         email: 'ईमेल पता',
         phone: 'फ़ोन (वैकल्पिक)',
@@ -126,23 +131,40 @@ export default function Newsletter() {
       <div className="relative h-56 md:h-72 lg:h-96 w-full overflow-hidden rounded-b-lg">
         <img src={banner} alt="banner" className="absolute inset-0 w-full h-full object-cover brightness-90" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
-        <div className="relative z-10 container mx-auto h-full flex items-center">
-          <div className="text-white py-6">
+        <div className="relative z-10 container mx-auto h-full flex items-center justify-center">
+          <div className="text-white py-6 text-center">
             <h1 className="text-3xl md:text-4xl font-extrabold">{strings[lang].title}</h1>
-            <p className="mt-2 text-sm md:text-base max-w-2xl">{strings[lang].subtitle}</p>
-          </div>
-          <div className="ml-auto mr-6">
-            <div className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-md">
-              <label className="text-xs text-white">EN</label>
-              <input aria-label="english" className="accent-amber-500" type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-              <label className="text-xs text-white">HI</label>
-              <input aria-label="hindi" className="accent-amber-500" type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
-            </div>
+            <p className="mt-2 text-sm md:text-base max-w-2xl mx-auto">{strings[lang].subtitle}</p>
+
+            <fieldset className="mt-4 flex flex-row items-center gap-3 justify-center" aria-label="Language selection">
+              <legend className="sr-only">Language</legend>
+              <label className={`flex items-center gap-2 px-3 py-1 rounded-md cursor-pointer ${lang === 'en' ? 'bg-white/10' : 'bg-transparent'}`}>
+                <input type="radio" name="newsletter-lang" className="accent-amber-500" checked={lang === 'en'} onChange={() => setLang('en')} />
+                <span className="text-sm text-white">EN</span>
+              </label>
+
+              <label className={`flex items-center gap-2 px-3 py-1 rounded-md cursor-pointer ${lang === 'hi' ? 'bg-white/10' : 'bg-transparent'}`}>
+                <input type="radio" name="newsletter-lang" className="accent-amber-500" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+                <span className="text-sm text-white">HI</span>
+              </label>
+            </fieldset>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto p-6">
+        {/* Dismissible notice under the hero */}
+        {showNotice && (
+          <div className="mx-auto max-w-3xl mb-4 bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 rounded-md flex items-start justify-between">
+            <div>
+              <div className="font-semibold">{strings[lang].noticeTitle}</div>
+              <div className="text-sm text-gray-700 dark:text-gray-200">{strings[lang].noticeText}</div>
+            </div>
+            <div>
+              <button onClick={() => setShowNotice(false)} className="text-sm px-3 py-1 rounded-md border bg-white/0">Dismiss</button>
+            </div>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl bg-white dark:bg-gray-900 shadow-md rounded-lg p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>

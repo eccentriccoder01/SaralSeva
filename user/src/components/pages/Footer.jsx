@@ -211,12 +211,15 @@ const Footer = () => {
                         {link.name}
                       </Link>
                     ))}
+                    
                   </nav>
                 )}
               </div>
             ))}
           </div>
         </div>
+
+        
       </div>
 
       {/* QR Code Popup - enhanced animation and styling */}

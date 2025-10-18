@@ -42,6 +42,14 @@ const FAQS = [
     hiA: `Contact पेज के माध्यम से सपोर्ट से संपर्क करें या तेज़ सहायता के लिए चेटबोट/Help Center संपर्क फॉर्म का उपयोग करें। त्वरित समाधान के लिए अपना आवेदन आईडी साझा करें।`,
     category: 'Support',
   },
+  {
+    id: 'f6',
+    q: 'How do I check the status of my application?',
+    a: `Go to Dashboard → Applications and enter your application ID or look under the Recent Applications list. Status updates and office comments (if any) will be shown there.`,
+    hiQ: 'मैं अपने आवेदन की स्थिति कैसे जांच सकता/सकती हूँ?',
+    hiA: `Dashboard → Applications पर जाएँ और अपना आवेदन आईडी दर्ज करें या Recent Applications सूची देखें। स्थिति अपडेट और कार्यालय टिप्पणियाँ वहीं दिखाई जाएँगी।`,
+    category: 'Support',
+  },
 ];
 
 export default function Help() {
@@ -89,21 +97,19 @@ export default function Help() {
         style={{ backgroundImage: `url(${banner})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">{strings[lang].title}</h1>
+        <div className="relative text-center">
+          <h1 className="text-5xl font-extrabold text-white jost tracking-wider">{strings[lang].title}</h1>
+          <p className="mt-2 text-white text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+        </div>
+        <div className="absolute right-4 top-4 flex items-center gap-2">
+          <label className="text-sm text-white">EN</label>
+          <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+          <label className="text-sm text-white">HI</label>
+          <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+        </div>
       </div>
 
       <div className="container mx-auto p-6">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <p className="text-gray-600 mt-1">{strings[lang].subtitle}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm">EN</label>
-            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-            <label className="text-sm">HI</label>
-            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
-          </div>
-        </div>
 
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -136,18 +142,30 @@ export default function Help() {
           </aside>
 
           <section className="md:col-span-2">
-            <div className="space-y-4">
+            <div className="relative">
+              <div className="space-y-4">
               {results.map((f) => (
-                <div key={f.id} className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-                  <button className="w-full text-left" onClick={() => setOpen((s) => ({ ...s, [f.id]: !s[f.id] }))} aria-expanded={!!open[f.id]}>
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-semibold">{lang === 'hi' && f.hiQ ? f.hiQ : f.q}</h4>
-                      <span className="text-amber-500">{open[f.id] ? '−' : '+'}</span>
+                <div key={f.id} className="mb-4">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-t-4 border-amber-500 overflow-hidden flex items-center justify-between px-6 py-4">
+                    <div>
+                      <h4 className="text-lg font-semibold text-stone-800 dark:text-gray-200">{lang === 'hi' && f.hiQ ? f.hiQ : f.q}</h4>
+                      <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{f.category}</div>
                     </div>
-                  </button>
-                  {open[f.id] && (
-                    <div className="mt-3 text-sm text-gray-700 whitespace-pre-line">{lang === 'hi' && f.hiA ? f.hiA : f.a}</div>
-                  )}
+                    <div>
+                      <button
+                        onClick={() => setOpen((s) => ({ ...s, [f.id]: !s[f.id] }))}
+                        aria-expanded={!!open[f.id]}
+                        className={`px-4 py-2 rounded-full border ${open[f.id] ? 'bg-amber-600 text-white border-amber-600' : 'bg-white text-amber-700 border-amber-200'} focus:outline-none focus:ring-2 focus:ring-amber-300`}
+                        aria-label={open[f.id] ? (lang === 'hi' ? 'उत्तर छुपाएँ' : 'Hide answer') : (lang === 'hi' ? 'उत्तर देखें' : 'View answer')}
+                      >
+                        {lang === 'hi' ? 'दिखाएँ' : 'View'}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className={open[f.id] ? 'px-6 pb-6 pt-4 transition-all duration-300 max-h-screen' : 'px-6 pb-0 pt-0 max-h-0 overflow-hidden transition-all duration-300'}>
+                    <div className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{lang === 'hi' && f.hiA ? f.hiA : f.a}</div>
+                  </div>
                 </div>
               ))}
 
@@ -155,15 +173,20 @@ export default function Help() {
                 <div className="text-center text-gray-500">{strings[lang].noResults}</div>
               )}
 
-              <div className="mt-6 bg-white dark:bg-gray-800 p-4 rounded-lg">
-                <h3 className="font-semibold mb-2">{strings[lang].stillHelp}</h3>
-                <p className="text-sm text-gray-700 mb-3">{lang === 'hi' ? 'यदि आप उत्तर नहीं ढूंढ पा रहे हैं, तो हमारे सपोर्ट से संपर्क करें या तेज़ सहायता के लिए चेटबोट का उपयोग करें।' : 'If you can\'t find an answer, contact our support team or use the chatbot for quick assistance.'}</p>
-                <div className="flex gap-2">
-                  <a href="/contact" className="px-4 py-2 bg-amber-500 text-white rounded-md">{strings[lang].contactSupport}</a>
-                  <a href="/chatbot" className="px-4 py-2 border rounded-md">{strings[lang].openChatbot}</a>
+              <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border-t-4 border-amber-500 p-4">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="font-semibold mb-2">{strings[lang].stillHelp}</h3>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">{lang === 'hi' ? 'यदि आप उत्तर नहीं ढूंढ पा रहे हैं, तो हमारे सपोर्ट से संपर्क करें या तेज़ सहायता के लिए चेटबोट का उपयोग करें।' : 'If you can\'t find an answer, contact our support team or use the chatbot for quick assistance.'}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <a href="/contact" className="px-4 py-2 bg-amber-500 text-white rounded-md text-sm">{strings[lang].contactSupport}</a>
+                    <a href="/chatbot" className="px-4 py-2 border rounded-md text-sm">{strings[lang].openChatbot}</a>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
           </section>
         </div>
       </main>

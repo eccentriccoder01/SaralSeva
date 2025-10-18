@@ -122,26 +122,21 @@ const Contact = () => {
         style={{ backgroundImage: `url(${banner})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">{S.title}</h1>
+        <div className="relative text-center">
+          <h1 className="text-5xl font-extrabold text-white jost tracking-wider">{S.title}</h1>
+          <p className="mt-2 text-white text-sm md:text-base opacity-90">{S.subtitle}</p>
+          <p className="mt-1 text-white text-sm opacity-80">{S.lastUpdated}</p>
+        </div>
+        <div className="absolute right-4 top-4 flex items-center gap-3">
+          <button onClick={() => window.print()} className="text-sm text-white underline">{S.print}</button>
+          <label className="text-sm text-white">EN</label>
+          <input type="radio" name="lang" checked={lang === "en"} onChange={() => setLang("en")} />
+          <label className="text-sm text-white">HI</label>
+          <input type="radio" name="lang" checked={lang === "hi"} onChange={() => setLang("hi")} />
+        </div>
       </div>
 
       <div className="container mx-auto p-6">
-        <div className="flex items-start justify-between mb-6">
-          <div>
-            <h2 className="text-3xl font-bold">{S.subtitle}</h2>
-            <p className="text-sm text-gray-500 mt-1">{S.lastUpdated}</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button onClick={() => window.print()} className="text-sm px-3 py-1 border rounded">{S.print}</button>
-            <div className="flex items-center gap-2">
-              <label className="text-sm">EN</label>
-              <input type="radio" name="lang" checked={lang === "en"} onChange={() => setLang("en")} />
-              <label className="text-sm">HI</label>
-              <input type="radio" name="lang" checked={lang === "hi"} onChange={() => setLang("hi")} />
-            </div>
-          </div>
-        </div>
 
         <div className="md:flex gap-8">
           <aside className="md:w-1/4 mb-6 md:mb-0">
