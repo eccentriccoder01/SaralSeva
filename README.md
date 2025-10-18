@@ -1,18 +1,36 @@
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
 <div align="center"><img src="S.png" style="width: 220px; height: 220px;"  alt="SaralSeva Logo" /></div>
 
 <h1 align="center">SaralSeva</h1>
 
-<h3>📖 Table of Contents</h3>
+<br>
+
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+<div align="center" style="margin: 10px 0 24px;">
+  <a href="https://github.com/eccentriccoder01/SaralSeva/issues">� Report Bug</a>
+  •
+  <a href="https://github.com/eccentriccoder01/SaralSeva/issues">💡 Request Feature</a>
+  
+</div>
+
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+ 
+<h3>�📖 Table of Contents</h3>
 
 - <a href="#overview"> Overview </a>
 - <a href="#project-insights"> Project Insights </a>
 - <a href="#vision"> 🇮🇳 The Vision: Digitising Governance at the Gram Panchayat Level </a>
+- <a href="#why-saralseva"> Why SaralSeva? </a>
+- <a href="#mission"> Mission </a>
 - <a href="#demo"> Live Demo </a>
 - <a href="#screenshots"> Screenshots </a>
 - <a href="#key-features">Key Features</a>
 - <a href="#technologies-used"> Technologies Used </a>
 - <a href="#automated-dependency-management"> 🤖 Automated Dependency Management </a>
 - <a href="#installation-setup"> Installation and Setup </a>
+- <a href="#troubleshooting"> Troubleshooting </a>
 - <a href="#acknowledgments">Acknowledgments</a>
 - <a href="#contact">Contact</a>
 - <a href="#how-to-contribute">How to Contribute</a>
@@ -26,19 +44,19 @@
 - <a href="#forkers">Forkers</a>
 - <a href="#project-admin">Project Admin</a>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="overview">🔍 Overview</h2>
 
 > **SaralSeva** is a web-based full stack application designed to streamline the application and grievance resolution process for rural government schemes. This platform offers user-friendly features for users to apply for schemes, track their progress, and receive updates, as well as powerful tools for administrators and employees to manage scheme applications, monitor performance, and communicate effectively.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1000&color=00C853&center=true&vCenter=true&width=900&lines=Thanks+for+visiting+SaralSeva!+🙌;Start+the+repo+✅;Share+it+with+others+🌍;Contribute+and+grow+🛠️;Happy+Coding+✨!" alt="Thanks Banner Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=FF6F3B&width=435&lines=Thanks+for+visiting+SaralSeva!%F0%9F%99%8C;Start+the+repo%E2%9C%85;Share+it+with+others%F0%9F%8C%8D;Contribute+and+grow%F0%9F%9B%A0%EF%B8%8F;Happy+Coding%E2%9C%A8!" alt="Thanks Banner Typing SVG" />
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="project-insights">📊 Project Insights</h2>
 
@@ -66,27 +84,48 @@
         </tr>
     </tbody>
 </table>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="vision"> 🇮🇳 The Vision: Digitising Governance at the Gram Panchayat Level </h2>
 
-SaralSeva is more than just a software project; it's an initiative for social good, aimed at strengthening governance from the ground up. It directly contributes to building a more inclusive and transparent Digital India by focusing on:
+SaralSeva strengthens grassroots governance to build a more inclusive and transparent Digital India:
 
-- By bringing government services online, SaralSeva makes them accessible to citizens 24/7 from anywhere, reducing the need for physical travel to government offices.
-- Every application and grievance is tracked digitally with a unique ID. This end-to-end visibility minimises ambiguity and holds the system accountable, building trust between the citizens and the administration.
-- The platform automates the workflow of application processing, reducing processing times and ensuring that benefits reach the intended recipients faster.
-- The platform serves as a central repository of information on all available government schemes. This empowers citizens with the information they need to claim their rights and improve their livelihoods.
-- With dedicated portals for employees and administrators, tasks are clearly assigned and tracked. The integrated grievance redressal system ensures that citizen concerns are heard and addressed in a structured manner.
+- 🌐 24/7 digital access to services — fewer in-person visits
+- 🔎 End‑to‑end tracking with unique IDs for trust and accountability
+- ⚙️ Automated workflows to reduce delays and speed up delivery
+- 📚 Centralised scheme information that empowers citizens
+- 👥 Clear roles for staff and structured grievance redressal
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+<h2 id="why-saralseva">🤔 Why SaralSeva?</h2>
+
+SaralSeva is built to make governance accessible, transparent, and efficient for everyone:
+
+- 🧭 One-stop platform: apply for schemes, file grievances, and track updates in one place
+- 🔍 Full transparency: real-time status, clear next steps, and notifications at each stage
+- ⚙️ Streamlined processing: automated workflows reduce manual delays and errors
+- 🛡️ Secure by design: role-based access, auditable actions, and safe data handling
+- 📱 Citizen-first experience: simple forms, PDF receipts, and multilingual-ready UI
+
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+<h2 id="mission">🎯 Mission</h2>
+
+Our mission is to make essential public services simple, transparent, and accessible for every citizen:
+
+- 🚪 Accessibility first: 24/7 digital access to schemes and grievance services
+- 🔎 Transparency by design: end-to-end tracking and clear status at each stage
+- ⚙️ Efficiency at scale: automated, auditable workflows that reduce delays
+- 🤝 Citizen empowerment: clear guidance, easy applications, and timely updates
+- 🛡️ Reliability: secure data handling and role-based access for admins/employees
 
 <h2 id="demo">🚀 Live Demo</h2>
 
 Experience SaralSeva live here:
 👉 [![**SaralSeva**](https://img.shields.io/badge/View-Live%20Demo-orange?style=for-the-badge)](https://saralseva.vercel.app/)
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat)
@@ -97,45 +136,48 @@ Experience SaralSeva live here:
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/eccentriccoder01/SaralSeva)
 ![Github](https://img.shields.io/github/license/eccentriccoder01/SaralSeva)
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="screenshots"> 📸 Screenshots </h2>
 
 <div align="center"><img src="App.png"/></div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="key-features">🌟 Key Features</h2>
 
 SaralSeva is built on a robust three-tier architecture, providing distinct, secure, and feature-rich portals for each user role.
 
-### **Citizen Portal**
+### 👤 **Citizen Portal**
 
-- **User Registration & Authentication**: Secure registration and login system with JWT and OTP verification via Twilio.
-- **Scheme & Grievance Applications**: Users can easily apply for government schemes and submit grievances through intuitive forms.
-- **Real-time Status Tracking**: Users can track the progress of their applications and grievances with a unique ID.
-- **Personalised Dashboard**: A central place for users to view their application history and manage their profile.
-- **PDF Downloads**: Users can download their applications as PDFs via `jsPDF` for their records.
+- 🔐 **User Registration & Authentication**: Secure registration and login system with JWT and OTP verification via Twilio.
+- 📝 **Scheme & Grievance Applications**: Users can easily apply for government schemes and submit grievances through intuitive forms.
+- ⏱️ **Real-time Status Tracking**: Users can track the progress of their applications and grievances with a unique ID.
+- 📊 **Personalised Dashboard**: A central place for users to view their application history and manage their profile.
+- 📄 **PDF Downloads**: Users can download their applications as PDFs via `jsPDF` for their records.
 
-### **Employee Portal**
+### 🧑‍💼 **Employee Portal**
 
-- **Task-Oriented Dashboard**: A clear view of all assigned scheme applications (tickets) and grievances.
-- **Application Processing**: Tools to review applications, verify documents, and update statuses.
-- **Performance Insights**: Admins can track and visualise employee performance data.
-- **Secure Messaging**: Internal chat system for communication with the admin.
+- 📋 **Task-Oriented Dashboard**: A clear view of all assigned scheme applications (tickets) and grievances.
+- 🛠️ **Application Processing**: Tools to review applications, verify documents, and update statuses.
+- 📈 **Performance Insights**: Admins can track and visualise employee performance data.
+- 🔒💬 **Secure Messaging**: Internal chat system for communication with the admin.
 
-### **Admin Portal**
+### 🛡️ **Admin Portal**
 
-- **Comprehensive Dashboard**: A high-level overview of all platform activity, including application statistics and employee performance.
-- **Scheme Management**: Full control to add, update, and manage all available government schemes.
-- **Automated Ticket Assignment**: Fair distribution of applications among employees.
-- **Final Approval Authority**: Power to give the final approval or rejection for all applications.
-- **Broadcast Announcements**: Create and display important updates for all citizens.
+- 📊 **Comprehensive Dashboard**: A high-level overview of all platform activity, including application statistics and employee performance.
+- 🗂️ **Scheme Management**: Full control to add, update, and manage all available government schemes.
+- 🤖 **Automated Ticket Assignment**: Fair distribution of applications among employees.
+- ✅ **Final Approval Authority**: Power to give the final approval or rejection for all applications.
+- 📢 **Broadcast Announcements**: Create and display important updates for all citizens.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
+<div align="center">
+  
 ![GSSoC Logo](gssoc_logo.png)
 
+</div>
 🌟 **Exciting News...**
 
 🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow _SaralSeva!_ Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
@@ -151,7 +193,7 @@ SaralSeva is built on a robust three-tier architecture, providing distinct, secu
 
 🎉 **I can’t wait to welcome new contributors** from GSSoC 2025 to this SaralSeva project family! Let's build, learn, and grow together — one commit at a time. 🔥👨‍💻👩‍💻
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="technologies-used"> 🛠️ Technologies Used</h2>
 
@@ -179,9 +221,9 @@ SaralSeva is built on a robust three-tier architecture, providing distinct, secu
 ![Dependabot](https://img.shields.io/badge/Dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
-## 🤖 Automated Dependency Management
+<h2 id="automated-dependency-management">🤖 Automated Dependency Management</h2>
 
 SaralSeva uses **GitHub Dependabot** for automated dependency updates and security vulnerability management:
 
@@ -193,9 +235,35 @@ SaralSeva uses **GitHub Dependabot** for automated dependency updates and securi
 
 [📖 Learn more about our Dependabot setup](./DEPENDABOT.md)
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%"> 
+
+<h2 id="flowchart">🧭 Project Flowchart</h2>
+
+<div align="center">
+
+```mermaid
+flowchart TD
+  A[Citizen] --> B[Apply for Scheme / File Grievance]
+  B --> C[Employee Review]
+  C -->|Verified| D[Admin Decision]
+  C -->|More Info Needed| B
+  D -->|Approved| E[Notification to Citizen]
+  D -->|Rejected| E
+  E --> F[Track Status / Download PDF]
+```
+
+</div>
 
 <h2 id="installation-setup"> ⚙️ Installation and Setup </h2>
+<h2 id="prerequisites">📋 Prerequisites</h2>
+
+Ensure you have the following installed/configured:
+
+- 🟢 Node.js 18+ and npm
+- 🍃 MongoDB (local or Atlas)
+- 🔐 Environment variables for JWT, MongoDB URL
+- 📧 Optional: Twilio (OTP), Cloudinary (media), Google OAuth Client ID
+
 
 > The project is a monorepo containing four separate applications: `backend`, `user`, `employee`, and `admin`. Each must be set up and run independently.
 
@@ -301,8 +369,17 @@ b. Install dependencies and run the development server:
 npm install
 npm run dev
 ```
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+<h2 id="troubleshooting">🛠️ Troubleshooting</h2>
+
+- ⛔ Node version errors: check `node -v` (need v18+)
+- 🔐 Missing/incorrect .env: ensure `MONGODB_URL`, `JWT_SECRET`, optional third-party keys
+- 🗄️ MongoDB connection failed: allow IP in Atlas; verify user roles and connection string
+- 🔌 Port in use: change ports or kill process using `netstat -ano | findstr :8000`
+- 🌐 CORS errors: verify frontend origin is allowed in server CORS config
+
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## Issue Creation ✴
 
@@ -319,6 +396,8 @@ Report bugs and issues or propose improvements through our GitHub repository's "
 
 - Check the [CONTRIBUTING.md](CONTRIBUTING.md) for detailed steps...
 
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+ 
 ## Contributing is fun🧡
 
 We welcome all contributions and suggestions!
@@ -326,7 +405,7 @@ Whether it's a new feature, design improvement, or a bug fix - your voice matter
 
 Your insights are invaluable to us. Reach out to us team for any inquiries, feedback, or concerns.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="acknowledgments">🙏 Acknowledgments</h2>
 
@@ -334,7 +413,7 @@ Your insights are invaluable to us. Reach out to us team for any inquiries, feed
 - Special shoutout to **GirlScript Summer of Code (GSSoC’25)** for the amazing community and support!
 - Built with dedication, collaboration, and lots of chai
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="contact">📞 Contact</h2>
 
@@ -344,7 +423,7 @@ Your insights are invaluable to us. Reach out to us team for any inquiries, feed
 
 _Feel free to reach out with any questions or feedback!_
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="how-to-contribute">🤝How to Contribute</h2>
 
@@ -365,7 +444,7 @@ We love contributions from the community! Whether it's a bug report, a new featu
 
 - We'd love to hear it! Open an issue to discuss your idea.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="contributing">🤝 Contributing</h2>
 
@@ -384,13 +463,13 @@ We welcome contributions from developers of all skill levels! Here are some ways
 
 _Thank you to everyone who has made SaralSeva better! 💚_
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="code-of-conduct">📜 Code of Conduct</h2>
 
 Please refer to the [`Code of Conduct`](https://github.com/eccentriccoder01/SaralSeva/blob/main/CODE_OF_CONDUCT.md) for details on contributing guidelines and community standards.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="contribution-guidelines">🤝👤 Contribution Guidelines</h2>
 
@@ -411,20 +490,20 @@ We love our contributors! If you'd like to help, please check out our [`CONTRIBU
 
 See the full list of contributors and their contributions on the [`GitHub Contributors Graph`](https://github.com/eccentriccoder01/SaralSeva/graphs/contributors).
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
 <h2 align="center">
 <p style="font-family:var(--ff-philosopher);font-size:3rem;"><b> Show some <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" alt="Red Heart" width="40" height="40" /> by starring this awesome repository!
 </p>
 </h2>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="suggestions-feedback">💡 Suggestions & Feedback</h2>
 
 Feel free to open issues or discussions if you have any feedback, feature suggestions, or want to collaborate!
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="show-your-support">🙌 Show Your Support</h2>
 
@@ -435,13 +514,13 @@ _If you find SaralSeva project helpful, give it a star! ⭐ to support more such
 - 💬 **Telling your friends and colleagues**
 - 🤝 **Contributing to the project**
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="license">📄 License</h2>
 
 This project is licensed under the MIT License - see the [`License`](https://github.com/eccentriccoder01/SaralSeva/blob/main/LICENSE) file for details.
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <h2 id="stargazers">⭐ Stargazers</h2>
 
@@ -451,7 +530,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
   </a>
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
 <h2 id="forkers">🍴 Forkers</h2>
 
@@ -461,7 +540,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
   </a>
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
 <h2 id="project-admin" align="center">🧑‍💻Project Admin:</h2>
 <table>
@@ -473,7 +552,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
 </tr>
 </table>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
 <h1 align="center"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /> Give us a Star and let's make magic! <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /></h1>
 
@@ -481,7 +560,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
      <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mirror%20Ball.png" alt="Mirror Ball" width="150" height="150" />
 </p>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
 <h3 align="center"> 👨‍💻 Built with ❤️ by SaralSeva Team</h3>
 <h4 align="center"> ❤️ Sagnik Chakraborty and Contributors ❤️ </h4>
@@ -495,7 +574,8 @@ This project is licensed under the MIT License - see the [`License`](https://git
     ⬆️ Back to Top
   </a>
 </p>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+ 
 
 > Ready to show off your coding achievements? Get started with **SaralSeva** today! 🚀
+
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
