@@ -1,139 +1,128 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import banner from '../../../assets/header-banner2.jpg';
 
 export default function Terms() {
   const [lang, setLang] = useState('en');
+  const [open, setOpen] = useState({});
 
   const t = useMemo(() => ({
     en: {
       title: 'Terms of Service',
+      subtitle: 'Please read these terms carefully before using SaralSeva.',
       lastUpdated: 'Last updated: October 12, 2025',
-      toc: 'Contents',
-      introTitle: '1. Introduction',
-      intro: `Welcome to SaralSeva. These Terms of Service ("Terms") govern your use of our website and services. By accessing or using SaralSeva, you agree to be bound by these Terms.`,
-      acceptanceTitle: '2. Acceptance of Terms',
-      acceptance: `By using our services you accept these Terms and our Privacy Policy. If you do not agree, please do not use the services.`,
-      servicesTitle: '3. Services',
-      services: `SaralSeva provides informational resources, scheme listings, application assistance and community features. Specific services may have additional terms.`,
-      userObligationsTitle: '4. User obligations',
-      userObligations: `You must provide accurate information and not misuse the services. You are responsible for account security and for maintaining confidentiality of any credentials.`,
-      prohibitedTitle: '5. Prohibited actions',
-      prohibited: `You must not (a) impersonate others; (b) upload malicious content; (c) use automated scraping; or (d) infringe on others' rights.`,
-      ipTitle: '6. Intellectual Property',
-      ip: `All content on SaralSeva is protected by copyright, trademark and other laws. You may not reproduce materials without permission.`,
-      disclaimerTitle: '7. Disclaimers & Limitation of Liability',
-      disclaimer: `The service is provided "as is". To the fullest extent permitted by law, SaralSeva disclaims all warranties and will not be liable for indirect or consequential damages.`,
-      indemnifyTitle: '8. Indemnification',
-      indemnify: `You agree to indemnify SaralSeva from any claims arising from your use of the service or violation of these Terms.`,
-      terminationTitle: '9. Termination',
-      termination: `We may suspend or terminate accounts for violations of these Terms. Some provisions survive termination.`,
-      governingTitle: '10. Governing Law',
-      governing: `These Terms are governed by the laws of India. Any disputes will be resolved in the competent courts of India.`,
-      contactTitle: '11. Contact',
-      contact: `If you have questions about these Terms, contact us at support@saralseva.example (replace with real address).`,
-      print: 'Print this page',
+      toc: 'On this page',
+      print: 'Print / Download',
+      downloadPdf: 'Download PDF',
       backToTop: 'Back to top',
     },
     hi: {
       title: 'सेवा की शर्तें',
+      subtitle: 'SaralSeva का उपयोग करने से पहले कृपया इन शर्तों को ध्यान से पढ़ें।',
       lastUpdated: 'अधिसूचित: 12 अक्टूबर, 2025',
-      toc: 'अनुक्रमणिका',
-      introTitle: '1. परिचय',
-      intro: `SaralSeva में आपका स्वागत है। ये सेवा की शर्तें ("शर्तें") हमारी वेबसाइट और सेवाओं के उपयोग को नियंत्रित करती हैं। हमारी सेवाओं का उपयोग कर आप इन शर्तों से सहमत होते हैं।`,
-      acceptanceTitle: '2. शर्तों की स्वीकृति',
-      acceptance: `हमारी सेवाओं का उपयोग करके आप इन शर्तों और हमारी गोपनीयता नीति से सहमत होते हैं। यदि आप सहमत नहीं हैं, तो कृपया सेवाओं का उपयोग न करें।`,
-      servicesTitle: '3. सेवाएँ',
-      services: `SaralSeva सूचनात्मक संसाधन, योजनाओं की सूची, आवेदन सहायता और सामुदायिक सुविधाएँ प्रदान करता है। कुछ सेवाओं के अतिरिक्त नियम हो सकते हैं।`,
-      userObligationsTitle: '4. उपयोगकर्ता की जिम्मेदारियाँ',
-      userObligations: `आपको सही जानकारी प्रदान करनी चाहिए और सेवाओं का दुरुपयोग नहीं करना चाहिए। खाता सुरक्षा आपकी जिम्मेदारी है।`,
-      prohibitedTitle: '5. निषिद्ध कार्य',
-      prohibited: `आपको (a) किसी और का नक़ल नहीं करना; (b) हानिकारक सामग्री अपलोड नहीं करनी; (c) स्वचालित स्क्रैपिंग का उपयोग नहीं करना; या (d) दूसरों के अधिकारों का उल्लंघन नहीं करना चाहिए।`,
-      ipTitle: '6. बौद्धिक संपदा',
-      ip: `SaralSeva पर सभी सामग्री कॉपीराइट, ट्रेडमार्क और अन्य कानूनों द्वारा सुरक्षित है। बिना अनुमति सामग्री की नकल न करें।`,
-      disclaimerTitle: '7. अस्वीकरण और दायित्व की सीमा',
-      disclaimer: `सेवा "जैसी है" दी जाती है। कानून द्वारा अनुमत अधिकतम सीमा तक, SaralSeva सभी वारंटियों से इनकार करता है और अप्रत्यक्ष या परिणामी नुकसान के लिए ज़िम्मेदार नहीं होगा।`,
-      indemnifyTitle: '8. प्रतिरक्षण',
-      indemnify: `आप SaralSeva को किसी भी दावे से प्रतिरक्षित करेंगे जो आपकी सेवाओं के उपयोग या इन शर्तों के उल्लंघन से उत्पन्न होते हैं।`,
-      terminationTitle: '9. समाप्ति',
-      termination: `हम इन शर्तों के उल्लंघन पर खातों को निलंबित या समाप्त कर सकते हैं। कुछ प्रावधान समाप्ति के बाद भी बने रहते हैं।`,
-      governingTitle: '10. शासन कानून',
-      governing: `ये शर्तें भारत के कानूनों द्वारा शासित हैं। किसी भी विवाद का निपटान भारत के सक्षम न्यायालयों में होगा।`,
-      contactTitle: '11. संपर्क',
-      contact: `यदि आपके पास इन शर्तों के बारे में प्रश्न हैं, तो हमें support@saralseva.example पर संपर्क करें (इसे वास्तविक पते से बदलें)।`,
-      print: 'पृष्ठ प्रिंट करें',
+      toc: 'इस पृष्ठ पर',
+      print: 'प्रिंट / डाउनलोड',
+      downloadPdf: 'PDF डाउनलोड करें',
       backToTop: 'ऊपर जाएँ',
-    },
+    }
   }), []);
 
-  const S = t[lang];
+  // Core sections (simple strings kept short here; expand as needed)
+  const SECTIONS = useMemo(() => ({
+    en: [
+      { id: 'intro', title: 'Introduction', body: `Welcome to SaralSeva. These Terms govern your use of our website and services. By using SaralSeva, you agree to these Terms.` },
+      { id: 'use', title: 'Using the Service', body: `SaralSeva provides scheme information, application help and community features. Use the service responsibly.` },
+      { id: 'accounts', title: 'Accounts & Security', body: `Keep your account secure. You are responsible for activity on your account.` },
+      { id: 'content', title: 'Content & IP', body: `All content is protected by IP laws. Do not reproduce content without permission.` },
+      { id: 'liability', title: 'Liability & Disclaimers', body: `Service provided “as is”. We disclaim warranties to the fullest extent permitted by law.` },
+      { id: 'termination', title: 'Termination', body: `We may suspend or terminate accounts that violate these Terms.` },
+      { id: 'governing', title: 'Governing Law', body: `These Terms are governed by the laws of India.` },
+      { id: 'contact', title: 'Contact', body: `Contact support@saralseva.example for questions.` },
+    ],
+    hi: [
+      { id: 'intro', title: 'परिचय', body: `SaralSeva में आपका स्वागत है। ये शर्तें हमारी वेबसाइट और सेवाओं के उपयोग को नियंत्रित करती हैं।` },
+      { id: 'use', title: 'सेवा का उपयोग', body: `SaralSeva योजना जानकारी, आवेदन सहायता और सामुदायिक सुविधाएँ प्रदान करता है। सेवा का सावधानीपूर्वक उपयोग करें।` },
+      { id: 'accounts', title: 'खाते और सुरक्षा', body: `अपने खाते को सुरक्षित रखें। खाते पर गतिविधियों के लिए आप जिम्मेदार हैं।` },
+      { id: 'content', title: 'सामग्री और बौद्धिक संपदा', body: `सभी सामग्री IP कानूनों द्वारा सुरक्षित है। बिना अनुमति सामग्री न नकलें।` },
+      { id: 'liability', title: 'दायित्व और अस्वीकरण', body: `सेवा "जैसी है" प्रदान की जाती है। हम कानून द्वारा अनुमति की गई सीमा तक वारंटियों से इनकार करते हैं।` },
+      { id: 'termination', title: 'समाप्ति', body: `हम उन खातों को निलंबित या समाप्त कर सकते हैं जो इन शर्तों का उल्लंघन करते हैं।` },
+      { id: 'governing', title: 'शासन कानून', body: `ये शर्तें भारत के कानूनों द्वारा शासित हैं।` },
+      { id: 'contact', title: 'संपर्क', body: `प्रश्नों के लिए support@saralseva.example पर संपर्क करें।` },
+    ]
+  }), []);
 
-  const sections = [
-    { id: 'introduction', title: S.introTitle, body: S.intro },
-    { id: 'acceptance', title: S.acceptanceTitle, body: S.acceptance },
-    { id: 'services', title: S.servicesTitle, body: S.services },
-    { id: 'user-obligations', title: S.userObligationsTitle, body: S.userObligations },
-    { id: 'prohibited', title: S.prohibitedTitle, body: S.prohibited },
-    { id: 'intellectual-property', title: S.ipTitle, body: S.ip },
-    { id: 'disclaimer', title: S.disclaimerTitle, body: S.disclaimer },
-    { id: 'indemnification', title: S.indemnifyTitle, body: S.indemnify },
-    { id: 'termination', title: S.terminationTitle, body: S.termination },
-    { id: 'governing-law', title: S.governingTitle, body: S.governing },
-    { id: 'contact', title: S.contactTitle, body: S.contact },
-  ];
+  const sections = SECTIONS[lang] || SECTIONS.en;
+
+  function toggle(id) {
+    setOpen((s) => ({ ...s, [id]: !s[id] }));
+  }
+
+  function doPrint() {
+    window.print();
+  }
 
   return (
-    <div className="container mx-auto p-6">
-      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#07132f] text-gray-900 dark:text-gray-100">
+      <header className="relative h-44 md:h-56 overflow-hidden rounded-b-lg mb-6">
         <img src={banner} alt="Terms banner" className="w-full h-full object-cover brightness-75" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">{S.title}</h1>
-            <p className="mt-2 text-sm md:text-base text-white/90">{S.lastUpdated}</p>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">{t[lang].title}</h1>
+            <p className="mt-2 text-sm md:text-base text-white/90">{t[lang].subtitle}</p>
+            <p className="mt-1 text-xs text-white/80">{t[lang].lastUpdated}</p>
           </div>
+
           <div className="absolute right-4 top-4 flex items-center gap-3">
-            <button onClick={() => window.print()} className="text-sm px-3 py-1 border rounded text-white/90">{S.print}</button>
+            <button onClick={doPrint} className="text-sm px-3 py-1 bg-amber-500 text-white rounded-md">{t[lang].print}</button>
             <div className="flex items-center gap-2 text-white/90">
               <label className="text-sm">EN</label>
-              <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+              <input type="radio" name="lang-terms" checked={lang === 'en'} onChange={() => setLang('en')} />
               <label className="text-sm">HI</label>
-              <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+              <input type="radio" name="lang-terms" checked={lang === 'hi'} onChange={() => setLang('hi')} />
             </div>
           </div>
         </div>
       </header>
 
-      <div className="md:flex gap-8">
-        <aside className="md:w-1/4 mb-6 md:mb-0">
-          <nav className="sticky top-6 bg-white p-4 rounded shadow-sm">
-            <h3 className="font-semibold mb-3">{S.toc}</h3>
-            <ul className="space-y-2 text-sm">
-              {sections.map((s) => (
-                <li key={s.id}>
-                  <a className="text-amber-600 hover:underline" href={`#${s.id}`}>{s.title}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
+      <main className="max-w-5xl mx-auto px-4 pb-12">
+        <div className="space-y-4">
+          {sections.map((s) => {
+            const excerpt = typeof s.body === 'string' ? (s.body.length > 160 ? s.body.slice(0, 160) + '…' : s.body) : '';
+            return (
+              <div key={s.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-t-4 border-amber-500 overflow-hidden">
+                <div className="flex items-center justify-between px-6 py-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-stone-800 dark:text-gray-200">{s.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{excerpt}</p>
+                  </div>
+                  <div className="ml-4">
+                    <button
+                      onClick={() => toggle(s.id)}
+                      aria-expanded={!!open[s.id]}
+                      aria-controls={`${s.id}-body`}
+                      className={`px-4 py-2 rounded-full border ${open[s.id] ? 'bg-amber-600 text-white border-amber-600' : 'bg-white text-amber-700 border-amber-200'}`}
+                    >
+                      {open[s.id] ? (lang === 'hi' ? 'छुपाएँ' : 'Hide') : (lang === 'hi' ? 'पढ़ें' : 'Read')}
+                    </button>
+                  </div>
+                </div>
 
-        <main className="md:flex-1 prose max-w-none">
-          {sections.map((s) => (
-            <section id={s.id} key={s.id} className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">{s.title}</h2>
-              <p className="text-gray-700 whitespace-pre-line">{s.body}</p>
-              <p className="mt-2 text-sm">
-                <a className="text-amber-600 hover:underline" href="#top">{S.backToTop}</a>
-              </p>
-            </section>
-          ))}
+                <div id={`${s.id}-body`} className={open[s.id] ? 'px-6 pb-6 pt-0 transition-all duration-300 max-h-screen' : 'px-6 pb-0 pt-0 max-h-0 overflow-hidden transition-all duration-300'}>
+                  <div className="text-gray-700 dark:text-gray-300 whitespace-pre-line pt-4">{s.body}</div>
+                </div>
+              </div>
+            );
+          })}
 
-          <section id="version" className="mt-8 text-sm text-gray-600">
-            <strong>Version:</strong> 1.0
-            <p className="mt-2">{S.lastUpdated}</p>
-          </section>
-        </main>
-      </div>
+          <div className="mt-6 flex items-center justify-between">
+            <div className="text-sm text-gray-600">{t[lang].lastUpdated} • <strong>Version:</strong> 1.0</div>
+            <div className="flex items-center gap-3">
+              <button onClick={doPrint} className="px-4 py-2 bg-amber-500 text-white rounded-md">{t[lang].print}</button>
+              <a href="#contact" className="text-sm text-amber-600 hover:underline">{t[lang].contact}</a>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

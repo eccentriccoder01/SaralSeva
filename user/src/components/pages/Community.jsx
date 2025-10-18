@@ -1,109 +1,176 @@
 import React, { useState, useMemo } from 'react';
 import banner from '../../assets/header-banner2.jpg';
+import indiaFlag from '../../assets/india.svg';
 
-const GROUPS = [
-  { id: 'g1', name: 'Panchayat Admins', hiName: 'पंचायत प्रशासन', description: 'Discussions for Gram Panchayat officials and coordinators.' , hiDesc: 'ग्राम पंचायत अधिकारियों और समन्वयकों के लिए चर्चा।'},
-  { id: 'g2', name: 'Beneficiaries', hiName: 'लाभार्थी', description: 'Community discussions for scheme beneficiaries to share experiences.' , hiDesc: 'योजना लाभार्थियों के अनुभव साझा करने के लिए समुदायिक चर्चा।'},
-  { id: 'g3', name: 'Field Workers', hiName: 'फील्ड वर्कर्स', description: 'Field staff and mobilizers share best practices and local updates.' , hiDesc: 'फील्ड स्टाफ और मोबिलाइज़र सर्वोत्कृष्ट प्रथाएँ और स्थानीय अपडेट साझा करते हैं।'},
-];
-
-const THREADS = [
-  { id: 't1', title: 'How to upload village reports?', group: 'g1', replies: 12 },
-  { id: 't2', title: 'Application stuck at verification', group: 'g2', replies: 8 },
-  { id: 't3', title: 'Training material for new staff', group: 'g3', replies: 5 },
-];
-
-const EVENTS = [
-  { id: 'e1', title: 'District-level training: October 20', location: 'Block Office', date: '2025-10-20' },
-  { id: 'e2', title: 'Webinar: Using SaralSeva for grievance tracking', location: 'Online', date: '2025-11-03' },
-];
+const SAMPLE = {
+  groups: [
+    { id: 'g1', name: 'Panchayat Admins', hiName: 'पंचायत प्रशासन', desc: 'Discussions for Gram Panchayat officials and coordinators.' , hiDesc: 'ग्राम पंचायत अधिकारियों और समन्वयकों के लिए चर्चा।', members: 420 },
+    { id: 'g2', name: 'Beneficiaries', hiName: 'लाभार्थी', desc: 'Community discussions for scheme beneficiaries to share experiences.' , hiDesc: 'योजना लाभार्थियों के अनुभव साझा करने के लिए समुदायिक चर्चा।', members: 1800 },
+    { id: 'g3', name: 'Field Workers', hiName: 'फील्ड वर्कर्स', desc: 'Field staff and mobilizers share best practices and local updates.' , hiDesc: 'फील्ड स्टाफ और मोबिलाइज़र सर्वोत्कृष्ट प्रथाएँ और स्थानीय अपडेट साझा करते हैं।', members: 640 },
+    { id: 'g4', name: 'Volunteers & NGOs', hiName: 'स्वयंसेवक और NGO', desc: 'Coordinate outreach, drives and local training with volunteers and NGOs.' , hiDesc: 'स्वयंसेवकों और NGO के साथ आउटरीच, ड्राइव और स्थानीय प्रशिक्षण का समन्वय।', members: 320 },
+  ],
+  threads: [
+    { id: 't1', title: 'Uploading village reports - quick guide', replies: 12, group: 'g1' },
+    { id: 't2', title: 'Fix: application stuck on verification', replies: 8, group: 'g2' },
+    { id: 't3', title: 'Best training resources for new recruits', replies: 5, group: 'g3' },
+  ],
+  events: [
+    { id: 'e1', title: 'District training workshop', date: '2025-10-20', location: 'Block Office' },
+    { id: 'e2', title: 'Webinar: Using SaralSeva for outreach', date: '2025-11-03', location: 'Online' },
+  ],
+  testimonials: [
+    { id: 'p1', name: 'Ramesh Kumar', role: 'Panchayat Secretary', quote: 'SaralSeva helped our panchayat streamline scheme reports and reach more beneficiaries.' },
+    { id: 'p2', name: 'Sita Devi', role: 'Beneficiary', quote: 'I found the right scheme quickly and the guidance was very clear.' },
+  ]
+};
 
 export default function Community() {
   const [lang, setLang] = useState('en');
-  const [query, setQuery] = useState('');
+  const [q, setQ] = useState('');
+  const [openGroup, setOpenGroup] = useState(null);
 
   const strings = useMemo(() => ({
-    en: { title: 'Community', subtitle: 'Groups, discussions and events — connect with other users and local officials.', searchPlaceholder: 'Search groups or threads...', join: 'Join Group', upcoming: 'Upcoming Events' },
-    hi: { title: 'समुदाय', subtitle: 'समूह, चर्चाएँ और कार्यक्रम — अन्य उपयोगकर्ताओं और स्थानीय अधिकारियों से जुड़ें।', searchPlaceholder: 'समूह या थ्रेड खोजें...', join: 'समूह में शामिल हों', upcoming: 'आगामी कार्यक्रम' },
+    en: {
+      title: 'Community',
+      subtitle: 'Groups, discussions and events — connect, learn and collaborate with other users and local officials.',
+      search: 'Search groups, threads or events...',
+      join: 'Join',
+      viewAll: 'View all',
+      upcoming: 'Upcoming Events',
+      testimonials: 'What people say',
+      createGroup: 'Create a group',
+    },
+    hi: {
+      title: 'समुदाय',
+      subtitle: 'समूह, चर्चाएँ और कार्यक्रम — अन्य उपयोगकर्ताओं और स्थानीय अधिकारियों के साथ जुड़ें, सीखें और सहयोग करें।',
+      search: 'समूह, थ्रेड या कार्यक्रम खोजें...',
+      join: 'जॉइन करें',
+      viewAll: 'सभी देखें',
+      upcoming: 'आगामी कार्यक्रम',
+      testimonials: 'लोग क्या कहते हैं',
+      createGroup: 'समूह बनाएँ',
+    }
   }), []);
 
-  const matchedGroups = useMemo(() => GROUPS.filter(g => (g.name + ' ' + (g.description || '') + ' ' + (g.hiName || '') + ' ' + (g.hiDesc || '')).toLowerCase().includes(query.toLowerCase())), [query]);
+  const groups = SAMPLE.groups.filter(g => (g.name + ' ' + g.desc + ' ' + (g.hiName || '') + ' ' + (g.hiDesc || '')).toLowerCase().includes(q.toLowerCase()));
+  const threads = SAMPLE.threads.filter(t => (t.title).toLowerCase().includes(q.toLowerCase()));
+  const events = SAMPLE.events.filter(e => (e.title + ' ' + e.location).toLowerCase().includes(q.toLowerCase()));
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#07132f] text-gray-900 dark:text-gray-100">
-      <header className="relative h-56 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
+
+      {/* Hero / Banner */}
+      <header className="relative h-64 md:h-72 lg:h-96 overflow-hidden rounded-b-lg mb-8">
         <img src={banner} alt="Community banner" className="w-full h-full object-cover brightness-75" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold">{strings[lang].title}</h1>
-            <p className="mt-2 text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">{strings[lang].title}</h1>
+            <p className="mt-2 text-white text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+            <div className="mt-4 flex items-center justify-center gap-3">
+              <a href="/community/create" className="px-4 py-2 bg-amber-500 text-white rounded-md font-medium">{strings[lang].createGroup}</a>
+              <a href="/chatbot" className="px-4 py-2 bg-transparent border border-white text-white rounded-md">Open Chatbot</a>
+            </div>
           </div>
+
           <div className="absolute right-4 top-4 flex items-center gap-2">
             <label className="text-sm text-white">EN</label>
-            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+            <input type="radio" name="clan" checked={lang === 'en'} onChange={() => setLang('en')} />
             <label className="text-sm text-white">HI</label>
-            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+            <input type="radio" name="clan" checked={lang === 'hi'} onChange={() => setLang('hi')} />
           </div>
         </div>
       </header>
 
-      <div className="mb-6 flex items-center gap-3">
-        <input value={query} onChange={e => setQuery(e.target.value)} className="px-3 py-2 border rounded-md w-72" placeholder={strings[lang].searchPlaceholder} />
-        <a href="/community/create" className="px-3 py-2 bg-amber-500 text-white rounded-md">{strings[lang].join}</a>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-2 space-y-4">
-          <h2 className="text-xl font-semibold">{lang === 'hi' ? 'लोकप्रिय समूह' : 'Popular Groups'}</h2>
-          {matchedGroups.map(g => (
-            <div key={g.id} className="p-4 bg-white dark:bg-gray-800 rounded-lg">
-              <h3 className="font-semibold">{lang === 'hi' && g.hiName ? g.hiName : g.name}</h3>
-              <p className="text-sm text-gray-700">{lang === 'hi' && g.hiDesc ? g.hiDesc : g.description}</p>
-              <div className="mt-3 flex gap-2">
-                <a href={`/community/group/${g.id}`} className="text-amber-500">{lang === 'hi' ? 'देखें' : 'View'}</a>
-                <button className="px-3 py-1 border rounded-md">{strings[lang].join}</button>
-              </div>
-            </div>
-          ))}
-
-          <h2 className="text-xl font-semibold">{lang === 'hi' ? 'सक्रिय चर्चाएँ' : 'Active Discussions'}</h2>
-          <div className="space-y-3">
-            {THREADS.map(t => (
-              <div key={t.id} className="p-3 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-between">
-                <div>
-                  <a href={`/community/thread/${t.id}`} className="font-medium">{t.title}</a>
-                  <div className="text-xs text-gray-500">{t.replies} replies</div>
-                </div>
-                <a href={`/community/thread/${t.id}`} className="text-amber-500">{lang === 'hi' ? 'जॉइन करें' : 'Join'}</a>
-              </div>
-            ))}
-          </div>
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        {/* Search */}
+        <div className="mb-6 flex items-center gap-3">
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={strings[lang].search} className="flex-1 px-4 py-3 border rounded-md" />
+          <a href="/community/create" className="px-4 py-3 bg-amber-500 text-white rounded-md">{strings[lang].createGroup}</a>
         </div>
 
-        <aside className="space-y-4">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">{strings[lang].upcoming}</h3>
-            <ul className="text-sm space-y-2">
-              {EVENTS.map(e => (
-                <li key={e.id} className="flex items-center justify-between">
-                  <div>
-                    <div className="font-medium">{e.title}</div>
-                    <div className="text-xs text-gray-500">{e.date} • {e.location}</div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Groups */}
+          <section className="lg:col-span-2 space-y-6">
+            <h2 className="text-xl font-semibold">{lang === 'hi' ? 'लोकप्रिय समूह' : 'Popular Groups'}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {groups.map(g => (
+                <div key={g.id} className="relative p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border-t-4 border-amber-500 overflow-hidden">
+                  <div className="absolute -top-10 right-4 w-44 opacity-10 pointer-events-none select-none">
+                    <img src={indiaFlag} alt="" />
                   </div>
-                  <a href={`/community/event/${e.id}`} className="text-amber-500">{lang === 'hi' ? 'विवरण' : 'Details'}</a>
-                </li>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-semibold">{g.name.split(' ').slice(0,1)[0]}</div>
+                    <div>
+                      <h3 className="text-lg font-semibold">{lang === 'hi' && g.hiName ? g.hiName : g.name}</h3>
+                      <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{lang === 'hi' && g.hiDesc ? g.hiDesc : g.desc}</p>
+                      <div className="mt-3 flex items-center gap-2">
+                        <button onClick={() => setOpenGroup(g.id)} className="px-3 py-1 bg-amber-500 text-white rounded-md">{strings[lang].join}</button>
+                        <a href={`/community/group/${g.id}`} className="text-amber-600">{strings[lang].viewAll}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
-            </ul>
-          </div>
+            </div>
 
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">{lang === 'hi' ? 'सहायता' : 'Help'}</h3>
-            <p className="text-sm text-gray-700">{lang === 'hi' ? 'समुदाय के नियम और मार्गदर्शिका के लिए यहाँ देखें।' : 'See community guidelines and help for participation.'}</p>
-            <a href="/help" className="mt-3 inline-block text-amber-500">{lang === 'hi' ? 'और देखें' : 'Learn more'}</a>
-          </div>
-        </aside>
-      </div>
+            {/* Active Discussions */}
+            <div>
+              <h2 className="text-xl font-semibold mt-6">{lang === 'hi' ? 'सक्रिय चर्चाएँ' : 'Active Discussions'}</h2>
+              <div className="mt-4 space-y-3">
+                {threads.map(t => (
+                  <div key={t.id} className="p-3 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-between">
+                    <div>
+                      <a href={`/community/thread/${t.id}`} className="font-medium">{t.title}</a>
+                      <div className="text-xs text-gray-500">{t.replies} replies</div>
+                    </div>
+                    <a href={`/community/thread/${t.id}`} className="text-amber-500">{strings[lang].join}</a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Sidebar */}
+          <aside className="space-y-6">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <h3 className="font-semibold mb-3">{strings[lang].upcoming}</h3>
+              <ul className="space-y-3 text-sm">
+                {events.map(e => (
+                  <li key={e.id} className="flex items-start justify-between">
+                    <div>
+                      <div className="font-medium">{e.title}</div>
+                      <div className="text-xs text-gray-500">{e.date} • {e.location}</div>
+                    </div>
+                    <a href={`/community/event/${e.id}`} className="text-amber-500">{lang === 'hi' ? 'विवरण' : 'Details'}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <h3 className="font-semibold mb-3">{strings[lang].testimonials}</h3>
+              <div className="space-y-3 text-sm">
+                {SAMPLE.testimonials.map(p => (
+                  <div key={p.id} className="p-3 bg-amber-50 dark:bg-gray-900 rounded">
+                    <div className="font-semibold">{p.name}</div>
+                    <div className="text-xs text-gray-500">{p.role}</div>
+                    <div className="mt-2">"{p.quote}"</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2">Need help?</h3>
+              <p className="text-sm text-gray-700">See community guidelines or contact support for any issues participating in the community.</p>
+              <div className="mt-3">
+                <a href="/help" className="px-3 py-2 bg-amber-500 text-white rounded-md">{strings[lang].viewAll}</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
     </div>
   );
 }

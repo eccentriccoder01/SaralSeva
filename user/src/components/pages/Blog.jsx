@@ -98,9 +98,8 @@ export default function Blog() {
         <img src={banner} alt="Blog banner" className="w-full h-full object-cover brightness-75" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold">{lang === 'hi' ? 'ब्लॉग' : 'Blog'}</h1>
-            <p className="mt-2 text-sm md:text-base opacity-90">{lang === 'hi' ? 'SaralSeva पर नवीनतम पोस्ट, सुझाव और मार्गदर्शिकाएँ।' : 'Read the latest posts, tips and how-tos about using SaralSeva.'}</p>
+            <div className="text-center px-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">{lang === 'hi' ? 'ब्लॉग' : 'Blog'}</h1>
           </div>
           <div className="absolute right-4 top-4 flex items-center gap-2">
             <label className="text-sm text-white">EN</label>
@@ -113,7 +112,6 @@ export default function Blog() {
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <p className="text-gray-700 dark:text-gray-300">{lang === 'hi' ? 'ब्लॉग पोस्ट, सुझाव और मार्गदर्शिकाएँ पढ़ें।' : 'Read the latest posts, tips and how-tos about using SaralSeva.'}</p>
           <div className="flex items-center gap-2">
             <label htmlFor="search" className="sr-only">Search posts</label>
             <input
@@ -129,28 +127,43 @@ export default function Blog() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {posts.map((post) => (
-            <article key={post.id} className="border rounded-lg p-4 bg-white dark:bg-gray-800">
-              <header className="flex items-start justify-between">
-                <div>
-                  <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
-                  <div className="text-xs text-gray-500 mb-2">
-                    <time dateTime={post.date}>{post.date}</time> • {post.tags.join(', ')}
+            <article
+              key={post.id}
+              className="rounded-lg bg-white dark:bg-gray-800 shadow-sm overflow-hidden border-t-4 border-amber-500"
+            >
+              <div className="p-4">
+                <header className="flex items-start justify-between">
+                  <div className="pr-4">
+                    <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
+                    <div className="text-xs text-gray-500 mb-2">
+                      <time dateTime={post.date}>{post.date}</time> • {post.tags.join(', ')}
+                    </div>
+                    {!expanded[post.id] && (
+                      <p className="text-sm text-gray-700 dark:text-gray-300">{post.excerpt}</p>
+                    )}
                   </div>
-                </div>
-                <div>
-                  <button
-                    onClick={() => toggleExpand(post.id)}
-                    className="text-sm text-amber-500 hover:underline"
-                    aria-expanded={!!expanded[post.id]}
-                  >
-                    {expanded[post.id] ? (lang === 'hi' ? 'कम दिखाएँ' : 'Show less') : (lang === 'hi' ? 'और पढ़ें' : 'Read more')}
-                  </button>
-                </div>
-              </header>
 
-              <section className="mt-2 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">
-                {expanded[post.id] ? post.content : post.excerpt}
-              </section>
+                  <div className="flex-shrink-0">
+                    <button
+                      onClick={() => toggleExpand(post.id)}
+                      aria-expanded={!!expanded[post.id]}
+                      aria-controls={`post-content-${post.id}`}
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition ${
+                        expanded[post.id] ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                      }`}
+                    >
+                      {expanded[post.id] ? (lang === 'hi' ? 'कम दिखाएँ' : 'Show less') : (lang === 'hi' ? 'पढ़ें' : 'Read')}
+                    </button>
+                  </div>
+                </header>
+
+                <section
+                  id={`post-content-${post.id}`}
+                  className="mt-3 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line"
+                >
+                  {expanded[post.id] ? post.content : null}
+                </section>
+              </div>
             </article>
           ))}
 

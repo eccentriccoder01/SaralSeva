@@ -74,11 +74,12 @@ export default function Features() {
         <img src={banner} alt="Features banner" className="w-full h-full object-cover brightness-75" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/15" />
         <div className="absolute inset-0 flex items-center justify-center">
+          {/* decorative flag removed per request */}
           <div className="text-center px-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
               {strings[lang].title}
             </h1>
-            <p className="mt-2 text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
+            <p className="mt-2 text-sm md:text-base opacity-90 text-white">{strings[lang].subtitle}</p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <label className="text-sm">EN</label>
               <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />

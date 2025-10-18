@@ -201,21 +201,18 @@ export default function Careers() {
         style={{ backgroundImage: `url(${banner})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-5xl font-extrabold text-white jost tracking-wider">{strings[lang].title}</h1>
-      </div>
-
-      <div className="container mx-auto p-6">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <p className="text-gray-600 mt-1">{strings[lang].subtitle}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm">EN</label>
-            <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
-            <label className="text-sm">HI</label>
-            <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
-          </div>
+        <div className="relative text-center">
+          <h1 className="text-5xl font-extrabold text-white jost tracking-wider">{strings[lang].title}</h1>
+          <p className="mt-2 text-white text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
         </div>
+        <div className="absolute right-4 top-4 flex items-center gap-2">
+          <label className="text-sm text-white">EN</label>
+          <input type="radio" name="lang" checked={lang === 'en'} onChange={() => setLang('en')} />
+          <label className="text-sm text-white">HI</label>
+          <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
+        </div>
+      </div>
+      <div className="container mx-auto p-6">
 
       <section className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -241,16 +238,23 @@ export default function Careers() {
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filtered.map((job) => (
-          <article key={job.id} className="border rounded-lg p-4 bg-white dark:bg-gray-800">
-            <h2 className="text-lg font-semibold">{lang === 'hi' && job.hiTitle ? job.hiTitle : job.title}</h2>
-            <div className="text-xs text-gray-500 mb-2">{job.department} • {job.location} • {job.type}</div>
-            <p className="text-sm text-gray-700 mb-3">{lang === 'hi' && job.hiDescription ? job.hiDescription : job.description}</p>
-            <div className="flex items-center justify-between">
-              <div className="text-xs text-gray-500">{strings[lang].posted} {job.posted}</div>
-              <div className="flex items-center gap-2">
-                <button onClick={() => openApply(job)} className="bg-amber-500 text-white px-3 py-1 rounded-md text-sm">{strings[lang].apply}</button>
-                <button onClick={() => setSelectedJob(job)} className="text-sm text-amber-500">{strings[lang].details}</button>
-              </div>
+          <article key={job.id} className="rounded-lg bg-white dark:bg-gray-800 shadow-sm overflow-hidden border-t-4 border-amber-500">
+            <div className="p-4">
+              <header className="flex items-start justify-between">
+                <div className="pr-4">
+                  <h2 className="text-lg font-semibold">{lang === 'hi' && job.hiTitle ? job.hiTitle : job.title}</h2>
+                  <div className="text-xs text-gray-500 mb-2">{job.department} • {job.location} • {job.type}</div>
+                  <p className="text-sm text-gray-700 mb-3">{lang === 'hi' && job.hiDescription ? job.hiDescription : job.description}</p>
+                </div>
+
+                <div className="flex-shrink-0 flex flex-col items-end gap-2">
+                  <div className="text-xs text-gray-500 mb-2">{strings[lang].posted} {job.posted}</div>
+                  <div className="flex items-center gap-2">
+                    <button onClick={() => openApply(job)} className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-amber-600 text-white">{strings[lang].apply}</button>
+                    <button onClick={() => setSelectedJob(job)} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-50 text-amber-700 hover:bg-amber-100">{strings[lang].details}</button>
+                  </div>
+                </div>
+              </header>
             </div>
           </article>
         ))}
