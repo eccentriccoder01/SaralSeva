@@ -53,7 +53,7 @@
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=FF6F3B&width=435&lines=Thanks+for+visiting+SaralSeva!%F0%9F%99%8C;Start+the+repo%E2%9C%85;Share+it+with+others%F0%9F%8C%8D;Contribute+and+grow%F0%9F%9B%A0%EF%B8%8F;Happy+Coding%E2%9C%A8!" alt="Thanks Banner Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=FF6F3B&width=435&lines=Thanks+for+visiting+SaralSeva!%F0%9F%99%8C;Star+the+repo%E2%9C%85;Share+it+with+others%F0%9F%8C%8D;Contribute+and+grow%F0%9F%9B%A0%EF%B8%8F;Happy+Coding%E2%9C%A8!" alt="Thanks Banner Typing SVG" />
 </div>
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
