@@ -34,6 +34,15 @@ const Contact = () => {
         lastUpdated: "Updated: October 12, 2025",
         toc: "Contents",
         print: "Print this page",
+        namePlaceholder: "Enter your name",
+        emailPlaceholder: "Enter your email",
+        subjectPlaceholder: "Enter subject",
+        messagePlaceholder: "Write your message here...",
+        nameLabel: "Full Name",
+        emailLabel: "Email Address",
+        subjectLabel: "Subject",
+        messageLabel: "Message",
+        sendButton: "Send Message",
       },
       hi: {
         title: "संपर्क करें",
@@ -48,6 +57,15 @@ const Contact = () => {
         lastUpdated: "अद्यतन: 12 अक्टूबर, 2025",
         toc: "अनुक्रमणिका",
         print: "पृष्ठ प्रिंट करें",
+        namePlaceholder: "अपना नाम दर्ज करें",
+        emailPlaceholder: "अपना ईमेल दर्ज करें",
+        subjectPlaceholder: "विषय दर्ज करें",
+        messagePlaceholder: "अपना संदेश यहाँ लिखें...",
+        nameLabel: "पूरा नाम",
+        emailLabel: "ईमेल पता",
+        subjectLabel: "विषय",
+        messageLabel: "संदेश",
+        sendButton: "संदेश भेजें",
       },
     }),
     []
@@ -207,39 +225,39 @@ const Contact = () => {
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{S.nameLabel}</label>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" required />
+                        <input type="text" name="name" placeholder={S.namePlaceholder} value={formData.name} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" required />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{S.emailLabel}</label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                        <input type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" required />
+                        <input type="email" name="email" placeholder={S.emailPlaceholder} value={formData.email} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" required />
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{S.subjectLabel}</label>
                     <div className="relative">
                       <BookUser className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                      <input type="text" name="subject" placeholder="Enter subject" value={formData.subject} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" />
+                      <input type="text" name="subject" placeholder={S.subjectPlaceholder} value={formData.subject} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{S.messageLabel}</label>
                     <div className="relative">
                       <MessageSquare className="absolute left-3 top-4 h-5 w-5 text-gray-400" />
-                      <textarea name="message" rows={5} placeholder="Write your message here..." value={formData.message} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" required></textarea>
+                      <textarea name="message" rows={5} placeholder={S.messagePlaceholder} value={formData.message} onChange={handleChange} className="w-full pl-11 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-amber-500 focus:outline-none" required></textarea>
                     </div>
                   </div>
 
                   <div className="text-center pt-2">
-                    <button type="submit" className="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">Send Message</button>
+                    <button type="submit" className="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">{S.sendButton}</button>
                   </div>
                 </form>
               </div>
