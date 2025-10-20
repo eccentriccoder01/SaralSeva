@@ -113,9 +113,9 @@ export default function Help() {
       <div className="container mx-auto p-6">
 
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ">
           <label htmlFor="search" className="sr-only">Search Help</label>
-          <input id="search" className="px-3 py-2 border rounded-md w-72" placeholder={strings[lang].searchPlaceholder} value={query} onChange={(e) => setQuery(e.target.value)} />
+          <input id="search" className="px-3 py-2 border rounded-md w-72 text-black" placeholder={strings[lang].searchPlaceholder} value={query} onChange={(e) => setQuery(e.target.value)} />
         </div>
 
         <DropdownSelect

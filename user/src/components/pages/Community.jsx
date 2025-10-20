@@ -85,7 +85,7 @@ export default function Community() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Search */}
         <div className="mb-6 flex items-center gap-3">
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={strings[lang].search} className="flex-1 px-4 py-3 border rounded-md" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={strings[lang].search} className="flex-1 px-4 py-3 border rounded-md text-black" />
           <a href="/community/create" className="px-4 py-3 bg-amber-500 text-white rounded-md">{strings[lang].createGroup}</a>
         </div>
 
@@ -163,7 +163,7 @@ export default function Community() {
 
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Need help?</h3>
-              <p className="text-sm text-gray-700">See community guidelines or contact support for any issues participating in the community.</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">See community guidelines or contact support for any issues participating in the community.</p>
               <div className="mt-3">
                 <a href="/help" className="px-3 py-2 bg-amber-500 text-white rounded-md">{strings[lang].viewAll}</a>
               </div>
