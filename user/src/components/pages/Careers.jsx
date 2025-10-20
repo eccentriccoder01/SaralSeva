@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"; 
 import { FaCheck, FaChevronDown } from 'react-icons/fa'; 
+import DropdownSelect from '../DropdownSelect';
 
 const JOBS = [
   {
@@ -239,49 +240,12 @@ export default function Careers() {
           />
         </div>
 
-        <div className="flex items-center gap-3">
-          <label htmlFor="department" className="">{strings[lang].departmentLabel}</label>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button
-                className="px-4 py-2 rounded-md bg-white dark:bg-gray-100 text-black border relative min-w-[22ch] text-left flex items-center justify-between"
-                type="button"
-              >
-                <span className="relative z-10">{department}</span>
-                <FaChevronDown className="w-3 h-3 text-gray-500 dark:text-gray-400" />
-              </button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent
-              align="end"
-              sideOffset={4}
-              className="bg-white dark:bg-gray-700 border border-orange-200 rounded-md mt-1 shadow-lg dark:border-gray-600"
-            >
-              {departments.map((d) => (
-                <DropdownMenuItem
-                  key={d}
-                  onSelect={() => setDepartment(d)}
-                  className={`
-                    ${
-                      department === d
-                        ? "bg-orange-600 text-white"
-                        : "bg-white dark:bg-gray-700 text-black dark:text-white"
-                    }
-                    hover:bg-orange-200 dark:hover:bg-orange-500 
-                    px-4 py-2 rounded-md transition-colors duration-200 flex items-center justify-between
-                  `}
-                >
-                  <span>{d}</span>
-                  {department === d && <FaCheck className="w-4 h-4 text-white ml-2" />}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>;
-
-    
-
-
-        </div>
+          <DropdownSelect
+            options={departments}
+            selectedOption={department}
+            onSelect={setDepartment}
+            label={strings[lang].departmentLabel}
+          />
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import banner from './../../assets/header-banner2.jpg';
+import DropdownSelect from '../DropdownSelect';
 
 const FAQS = [
   {
@@ -117,14 +118,12 @@ export default function Help() {
           <input id="search" className="px-3 py-2 border rounded-md w-72" placeholder={strings[lang].searchPlaceholder} value={query} onChange={(e) => setQuery(e.target.value)} />
         </div>
 
-        <div className="flex items-center gap-3">
-          <label htmlFor="category" className="text-sm">{strings[lang].categoryLabel}</label>
-          <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} className="px-2 py-1 border rounded-md">
-            {categories.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-        </div>
+        <DropdownSelect
+          options={categories}
+          selectedOption={category}
+          onSelect={setCategory}
+          label={strings[lang].categoryLabel}
+        />
       </div>
 
       <main>
