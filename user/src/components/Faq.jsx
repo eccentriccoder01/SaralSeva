@@ -108,19 +108,20 @@ export default function Faq() {
               key={index}
               className="bg-white dark:bg-gray-800 rounded-xl border border-orange-200 dark:border-gray-700 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:bg-orange-50 dark:hover:bg-gray-700 dark:hover:border-orange-400"
             >
-              <button
+             <button
                 className="w-full text-left px-6 py-4 flex justify-between items-center text-[#7b3f00] dark:text-orange-400 font-semibold transition-all duration-300 hover:text-[#5d2f00] dark:hover:text-orange-300"
-                onClick={() => toggleFAQ(index)}
-              >
-                {faq.question}
-                <span
-                  className={`transform transition-transform duration-300 text-[#7b3f00] dark:text-orange-400 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                >
-                  \u25bc
-                </span>
+                  onClick={() => toggleFAQ(index)}
+>
+                    {faq.question}
+                      <span
+                        className={`transform transition-transform duration-300 text-[#7b3f00] dark:text-orange-400 ${
+                          openIndex === index ? "rotate-180" : ""
+                    }`}
+                    >
+                     ▼
+                      </span>
               </button>
+
               {openIndex === index && (
                 <div className="px-6 pb-4 text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
                   {faq.answer}
