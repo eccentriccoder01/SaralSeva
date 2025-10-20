@@ -1,5 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import banner from './../../assets/header-banner2.jpg';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu"; 
+import { FaCheck, FaChevronDown } from 'react-icons/fa'; 
 
 const JOBS = [
   {
@@ -131,6 +138,7 @@ export default function Careers() {
 
   const departments = useMemo(() => ['All', ...new Set(JOBS.map((j) => j.department))], []);
 
+  
   const strings = useMemo(() => ({
     en: {
       title: 'Careers',
@@ -219,7 +227,7 @@ export default function Careers() {
           <label htmlFor="search" className="sr-only">{strings[lang].searchPlaceholder}</label>
           <input
             id="search"
-            className="px-3 py-2 border rounded-md w-64"
+            className="px-3 py-2 border rounded-md w-64 text-black"
             placeholder={strings[lang].searchPlaceholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -227,12 +235,47 @@ export default function Careers() {
         </div>
 
         <div className="flex items-center gap-3">
-          <label htmlFor="department" className="text-sm">{strings[lang].departmentLabel}</label>
-          <select id="department" value={department} onChange={(e) => setDepartment(e.target.value)} className="px-2 py-1 border rounded-md">
-            {departments.map((d) => (
-              <option key={d} value={d}>{d}</option>
-            ))}
-          </select>
+          <label htmlFor="department" className="">{strings[lang].departmentLabel}</label>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="px-4 py-2 rounded-md bg-white dark:bg-gray-100 text-black border relative min-w-[22ch] text-left flex items-center justify-between"
+                type="button"
+              >
+                <span className="relative z-10">{department}</span>
+                <FaChevronDown className="w-3 h-3 text-gray-500 dark:text-gray-400" />
+              </button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+              align="end"
+              sideOffset={4}
+              className="bg-white dark:bg-gray-700 border border-orange-200 rounded-md mt-1 shadow-lg dark:border-gray-600"
+            >
+              {departments.map((d) => (
+                <DropdownMenuItem
+                  key={d}
+                  onSelect={() => setDepartment(d)}
+                  className={`
+                    ${
+                      department === d
+                        ? "bg-orange-600 text-white"
+                        : "bg-white dark:bg-gray-700 text-black dark:text-white"
+                    }
+                    hover:bg-orange-200 dark:hover:bg-orange-500 
+                    px-4 py-2 rounded-md transition-colors duration-200 flex items-center justify-between
+                  `}
+                >
+                  <span>{d}</span>
+                  {department === d && <FaCheck className="w-4 h-4 text-white ml-2" />}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>;
+
+    
+
+
         </div>
       </section>
 
@@ -244,7 +287,7 @@ export default function Careers() {
                 <div className="pr-4">
                   <h2 className="text-lg font-semibold">{lang === 'hi' && job.hiTitle ? job.hiTitle : job.title}</h2>
                   <div className="text-xs text-gray-500 mb-2">{job.department} • {job.location} • {job.type}</div>
-                  <p className="text-sm text-gray-700 mb-3">{lang === 'hi' && job.hiDescription ? job.hiDescription : job.description}</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">{lang === 'hi' && job.hiDescription ? job.hiDescription : job.description}</p>
                 </div>
 
                 <div className="flex-shrink-0 flex flex-col items-end gap-2">
@@ -276,20 +319,20 @@ export default function Careers() {
               <button aria-label="Close" onClick={() => setSelectedJob(null)} className="text-gray-500">✕</button>
             </header>
 
-            <div className="mb-4 text-sm text-gray-700">{lang === 'hi' && selectedJob.hiDescription ? selectedJob.hiDescription : selectedJob.description}</div>
+            <div className="mb-4 text-sm text-gray-700 dark:text-gray-300">{lang === 'hi' && selectedJob.hiDescription ? selectedJob.hiDescription : selectedJob.description}</div>
 
             <form onSubmit={submitApplication} className="space-y-3">
               <div>
                 <label className="block text-sm">{strings[lang].fullname}</label>
-                <input value={applicant.name} onChange={(e) => setApplicant({ ...applicant, name: e.target.value })} className="w-full px-3 py-2 border rounded-md" required />
+                <input value={applicant.name} onChange={(e) => setApplicant({ ...applicant, name: e.target.value })} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" required />
               </div>
               <div>
                 <label className="block text-sm">{strings[lang].email}</label>
-                <input type="email" value={applicant.email} onChange={(e) => setApplicant({ ...applicant, email: e.target.value })} className="w-full px-3 py-2 border rounded-md" required />
+                <input type="email" value={applicant.email} onChange={(e) => setApplicant({ ...applicant, email: e.target.value })} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" required />
               </div>
               <div>
                 <label className="block text-sm">{strings[lang].message}</label>
-                <textarea value={applicant.message} onChange={(e) => setApplicant({ ...applicant, message: e.target.value })} rows={4} className="w-full px-3 py-2 border rounded-md" />
+                <textarea value={applicant.message} onChange={(e) => setApplicant({ ...applicant, message: e.target.value })} rows={4} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" />
               </div>
 
               <div className="flex items-center justify-between">
