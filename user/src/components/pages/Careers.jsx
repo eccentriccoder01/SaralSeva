@@ -188,19 +188,24 @@ export default function Careers() {
   }
 
   function submitApplication(e) {
-    e.preventDefault();
-    // Basic validation
-    if (!applicant.name || !applicant.email) {
-      alert('Please provide name and email.');
-      return;
-    }
-    // Simulate submit (no network)
-    setSubmitted(true);
-    setTimeout(() => {
-      setSelectedJob(null);
-      alert('Application submitted — thank you! (simulated)');
-    }, 900);
+  e.preventDefault();
+  // Basic validation
+  if (!applicant.name || !applicant.email) {
+    alert('Please provide name and email.');
+    return;
   }
+
+  setSubmitted(true);
+
+  // Simulate submit
+  setTimeout(() => {
+    alert('Application submitted — thank you! (simulated)');
+    setSubmitted(false); // reset for next submission
+    setSelectedJob(null); // close modal
+    setApplicant({ name: '', email: '', message: '' }); // optional reset
+  }, 900);
+}
+
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
