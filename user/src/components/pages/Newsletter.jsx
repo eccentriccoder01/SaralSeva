@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import banner from '../../assets/header-banner2.jpg';
+import DropdownSelect from '../DropdownSelect';
 
 export default function Newsletter() {
   const [lang, setLang] = useState('en');
@@ -179,11 +180,15 @@ export default function Newsletter() {
 
             <div>
               <label className="block text-sm font-medium mb-1">{strings[lang].country}</label>
-              <select value={country} onChange={(e) => setCountry(e.target.value)} className="w-full px-3 py-2 border rounded-md bg-transparent">
-                {countries.map((c) => (
-                  <option key={c.code} value={c.code}>{`${c.flag} ${c.name} (${c.dial})`}</option>
-                ))}
-              </select>
+                <DropdownSelect
+                  options={countries.map(c => `${c.flag} ${c.name} (${c.dial})`)}
+                  selectedOption={`${countries.find((c) => c.code === country)?.flag} ${countries.find((c) => c.code === country)?.name} (${countries.find((c) => c.code === country)?.dial})`}
+                  onSelect={(option) => {
+                    const selectedCountry = countries.find((c) => `${c.flag} ${c.name} (${c.dial})` === option);
+                    if (selectedCountry) setCountry(selectedCountry.code);
+                  }}
+                  label={strings[lang].country}
+                />
             </div>
 
             <div>

@@ -11,6 +11,7 @@ import { Link ,useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // 👁 for toggle
 import { GoogleLogin } from "@react-oauth/google"; // Google OAuth
+import DropdownSelect from "@/components/DropdownSelect";
 
 // ✅ Schema with confirmPassword + refine
 const schema = z.object({
@@ -225,18 +226,21 @@ const onSubmit = async (data) => {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              {/* Name + Gender */}
+              {/* Name */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <input id="name" type="text" placeholder="Enter your Name" {...register("name")} className={inputClasses}/>
                   {errors.name && <p className={errorClasses}>{errors.name.message}</p>}
                 </div>
+                {/* Gender */}
                 <div>
-                  <select {...register("gender")} className={inputClasses}>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
+                  <DropdownSelect
+                    options={["Male", "Female"]}
+                    selectedOption={watch("gender") || "Select Gender"} 
+                    onSelect={(value) => setValue("gender", value)}
+                    className={inputClasses}
+                    placeholder="Select Gender" 
+                  />
                   {errors.gender && <p className={errorClasses}>{errors.gender.message}</p>}
                 </div>
               </div>
