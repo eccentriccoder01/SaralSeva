@@ -102,7 +102,7 @@ export default function Features() {
         </section>
 
         <section className="mt-12 text-center">
-          <a href="/schemes" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md">{strings[lang].cta}</a>
+          <a href="/schemes" className="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">{strings[lang].cta}</a>
         </section>
       </main>
     </div>
