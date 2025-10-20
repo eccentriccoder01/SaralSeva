@@ -140,12 +140,17 @@ const Contact = () => {
 
         <div className="md:flex gap-8">
           <aside className="md:w-1/4 mb-6 md:mb-0">
-            <nav className="sticky top-6 bg-white p-4 rounded shadow-sm">
-              <h3 className="font-semibold mb-3">{S.toc}</h3>
+            <nav className="sticky top-6 bg-white dark:bg-gray-800 p-4 rounded shadow-sm">
+              <h3 className="font-semibold mb-3 text-gray-800 dark:text-gray-200">{S.toc}</h3>
               <ul className="space-y-2 text-sm">
                 {sections.map((s) => (
                   <li key={s.id}>
-                    <a className="text-amber-600 hover:underline" href={`#${s.id}`}>{s.title}</a>
+                    <a 
+                      className="text-amber-600 hover:underline dark:text-amber-400" 
+                      href={`#${s.id}`}
+                    >
+                      {s.title}
+                    </a>
                   </li>
                 ))}
               </ul>
