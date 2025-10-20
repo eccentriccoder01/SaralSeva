@@ -24,6 +24,23 @@ const tooltipStyle = {
   zIndex: 9999,
 };
 
+const GrievanceCard = ({ icon: Icon, title, description, buttonText, buttonLink, tooltipId, tooltipContent }) => (
+  <div
+    className="w-full max-w-sm p-8 bg-orange-50 dark:bg-gray-700 text-center rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
+    data-tooltip-id={tooltipId}
+    data-tooltip-content={tooltipContent}
+  >
+    <Icon className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400" />
+    <h3 className="mt-4 text-2xl font-bold text-stone-800 dark:text-gray-200">{title}</h3>
+    <p className="mt-2 text-gray-600 dark:text-gray-300">{description}</p>
+    <Link to={buttonLink}>
+      <Button className="mt-auto mt-6 font-bold text-white uppercase bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg shadow-md px-7 py-5">
+        {buttonText}
+      </Button>
+    </Link>
+  </div>
+);
+
 const Grievances = () => {
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/30 transition-colors duration-300">
@@ -70,61 +87,40 @@ const Grievances = () => {
       </div>
 
       {/* Action Cards */}
-  <div className="max-w-7xl mx-auto flex flex-col justify-center gap-8 py-16 md:flex-row items-center bg-white dark:bg-gray-800 transition-colors duration-300 mb-12">
-        
-        {/* Lodge Grievance */}
-        <div
-          className="w-full max-w-sm p-8 bg-orange-50 dark:bg-gray-700 text-center rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
-          data-tooltip-id="tooltip-lodge"
-          data-tooltip-content="Click to lodge a new grievance"
-        >
-            <FileSignature className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400 "/>
-            <h3 className="mt-4 text-2xl font-bold text-stone-800 dark:text-gray-200">Lodge a Grievance</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">Submit a new grievance through our simplified form.</p>
-            <Link to='/grievances/grievances_registration_form'>
-              <Button className="mt-6 font-bold text-white uppercase bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg shadow-md px-7 py-5">
-                Register Now
-              </Button>
-            </Link>
-        </div>
-        <Tooltip id="tooltip-lodge" style={tooltipStyle} place="top" />
-
-        {/* Check Status */}
-        <div
-          className="w-full max-w-sm p-8 bg-orange-50 dark:bg-gray-700 text-center rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
-          data-tooltip-id="tooltip-status"
-          data-tooltip-content="Check the status of your submitted grievances"
-        >
-            <ListChecks className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400"/>
-            <h3 className="mt-4 text-2xl font-bold text-stone-800 dark:text-gray-200">Check Status</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">Track the progress of your submitted grievances.</p>
-            <Link to='/status'>
-              <Button className="mt-6 font-bold text-white uppercase bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg shadow-md px-7 py-5">
-                View Status
-              </Button>
-            </Link>
-        </div>
-        <Tooltip id="tooltip-status" style={tooltipStyle} place="top" />
-
-        {/* Contact Us */}
-        <div
-          className="w-full max-w-sm p-8 bg-orange-50 dark:bg-gray-700 text-center rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300"
-          data-tooltip-id="tooltip-contact"
-          data-tooltip-content="Contact the appropriate authorities"
-        >
-            <Users className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400"/>
-            <h3 className="mt-4 text-2xl font-bold text-stone-800 dark:text-gray-200">Contact Us</h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">Get in touch with the appropriate authorities.</p>
-            <Link to='/contact'>
-              <Button className="mt-6 font-bold text-white uppercase bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg shadow-md px-7 py-5">
-                Contact Us
-              </Button>
-            </Link>
-        </div>
-        <Tooltip id="tooltip-contact" style={tooltipStyle} place="top" />
+      <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-8 py-16 items-stretch bg-white dark:bg-gray-800 transition-colors duration-300 mb-12">
+        <GrievanceCard
+          icon={FileSignature}
+          title="Lodge a Grievance"
+          description="Submit a new grievance through our simplified form."
+          buttonText="Register Now"
+          buttonLink="/grievances/grievances_registration_form"
+          tooltipId="tooltip-lodge"
+          tooltipContent="Click to lodge a new grievance"
+        />
+        <GrievanceCard
+          icon={ListChecks}
+          title="Check Status"
+          description="Track the progress of your submitted grievances."
+          buttonText="View Status"
+          buttonLink="/status"
+          tooltipId="tooltip-status"
+          tooltipContent="Check the status of your submitted grievances"
+        />
+        <GrievanceCard
+          icon={Users}
+          title="Contact Us"
+          description="Get in touch with the appropriate authorities."
+          buttonText="Contact Us"
+          buttonLink="/contact"
+          tooltipId="tooltip-contact"
+          tooltipContent="Contact the appropriate authorities"
+        />
       </div>
+      <Tooltip id="tooltip-lodge" style={tooltipStyle} place="top" />
+      <Tooltip id="tooltip-status" style={tooltipStyle} place="top" />
+      <Tooltip id="tooltip-contact" style={tooltipStyle} place="top" />
     </div>
   );
 };
-
+        
 export default Grievances;
