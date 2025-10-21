@@ -173,28 +173,6 @@ SaralSeva is built on a robust three-tier architecture, providing distinct, secu
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-<div align="center">
-  
-![GSSoC Logo](gssoc_logo.png)
-
-</div>
-🌟 **Exciting News...**
-
-🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow _SaralSeva!_ Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
-
-👩‍💻 GSSoC is one of India’s **largest 3-month-long open-source programs** that encourages developers of all levels to contribute to real-world projects 🌍 while learning, collaborating, and growing together. 🌱
-
-🌈 With **mentorship, community support**, and **collaborative coding**, it's the perfect platform for developers to:
-
-- ✨ Improve their skills
-- 🤝 Contribute to impactful projects
-- 🏆 Get recognized for their work
-- 📜 Receive certificates and swag!
-
-🎉 **I can’t wait to welcome new contributors** from GSSoC 2025 to this SaralSeva project family! Let's build, learn, and grow together — one commit at a time. 🔥👨‍💻👩‍💻
-
- <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
-
 <h2 id="technologies-used"> 🛠️ Technologies Used</h2>
 
 ### Frontend
@@ -542,18 +520,6 @@ This project is licensed under the MIT License - see the [`License`](https://git
 
  
 
-<h2 id="project-admin" align="center">🧑‍💻Project Admin:</h2>
-<table>
-<tr>
-<td align="center">
-<a href="https://github.com/eccentriccoder01"><img src="https://avatars.githubusercontent.com/u/121952662?v=4" height="140px" width="140px" alt="Sagnik Chakraborty"></a><br><sub><b>Sagnik Chakraborty</b><br><a href="https://www.linkedin.com/in/eccentricexplorer"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73993775/278833250-adb040ea-e3ef-446e-bcd4-3e8d7d4c0176.png" width="45px" height="45px"></a>
-</sub>
-</td>
-</tr>
-</table>
-
- 
-
 <h1 align="center"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /> Give us a Star and let's make magic! <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25" height="25" /></h1>
 
 <p align="center">
@@ -563,7 +529,6 @@ This project is licensed under the MIT License - see the [`License`](https://git
  
 
 <h3 align="center"> 👨‍💻 Built with ❤️ by SaralSeva Team</h3>
-<h4 align="center"> ❤️ Sagnik Chakraborty and Contributors ❤️ </h4>
 <p align="center">
   <a href="https://github.com/eccentriccoder01/SaralSeva/issues">Open an Issue</a> | <a href="https://github.com/eccentriccoder01/SaralSeva">🌟 Star on GitHub</a> | <a href="https://saralseva.vercel.app/">🚀 Live Demo</a></p>
 
