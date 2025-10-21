@@ -42,7 +42,6 @@
 - <a href="#license">License</a>
 - <a href="#stargazers">Stargazers</a>
 - <a href="#forkers">Forkers</a>
-- <a href="#project-admin">Project Admin</a>
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
