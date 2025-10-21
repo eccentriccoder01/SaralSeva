@@ -9,7 +9,7 @@
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 <div align="center" style="margin: 10px 0 24px;">
-  <a href="https://github.com/eccentriccoder01/SaralSeva/issues">� Report Bug</a>
+  <a href="https://github.com/eccentriccoder01/SaralSeva/issues">🐛 Report Bug</a>
   •
   <a href="https://github.com/eccentriccoder01/SaralSeva/issues">💡 Request Feature</a>
   
@@ -17,7 +17,7 @@
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
  
-<h3>�📖 Table of Contents</h3>
+<h3>📖 Table of Contents</h3>
 
 - <a href="#overview"> Overview </a>
 - <a href="#project-insights"> Project Insights </a>
