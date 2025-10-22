@@ -2,11 +2,7 @@
 
 <div align="center"><img src="S.png" style="width: 220px; height: 220px;"  alt="SaralSeva Logo" /></div>
 
-<h1 align="center">SaralSeva</h1>
-
-<br>
-
- <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+<h1 align="center">SARALSEVA</h1>
 
 <div align="center" style="margin: 10px 0 24px;">
   <a href="https://github.com/eccentriccoder01/SaralSeva/issues">🐛 Report Bug</a>
@@ -14,34 +10,6 @@
   <a href="https://github.com/eccentriccoder01/SaralSeva/issues">💡 Request Feature</a>
   
 </div>
-
- <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
- 
-<h3>📖 Table of Contents</h3>
-
-- <a href="#overview"> Overview </a>
-- <a href="#project-insights"> Project Insights </a>
-- <a href="#vision"> 🇮🇳 The Vision: Digitising Governance at the Gram Panchayat Level </a>
-- <a href="#why-saralseva"> Why SaralSeva? </a>
-- <a href="#mission"> Mission </a>
-- <a href="#demo"> Live Demo </a>
-- <a href="#screenshots"> Screenshots </a>
-- <a href="#key-features">Key Features</a>
-- <a href="#technologies-used"> Technologies Used </a>
-- <a href="#automated-dependency-management"> 🤖 Automated Dependency Management </a>
-- <a href="#installation-setup"> Installation and Setup </a>
-- <a href="#troubleshooting"> Troubleshooting </a>
-- <a href="#acknowledgments">Acknowledgments</a>
-- <a href="#contact">Contact</a>
-- <a href="#how-to-contribute">How to Contribute</a>
-- <a href="#contributing">Contributing</a>
-- <a href="#code-of-conduct">Code of Conduct</a>
-- <a href="#contribution-guidelines">Contribution Guidelines</a>
-- <a href="#suggestions-feedback"> Suggestions & Feedback</a>
-- <a href="#show-your-support">Show Your Support</a>
-- <a href="#license">License</a>
-- <a href="#stargazers">Stargazers</a>
-- <a href="#forkers">Forkers</a>
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
