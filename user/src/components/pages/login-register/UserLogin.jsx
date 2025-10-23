@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import heroBg from "./../../../assets/baner-cpgrams_1.jpg"; // Using a relevant background
+import heroBg from "./../../../assets/baner-cpgrams_1.jpg";
 import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "sonner";
 
 const UserLogin = ({ setIsAuthenticated }) => {
-  const [loginType, setLoginType] = useState('otp'); // 'otp' or 'email'
+  const [loginType, setLoginType] = useState('otp');
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [mobile, setMobile] = useState("");
   const [error, setError] = useState(null);
@@ -47,7 +47,6 @@ const UserLogin = ({ setIsAuthenticated }) => {
     }
   };
 
-  // Google Login Handler
   const handleGoogleLogin = async (id_token) => {
     setError(null);
 
@@ -59,7 +58,6 @@ const UserLogin = ({ setIsAuthenticated }) => {
 
       if (res.data.success) {
         if (res.data.incomplete) {
-          // User needs to complete registration
           toast.success("Please complete your profile to finish registration");
           navigate("/auth/complete-registration", {
             state: {
@@ -68,7 +66,6 @@ const UserLogin = ({ setIsAuthenticated }) => {
             },
           });
         } else {
-          // User is fully registered
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.user._id);
           setIsAuthenticated(true);
@@ -82,13 +79,13 @@ const UserLogin = ({ setIsAuthenticated }) => {
     }
   };
   
-  const inputClasses = "dark:text-black w-full p-3 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none";
+  const inputClasses = "w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md transition-all duration-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100";
 
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center p-4 bg-orange-50/30" style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative w-full max-w-md p-8 space-y-6 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl">
-            <h1 className="text-3xl font-bold text-center text-orange-900 jost">Welcome Back</h1>
+    <div className="relative min-h-[80vh] flex items-center justify-center p-4 bg-orange-50/30 dark:bg-gray-900/30" style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="absolute inset-0 bg-black/50 dark:bg-black/70"></div>
+        <div className="relative w-full max-w-md p-8 space-y-6 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-2xl">
+            <h1 className="text-3xl font-bold text-center text-orange-900 dark:text-orange-400 jost">Welcome Back</h1>
 
             {/* Google Sign-In Button */}
             <div className="space-y-4">
@@ -113,10 +110,10 @@ const UserLogin = ({ setIsAuthenticated }) => {
               </div>
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300"></div>
+                  <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
+                  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
                     Or continue with
                   </span>
                 </div>
@@ -124,19 +121,49 @@ const UserLogin = ({ setIsAuthenticated }) => {
             </div>
             
             {/* Tab Switcher */}
-            <div className="flex bg-gray-200 rounded-lg p-1">
-                <button onClick={() => setLoginType('otp')} className={`flex-1 p-2 rounded-md font-semibold transition-colors ${loginType === 'otp' ? 'bg-orange-600 text-white shadow' : 'text-gray-600 hover:bg-gray-300'}`}>Login with OTP</button>
-                <button onClick={() => setLoginType('email')} className={`flex-1 p-2 rounded-md font-semibold transition-colors ${loginType === 'email' ? 'bg-orange-600 text-white shadow' : 'text-gray-600 hover:bg-gray-300'}`}>Login with Email</button>
+            <div className="flex bg-gray-200 dark:bg-gray-700 rounded-lg p-1">
+                <button 
+                  onClick={() => setLoginType('otp')} 
+                  className={`flex-1 p-2 rounded-md font-semibold transition-colors ${
+                    loginType === 'otp' 
+                      ? 'bg-orange-600 dark:bg-orange-500 text-white shadow' 
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  Login with OTP
+                </button>
+                <button 
+                  onClick={() => setLoginType('email')} 
+                  className={`flex-1 p-2 rounded-md font-semibold transition-colors ${
+                    loginType === 'email' 
+                      ? 'bg-orange-600 dark:bg-orange-500 text-white shadow' 
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  Login with Email
+                </button>
             </div>
             
             {/* OTP Login Form */}
             {loginType === 'otp' && (
                 <form onSubmit={handleOtpLogin} className="space-y-4 animate-in fade-in duration-300">
                     <div className="space-y-1">
-                        <label htmlFor="mobile" className="font-medium text-gray-700">Mobile Number</label>
-                        <input id="mobile" type="tel" onChange={(e) => setMobile(e.target.value)} placeholder="Enter 10-digit mobile number" required className={inputClasses} />
+                        <label htmlFor="mobile" className="font-medium text-gray-700 dark:text-gray-300">Mobile Number</label>
+                        <input 
+                          id="mobile" 
+                          type="tel" 
+                          onChange={(e) => setMobile(e.target.value)} 
+                          placeholder="Enter 10-digit mobile number" 
+                          required 
+                          className={inputClasses} 
+                        />
                     </div>
-                    <Button className="w-full text-lg py-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all" type="submit">Get OTP</Button>
+                    <Button 
+                      className="w-full text-lg py-6 bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-500 dark:to-amber-500 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all" 
+                      type="submit"
+                    >
+                      Get OTP
+                    </Button>
                 </form>
             )}
 
@@ -144,22 +171,45 @@ const UserLogin = ({ setIsAuthenticated }) => {
             {loginType === 'email' && (
                 <form onSubmit={handleEmailLogin} className="space-y-4 animate-in fade-in duration-300">
                     <div className="space-y-1">
-                        <label htmlFor="email" className="font-medium text-gray-700">Email Address</label>
-                        <input id="email" type="email" placeholder="Enter your Email" required name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className={inputClasses} />
+                        <label htmlFor="email" className="font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                        <input 
+                          id="email" 
+                          type="email" 
+                          placeholder="Enter your Email" 
+                          required 
+                          name="email" 
+                          value={formData.email} 
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+                          className={inputClasses} 
+                        />
                     </div>
                     <div className="space-y-1">
-                        <label htmlFor="password-email" className="font-medium text-gray-700">Password</label>
-                        <input id="password-email" type="password" placeholder="Enter your Password" required name="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className={inputClasses} />
+                        <label htmlFor="password-email" className="font-medium text-gray-700 dark:text-gray-300">Password</label>
+                        <input 
+                          id="password-email" 
+                          type="password" 
+                          placeholder="Enter your Password" 
+                          required 
+                          name="password" 
+                          value={formData.password} 
+                          onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
+                          className={inputClasses} 
+                        />
                     </div>
-                    <Button className="w-full text-lg py-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all" type="submit">Log in</Button>
+                    <Button 
+                      className="w-full text-lg py-6 bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-500 dark:to-amber-500 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all" 
+                      type="submit"
+                    >
+                      Log in
+                    </Button>
                 </form>
             )}
 
-            {error && <p className="text-center text-red-600 font-medium">{error}</p>}
+            {error && <p className="text-center text-red-600 dark:text-red-400 font-medium">{error}</p>}
             
-            <p className="text-sm text-center text-gray-600">
+            <p className="text-sm text-center text-gray-600 dark:text-gray-400">
               Not registered yet?{' '}
-              <Link to='/register' className="font-semibold text-orange-700 hover:underline">Register Now</Link>
+              <Link to='/register' className="font-semibold text-orange-700 dark:text-orange-400 hover:underline">Register Now</Link>
             </p>
         </div>
     </div>
