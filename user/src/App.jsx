@@ -53,6 +53,7 @@ import Features from "./components/pages/Features";
 import Community from "./components/pages/Community";
 import Social from "./components/pages/Social";
 import Newsletter from "./components/pages/Newsletter";
+import SuccessStories from "./components/pages/SuccessStories";
 
 import FeedbackButton from "./components/FeedbackButton";
 
@@ -122,6 +123,7 @@ function App() {
   <Route path="/community" element={<Community />} />
   <Route path="/social" element={<Social />} />
   <Route path="/newsletter" element={<Newsletter />} />
+  <Route path="/success-stories" element={<SuccessStories />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       
