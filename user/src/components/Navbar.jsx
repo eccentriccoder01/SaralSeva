@@ -107,6 +107,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         <Link to="/" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-home" data-tooltip-content="Go to Home Page">Home</Link>
         <Link to="/about" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-about" data-tooltip-content="Learn more About us">About</Link>
         <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-schemes" data-tooltip-content="View Government Schemes">Schemes</Link>
+        <Link to="/ask-saralseva" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-ai" data-tooltip-content="AI-Powered Scheme Recommender">Ask AI</Link>
         <Link to="/success-stories" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-success" data-tooltip-content="Read Success Stories">Success Stories</Link>
         <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-dashboard" data-tooltip-content="Go to Dashboard">Dashboard</Link>
         <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-grievances" data-tooltip-content="View Grievances">Grievances</Link>
@@ -178,6 +179,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
             <Link to="/" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Home</Link>
             <Link to="/about" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>About</Link>
             <Link to="/schemes" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Schemes</Link>
+            <Link to="/ask-saralseva" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Ask AI</Link>
             <Link to="/success-stories" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Success Stories</Link>
             <Link to="/dashboard" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Dashboard</Link>
             <Link to="/grievances" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Grievances</Link>
@@ -190,6 +192,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       <ReactTooltip id="nav-home" style={tooltipStyle} />
       <ReactTooltip id="nav-about" style={tooltipStyle} />
       <ReactTooltip id="nav-schemes" style={tooltipStyle} />
+      <ReactTooltip id="nav-ai" style={tooltipStyle} />
       <ReactTooltip id="nav-success" style={tooltipStyle} />
       <ReactTooltip id="nav-dashboard" style={tooltipStyle} />
       <ReactTooltip id="nav-grievances" style={tooltipStyle} />
