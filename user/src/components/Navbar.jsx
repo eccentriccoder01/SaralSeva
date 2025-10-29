@@ -113,7 +113,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-contact" data-tooltip-content="Contact Us">Contact</Link>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 scale-[0.7] min-[280px]:scale-100">
         {/* Theme toggle switch */}
         <TooltipProvider>
           <Tooltip>
@@ -131,14 +131,20 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
             {location.pathname !== "/login" && (
               <Link to="/login">
                 <Button className="gap-2 font-bold text-orange-900 bg-amber-400 dark:bg-amber-300 rounded-full lg:px-6 hover:bg-white dark:hover:bg-gray-200 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-px">
-                  LOGIN <ArrowRightFromLine className="hidden w-5 h-5 lg:block" />
+                  <span className="hidden sm:inline">LOGIN</span>
+                  {/* icon for small screens */}
+                  <ArrowRightFromLine className="w-5 h-5 sm:hidden" />
+                  {/* keep existing icon on large screens unchanged */}
+                  <ArrowRightFromLine className="hidden w-5 h-5 sm:block" />
                 </Button>
               </Link>
             )}
             {location.pathname !== "/register" && (
               <Link to="/register">
-                <Button className="font-bold text-white bg-transparent border-2 border-amber-400 dark:border-amber-300 rounded-full lg:px-6 hover:bg-amber-400 dark:hover:bg-amber-300 hover:text-orange-900 transition-all duration-300">
-                  REGISTER
+                <Button className="font-bold flex gap-1 items-center text-white bg-transparent border-2 border-amber-400 dark:border-amber-300 rounded-full lg:px-6 hover:bg-amber-400 dark:hover:bg-amber-300 hover:text-orange-900 transition-all duration-300">
+                  <span className="hidden sm:inline">REGISTER</span>
+                  {/* show user icon on small screens instead of text */}
+                  <CircleUserRound className="w-5 h-5" />
                 </Button>
               </Link>
             )}
