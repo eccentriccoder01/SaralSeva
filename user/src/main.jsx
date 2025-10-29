@@ -1,3 +1,5 @@
+import React from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom"; // ✅ import BrowserRouter
@@ -12,9 +14,11 @@ createRoot(document.getElementById("root")).render(
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <UserProvider>
         <SchemeProvider>
+          <HelmetProvider>
           <BrowserRouter> {/* ✅ Wrap App here */}
             <App />
           </BrowserRouter>
+          </HelmetProvider>
         </SchemeProvider>
       </UserProvider>
     </GoogleOAuthProvider>

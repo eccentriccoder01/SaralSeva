@@ -42,6 +42,18 @@ import Contact from "./components/Contact";
 import Faq from "./components/Faq";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import LinkingPolicy from "./components/LinkingPolicy";
+import Terms from "./components/pages/legal/Terms";
+import Disclaimer from "./components/pages/legal/Disclaimer";
+import CookiePolicy from "./components/pages/legal/CookiePolicy";
+import Copyright from "./components/pages/legal/Copyright";
+import Blog from "./components/pages/Blog";
+import Careers from "./components/pages/Careers";
+import Help from "./components/pages/Help";
+import Features from "./components/pages/Features";
+import Community from "./components/pages/Community";
+import Social from "./components/pages/Social";
+import Newsletter from "./components/pages/Newsletter";
+import SuccessStories from "./components/pages/SuccessStories";
 
 import FeedbackButton from "./components/FeedbackButton";
 
@@ -100,6 +112,18 @@ function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/linkingpolicy" element={<LinkingPolicy />} />
+  <Route path="/terms" element={<Terms />} />
+  <Route path="/disclaimer" element={<Disclaimer />} />
+  <Route path="/cookie-policy" element={<CookiePolicy />} />
+  <Route path="/copyright" element={<Copyright />} />
+  <Route path="/blog" element={<Blog />} />
+  <Route path="/careers" element={<Careers />} />
+  <Route path="/help" element={<Help />} />
+  <Route path="/features" element={<Features />} />
+  <Route path="/community" element={<Community />} />
+  <Route path="/social" element={<Social />} />
+  <Route path="/newsletter" element={<Newsletter />} />
+  <Route path="/success-stories" element={<SuccessStories />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       

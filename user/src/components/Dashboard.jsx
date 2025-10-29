@@ -22,7 +22,7 @@ const Dashboard = () => {
     <div className="p-4 lg:p-8 bg-orange-50/30 dark:bg-gray-900/30 transition-colors duration-300">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center justify-center transition-colors duration-300">
-                <h2 className="text-3xl font-bold text-orange-900 dark:text-orange-400 mb-4 jost">National Presence</h2>
+                <h1 className="text-3xl font-bold text-orange-900 dark:text-orange-400 mb-4 jost">National Presence</h1>
                 <img src={map} alt="Map of India" className="w-full rounded-lg"/>
             </div>
             <div className="space-y-8">

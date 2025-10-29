@@ -28,9 +28,14 @@ const Status = () => {
   const [resultScheme, setResultScheme] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(true);
+  
+  // FIX: Initialize isLightMode from localStorage
+  const [isLightMode, setIsLightMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme !== "dark"; // Returns false if dark, true otherwise
+  });
 
-  // Persist theme
+  // Apply theme whenever isLightMode changes
   useEffect(() => {
     if (isLightMode) {
       document.documentElement.classList.add("light");
@@ -42,13 +47,6 @@ const Status = () => {
       localStorage.setItem("theme", "dark");
     }
   }, [isLightMode]);
-
-  // Load saved theme
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") setIsLightMode(false);
-    else setIsLightMode(true);
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,14 +79,12 @@ const Status = () => {
     <div className="flex flex-col items-center min-h-[80vh] py-12 px-4 bg-orange-50/30 dark:bg-gray-900/30 transition-colors duration-500">
       <div className="relative w-full max-w-2xl p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-colors duration-500">
         
-{/* Go Back Arrow - aligned with heading */}
-<FaArrowLeft
-  className="absolute left-4 top-10 text-orange-500 hover:text-amber-400 cursor-pointer text-2xl"
-  onClick={() => navigate(-1)}
-  title="Go Back"
-/>
-
-
+        {/* Go Back Arrow - aligned with heading */}
+        <FaArrowLeft
+          className="absolute left-4 top-10 text-orange-500 hover:text-amber-400 cursor-pointer text-2xl"
+          onClick={() => navigate(-1)}
+          title="Go Back"
+        />
 
         {/* Centered Heading */}
         <div className="text-center">
