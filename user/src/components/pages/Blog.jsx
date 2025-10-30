@@ -118,7 +118,7 @@ export default function Blog() {
               id="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="px-3 py-2 border rounded-md w-56 text-sm"
+              className="px-3 py-2 border rounded-md w-56 text-black"
               placeholder={lang === 'hi' ? 'पोस्ट, टैग खोजें...' : 'Search posts, tags...'}
               aria-label={lang === 'hi' ? 'ब्लॉग पोस्ट खोजें' : 'Search blog posts'}
             />
