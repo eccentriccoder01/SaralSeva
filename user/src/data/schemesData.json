@@ -1,0 +1,355 @@
+[
+  {
+    "id": "pm-kisan",
+    "scheme_name": "PM-KISAN Samman Nidhi",
+    "category": "Agriculture",
+    "description": "Income support scheme for farmers providing ₹6000 per year in three equal installments",
+    "eligibility": {
+      "occupation": ["Farmer", "Agricultural Worker"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "land_holding": "Any size"
+    },
+    "benefits": "₹6000 per year direct income support in three installments of ₹2000 each",
+    "application_link": "https://pmkisan.gov.in/",
+    "keywords": ["farmer", "agriculture", "income support", "kisan", "farming", "crop", "land"]
+  },
+  {
+    "id": "pmay",
+    "scheme_name": "Pradhan Mantri Awas Yojana (PMAY)",
+    "category": "Housing",
+    "description": "Affordable housing scheme for economically weaker sections and low-income groups",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": 1800000,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "owns_house": false
+    },
+    "benefits": "Subsidy up to ₹2.67 lakh on home loans, affordable housing units",
+    "application_link": "https://pmaymis.gov.in/",
+    "keywords": ["housing", "home", "house", "shelter", "awas", "loan", "subsidy", "ews", "lig"]
+  },
+  {
+    "id": "pmmy",
+    "scheme_name": "Pradhan Mantri MUDRA Yojana (PMMY)",
+    "category": "Business & Entrepreneurship",
+    "description": "Loans up to ₹10 lakh for small businesses and micro-enterprises",
+    "eligibility": {
+      "occupation": ["Entrepreneur", "Self-Employed", "Small Business Owner", "Trader", "Shopkeeper"],
+      "age_min": 18,
+      "age_max": 65,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"]
+    },
+    "benefits": "Collateral-free loans: Shishu (up to ₹50k), Kishore (₹50k-₹5L), Tarun (₹5L-₹10L)",
+    "application_link": "https://www.mudra.org.in/",
+    "keywords": ["business", "loan", "mudra", "entrepreneur", "startup", "self-employed", "enterprise", "shop"]
+  },
+  {
+    "id": "nsp",
+    "scheme_name": "National Scholarship Portal (NSP)",
+    "category": "Education",
+    "description": "Scholarships for students from various backgrounds including SC/ST/OBC/Minorities",
+    "eligibility": {
+      "occupation": ["Student"],
+      "age_min": 5,
+      "age_max": 35,
+      "income_limit": 800000,
+      "state_specific": ["All"],
+      "gender": ["All"]
+    },
+    "benefits": "Financial assistance ranging from ₹3000 to ₹50000 per year based on course and category",
+    "application_link": "https://scholarships.gov.in/",
+    "keywords": ["scholarship", "education", "student", "study", "school", "college", "university", "fees"]
+  },
+  {
+    "id": "nsap",
+    "scheme_name": "National Social Assistance Programme (NSAP)",
+    "category": "Social Welfare",
+    "description": "Pension schemes for elderly, widows, and persons with disabilities",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 60,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "bpl": true
+    },
+    "benefits": "Monthly pension: ₹200-₹500 for elderly, ₹300 for widows, ₹300 for persons with disabilities",
+    "application_link": "https://nsap.nic.in/",
+    "keywords": ["pension", "elderly", "old age", "widow", "disability", "senior citizen", "retirement"]
+  },
+  {
+    "id": "standup-india",
+    "scheme_name": "Stand-Up India",
+    "category": "Business & Entrepreneurship",
+    "description": "Loans for SC/ST and women entrepreneurs to start greenfield enterprises",
+    "eligibility": {
+      "occupation": ["Entrepreneur", "Self-Employed"],
+      "age_min": 18,
+      "age_max": 65,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["Female", "All"],
+      "category": ["SC", "ST", "Women"]
+    },
+    "benefits": "Bank loans between ₹10 lakh to ₹1 crore for greenfield enterprises",
+    "application_link": "https://www.standupmitra.in/",
+    "keywords": ["women", "sc", "st", "entrepreneur", "business", "loan", "startup", "enterprise"]
+  },
+  {
+    "id": "pmjdy",
+    "scheme_name": "Pradhan Mantri Jan Dhan Yojana (PMJDY)",
+    "category": "Financial Inclusion",
+    "description": "Financial inclusion scheme providing zero-balance bank accounts with insurance benefits",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 10,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"]
+    },
+    "benefits": "Zero-balance account, ₹10000 overdraft, ₹2 lakh accident insurance, RuPay debit card",
+    "application_link": "https://pmjdy.gov.in/",
+    "keywords": ["bank", "account", "financial", "insurance", "savings", "rupay", "overdraft"]
+  },
+  {
+    "id": "pmfby",
+    "scheme_name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+    "category": "Agriculture",
+    "description": "Crop insurance scheme protecting farmers against crop loss due to natural calamities",
+    "eligibility": {
+      "occupation": ["Farmer", "Agricultural Worker"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"]
+    },
+    "benefits": "Comprehensive crop insurance with low premium (2% for Kharif, 1.5% for Rabi)",
+    "application_link": "https://pmfby.gov.in/",
+    "keywords": ["crop", "insurance", "farmer", "agriculture", "fasal", "natural calamity", "loss"]
+  },
+  {
+    "id": "atal-pension",
+    "scheme_name": "Atal Pension Yojana (APY)",
+    "category": "Social Welfare",
+    "description": "Pension scheme for unorganized sector workers",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 18,
+      "age_max": 40,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "has_bank_account": true
+    },
+    "benefits": "Guaranteed pension of ₹1000 to ₹5000 per month after age 60",
+    "application_link": "https://npscra.nsdl.co.in/",
+    "keywords": ["pension", "retirement", "unorganized", "worker", "savings", "old age"]
+  },
+  {
+    "id": "pmuy",
+    "scheme_name": "Pradhan Mantri Ujjwala Yojana (PMUY)",
+    "category": "Energy & Environment",
+    "description": "Free LPG connections to women from BPL households",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["Female"],
+      "bpl": true
+    },
+    "benefits": "Free LPG connection with financial assistance for first refill and stove",
+    "application_link": "https://pmuy.gov.in/",
+    "keywords": ["lpg", "gas", "cooking", "women", "bpl", "ujjwala", "cylinder", "fuel"]
+  },
+  {
+    "id": "bbbp",
+    "scheme_name": "Beti Bachao Beti Padhao (BBBP)",
+    "category": "Women & Child Development",
+    "description": "Scheme to promote girl child education and prevent gender discrimination",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 0,
+      "age_max": 21,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["Female"]
+    },
+    "benefits": "Financial incentives for girl child education, awareness campaigns, improved sex ratio",
+    "application_link": "https://wcd.nic.in/bbbp-schemes",
+    "keywords": ["girl", "daughter", "beti", "education", "women", "child", "female"]
+  },
+  {
+    "id": "pmgsy",
+    "scheme_name": "Pradhan Mantri Gram Sadak Yojana (PMGSY)",
+    "category": "Infrastructure",
+    "description": "Rural road connectivity scheme for unconnected habitations",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "location": "Rural"
+    },
+    "benefits": "All-weather road connectivity to unconnected rural habitations",
+    "application_link": "https://pmgsy.nic.in/",
+    "keywords": ["road", "rural", "village", "infrastructure", "connectivity", "transport"]
+  },
+  {
+    "id": "ayushman-bharat",
+    "scheme_name": "Ayushman Bharat - PM-JAY",
+    "category": "Health",
+    "description": "Health insurance scheme providing coverage up to ₹5 lakh per family per year",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 0,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "secc_eligible": true
+    },
+    "benefits": "Health coverage of ₹5 lakh per family per year for secondary and tertiary hospitalization",
+    "application_link": "https://pmjay.gov.in/",
+    "keywords": ["health", "insurance", "medical", "hospital", "treatment", "ayushman", "healthcare"]
+  },
+  {
+    "id": "skill-india",
+    "scheme_name": "Skill India Mission (PMKVY)",
+    "category": "Skill Development",
+    "description": "Skill development and vocational training for youth",
+    "eligibility": {
+      "occupation": ["Unemployed", "Student", "All"],
+      "age_min": 15,
+      "age_max": 45,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"]
+    },
+    "benefits": "Free skill training, certification, and monetary rewards (₹8000 average)",
+    "application_link": "https://www.pmkvyofficial.org/",
+    "keywords": ["skill", "training", "vocational", "employment", "job", "youth", "course"]
+  },
+  {
+    "id": "svamitva",
+    "scheme_name": "SVAMITVA Scheme",
+    "category": "Rural Development",
+    "description": "Property ownership cards for rural households using drone technology",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "location": "Rural"
+    },
+    "benefits": "Property cards for rural residential properties, clear ownership rights",
+    "application_link": "https://svamitva.nic.in/",
+    "keywords": ["property", "land", "rural", "ownership", "village", "card", "title"]
+  },
+  {
+    "id": "pm-kusum",
+    "scheme_name": "PM-KUSUM (Solar Agriculture)",
+    "category": "Energy & Environment",
+    "description": "Solar pump and grid-connected solar power scheme for farmers",
+    "eligibility": {
+      "occupation": ["Farmer", "Agricultural Worker"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"]
+    },
+    "benefits": "90% subsidy on solar pumps, income from selling surplus solar power",
+    "application_link": "https://pmkusum.mnre.gov.in/",
+    "keywords": ["solar", "energy", "farmer", "pump", "irrigation", "renewable", "electricity"]
+  },
+  {
+    "id": "nrlm",
+    "scheme_name": "National Rural Livelihood Mission (NRLM)",
+    "category": "Rural Development",
+    "description": "Self-employment and skill development for rural poor, especially women",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 18,
+      "age_max": 60,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "location": "Rural",
+      "bpl": true
+    },
+    "benefits": "Interest subsidy on loans, skill training, SHG formation support",
+    "application_link": "https://nrlm.gov.in/",
+    "keywords": ["rural", "livelihood", "self-help", "women", "employment", "skill", "shg"]
+  },
+  {
+    "id": "pmegp",
+    "scheme_name": "Prime Minister's Employment Generation Programme (PMEGP)",
+    "category": "Business & Entrepreneurship",
+    "description": "Financial assistance for setting up micro-enterprises in manufacturing and services",
+    "eligibility": {
+      "occupation": ["Entrepreneur", "Unemployed", "Self-Employed"],
+      "age_min": 18,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "education": "Class 8 pass"
+    },
+    "benefits": "Subsidy 15-35% on project cost up to ₹25 lakh (manufacturing) or ₹10 lakh (services)",
+    "application_link": "https://www.kviconline.gov.in/pmegpeportal/",
+    "keywords": ["employment", "business", "enterprise", "manufacturing", "service", "subsidy", "startup"]
+  },
+  {
+    "id": "sukanya-samriddhi",
+    "scheme_name": "Sukanya Samriddhi Yojana (SSY)",
+    "category": "Women & Child Development",
+    "description": "Savings scheme for girl child with attractive interest rates and tax benefits",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 0,
+      "age_max": 10,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["Female"]
+    },
+    "benefits": "High interest rate (currently 8%+), tax benefits under 80C, maturity at age 21",
+    "application_link": "https://www.india.gov.in/sukanya-samriddhi-yojana",
+    "keywords": ["girl", "savings", "daughter", "investment", "tax", "education", "marriage"]
+  },
+  {
+    "id": "one-nation-one-ration",
+    "scheme_name": "One Nation One Ration Card",
+    "category": "Food Security",
+    "description": "Portability of ration card benefits across India",
+    "eligibility": {
+      "occupation": ["All"],
+      "age_min": 0,
+      "age_max": 100,
+      "income_limit": null,
+      "state_specific": ["All"],
+      "gender": ["All"],
+      "has_ration_card": true
+    },
+    "benefits": "Access subsidized food grains from any Fair Price Shop in India",
+    "application_link": "https://nfsa.gov.in/",
+    "keywords": ["ration", "food", "pds", "grain", "subsidy", "migrant", "portability"]
+  }
+]

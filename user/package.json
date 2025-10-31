@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
+    "test": "echo \"No tests specified\""
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

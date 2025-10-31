@@ -98,7 +98,7 @@ export default function Blog() {
         <img src={banner} alt="Blog banner" className="w-full h-full object-cover brightness-75" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center px-4">
+          <div className="text-center px-4">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white">{lang === 'hi' ? 'ब्लॉग' : 'Blog'}</h1>
           </div>
           <div className="absolute right-4 top-4 flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function Blog() {
               id="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="px-3 py-2 border rounded-md w-56 text-black"
+              className="px-3 py-2 border rounded-md w-56 text-sm text-black"
               placeholder={lang === 'hi' ? 'पोस्ट, टैग खोजें...' : 'Search posts, tags...'}
               aria-label={lang === 'hi' ? 'ब्लॉग पोस्ट खोजें' : 'Search blog posts'}
             />
@@ -148,9 +148,8 @@ export default function Blog() {
                       onClick={() => toggleExpand(post.id)}
                       aria-expanded={!!expanded[post.id]}
                       aria-controls={`post-content-${post.id}`}
-                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition ${
-                        expanded[post.id] ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
-                      }`}
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition ${expanded[post.id] ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                        }`}
                     >
                       {expanded[post.id] ? (lang === 'hi' ? 'कम दिखाएँ' : 'Show less') : (lang === 'hi' ? 'पढ़ें' : 'Read')}
                     </button>
