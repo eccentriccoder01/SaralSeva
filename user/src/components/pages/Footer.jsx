@@ -48,12 +48,13 @@ const Footer = () => {
   }, [isQRActive]);
 
   const socialLinks = [
-    { icon: <FaFacebook />, link: "/social", name: "Facebook" },
-    { icon: <FaWhatsapp />, link: "/social", name: "WhatsApp" },
-    { icon: <FaYoutube />, link: "/social", name: "YouTube" },
-    { icon: <FaInstagram />, link: "/social", name: "Instagram" },
-    { icon: <FaXTwitter />, link: "/social", name: "X (Twitter)" },
+    { icon: <FaFacebook />, link: "https://facebook.com", name: "Facebook" },
+    { icon: <FaWhatsapp />, link: "https://wa.me/1234567890", name: "WhatsApp" },
+    { icon: <FaYoutube />, link: "https://youtube.com", name: "YouTube" },
+    { icon: <FaInstagram />, link: "https://instagram.com", name: "Instagram" },
+    { icon: <FaXTwitter />, link: "https://twitter.com", name: "X (Twitter)" },
   ];
+
 
   const sections = [
     {
