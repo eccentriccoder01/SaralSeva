@@ -199,8 +199,22 @@ const Contact = () => {
             <section id="address" className="mb-6">
               <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-amber-500">
                 <h3 className="text-2xl font-bold text-stone-800 dark:text-gray-200">{S.addressTitle}</h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-300">National Portal Secretariat</p>
-                <p className="text-gray-600 dark:text-gray-300">CGO Complex, Lodhi Road, New Delhi - 110 003, India.</p>
+                {lang === "en" ? (
+  <>
+    <p className="mt-2 text-gray-600 dark:text-gray-300">National Portal Secretariat</p>
+    <p className="text-gray-600 dark:text-gray-300">
+      CGO Complex, Lodhi Road, New Delhi - 110 003, India.
+    </p>
+  </>
+) : (
+  <>
+    <p className="mt-2 text-gray-600 dark:text-gray-300">राष्ट्रीय पोर्टल सचिवालय</p>
+    <p className="text-gray-600 dark:text-gray-300">
+      सीजीओ कॉम्प्लेक्स, लोदी रोड, नई दिल्ली - 110 003, भारत।
+    </p>
+  </>
+)}
+
                 <div className="mt-4">
                   <div className="w-full h-44 rounded-md overflow-hidden border">
                     <iframe
