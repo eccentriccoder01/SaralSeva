@@ -82,7 +82,7 @@ const Dashboard = () => {
 
         <div className="p-6 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center">
             <ChartContainer config={chartConfig2} className="w-full h-[300px]">
-                <h2 className="text-xl font-bold text-center text-stone-800 mb-4">Overall Progress</h2>
+                <h1 className="text-xl font-bold text-center text-stone-800 mb-4">Overall Progress</h1>
                 <PieChart>
                     <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
                     <Pie data={chartData} dataKey="total" nameKey="ticket" innerRadius={60} strokeWidth={5}>

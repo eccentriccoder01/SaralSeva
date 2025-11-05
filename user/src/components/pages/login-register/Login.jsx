@@ -18,8 +18,8 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] py-10 bg-orange-50/30">
       <div className="text-center">
-        <h1 className="text-5xl font-extrabold text-orange-900 jost">Choose Your Login Type</h1>
-        <p className="mt-2 text-lg text-gray-600">
+        <h1 className="text-5xl font-extrabold text-orange-900 dark:text-amber-100 jost">Choose Your Login Type</h1>
+        <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">
           Please select the type of account you wish to access.
         </p>
       </div>
@@ -27,22 +27,22 @@ const Login = () => {
       <div className="flex flex-wrap items-center justify-center gap-10 mt-12">
         <div className={`${cardBaseClasses} ${chooseLogin === "user" ? cardSelectedClasses : 'hover:shadow-xl'}`} onClick={() => setChooseLogin("user")}>
           <img src={user} alt="User Login" className={`${imageBaseClasses} ${chooseLogin === 'user' ? imageSelectedClasses : imageUnselectedClasses}`} />
-          <h2 className={`mt-2 text-xl font-bold ${chooseLogin === 'user' ? 'text-orange-800' : 'text-gray-700'}`}>User</h2>
+          <h2 className={`mt-2 text-xl font-bold ${chooseLogin === 'user' ? 'text-orange-800 dark:text-amber-100' : 'text-gray-700 dark:text-amber-100'}`}>User</h2>
         </div>
         <div className={`${cardBaseClasses} ${chooseLogin === "admin" ? cardSelectedClasses : 'hover:shadow-xl'}`} onClick={() => setChooseLogin("admin")}>
           <img src={admin} alt="Admin Login" className={`${imageBaseClasses} ${chooseLogin === 'admin' ? imageSelectedClasses : imageUnselectedClasses}`} />
-          <h2 className={`mt-2 text-xl font-bold ${chooseLogin === 'admin' ? 'text-orange-800' : 'text-gray-700'}`}>Admin</h2>
+          <h2 className={`mt-2 text-xl font-bold ${chooseLogin === 'admin' ? 'text-orange-800 dark:text-amber-100' : 'text-gray-700 dark:text-amber-100'}`}>Admin</h2>
         </div>
         <div className={`${cardBaseClasses} ${chooseLogin === "employee" ? cardSelectedClasses : 'hover:shadow-xl'}`} onClick={() => setChooseLogin("employee")}>
           <img src={employee} alt="Employee Login" className={`${imageBaseClasses} w-28 h-28 ${chooseLogin === 'employee' ? imageSelectedClasses : imageUnselectedClasses}`} />
-          <h2 className={`mt-2 text-xl font-bold ${chooseLogin === 'employee' ? 'text-orange-800' : 'text-gray-700'}`}>Employee</h2>
+          <h2 className={`mt-2 text-xl font-bold ${chooseLogin === 'employee' ? 'text-orange-800 dark:text-amber-100' : 'text-gray-700 dark:text-amber-100'}`}>Employee</h2>
         </div>
       </div>
 
       <div className="mt-8 h-24 flex flex-col items-center justify-center">
         {chooseLogin === "user" && (
           <Link to='/userlogin' className="text-center animate-in fade-in duration-500">
-            <p className="text-gray-500">Only for Registered Users</p>
+            <p className="text-gray-500 dark:text-gray-300">Only for Registered Users</p>
             <Button className='px-8 mt-2 text-xl uppercase bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-px transition-all'>User Login</Button>
           </Link>
         )}

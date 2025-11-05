@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import india from "./../assets/india.svg";
-import { Phone, Sun, Moon } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
@@ -52,11 +52,7 @@ const Topbar = ({ onSearch }) => {
   return (
     <div
       className={`flex justify-between w-full items-center p-2 px-[5vw] shadow-md border-b-2 transition-colors duration-500
-        ${
-          darkMode
-            ? "bg-gray-900 border-gray-700 text-white"
-            : "bg-gradient-to-r from-orange-500 to-amber-600 border-amber-800 text-white"
-        }
+        bg-gradient-to-r from-orange-500 to-amber-600 border-amber-800 text-white
       `}
     >
       <div className="flex items-center font-semibold text-sm tracking-wider">
@@ -93,17 +89,6 @@ const Topbar = ({ onSearch }) => {
           <span className="font-semibold">9876543210</span>
         </a>
         <Tooltip id="phone-tooltip" place="bottom" style={tooltipStyle} />
-
-        {/* Theme toggle with tooltip */}
-        <button
-          onClick={() => setDarkMode((prev) => !prev)}
-          className="ml-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          data-tooltip-id="theme-tooltip"
-          data-tooltip-content="Switch between Light and Dark mode"
-        >
-          {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
-        <Tooltip id="theme-tooltip" place="bottom" style={tooltipStyle} />
       </div>
     </div>
   );
