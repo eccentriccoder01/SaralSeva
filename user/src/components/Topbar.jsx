@@ -19,7 +19,36 @@ const tooltipStyle = {
   zIndex: 9999,
 };
 
-const Topbar = () => {
+const Topbar = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // ✅ Initialize from localStorage or system preference
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) return savedTheme === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  // Apply theme whenever darkMode changes
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (onSearch) onSearch(value); // pass query up if needed
+  };
+
   return (
     <div
       className={`flex justify-between w-full items-center p-2 px-[5vw] shadow-md border-b-2 transition-colors duration-500
@@ -34,6 +63,20 @@ const Topbar = () => {
 
       <div className="flex items-center gap-4 text-sm">
         <span className="font-bold hidden sm:inline">सत्यमेव जयते</span>
+
+        {/* ✅ Search bar */}
+        <input
+          type="text"
+          placeholder="Search..."
+          className={`ml-4 p-2 rounded-md border w-48
+  ${darkMode 
+    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
+    : "bg-white border-gray-300 text-black placeholder-gray-500"
+  }
+  focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors`}
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
 
         {/* Phone with tooltip */}
         <a
