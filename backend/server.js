@@ -59,7 +59,7 @@ connectCloudinary();
 // RateLimiter + Routes
 app.use('/api/v1/schemes', createRateLimiter('light'), schemesRouter);
 app.use('/api/v1/announcement', createRateLimiter('light'), announcementRouter);
-app.use('/api/v1/user/login', createRateLimiter('strict'), userRouter);
+app.use('/api/v1/user', createRateLimiter('strict'), userRouter);
 app.use('/api/v1/admin', createRateLimiter('strict'), adminRouter);
 app.use('/api/v1/user/scheme', createRateLimiter('moderate'), schemeAppliedRouter);
 app.use('/api/v1/messages', createRateLimiter('moderate'), messageRouter);

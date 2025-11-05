@@ -251,7 +251,7 @@ const RegisterForm = ({ setIsAuthenticated }) => {
                   <DropdownSelect
                     options={["Male", "Female"]}
                     selectedOption={watch("gender") || "Select Gender"} 
-                    onSelect={(value) => setValue("gender", value)}
+                    onSelect={(value) => setValue("gender", value.toLowerCase())}
                     className={inputClasses}
                     placeholder="Select Gender" 
                   />
