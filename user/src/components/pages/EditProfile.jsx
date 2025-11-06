@@ -11,6 +11,14 @@ import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';
 import { FaArrowLeft } from "react-icons/fa";
 
+
+// ✅ Helper: Fix wrong country names from library
+const normalizeCountryName = (countryName) => {
+  if (countryName === "Gambia The") return "The Gambia";
+  if (countryName === "Bahamas The") return "The Bahamas";
+  return countryName;
+};
+
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email" }),
@@ -93,9 +101,12 @@ const EditProfile = () => {
       />
 
       <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
-        <h1 className="text-2xl font-bold mb-4 ml-8 text-gray-800 dark:text-gray-100">Edit Profile</h1>
+        <h1 className="text-2xl font-bold mb-4 ml-8 text-gray-800 dark:text-gray-100">
+          Edit Profile
+        </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
           {/* Name */}
           <div className="relative" data-tooltip-id="name-tooltip" data-tooltip-content="Enter your full name">
             <input {...register("name")} placeholder="Name" className={inputClasses} />
@@ -124,7 +135,7 @@ const EditProfile = () => {
           </div>
           {errors.mobile && <p className={errorClasses}>{errors.mobile.message}</p>}
 
-          {/* Country */}
+          {/* ✅ Country (with normalization) */}
           <div className={`${selectWrapperClasses} dark-theme-input`} data-tooltip-id="country-tooltip" data-tooltip-content="Select your country">
             <CountrySelect
               placeHolder={user?.country || "Select Country"}
@@ -132,8 +143,9 @@ const EditProfile = () => {
               className={selectClasses}
               onChange={(e) => {
                 setCountryId(e.id);
-                setValue("country", e.name);
+                setValue("country", normalizeCountryName(e.name));
               }}
+              showFlag={false}
             />
           </div>
           {errors.country && <p className={errorClasses}>{errors.country.message}</p>}
