@@ -56,31 +56,26 @@ const Topbar = ({ onSearch }) => {
       `}
     >
       <div className="flex items-center font-semibold text-sm tracking-wider">
-        <img
-          src={india}
-          alt="Indian Flag"
-          className="mr-3 w-7 h-7 drop-shadow-md"
-        />
-        <span className="hidden md:inline">
-          भारत सरकार | Government of India
-        </span>
+        <img src={india} alt="Indian Flag" className="mr-3 w-7 h-7 drop-shadow-md" />
+        <span className="hidden md:inline">भारत सरकार | Government of India</span>
         <span className="md:hidden">भारत सरकार</span>
       </div>
 
       <div className="flex items-center gap-4 text-sm">
         <span className="font-bold hidden sm:inline">सत्यमेव जयते</span>
 
-        {/* ✅ Updated Search bar - Better visibility on orange background */}
+        {/* ✅ Search bar */}
         <input
           type="text"
           placeholder="Search..."
-          className="ml-4 p-2 rounded-md border w-48 focus:outline-none focus:ring-2 transition-all bg-white/90 border-white/50 text-gray-900 placeholder-gray-600 focus:ring-white focus:bg-white shadow-md"
+          className={`ml-4 p-2 rounded-md border w-48
+  ${darkMode 
+    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
+    : "bg-white border-gray-300 text-black placeholder-gray-500"
+  }
+  focus:outline-none focus:ring-2 focus:ring-orange-400 dark:focus:ring-orange-600 transition-colors`}
           value={searchQuery}
           onChange={handleSearchChange}
-          style={{
-            color: "#111827", // Force dark text color for visibility
-            backgroundColor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white background
-          }}
         />
 
         {/* Phone with tooltip */}
