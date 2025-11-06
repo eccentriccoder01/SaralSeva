@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import india from "./../assets/india.svg";
 import { Phone } from "lucide-react";
 import { Tooltip } from "react-tooltip";
