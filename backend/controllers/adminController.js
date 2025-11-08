@@ -3,9 +3,27 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import schemeAppliedModel from "../models/schemeAppliedModel.js";
 import mongoose from "mongoose";
+import { validEmail, validGender, validID, validMobile, validPassword, validString } from "../utils/validators.js";
 
 const registerAdmin = async (req, res) => {
     const { name, email, mobile, password, adminId, gender } = req.body;
+
+    //validate inputs
+    const errors = {};
+    if(!validString(name,2,50)) errors.name = "Name must contain only letters and be 2-50 characters long.";
+    if(!validEmail(email)) errors.email = "Invalid email address";
+    if(!validPassword(password)) errors.password = "Password must be 8-255 chars with upper,lower,digit & special CharacterData.";
+    if(!validMobile(mobile)) errors.mobile = "Invalid mobile number. Must be 10 digits starting with 6–9.";
+    if(!validGender(gender)) errors.gender = "Gender must be either 'male' or 'female'.";
+    if(!validID(adminId)) errors.adminId = "Invalid admin ID. Must be alphanumeric or UUID format.";
+
+    if(Object.keys(errors).length > 0){
+        return res.status(400).json({
+            success:false,
+            message:"Validation failed",
+            errors,
+        });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -58,6 +76,15 @@ const registerAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
     const { email, password } = req.body;
+    const errors = {};
+
+    if (!validEmail(email)) errors.email = "Invalid email format.";
+    if (!validPassword(password))
+        errors.password = "Password format is invalid.";
+
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({ success: false, message: "Validation failed.", errors });
+    }
     try {
         const admin = await adminModel.findOne({ email });
         if (!admin) {
