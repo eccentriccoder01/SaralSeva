@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Menu, ArrowRightFromLine, CircleUserRound } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // ✅ Add i18next hook
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import LanguageSwitcher from "./LanguageSwitcher"; // ✅ Import LanguageSwitcher
 import "react-tooltip/dist/react-tooltip.css";
 
 const tooltipStyle = {
@@ -33,9 +35,8 @@ function ThemeToggle({ darkMode, setDarkMode }) {
   return (
     <button
       onClick={() => setDarkMode((prev) => !prev)}
-      className={`relative w-16 h-8 flex items-center rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-orange-900 dark:focus:ring-offset-gray-900 ${
-        darkMode ? "bg-gray-700" : "bg-amber-500"
-      }`}
+      className={`relative w-16 h-8 flex items-center rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-orange-900 dark:focus:ring-offset-gray-900 ${darkMode ? "bg-gray-700" : "bg-amber-500"
+        }`}
       aria-label="Toggle theme"
     >
       {/* Sun icon */}
@@ -44,9 +45,8 @@ function ThemeToggle({ darkMode, setDarkMode }) {
       <span className="absolute right-1 text-gray-200 text-lg select-none pointer-events-none">🌙</span>
       {/* Toggle handle */}
       <span
-        className={`bg-white w-7 h-7 rounded-full shadow-md transform transition-transform duration-300 ${
-          darkMode ? "translate-x-8" : "translate-x-0"
-        }`}
+        className={`bg-white w-7 h-7 rounded-full shadow-md transform transition-transform duration-300 ${darkMode ? "translate-x-8" : "translate-x-0"
+          }`}
       />
     </button>
   );
@@ -56,6 +56,7 @@ function ThemeToggle({ darkMode, setDarkMode }) {
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation(); // ✅ Add translation hook
 
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
@@ -104,17 +105,20 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         </button>
 
         {/* Desktop Links */}
-        <Link to="/" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-home" data-tooltip-content="Go to Home Page">Home</Link>
-        <Link to="/about" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-about" data-tooltip-content="Learn more About us">About</Link>
-        <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-schemes" data-tooltip-content="View Government Schemes">Schemes</Link>
-        <Link to="/ask-saralseva" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-ai" data-tooltip-content="AI-Powered Scheme Recommender">Ask AI</Link>
-        <Link to="/success-stories" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-success" data-tooltip-content="Read Success Stories">Success Stories</Link>
-        <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-dashboard" data-tooltip-content="Go to Dashboard">Dashboard</Link>
-        <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-grievances" data-tooltip-content="View Grievances">Grievances</Link>
-        <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-contact" data-tooltip-content="Contact Us">Contact</Link>
+        <Link to="/" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-home" data-tooltip-content={t('navigation.home')}>{t('navigation.home')}</Link>
+        <Link to="/about" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-about" data-tooltip-content={t('navigation.about')}>{t('navigation.about')}</Link>
+        <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-schemes" data-tooltip-content={t('navigation.schemes')}>{t('navigation.schemes')}</Link>
+        <Link to="/ask-saralseva" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-ai" data-tooltip-content={t('navigation.askAI')}>{t('navigation.askAI')}</Link>
+        <Link to="/success-stories" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-success" data-tooltip-content={t('navigation.successStories')}>{t('navigation.successStories')}</Link>
+        <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-dashboard" data-tooltip-content={t('navigation.dashboard')}>{t('navigation.dashboard')}</Link>
+        <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-grievances" data-tooltip-content={t('navigation.grievances')}>{t('navigation.grievances')}</Link>
+        <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-contact" data-tooltip-content={t('navigation.contact')}>{t('navigation.contact')}</Link>
       </div>
 
       <div className="flex items-center gap-3 scale-[0.7] min-[280px]:scale-100">
+        {/* Language Switcher */}
+        <LanguageSwitcher /> {/* ✅ Add Language Switcher */}
+
         {/* Theme toggle switch */}
         <TooltipProvider>
           <Tooltip>
@@ -122,7 +126,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
               <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
             </TooltipTrigger>
             <TooltipContent className="bg-orange-800 dark:bg-gray-800 text-white border-orange-700 dark:border-gray-700">
-              <p>Switch theme</p>
+              <p>{t('navigation.switchTheme')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -132,7 +136,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
             {location.pathname !== "/login" && (
               <Link to="/login">
                 <Button className="gap-2 font-bold text-orange-900 bg-amber-400 dark:bg-amber-300 rounded-full lg:px-6 hover:bg-white dark:hover:bg-gray-200 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-px">
-                  <span className="hidden sm:inline">LOGIN</span>
+                  <span className="hidden sm:inline">{t('navigation.login')}</span>
                   {/* icon for small screens */}
                   <ArrowRightFromLine className="w-5 h-5 sm:hidden" />
                   {/* keep existing icon on large screens unchanged */}
@@ -143,7 +147,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
             {location.pathname !== "/register" && (
               <Link to="/register">
                 <Button className="font-bold flex gap-1 items-center text-white bg-transparent border-2 border-amber-400 dark:border-amber-300 rounded-full lg:px-6 hover:bg-amber-400 dark:hover:bg-amber-300 hover:text-orange-900 transition-all duration-300">
-                  <span className="hidden sm:inline">REGISTER</span>
+                  <span className="hidden sm:inline">{t('navigation.register')}</span>
                   {/* show user icon on small screens instead of text */}
                   <CircleUserRound className="w-5 h-5" />
                 </Button>
@@ -159,20 +163,20 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                     <CircleUserRound className="w-8 h-8 transition-colors duration-300 hover:text-amber-400 dark:hover:text-amber-300" />
                   </TooltipTrigger>
                   <TooltipContent className="bg-orange-800 dark:bg-gray-800 text-white border-orange-700 dark:border-gray-700">
-                    <p>My Account</p>
+                    <p>{t('navigation.myAccount')}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mt-2 bg-orange-900/95 dark:bg-gray-900/95 backdrop-blur-md text-white border-orange-800 dark:border-gray-700 w-56 transition-colors duration-500">
-              <DropdownMenuLabel className="font-bold text-amber-400 dark:text-amber-300">My Account</DropdownMenuLabel>
+              <DropdownMenuLabel className="font-bold text-amber-400 dark:text-amber-300">{t('navigation.myAccount')}</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-orange-800 dark:bg-gray-700" />
-              <Link to="/profile"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Profile</DropdownMenuItem></Link>
-              <Link to="/schemeApplied"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Scheme Applied</DropdownMenuItem></Link>
-              <Link to="/grievancesApplied"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Grievances</DropdownMenuItem></Link>
-              <Link to="/status"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">Status</DropdownMenuItem></Link>
+              <Link to="/profile"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">{t('navigation.profile')}</DropdownMenuItem></Link>
+              <Link to="/schemeApplied"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">{t('navigation.schemeApplied')}</DropdownMenuItem></Link>
+              <Link to="/grievancesApplied"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">{t('navigation.grievances')}</DropdownMenuItem></Link>
+              <Link to="/status"><DropdownMenuItem className="cursor-pointer focus:bg-orange-800 dark:focus:bg-gray-700 focus:text-amber-400 dark:focus:text-amber-300">{t('navigation.status')}</DropdownMenuItem></Link>
               <DropdownMenuSeparator className="bg-orange-800 dark:bg-gray-700" />
-              <DropdownMenuItem onClick={handleLogout} className="font-bold text-red-400 dark:text-red-300 cursor-pointer focus:bg-red-500/20 dark:focus:bg-red-700/20 focus:text-red-300 dark:focus:text-red-200">Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout} className="font-bold text-red-400 dark:text-red-300 cursor-pointer focus:bg-red-500/20 dark:focus:bg-red-700/20 focus:text-red-300 dark:focus:text-red-200">{t('navigation.logout')}</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
@@ -182,14 +186,14 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       {isMenuOpen && (
         <div className="absolute left-0 w-full bg-orange-900 dark:bg-gray-900 top-20 lg:hidden shadow-xl animate-in slide-in-from-top-4 transition-colors duration-500">
           <div className="flex flex-col p-4 gap-y-2">
-            <Link to="/" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Home</Link>
-            <Link to="/about" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>About</Link>
-            <Link to="/schemes" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Schemes</Link>
-            <Link to="/ask-saralseva" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Ask AI</Link>
-            <Link to="/success-stories" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Success Stories</Link>
-            <Link to="/dashboard" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Dashboard</Link>
-            <Link to="/grievances" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Grievances</Link>
-            <Link to="/contact" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>Contact</Link>
+            <Link to="/" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.home')}</Link>
+            <Link to="/about" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.about')}</Link>
+            <Link to="/schemes" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.schemes')}</Link>
+            <Link to="/ask-saralseva" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.askAI')}</Link>
+            <Link to="/success-stories" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.successStories')}</Link>
+            <Link to="/dashboard" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.dashboard')}</Link>
+            <Link to="/grievances" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.grievances')}</Link>
+            <Link to="/contact" className="block px-4 py-3 rounded-md hover:bg-orange-800/70 dark:hover:bg-gray-700/50" onClick={toggleMenu}>{t('navigation.contact')}</Link>
           </div>
         </div>
       )}

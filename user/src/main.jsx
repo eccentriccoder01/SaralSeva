@@ -8,6 +8,7 @@ import "./index.css";
 import { SchemeProvider } from "./components/context/SchemaContext.jsx";
 import { UserProvider } from "./components/context/UserContext.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import './i18n/config.js'; // ✅ Import i18next configuration
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,9 +16,9 @@ createRoot(document.getElementById("root")).render(
       <UserProvider>
         <SchemeProvider>
           <HelmetProvider>
-          <BrowserRouter> {/* ✅ Wrap App here */}
-            <App />
-          </BrowserRouter>
+            <BrowserRouter> {/* ✅ Wrap App here */}
+              <App />
+            </BrowserRouter>
           </HelmetProvider>
         </SchemeProvider>
       </UserProvider>
