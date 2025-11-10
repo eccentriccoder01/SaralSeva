@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, RefreshCw, HelpCircle, Lightbulb, Bot } from 'lucide-react';
+import { useTranslation } from 'react-i18next'; // ✅ Add i18next hook
 import MessageBubble, { TypingIndicator } from './MessageBubble';
 import { extractEntities, generateEntitySummary } from '../../../utils/nlpProcessor';
 import { recommendSchemes, generateRecommendationExplanation } from '../../../utils/schemeRecommender';
@@ -21,16 +22,18 @@ const tooltipStyle = {
 };
 
 const AskSaralSeva = () => {
+  const { t } = useTranslation(); // ✅ Add translation hook
+
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "👋 Hello! I'm SaralSeva AI Assistant. I can help you discover government schemes that match your profile.\n\nTell me about yourself - your age, occupation, location, or what kind of help you're looking for!",
+      text: t('aiRecommender.greeting') + '\n\n' + t('aiRecommender.tellAbout'),
       isUser: false,
       suggestions: [
-        "I'm a 45-year-old farmer from Maharashtra",
-        "Looking for education scholarships",
-        "Need a business loan for my startup",
-        "I'm a senior citizen seeking pension"
+        t('aiRecommender.suggestion1'),
+        t('aiRecommender.suggestion2'),
+        t('aiRecommender.suggestion3'),
+        t('aiRecommender.suggestion4')
       ],
       onSuggestionClick: handleSuggestionClick
     }
@@ -76,18 +79,17 @@ const AskSaralSeva = () => {
         responseText = `${entitySummary}\n\n`;
       }
 
-      responseText += `Great! I found ${recommendations.length} scheme${recommendations.length > 1 ? 's' : ''} that match your profile:`;
+      responseText += `${t('common.success')}! I found ${recommendations.length} scheme${recommendations.length > 1 ? 's' : ''} that match your profile:`;
 
       schemes = recommendations.map(scheme => ({
         ...scheme,
         explanation: generateRecommendationExplanation(scheme, entities)
       }));
     } else {
-      responseText =
-        "I couldn't find any schemes that exactly match your criteria. This could be because:\n\n" +
-        "• The information provided doesn't match current scheme eligibility\n" +
-        "• You might need to provide more details\n\n" +
-        "Try rephrasing your query with more specific information like age, occupation, or location.";
+      responseText = `${t('common.error')} - couldn't find any matching schemes.\n\n` +
+        "• " + t('common.noData') + "\n" +
+        "• " + t('messages.requiredField') + "\n\n" +
+        "Try rephrasing your query with more specific information.";
     }
 
     const botMessage = {
@@ -115,13 +117,13 @@ const AskSaralSeva = () => {
     setMessages([
       {
         id: 1,
-        text: "👋 Hello! I'm SaralSeva AI Assistant. I can help you discover government schemes that match your profile.\n\nTell me about yourself - your age, occupation, location, or what kind of help you're looking for!",
+        text: t('aiRecommender.greeting') + '\n\n' + t('aiRecommender.tellAbout'),
         isUser: false,
         suggestions: [
-          "I'm a 45-year-old farmer from Maharashtra",
-          "Looking for education scholarships",
-          "Need a business loan for my startup",
-          "I'm a senior citizen seeking pension"
+          t('aiRecommender.suggestion1'),
+          t('aiRecommender.suggestion2'),
+          t('aiRecommender.suggestion3'),
+          t('aiRecommender.suggestion4')
         ],
         onSuggestionClick: handleSuggestionClick
       }
@@ -148,27 +150,26 @@ const AskSaralSeva = () => {
               <Tooltip id="ai-icon-tooltip" style={tooltipStyle} />
 
               <div>
-                <h1 className="text-3xl font-bold text-orange-900 dark:text-orange-400 jost flex items-center gap-2">
-                  Ask SaralSeva
+                <h1 className="text-2xl font-bold text-orange-900 dark:text-orange-400 jost flex items-center gap-2">
+                  {t('aiRecommender.title')}
                   <span className="text-sm font-normal px-2 py-0.5 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full">
                     AI Beta
                   </span>
                 </h1>
-                <p className="text-base text-stone-600 dark:text-stone-400">
-                  AI-powered scheme recommendations tailored for you
+                <p className="text-sm text-stone-600 dark:text-stone-400">
+                  {t('aiRecommender.subtitle')}
                 </p>
               </div>
             </div>
 
             <button
               onClick={handleReset}
-              className="flex items-center gap-2 px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-lg hover:bg-orange-200 dark:hover:bg-orange-900/50 transition-colors text-base"
-              title="Start new conversation"
+              className="flex items-center gap-2 px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-lg hover:bg-orange-200 dark:hover:bg-orange-900/50 transition-colors"
+              title={t('aiRecommender.reset')}
               data-tooltip-id="reset-tooltip"
-              data-tooltip-content="Start a new conversation"
-            >
+              data-tooltip-content={t('aiRecommender.reset')}>
               <RefreshCw className="w-4 h-4" />
-              <span className="hidden sm:inline">Reset</span>
+              <span className="hidden sm:inline">{t('common.ok')}</span>
             </button>
 
             <Tooltip id="reset-tooltip" style={tooltipStyle} />
@@ -212,8 +213,8 @@ const AskSaralSeva = () => {
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="Type your query here... (e.g., I'm a 30-year-old farmer from Punjab)"
-                className="flex-1 px-4 py-3 border-2 border-orange-300 dark:border-orange-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800 dark:text-white text-base placeholder:text-base"
+                placeholder={t('aiRecommender.typePlaceholder')}
+                className="flex-1 px-4 py-3 border-2 border-orange-300 dark:border-orange-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800 dark:text-white"
                 disabled={isTyping}
               />
 
@@ -222,10 +223,9 @@ const AskSaralSeva = () => {
                 disabled={!inputText.trim() || isTyping}
                 className="px-6 py-3 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-lg hover:from-orange-700 hover:to-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 font-medium shadow-lg hover:shadow-xl text-base"
                 data-tooltip-id="send-tooltip"
-                data-tooltip-content="Send your query"
-              >
+                data-tooltip-content={t('aiRecommender.send')}>
                 <Send className="w-4 h-4" />
-                <span className="hidden sm:inline">Send</span>
+                <span className="hidden sm:inline">{t('aiRecommender.send')}</span>
               </button>
 
               <Tooltip id="send-tooltip" style={tooltipStyle} />
