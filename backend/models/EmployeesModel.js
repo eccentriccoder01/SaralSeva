@@ -40,21 +40,26 @@ const employeeSchema = new mongoose.Schema({
             ref: 'grievances'
         }
     ],
-    address:{
-        type:String,
+    address: {
+        type: String,
     },
-    profilePic:{
-        type:String
+    profilePic: {
+        type: String
     },
-    DOB:{
-        type:String
+    DOB: {
+        type: String
     },
-    aadhar_no:{
-        type:Number
+    aadhar_no: {
+        type: Number
     },
-    pan_no:{
-        type:String
-    }
+    pan_no: {
+        type: String
+    },
+    role: {
+        type: String,
+        enum: ['employee'],
+        default: 'employee',
+    },
 })
 
 const employeeModel = mongoose.model("employee", employeeSchema) || mongoose.model("employee")
