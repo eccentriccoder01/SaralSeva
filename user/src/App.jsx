@@ -40,11 +40,11 @@ import EditProfile from "./components/pages/EditProfile";
 
 import Contact from "./components/Contact";
 import Faq from "./components/Faq";
-import PrivacyPolicy from "./components/PrivacyPolicy";
+// import PrivacyPolicy from "./components/PrivacyPolicy";
 import LinkingPolicy from "./components/LinkingPolicy";
 import Terms from "./components/pages/legal/Terms";
 import Disclaimer from "./components/pages/legal/Disclaimer";
-import CookiePolicy from "./components/pages/legal/CookiePolicy";
+// import CookiePolicy from "./components/pages/legal/CookiePolicy";
 import Copyright from "./components/pages/legal/Copyright";
 import Blog from "./components/pages/Blog";
 import Careers from "./components/pages/Careers";
@@ -111,11 +111,11 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        {/* <Route path="/privacypolicy" element={<PrivacyPolicy />} //> */}
         <Route path="/linkingpolicy" element={<LinkingPolicy />} />
   <Route path="/terms" element={<Terms />} />
   <Route path="/disclaimer" element={<Disclaimer />} />
-  <Route path="/cookie-policy" element={<CookiePolicy />} />
+  {/* <Route path="/cookie-policy" element={<CookiePolicy />} /> */}
   <Route path="/copyright" element={<Copyright />} />
   <Route path="/blog" element={<Blog />} />
   <Route path="/careers" element={<Careers />} />

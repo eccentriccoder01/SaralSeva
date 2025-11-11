@@ -1,12 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import banner from './../../assets/header-banner2.jpg';
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu"; 
-import { FaCheck, FaChevronDown } from 'react-icons/fa'; 
 import DropdownSelect from '../DropdownSelect';
 
 const JOBS = [
@@ -135,11 +128,10 @@ export default function Careers() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [applicant, setApplicant] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [lang, setLang] = useState('en'); // 'en' or 'hi'
+  const [lang, setLang] = useState('en');
 
   const departments = useMemo(() => ['All', ...new Set(JOBS.map((j) => j.department))], []);
 
-  
   const strings = useMemo(() => ({
     en: {
       title: 'Careers',
@@ -153,6 +145,9 @@ export default function Careers() {
       fullname: 'Full name',
       email: 'Email',
       message: 'Message (optional)',
+      namePlaceholder: 'Enter full name',
+      emailPlaceholder: 'Enter email',
+      messagePlaceholder: 'Write your message (optional)',
       submit: 'Submit application',
       cancel: 'Cancel',
     },
@@ -168,6 +163,9 @@ export default function Careers() {
       fullname: 'पूरा नाम',
       email: 'ईमेल',
       message: 'संदेश (वैकल्पिक)',
+      namePlaceholder: 'पूरा नाम दर्ज करें',
+      emailPlaceholder: 'ईमेल पता दर्ज करें',
+      messagePlaceholder: 'अपना संदेश लिखें (वैकल्पिक)',
       submit: 'आवेदन भेजें',
       cancel: 'रद्द करें',
     },
@@ -189,34 +187,26 @@ export default function Careers() {
   }
 
   function submitApplication(e) {
-  e.preventDefault();
-  // Basic validation
-  if (!applicant.name || !applicant.email) {
-    alert('Please provide name and email.');
-    return;
+    e.preventDefault();
+    if (!applicant.name || !applicant.email) {
+      alert(lang === 'hi' ? 'कृपया नाम और ईमेल प्रदान करें।' : 'Please provide name and email.');
+      return;
+    }
+    setSubmitted(true);
+    setTimeout(() => {
+      alert(lang === 'hi' ? 'आवेदन भेजा गया — धन्यवाद!' : 'Application submitted — thank you!');
+      setSubmitted(false);
+      setSelectedJob(null);
+      setApplicant({ name: '', email: '', message: '' });
+    }, 900);
   }
-
-  setSubmitted(true);
-
-  // Simulate submit
-  setTimeout(() => {
-    alert('Application submitted — thank you! (simulated)');
-    setSubmitted(false); // reset for next submission
-    setSelectedJob(null); // close modal
-    setApplicant({ name: '', email: '', message: '' }); // optional reset
-  }, 900);
-}
-
 
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 transition-colors duration-300">
-      <div
-        className="relative flex items-center justify-center h-48 bg-cover bg-center"
-        style={{ backgroundImage: `url(${banner})` }}
-      >
+      <div className="relative flex items-center justify-center h-48 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}>
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative text-center">
-          <h1 className="text-5xl font-extrabold text-white jost tracking-wider">{strings[lang].title}</h1>
+          <h1 className="text-5xl font-extrabold text-white tracking-wider">{strings[lang].title}</h1>
           <p className="mt-2 text-white text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
         </div>
         <div className="absolute right-4 top-4 flex items-center gap-2">
@@ -226,92 +216,117 @@ export default function Careers() {
           <input type="radio" name="lang" checked={lang === 'hi'} onChange={() => setLang('hi')} />
         </div>
       </div>
+
       <div className="container mx-auto p-6">
-
-      <section className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <label htmlFor="search" className="sr-only">{strings[lang].searchPlaceholder}</label>
-          <input
-            id="search"
-            className="px-3 py-2 border rounded-md w-64 text-black"
-            placeholder={strings[lang].searchPlaceholder}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-
-          <DropdownSelect
-            options={departments}
-            selectedOption={department}
-            onSelect={setDepartment}
-            label={strings[lang].departmentLabel}
-          />
-      </section>
-
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filtered.map((job) => (
-          <article key={job.id} className="rounded-lg bg-white dark:bg-gray-800 shadow-sm overflow-hidden border-t-4 border-amber-500">
-            <div className="p-4">
-              <header className="flex items-start justify-between">
-                <div className="pr-4">
-                  <h2 className="text-lg font-semibold">{lang === 'hi' && job.hiTitle ? job.hiTitle : job.title}</h2>
-                  <div className="text-xs text-gray-500 mb-2">{job.department} • {job.location} • {job.type}</div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">{lang === 'hi' && job.hiDescription ? job.hiDescription : job.description}</p>
-                </div>
-
-                <div className="flex-shrink-0 flex flex-col items-end gap-2">
-                  <div className="text-xs text-gray-500 mb-2">{strings[lang].posted} {job.posted}</div>
-                  <div className="flex items-center gap-2">
-                    <button onClick={() => openApply(job)} className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-amber-600 text-white">{strings[lang].apply}</button>
-                    <button onClick={() => setSelectedJob(job)} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-50 text-amber-700 hover:bg-amber-100">{strings[lang].details}</button>
-                  </div>
-                </div>
-              </header>
-            </div>
-          </article>
-        ))}
-
-        {filtered.length === 0 && (
-          <div className="col-span-full text-center text-gray-500">{strings[lang].noRoles}</div>
-        )}
-      </section>
-
-      {/* Modal: Job detail / application */}
-      {selectedJob && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
-          <div className="bg-white dark:bg-gray-900 rounded-lg max-w-xl w-full p-6 shadow-lg">
-            <header className="flex items-start justify-between mb-4">
-              <div>
-                <h3 className="text-xl font-bold">{selectedJob.title}</h3>
-                <div className="text-sm text-gray-500">{selectedJob.department} • {selectedJob.location}</div>
-              </div>
-              <button aria-label="Close" onClick={() => setSelectedJob(null)} className="text-gray-500">✕</button>
-            </header>
-
-            <div className="mb-4 text-sm text-gray-700 dark:text-gray-300">{lang === 'hi' && selectedJob.hiDescription ? selectedJob.hiDescription : selectedJob.description}</div>
-
-            <form onSubmit={submitApplication} className="space-y-3">
-              <div>
-                <label className="block text-sm">{strings[lang].fullname}</label>
-                <input value={applicant.name} onChange={(e) => setApplicant({ ...applicant, name: e.target.value })} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" required />
-              </div>
-              <div>
-                <label className="block text-sm">{strings[lang].email}</label>
-                <input type="email" value={applicant.email} onChange={(e) => setApplicant({ ...applicant, email: e.target.value })} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" required />
-              </div>
-              <div>
-                <label className="block text-sm">{strings[lang].message}</label>
-                <textarea value={applicant.message} onChange={(e) => setApplicant({ ...applicant, message: e.target.value })} rows={4} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600" />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <button type="submit" className="bg-amber-500 text-white px-4 py-2 rounded-md">{submitted ? (lang === 'hi' ? 'भेजना...' : 'Sending...') : strings[lang].submit}</button>
-                <button type="button" onClick={() => setSelectedJob(null)} className="text-sm text-gray-600">{strings[lang].cancel}</button>
-              </div>
-            </form>
+        <section className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <input
+              id="search"
+              className="px-3 py-2 border rounded-md w-64 text-black"
+              placeholder={strings[lang].searchPlaceholder}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
-        </div>
-      )}
+          <DropdownSelect options={departments} selectedOption={department} onSelect={setDepartment} label={strings[lang].departmentLabel} />
+        </section>
+
+        {/* Job Listings */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filtered.map((job) => (
+            <article key={job.id} className="rounded-lg bg-white dark:bg-gray-800 shadow-sm overflow-hidden border-t-4 border-amber-500">
+              <div className="p-4">
+                <header className="flex items-start justify-between">
+                  <div className="pr-4">
+                    <h2 className="text-lg font-semibold">{lang === 'hi' && job.hiTitle ? job.hiTitle : job.title}</h2>
+                    <div className="text-xs text-gray-500 mb-2">{job.department} • {job.location} • {job.type}</div>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">{lang === 'hi' && job.hiDescription ? job.hiDescription : job.description}</p>
+                  </div>
+
+                  <div className="flex-shrink-0 flex flex-col items-end gap-2">
+                    <div className="text-xs text-gray-500 mb-2">{strings[lang].posted} {job.posted}</div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => openApply(job)} className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-amber-600 text-white">
+                        {strings[lang].apply}
+                      </button>
+                      <button onClick={() => setSelectedJob(job)} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-50 text-amber-700 hover:bg-amber-100">
+                        {strings[lang].details}
+                      </button>
+                    </div>
+                  </div>
+                </header>
+              </div>
+            </article>
+          ))}
+
+          {filtered.length === 0 && (
+            <div className="col-span-full text-center text-gray-500">{strings[lang].noRoles}</div>
+          )}
+        </section>
+
+        {/* Application Modal */}
+        {selectedJob && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
+            <div className="bg-white dark:bg-gray-900 rounded-lg max-w-xl w-full p-6 shadow-lg">
+              <header className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-bold">{selectedJob.title}</h3>
+                  <div className="text-sm text-gray-500">{selectedJob.department} • {selectedJob.location}</div>
+                </div>
+                <button aria-label="Close" onClick={() => setSelectedJob(null)} className="text-gray-500">✕</button>
+              </header>
+
+              <div className="mb-4 text-sm text-gray-700 dark:text-gray-300">
+                {lang === 'hi' && selectedJob.hiDescription ? selectedJob.hiDescription : selectedJob.description}
+              </div>
+
+              <form onSubmit={submitApplication} className="space-y-3">
+                <div>
+                  <label className="block text-sm">{strings[lang].fullname}</label>
+                  <input
+                    value={applicant.name}
+                    onChange={(e) => setApplicant({ ...applicant, name: e.target.value })}
+                    placeholder={strings[lang].namePlaceholder}
+                    className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm">{strings[lang].email}</label>
+                  <input
+                    type="email"
+                    value={applicant.email}
+                    onChange={(e) => setApplicant({ ...applicant, email: e.target.value })}
+                    placeholder={strings[lang].emailPlaceholder}
+                    className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm">{strings[lang].message}</label>
+                  <textarea
+                    value={applicant.message}
+                    onChange={(e) => setApplicant({ ...applicant, message: e.target.value })}
+                    placeholder={strings[lang].messagePlaceholder}
+                    rows={4}
+                    className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <button type="submit" className="bg-amber-500 text-white px-4 py-2 rounded-md">
+                    {submitted ? (lang === 'hi' ? 'भेजना...' : 'Sending...') : strings[lang].submit}
+                  </button>
+                  <button type="button" onClick={() => setSelectedJob(null)} className="text-sm text-gray-600">
+                    {strings[lang].cancel}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

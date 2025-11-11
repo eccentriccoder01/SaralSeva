@@ -4,10 +4,10 @@ import indiaFlag from '../../assets/india.svg';
 
 const SAMPLE = {
   groups: [
-    { id: 'g1', name: 'Panchayat Admins', hiName: 'पंचायत प्रशासन', desc: 'Discussions for Gram Panchayat officials and coordinators.' , hiDesc: 'ग्राम पंचायत अधिकारियों और समन्वयकों के लिए चर्चा।', members: 420 },
-    { id: 'g2', name: 'Beneficiaries', hiName: 'लाभार्थी', desc: 'Community discussions for scheme beneficiaries to share experiences.' , hiDesc: 'योजना लाभार्थियों के अनुभव साझा करने के लिए समुदायिक चर्चा।', members: 1800 },
-    { id: 'g3', name: 'Field Workers', hiName: 'फील्ड वर्कर्स', desc: 'Field staff and mobilizers share best practices and local updates.' , hiDesc: 'फील्ड स्टाफ और मोबिलाइज़र सर्वोत्कृष्ट प्रथाएँ और स्थानीय अपडेट साझा करते हैं।', members: 640 },
-    { id: 'g4', name: 'Volunteers & NGOs', hiName: 'स्वयंसेवक और NGO', desc: 'Coordinate outreach, drives and local training with volunteers and NGOs.' , hiDesc: 'स्वयंसेवकों और NGO के साथ आउटरीच, ड्राइव और स्थानीय प्रशिक्षण का समन्वय।', members: 320 },
+    { id: 'g1', name: 'Panchayat Admins', hiName: 'पंचायत प्रशासन', desc: 'Discussions for Gram Panchayat officials and coordinators.', hiDesc: 'ग्राम पंचायत अधिकारियों और समन्वयकों के लिए चर्चा।', members: 420 },
+    { id: 'g2', name: 'Beneficiaries', hiName: 'लाभार्थी', desc: 'Community discussions for scheme beneficiaries to share experiences.', hiDesc: 'योजना लाभार्थियों के अनुभव साझा करने के लिए समुदायिक चर्चा।', members: 1800 },
+    { id: 'g3', name: 'Field Workers', hiName: 'फील्ड वर्कर्स', desc: 'Field staff and mobilizers share best practices and local updates.', hiDesc: 'फील्ड स्टाफ और मोबिलाइज़र सर्वोत्कृष्ट प्रथाएँ और स्थानीय अपडेट साझा करते हैं।', members: 640 },
+    { id: 'g4', name: 'Volunteers & NGOs', hiName: 'स्वयंसेवक और NGO', desc: 'Coordinate outreach, drives and local training with volunteers and NGOs.', hiDesc: 'स्वयंसेवकों और NGO के साथ आउटरीच, ड्राइव और स्थानीय प्रशिक्षण का समन्वय।', members: 320 },
   ],
   threads: [
     { id: 't1', title: 'Uploading village reports - quick guide', replies: 12, group: 'g1' },
@@ -52,8 +52,10 @@ export default function Community() {
     }
   }), []);
 
-  const groups = SAMPLE.groups.filter(g => (g.name + ' ' + g.desc + ' ' + (g.hiName || '') + ' ' + (g.hiDesc || '')).toLowerCase().includes(q.toLowerCase()));
-  const threads = SAMPLE.threads.filter(t => (t.title).toLowerCase().includes(q.toLowerCase()));
+  const groups = SAMPLE.groups.filter(g =>
+    (g.name + ' ' + g.desc + ' ' + (g.hiName || '') + ' ' + (g.hiDesc || '')).toLowerCase().includes(q.toLowerCase())
+  );
+  const threads = SAMPLE.threads.filter(t => t.title.toLowerCase().includes(q.toLowerCase()));
   const events = SAMPLE.events.filter(e => (e.title + ' ' + e.location).toLowerCase().includes(q.toLowerCase()));
 
   return (
@@ -67,7 +69,7 @@ export default function Community() {
           <div className="text-center px-4">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">{strings[lang].title}</h1>
             <p className="mt-2 text-white text-sm md:text-base opacity-90">{strings[lang].subtitle}</p>
-            <div className="mt-4 flex items-center justify-center gap-3">
+            <div className="mt-4 flex items-center justify-center gap-3 flex-wrap">
               <a href="/community/create" className="px-4 py-2 bg-amber-500 text-white rounded-md font-medium">{strings[lang].createGroup}</a>
               <a href="/chatbot" className="px-4 py-2 bg-transparent border border-white text-white rounded-md">Open Chatbot</a>
             </div>
@@ -84,29 +86,66 @@ export default function Community() {
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Search */}
-        <div className="mb-6 flex items-center gap-3">
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={strings[lang].search} className="flex-1 px-4 py-3 border rounded-md text-black" />
-          <a href="/community/create" className="px-4 py-3 bg-amber-500 text-white rounded-md">{strings[lang].createGroup}</a>
+        <div className="mb-6 flex flex-col sm:flex-row items-stretch gap-3">
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder={strings[lang].search}
+            className="flex-1 px-4 py-3 border rounded-md text-black"
+          />
+          <a href="/community/create" className="px-4 py-3 bg-amber-500 text-white rounded-md text-center">{strings[lang].createGroup}</a>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Groups */}
-          <section className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Groups Section */}
+          <section className="lg:col-span-2 space-y-8">
             <h2 className="text-xl font-semibold">{lang === 'hi' ? 'लोकप्रिय समूह' : 'Popular Groups'}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {groups.map(g => (
-                <div key={g.id} className="relative p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border-t-4 border-amber-500 overflow-hidden">
-                  <div className="absolute -top-10 right-4 w-44 opacity-10 pointer-events-none select-none">
-                    <img src={indiaFlag} alt="" />
+                <div
+                  key={g.id}
+                  className="relative p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border-t-4 border-amber-500 overflow-hidden transition-transform hover:scale-[1.02] duration-200"
+                >
+                  {/* Background flag */}
+                  <div className="absolute top-2 right-2 w-24 md:w-28 opacity-10 pointer-events-none select-none">
+                    <img src={indiaFlag} alt="" className="object-contain" />
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-semibold">{g.name.split(' ').slice(0,1)[0]}</div>
-                    <div>
-                      <h3 className="text-lg font-semibold">{lang === 'hi' && g.hiName ? g.hiName : g.name}</h3>
-                      <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{lang === 'hi' && g.hiDesc ? g.hiDesc : g.desc}</p>
-                      <div className="mt-3 flex items-center gap-2">
-                        <button onClick={() => setOpenGroup(g.id)} className="px-3 py-1 bg-amber-500 text-white rounded-md">{strings[lang].join}</button>
-                        <a href={`/community/group/${g.id}`} className="text-amber-600">{strings[lang].viewAll}</a>
+
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4 relative z-10">
+                    {/* Circle with initials */}
+                    <div
+                    className="flex-shrink-0 w-14 h-14 rounded-full bg-amber-100 text-amber-800 
+                     flex items-center justify-center font-semibold text-base sm:text-lg uppercase shadow-sm"
+                     title={g.name} // tooltip on hover
+>
+                 {g.name === 'Volunteers & NGOs'
+                ? 'V&N'
+              : g.name.split(' ').map(w => w[0]).join('').slice(0, 2)
+                     }
+                    </div>
+
+
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold leading-snug break-words">
+                        {lang === 'hi' && g.hiName ? g.hiName : g.name}
+                      </h3>
+                      <p className="text-sm text-gray-700 dark:text-gray-300 mt-1 leading-relaxed break-words">
+                        {lang === 'hi' && g.hiDesc ? g.hiDesc : g.desc}
+                      </p>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <button
+                          onClick={() => setOpenGroup(g.id)}
+                          className="px-3 py-1 bg-amber-500 text-white rounded-md text-sm"
+                        >
+                          {strings[lang].join}
+                        </button>
+                        <a
+                          href={`/community/group/${g.id}`}
+                          className="text-amber-600 text-sm font-medium hover:underline"
+                        >
+                          {strings[lang].viewAll}
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -116,7 +155,7 @@ export default function Community() {
 
             {/* Active Discussions */}
             <div>
-              <h2 className="text-xl font-semibold mt-6">{lang === 'hi' ? 'सक्रिय चर्चाएँ' : 'Active Discussions'}</h2>
+              <h2 className="text-xl font-semibold mt-8">{lang === 'hi' ? 'सक्रिय चर्चाएँ' : 'Active Discussions'}</h2>
               <div className="mt-4 space-y-3">
                 {threads.map(t => (
                   <div key={t.id} className="p-3 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-between">
@@ -124,7 +163,7 @@ export default function Community() {
                       <a href={`/community/thread/${t.id}`} className="font-medium">{t.title}</a>
                       <div className="text-xs text-gray-500">{t.replies} replies</div>
                     </div>
-                    <a href={`/community/thread/${t.id}`} className="text-amber-500">{strings[lang].join}</a>
+                    <a href={`/community/thread/${t.id}`} className="text-amber-500 text-sm">{strings[lang].join}</a>
                   </div>
                 ))}
               </div>
@@ -163,7 +202,9 @@ export default function Community() {
 
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Need help?</h3>
-              <p className="text-sm text-gray-700 dark:text-gray-300">See community guidelines or contact support for any issues participating in the community.</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                See community guidelines or contact support for any issues participating in the community.
+              </p>
               <div className="mt-3">
                 <a href="/help" className="px-3 py-2 bg-amber-500 text-white rounded-md">{strings[lang].viewAll}</a>
               </div>
