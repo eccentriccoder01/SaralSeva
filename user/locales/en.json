@@ -1,0 +1,10 @@
+{
+  "home": {
+    "welcome": "Welcome to SaralSeva",
+    "description": "Your one-stop solution for digital services.",
+    "login": "Login",
+    "logout": "Logout",
+    "language": "Language",
+    "contrast": "High Contrast Mode"
+  }
+}
