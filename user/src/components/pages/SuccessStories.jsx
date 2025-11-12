@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { User, Calendar, Tag, ArrowRight } from 'lucide-react';
 import banner from './../../assets/header-banner2.jpg';
 import StoryModal from './StoryModal';
@@ -76,6 +76,64 @@ const successStories = [
 const SuccessStories = () => {
   const [selectedStory, setSelectedStory] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const [schemeFilter, setSchemeFilter] = useState('All');
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  // derive filtered list (search + filter)
+  const filteredStories = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return successStories
+      .filter(s => (schemeFilter === 'All' ? true : s.scheme === schemeFilter))
+      .filter(s => {
+        if (!q) return true;
+        return [s.name, s.location, s.scheme, s.shortDescription].join(' ').toLowerCase().includes(q);
+      });
+  }, [query, schemeFilter]);
+
+  // Small presentational component for a story card to keep markup tidy
+  const StoryCard = ({ story, onReadMore }) => (
+    <article className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1 overflow-hidden border border-transparent hover:border-gray-100 dark:hover:border-gray-700">
+      {/* Avatar / top band */}
+      <div className="h-36 flex items-center justify-center bg-gradient-to-br from-amber-400 to-orange-500">
+        <div className="w-24 h-24 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-inner">
+          <span className="text-2xl md:text-3xl font-extrabold text-orange-600 dark:text-orange-400">{story.avatar}</span>
+        </div>
+      </div>
+
+      <div className="p-6 space-y-3">
+        <div>
+          <h3 className="text-lg md:text-xl font-semibold text-stone-900 dark:text-white flex items-center gap-2">
+            <User className="w-4 h-4 text-amber-600" />
+            {story.name}
+          </h3>
+          <p className="text-xs text-stone-500 dark:text-gray-400 ml-6">{story.location}</p>
+        </div>
+
+        <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-amber-50 dark:bg-amber-900/10 w-max">
+          <Tag className="w-4 h-4 text-amber-600" />
+          <span className="text-xs font-medium text-amber-800 dark:text-amber-300">{story.scheme}</span>
+        </div>
+
+        <p className="text-sm text-stone-700 dark:text-gray-300 leading-relaxed line-clamp-3">{story.shortDescription}</p>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-gray-400">
+            <Calendar className="w-4 h-4" />
+            <span>{story.dateOfBenefit}</span>
+          </div>
+
+          <button
+            onClick={onReadMore}
+            className="inline-flex items-center gap-2 bg-amber-600 hover:bg-orange-600 text-white text-sm font-medium px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
+          >
+            Read Full Story
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </article>
+  );
 
   const handleReadMore = (story) => {
     setSelectedStory(story);
@@ -88,7 +146,7 @@ const SuccessStories = () => {
   };
 
   return (
-    <main className='bg-orange-50/30 dark:bg-gray-900 min-h-screen'>
+    <main className='min-h-screen bg-transparent dark:bg-gray-900'>
       {/* Banner Section */}
       <div
         className="relative flex items-center justify-center h-48 bg-cover bg-center"
@@ -106,84 +164,83 @@ const SuccessStories = () => {
       </div>
 
       {/* Stories Grid Section */}
-      <div className='container mx-auto px-[5vw] py-16'>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {successStories.map((story) => (
-            <div
-              key={story.id}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group hover:-translate-y-2"
+      <div className='container mx-auto px-[5vw] py-12'>
+        {/* Controls: Search + Filter */}
+        <div className="mb-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
+          <div className="flex-1">
+            <label htmlFor="search" className="sr-only">Search stories</label>
+            <input
+              id="search"
+              type="search"
+              value={query}
+              onChange={(e) => { setQuery(e.target.value); setVisibleCount(6); }}
+              placeholder="Search by name, location or scheme..."
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm shadow-sm"
+            />
+          </div>
+
+          <div className="w-56">
+            <label htmlFor="scheme" className="sr-only">Filter by scheme</label>
+            <select
+              id="scheme"
+              value={schemeFilter}
+              onChange={(e) => { setSchemeFilter(e.target.value); setVisibleCount(6); }}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm shadow-sm"
             >
-              {/* Avatar Section */}
-              <div className="bg-gradient-to-br from-orange-400 to-orange-600 h-32 flex items-center justify-center">
-                <div className="w-20 h-20 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                    {story.avatar}
-                  </span>
-                </div>
-              </div>
+              <option value="All">All Schemes</option>
+              {Array.from(new Set(successStories.map(s => s.scheme))).map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-              {/* Content Section */}
-              <div className="p-6 space-y-4">
-                {/* Name and Location */}
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <User className="w-5 h-5 text-orange-600 dark:text-orange-400" />
-                    {story.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 ml-7">
-                    {story.location}
-                  </p>
-                </div>
-
-                {/* Scheme Tag */}
-                <div className="flex items-center gap-2 bg-orange-100 dark:bg-orange-900/30 px-3 py-2 rounded-lg">
-                  <Tag className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                  <span className="text-sm font-semibold text-orange-800 dark:text-orange-300">
-                    {story.scheme}
-                  </span>
-                </div>
-
-                {/* Short Description */}
-                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed line-clamp-3">
-                  {story.shortDescription}
-                </p>
-
-                {/* Date */}
-                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <Calendar className="w-4 h-4" />
-                  <span>{story.dateOfBenefit}</span>
-                </div>
-
-                {/* Read More Button */}
-                <button
-                  onClick={() => handleReadMore(story)}
-                  className="w-full bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 group-hover:gap-3"
-                >
-                  Read Full Story
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredStories.slice(0, visibleCount).map((story) => (
+            <StoryCard key={story.id} story={story} onReadMore={() => handleReadMore(story)} />
           ))}
+        </div>
+
+        {/* Load more button */}
+        <div className="mt-8 text-center">
+          {useMemo(() => {
+            const q = query.trim().toLowerCase();
+            const total = successStories
+              .filter(s => schemeFilter === 'All' ? true : s.scheme === schemeFilter)
+              .filter(s => {
+                if (!q) return true;
+                return [s.name, s.location, s.scheme, s.shortDescription].join(' ').toLowerCase().includes(q);
+              }).length;
+            return total > visibleCount;
+          }, [query, schemeFilter, visibleCount]) ? (
+            <button
+              onClick={() => setVisibleCount((v) => v + 6)}
+              className="bg-white text-orange-600 hover:bg-orange-50 dark:bg-gray-800 dark:text-orange-400 font-semibold py-3 px-6 rounded-lg shadow"
+            >
+              Load more
+            </button>
+          ) : (
+            <p className="text-sm text-gray-500 dark:text-gray-400">No more stories</p>
+          )}
         </div>
       </div>
 
-      {/* CTA Banner Section */}
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-700 py-16">
+      {/* CTA Banner Section (background removed per request) */}
+      <div className="py-16">
         <div className="container mx-auto px-[5vw] text-center">
-          <h2 className="text-4xl font-bold text-white mb-4 jost">
+          <h2 className="text-4xl font-bold text-stone-900 mb-4 jost dark:text-white">
             Have You Benefited from a Scheme?
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-stone-700 mb-8 max-w-2xl mx-auto dark:text-gray-300">
             Share your inspiring story and motivate others to take advantage of government initiatives!
           </p>
           <button
             onClick={() => window.location.href = '/share-story'}
-            className="bg-white text-orange-600 hover:bg-orange-50 dark:bg-gray-800 dark:text-orange-400 dark:hover:bg-gray-700 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
             Share Your Story
           </button>
-          <p className="text-white/80 text-sm mt-4">
+          <p className="text-stone-600 dark:text-gray-400 text-sm mt-4">
             (Feature coming soon - We're building a platform for community contributions)
           </p>
         </div>
