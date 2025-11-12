@@ -4,22 +4,8 @@ import axios from "axios";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Link, useNavigate } from "react-router-dom";
 import { Download, ExternalLink } from "lucide-react";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 
-const tooltipStyle = {
-  backgroundColor: "#FF9933",
-  color: "#1F2937",
-  padding: "8px 12px",
-  borderRadius: "12px",
-  fontSize: "14px",
-  fontWeight: 500,
-  textAlign: "center",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-  maxWidth: "220px",
-  whiteSpace: "pre-line",
-  zIndex: 9999,
-};
+  // external tooltip removed; using inline labels or accessible text instead
 
 const Scheme = () => {
   const [scheme, setScheme] = useState([]);
@@ -94,19 +80,14 @@ const Scheme = () => {
           {item?.scheme_name}
         </Link>
       </TableCell>
-      <TableCell>
-        <Download
-          className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110"
-          onClick={() => handleClick(item?.scheme_brochure)}
-          data-tooltip-id={`download-tooltip-${index}`}
-          data-tooltip-content="Download brochure (PDF)"
-        />
-        <Tooltip
-          id={`download-tooltip-${index}`}
-          place="top"
-          style={tooltipStyle}
-        />
-      </TableCell>
+        <TableCell>
+          <Download
+            className="w-8 h-8 text-red-700 dark:text-red-500 cursor-pointer transition-transform hover:scale-110"
+            onClick={() => handleClick(item?.scheme_brochure)}
+            aria-label="Download brochure (PDF)"
+            role="button"
+          />
+        </TableCell>
       <TableCell className="text-right">
         <button
           className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
