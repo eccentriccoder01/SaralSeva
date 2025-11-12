@@ -11,23 +11,7 @@ import apply from "./../../../assets/apply.svg";
 import search from "./../../../assets/search.svg";
 import check from "./../../../assets/check.svg";
 import axios from "axios";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
-
-// Global tooltip style
-const tooltipStyles = {
-  backgroundColor: "#FF9933",
-  color: "#1F2937",
-  padding: "8px 12px",
-  borderRadius: "12px",
-  fontSize: "14px",
-  fontWeight: 500,
-  textAlign: "center",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-  whiteSpace: "pre-line",
-  maxWidth: "220px",
-  zIndex: 9999,
-};
+// external tooltip library removed to avoid duplicate orange boxes
 
 // Wave background SVG component
 const WaveBackground = () => (
@@ -233,14 +217,6 @@ const Home = () => {
                     src={announcement_icon}
                     alt={S.latestAnnouncementTooltip}
                     className="w-6 h-6"
-                    data-tooltip-id={`announcement-${index}`}
-                    data-tooltip-content={S.latestAnnouncementTooltip}
-                  />
-                  <Tooltip
-                    id={`announcement-${index}`}
-                    place="top"
-                    multiline
-                    style={tooltipStyles}
                   />
                   <p>{item.announcement_details}</p>
                 </div>
@@ -263,12 +239,7 @@ const Home = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
           {S.schemeCards.map((card, index) => (
-            <Link
-              to={schemeLinks[index]}
-              key={index}
-              data-tooltip-id={`scheme-card-${index}`}
-              data-tooltip-content={card.tooltip}
-            >
+            <Link to={schemeLinks[index]} key={index}>
               <div className="p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 hover:shadow-2xl border-b-8 border-amber-500 dark:border-amber-600 hover:border-orange-600 transform hover:-translate-y-2 transition-all duration-300 cursor-pointer h-full flex flex-col justify-center items-center">
                 <p className="text-2xl font-bold text-orange-800 dark:text-amber-100">
                   {card.title}
@@ -277,12 +248,7 @@ const Home = () => {
                   {card.subtitle}
                 </p>
               </div>
-              <Tooltip
-                id={`scheme-card-${index}`}
-                place="top"
-                multiline
-                style={tooltipStyles}
-              />
+              {/* external tooltip removed for accessibility */}
             </Link>
           ))}
         </div>
@@ -332,31 +298,13 @@ const Home = () => {
       dark:hue-rotate-[100deg] 
       dark:saturate-[800%] 
       transition-all duration-300"
-                    data-tooltip-id={`step-${index}`}
-                    data-tooltip-content={step.tooltip}
-                  />
-
-                  <Tooltip
-                    id={`step-${index}`}
-                    place="top"
-                    multiline
-                    style={tooltipStyles}
                   />
                 </div>
 
-                <h3
-                  className="mt-6 text-2xl font-bold text-orange-900 dark:text-amber-100 jost"
-                  data-tooltip-id={`step-title-${index}`}
-                  data-tooltip-content={step.tooltip}
-                >
+                <h3 className="mt-6 text-2xl font-bold text-orange-900 dark:text-amber-100 jost">
                   {step.title}
                 </h3>
-                <Tooltip
-                  id={`step-title-${index}`}
-                  place="top"
-                  multiline
-                  style={tooltipStyles}
-                />
+                {/* removed per-step tooltips to avoid duplicate labels */}
 
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {step.description}
