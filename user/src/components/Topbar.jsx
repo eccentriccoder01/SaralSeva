@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import india from "./../assets/india.svg";
 import { Phone } from "lucide-react";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 
 // Tooltip style (same as Footer)
 const tooltipStyle = {
@@ -80,15 +78,14 @@ const Topbar = ({ onSearch }) => {
 
         {/* Phone with tooltip shows in only medium and deskop width*/}
         <a
-          href="tel:9876543210"
-          className="hidden md:flex items-center gap-2 hover:scale-105 transition-transform duration-300"
+          href="tel:9876543210" 
+          className="hidden sm:flex md:flex items-center gap-2 hover:scale-105 transition-transform duration-300"
           data-tooltip-id="phone-tooltip"
-          data-tooltip-content="Click to call the helpline"
+          data-tooltip-content="Click to call the helpline" 
         >
           <Phone size={18} />
           <span className="font-semibold">9876543210</span>
         </a>
-        <Tooltip id="phone-tooltip" place="bottom" style={tooltipStyle} />
       </div>
     </div>
   );
