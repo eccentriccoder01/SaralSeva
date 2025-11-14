@@ -1,81 +1,86 @@
 import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: function () {
+      return this.provider === "local";
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true,
+    required: function () {
+      return this.provider === "google";
     },
-    password: {
-      type: String,
-      required: function () {
-        return this.provider === "local";
-      },
+  },
+  provider: {
+    type: String,
+    enum: ["local", "google"],
+    default: "local",
+  },
+  isComplete: {
+    type: Boolean,
+    default: function () {
+      return this.provider === "local"; // local users are always complete
     },
-    googleId: {
-      type: String,
-      unique: true,
-      sparse: true,
-      required: function () {
-        return this.provider === "google";
-      },
+  },
+  gender: {
+    type: String,
+    required: function () {
+      return this.isComplete;
     },
-    provider: {
-      type: String,
-      enum: ["local", "google"],
-      default: "local",
+  },
+  mobile: {
+    type: Number,
+    unique: true,
+    required: function () {
+      return this.isComplete;
     },
-    isComplete: {
-      type: Boolean,
-      default: function () {
-        return this.provider === "local"; // local users are always complete
-      },
+  },
+  state: {
+    type: String,
+    required: function () {
+      return this.isComplete;
     },
-    gender: {
-      type: String,
-      required: function () {
-        return this.isComplete;
-      },
+  },
+  country: {
+    type: String,
+    required: function () {
+      return this.isComplete;
     },
-    mobile: {
-      type: Number,
-      unique: true,
-      required: function () {
-        return this.isComplete;
-      },
+  },
+  otp: { type: String },
+  otp_expiry: { type: Date },
+  schemes_applied: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'schemeApplied',
     },
-    state: {
-      type: String,
-      required: function () {
-        return this.isComplete;
-      },
+  ],
+  grievances: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'grievances',
     },
-    country: {
-      type: String,
-      required: function () {
-        return this.isComplete;
-      },
-    },
-    otp: { type: String },
-    otp_expiry: { type: Date },
-    schemes_applied: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'schemeApplied',
-      },
-    ],
-    grievances: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'grievances',
-      },
-    ],
-},{
-    timestamps:true
+  ],
+  role: {
+    type: String,
+    enum: ['user', 'employee', 'admin'],
+    default: 'user',
+  },
+}, {
+  timestamps: true
 })
 
 const userModel = mongoose.model("User", userSchema) || mongoose.model("User")

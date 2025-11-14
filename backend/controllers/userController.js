@@ -5,131 +5,134 @@ import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // clien id needed for google login
 
-const registerUser = async(req,res) =>{
-   const {name,email,mobile,password,gender,country,state} = req.body;
+const registerUser = async (req, res) => {
+  const { name, email, mobile, password, gender, country, state } = req.body;
 
-   const hashedPassword = await bcrypt.hash(password,10)
+  const hashedPassword = await bcrypt.hash(password, 10)
 
-   try {
-      const isExistEmail = await userModel.findOne({email})
-      if(isExistEmail){
-         return res.json({
-               success:false,
-               message:"Email already exists"
-            })
-      }
-
-      const isExistMobile  = await userModel.findOne({mobile})
-      if(isExistMobile){
-         return res.json({
-            success:false,
-            message:"Mobile number already exist"
-         })
-      }
-
-      const newUser = new userModel({
-         name,
-         email,
-         country,
-         state,
-         mobile,
-         gender,
-         password : hashedPassword,
-         isComplete: true, // Mark local registration as complete
-      })
-
-      await newUser.save();
-
+  try {
+    const isExistEmail = await userModel.findOne({ email })
+    if (isExistEmail) {
       return res.json({
-         success:true,
-         message:"User registered successfully"
+        success: false,
+        message: "Email already exists"
       })
-   } catch (error) {
-      console.log(error)
+    }
+
+    const isExistMobile = await userModel.findOne({ mobile })
+    if (isExistMobile) {
       return res.json({
-         success:false,
-         message:"Something went wrong"
+        success: false,
+        message: "Mobile number already exist"
       })
-   }
+    }
+
+    const newUser = new userModel({
+      name,
+      email,
+      country,
+      state,
+      mobile,
+      gender,
+      password: hashedPassword,
+      isComplete: true, // Mark local registration as complete
+    })
+
+    await newUser.save();
+
+    return res.json({
+      success: true,
+      message: "User registered successfully"
+    })
+  } catch (error) {
+    console.log(error)
+    return res.json({
+      success: false,
+      message: "Something went wrong"
+    })
+  }
 }
 
-const loginUser = async(req,res) =>{
-   const {email , password , mobile , otp} = req.body;
-   try {
-      let user;
-      if(email && password){
-         user = await userModel.findOne({email})
-         if(!user){
-            return res.json({
-               success:false,
-               message:"User not found"
-            })
-         }
+const loginUser = async (req, res) => {
+  const { email, password, mobile, otp } = req.body;
+  try {
+    let user;
+    if (email && password) {
+      user = await userModel.findOne({ email })
+      if (!user) {
+        return res.json({
+          success: false,
+          message: "User not found"
+        })
+      }
 
-         // Check if the user registered via Google
-         if (user.googleId) {
-           return res.status(400).json({
-             success: false,
-             message:
-               "This account uses Google login. Please use Google or mobile OTP.",
-           });
-         }
+      // Check if the user registered via Google
+      if (user.googleId) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "This account uses Google login. Please use Google or mobile OTP.",
+        });
+      }
 
-         // Ensure the user has completed registration
-         if (!user.isComplete) {
-           return res.json({
-             success: false,
-             message: "Please complete your registration first",
-           });
-         }
+      // Ensure the user has completed registration
+      if (!user.isComplete) {
+        return res.json({
+          success: false,
+          message: "Please complete your registration first",
+        });
+      }
 
-         const isMatch = await bcrypt.compare(password,user.password)
-         if(!isMatch){
-            return res.json({
-               success:false,
-               message:"Incorrect password"
-            })
-         }
-       
-      }   else if (mobile && otp) {
-         user = await userModel.findOne({ mobile });
-         if (!user || otp !== user.otp || new Date() > user.otp_expiry) {
-           return res.status(401).json({ message: 'Invalid mobile number or OTP' });
-         }
-      }  else {
-         return res.status(400).json({ message: 'Invalid login credentials' });
-       }
-   
-       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-         expiresIn: '1h',
-       });
+      const isMatch = await bcrypt.compare(password, user.password)
+      if (!isMatch) {
+        return res.json({
+          success: false,
+          message: "Incorrect password"
+        })
+      }
 
-   
-       return res.json({
-         success:true,
-         message:"User logged in successfully",
-         token,
-         user
-       });
-       
-   } catch (error) {
-      console.log(error)
-      return res.json({
-         success:false,
-         message:"Something went wrong"
-      })
-   }
+    } else if (mobile && otp) {
+      user = await userModel.findOne({ mobile });
+      if (!user || otp !== user.otp || new Date() > user.otp_expiry) {
+        return res.status(401).json({ message: 'Invalid mobile number or OTP' });
+      }
+    } else {
+      return res.status(400).json({ message: 'Invalid login credentials' });
+    }
+
+    const token = jwt.sign({
+      id: user._id,
+      role: user.role || 'user'
+    }, process.env.JWT_SECRET, {
+      expiresIn: '1h',
+    });
+
+
+    return res.json({
+      success: true,
+      message: "User logged in successfully",
+      token,
+      user
+    });
+
+  } catch (error) {
+    console.log(error)
+    return res.json({
+      success: false,
+      message: "Something went wrong"
+    })
+  }
 }
 
 // Google Login Handler
 const googleLogin = async (req, res) => {
- 
+
   const { id_token, isRegistering } = req.body;
   try {
 
     const ticket = await client.verifyIdToken({
       idToken: id_token,
-      audience: process.env.GOOGLE_CLIENT_ID, 
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
 
     const data = ticket.getPayload();
@@ -178,7 +181,10 @@ const googleLogin = async (req, res) => {
             message: "User already exists. Please login instead.",
           });
         }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({
+          id: user._id,
+          role: user.role || 'user'
+        }, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
 
@@ -256,48 +262,48 @@ const completeGoogleRegistration = async (req, res) => {
   }
 };
 
-const getSingleUser = async(req,res) =>{
-    const id = req.params.id;
-    try {
-      const user = await userModel.findById(id)
+const getSingleUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await userModel.findById(id)
       .populate("schemes_applied")
       .populate("grievances")
       .exec();
 
-      if(!user){
-         return res.json({
-            success:false,
-            message:"User not found"
-         })
-      }
-
+    if (!user) {
       return res.json({
-         success:true,
-         user
-      })
-    } catch (error) {
-      console.log(error)
-      return res.json({
-         success:false,
-         message:"Something went wrong"
+        success: false,
+        message: "User not found"
       })
     }
+
+    return res.json({
+      success: true,
+      user
+    })
+  } catch (error) {
+    console.log(error)
+    return res.json({
+      success: false,
+      message: "Something went wrong"
+    })
+  }
 }
 
-const getAllUser = async(req,res) =>{
-   try {
-      const users = await userModel.find({});
-      return res.json({
-         success:true,
-         users
-      })
-   } catch (error) {
-      console.log(error)
-      return res.json({
-         success:false,
-         message:"Something went wrong"
-      })
-   }
+const getAllUser = async (req, res) => {
+  try {
+    const users = await userModel.find({});
+    return res.json({
+      success: true,
+      users
+    })
+  } catch (error) {
+    console.log(error)
+    return res.json({
+      success: false,
+      message: "Something went wrong"
+    })
+  }
 }
 
 
@@ -339,4 +345,4 @@ export const updateUser = async (req, res) => {
 };
 
 
-export {registerUser,loginUser ,googleLogin, completeGoogleRegistration,getAllUser ,getSingleUser}
+export { registerUser, loginUser, googleLogin, completeGoogleRegistration, getAllUser, getSingleUser }

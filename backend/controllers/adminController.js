@@ -10,17 +10,17 @@ const registerAdmin = async (req, res) => {
 
     //validate inputs
     const errors = {};
-    if(!validString(name,2,50)) errors.name = "Name must contain only letters and be 2-50 characters long.";
-    if(!validEmail(email)) errors.email = "Invalid email address";
-    if(!validPassword(password)) errors.password = "Password must be 8-255 chars with upper,lower,digit & special CharacterData.";
-    if(!validMobile(mobile)) errors.mobile = "Invalid mobile number. Must be 10 digits starting with 6–9.";
-    if(!validGender(gender)) errors.gender = "Gender must be either 'male' or 'female'.";
-    if(!validID(adminId)) errors.adminId = "Invalid admin ID. Must be alphanumeric or UUID format.";
+    if (!validString(name, 2, 50)) errors.name = "Name must contain only letters and be 2-50 characters long.";
+    if (!validEmail(email)) errors.email = "Invalid email address";
+    if (!validPassword(password)) errors.password = "Password must be 8-255 chars with upper,lower,digit & special CharacterData.";
+    if (!validMobile(mobile)) errors.mobile = "Invalid mobile number. Must be 10 digits starting with 6–9.";
+    if (!validGender(gender)) errors.gender = "Gender must be either 'male' or 'female'.";
+    if (!validID(adminId)) errors.adminId = "Invalid admin ID. Must be alphanumeric or UUID format.";
 
-    if(Object.keys(errors).length > 0){
+    if (Object.keys(errors).length > 0) {
         return res.status(400).json({
-            success:false,
-            message:"Validation failed",
+            success: false,
+            message: "Validation failed",
             errors,
         });
     }
@@ -102,7 +102,10 @@ const loginAdmin = async (req, res) => {
             })
         }
 
-        const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({
+            id: admin._id,
+            role: admin.role || 'admin'
+        }, process.env.JWT_SECRET);
         return res.json({
             success: true,
             message: "Admin logged in successfully",

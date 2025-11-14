@@ -87,7 +87,10 @@ const login_employee = async (req, res) => {
          })
       }
 
-      const token = jwt.sign({ id: employee._id }, process.env.JWT_SECRET)
+      const token = jwt.sign({
+         id: employee._id,
+         role: employee.role || 'employee'
+      }, process.env.JWT_SECRET)
 
       return res.json({
          success: true,
@@ -185,16 +188,16 @@ const empChangeStatus = async (req, res) => {
 
       await schemes_applied.save();
 
-         await twilioClient.messages.create({
-            body: `Dear ${schemes_applied.name},The status of your application for the  ${schemes_applied.scheme_name} scheme has been updated. Your registration number is ${schemes_applied.registration_no}, and the current status of your application is now ${initial_status}`,
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: `+91${7326074744}`,
-        });
+      await twilioClient.messages.create({
+         body: `Dear ${schemes_applied.name},The status of your application for the  ${schemes_applied.scheme_name} scheme has been updated. Your registration number is ${schemes_applied.registration_no}, and the current status of your application is now ${initial_status}`,
+         from: process.env.TWILIO_PHONE_NUMBER,
+         to: `+91${7326074744}`,
+      });
 
       const adminId = "67121931588bf0a6336055a4";
 
       const notification = new notificationModel({
-         recipientId: adminId, 
+         recipientId: adminId,
          recipientType: 'Admin',
          message: `The status of the scheme with registration number ${schemes_applied.registration_no} has been updated by employee ${employee.name}.`
       })
@@ -245,13 +248,13 @@ const employeePerformance = async (req, res) => {
    }
 }
 
-const employeeGrievancePerformance = async(req,res) =>{
+const employeeGrievancePerformance = async (req, res) => {
 
-   const {id} = req.body;
+   const { id } = req.body;
    try {
-      const grievance = await grievanceModel.find({assigned_to:id})
-      .populate('assigned_to')
-      .exec();
+      const grievance = await grievanceModel.find({ assigned_to: id })
+         .populate('assigned_to')
+         .exec();
 
       const totalGrievance = grievance.length;
       const openGrievance = grievance.filter((grievance) => grievance.status === 'pending').reduce((acc, cur) => acc + 1, 0);
@@ -261,9 +264,9 @@ const employeeGrievancePerformance = async(req,res) =>{
          close: closeGrievance,
          open: openGrievance
       }]
-      
+
       return res.json({
-         success:true,  
+         success: true,
          data
       })
    } catch (error) {
@@ -273,7 +276,7 @@ const employeeGrievancePerformance = async(req,res) =>{
 
 
 const editEmployee = async (req, res) => {
-   const {address, DOB , aadhar_no, pan_no , id} = req.body
+   const { address, DOB, aadhar_no, pan_no, id } = req.body
    try {
 
       if (!req.file) {
@@ -357,18 +360,18 @@ const empGrievanceChangeStatus = async (req, res) => {
 
       await grievance.save();
 
-         await twilioClient.messages.create({
-            body: `Dear ${grievance.name},The status of your grievance has been updated. Your grievance number is ${grievance.grievance_registered_number}, and the current status of your grievance is now changed. Log in to your dashboard to see the status`,
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: `+91${7326074744}`,
-        });
+      await twilioClient.messages.create({
+         body: `Dear ${grievance.name},The status of your grievance has been updated. Your grievance number is ${grievance.grievance_registered_number}, and the current status of your grievance is now changed. Log in to your dashboard to see the status`,
+         from: process.env.TWILIO_PHONE_NUMBER,
+         to: `+91${7326074744}`,
+      });
 
       const adminId = "67121931588bf0a6336055a4";
 
       const notification = new notificationModel({
-         recipientId: adminId, 
+         recipientId: adminId,
          recipientType: 'Admin',
-         message: `The status of the grievance with  number ${grievance.grievance_registered_number } has been updated by employee ${employee.name}.`
+         message: `The status of the grievance with  number ${grievance.grievance_registered_number} has been updated by employee ${employee.name}.`
       })
 
       await notification.save();
@@ -390,4 +393,4 @@ const empGrievanceChangeStatus = async (req, res) => {
 
 
 
-export { register_employee, login_employee, getAllEmployee, getSingleEmployee, empChangeStatus, employeePerformance ,employeeGrievancePerformance ,editEmployee ,empGrievanceChangeStatus}
+export { register_employee, login_employee, getAllEmployee, getSingleEmployee, empChangeStatus, employeePerformance, employeeGrievancePerformance, editEmployee, empGrievanceChangeStatus }
