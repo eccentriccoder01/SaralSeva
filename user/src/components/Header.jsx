@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Tooltip as ReactTooltip } from 'react-tooltip';
-import 'react-tooltip/dist/react-tooltip.css';
+// external tooltip library removed to avoid duplicate orange boxes
 import logo from './../assets/emblem.svg';
 import amrit from './../assets/logo-amrit2.png';
 import swachh from './../assets/swachh2.png';
@@ -30,8 +29,6 @@ const Header = () => {
           <img 
             src={logo} 
             alt="Ashoka Emblem" 
-            data-tooltip-id="tooltip-emblem"
-            data-tooltip-content="Ashoka Emblem - National Symbol"
             className='w-14 h-14 lg:h-20 lg:w-20 drop-shadow-lg dark:invert dark:brightness-300' 
           />
 
@@ -41,8 +38,6 @@ const Header = () => {
                 <img
                   src={S}
                   alt="S"
-                  data-tooltip-id="tooltip-s"
-                  data-tooltip-content="S - SaralSeva Initial"
                   style={{
                       height: '3.5rem',
                       marginRight: '-12px',
@@ -64,8 +59,6 @@ const Header = () => {
             <img 
               src={swachh} 
               alt="Swachh Bharat" 
-              data-tooltip-id="tooltip-swachh"
-              data-tooltip-content="Swachh Bharat Logo - Clean India Mission"
               className='w-20 lg:w-24 transition-transform duration-300 hover:scale-105'
             />
           </div>
@@ -88,8 +81,6 @@ const Header = () => {
           <img
             src={logo}
             alt="Ashoka Emblem"
-            data-tooltip-id="tooltip-emblem"
-            data-tooltip-content="Ashoka Emblem - National Symbol"
             className='w-12 sm:w-14 h-auto drop-shadow-lg dark:invert dark:brightness-300 transition-all duration-300'
           />
         </div>
@@ -103,8 +94,6 @@ const Header = () => {
             <img
               src={S}
               alt="S"
-              data-tooltip-id="tooltip-s"
-              data-tooltip-content="S - SaralSeva Initial"
               className='h-10 mr-[-8px]'
             />
             aralSeva
@@ -120,8 +109,6 @@ const Header = () => {
             <img
               src={swachh}
               alt="Swachh Bharat"
-              data-tooltip-id="tooltip-swachh"
-              data-tooltip-content="Swachh Bharat Logo - Clean India Mission"
               className='w-24 sm:w-28 h-auto transition-transform duration-300 hover:scale-105'
             />
           </div>
@@ -133,19 +120,13 @@ const Header = () => {
             <img
               src={amrit}
               alt="Azadi Ka Amrit Mahotsav"
-              data-tooltip-id="tooltip-amrit"
-              data-tooltip-content="Azadi Ka Amrit Mahotsav - 75 Years of Independence"
               className='w-28 sm:w-32 h-auto transition-transform duration-300 hover:scale-105'
             />
           </div>
         </div>
       </div>
 
-      {/* Tooltips */}
-      <ReactTooltip id="tooltip-emblem" style={tooltipStyle} />
-      <ReactTooltip id="tooltip-s" style={tooltipStyle} />
-      <ReactTooltip id="tooltip-swachh" style={tooltipStyle} />
-      <ReactTooltip id="tooltip-amrit" style={tooltipStyle} />
+      {/* external tooltips removed */}
     </div>
   );
 }

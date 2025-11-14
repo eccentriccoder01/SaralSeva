@@ -12,9 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Tooltip as ReactTooltip } from "react-tooltip";
 import LanguageSwitcher from "./LanguageSwitcher"; // ✅ Import LanguageSwitcher
-import "react-tooltip/dist/react-tooltip.css";
 
 const tooltipStyle = {
   backgroundColor: "#FF9933",
@@ -105,14 +103,14 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         </button>
 
         {/* Desktop Links */}
-        <Link to="/" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-home" data-tooltip-content={t('navigation.home')}>{t('navigation.home')}</Link>
-        <Link to="/about" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-about" data-tooltip-content={t('navigation.about')}>{t('navigation.about')}</Link>
-        <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-schemes" data-tooltip-content={t('navigation.schemes')}>{t('navigation.schemes')}</Link>
-        <Link to="/ask-saralseva" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-ai" data-tooltip-content={t('navigation.askAI')}>{t('navigation.askAI')}</Link>
-        <Link to="/success-stories" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-success" data-tooltip-content={t('navigation.successStories')}>{t('navigation.successStories')}</Link>
-        <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-dashboard" data-tooltip-content={t('navigation.dashboard')}>{t('navigation.dashboard')}</Link>
-        <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-grievances" data-tooltip-content={t('navigation.grievances')}>{t('navigation.grievances')}</Link>
-        <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`} data-tooltip-id="nav-contact" data-tooltip-content={t('navigation.contact')}>{t('navigation.contact')}</Link>
+  <Link to="/" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.home')}</Link>
+  <Link to="/about" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.about')}</Link>
+  <Link to="/schemes" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.schemes')}</Link>
+  <Link to="/ask-saralseva" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.askAI')}</Link>
+  <Link to="/success-stories" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.successStories')}</Link>
+  <Link to="/dashboard" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.dashboard')}</Link>
+  <Link to="/grievances" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.grievances')}</Link>
+  <Link to="/contact" className={`hidden lg:block ${navLinkClasses}`}>{t('navigation.contact')}</Link>
       </div>
 
       <div className="flex items-center gap-3 scale-[0.7] min-[280px]:scale-100">
@@ -198,15 +196,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         </div>
       )}
 
-      {/* Tooltips */}
-      <ReactTooltip id="nav-home" style={tooltipStyle} />
-      <ReactTooltip id="nav-about" style={tooltipStyle} />
-      <ReactTooltip id="nav-schemes" style={tooltipStyle} />
-      <ReactTooltip id="nav-ai" style={tooltipStyle} />
-      <ReactTooltip id="nav-success" style={tooltipStyle} />
-      <ReactTooltip id="nav-dashboard" style={tooltipStyle} />
-      <ReactTooltip id="nav-grievances" style={tooltipStyle} />
-      <ReactTooltip id="nav-contact" style={tooltipStyle} />
+      {/* external tooltips removed to avoid duplicate orange boxes */}
     </div>
   );
 };
