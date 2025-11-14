@@ -7,8 +7,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Tooltip } from "react-tooltip";
-import 'react-tooltip/dist/react-tooltip.css';
 
 const sliderTooltipStyle = {
   backgroundColor: '#FF9933', // theme color
@@ -44,14 +42,6 @@ const Slider = ({ image1, image2, image3, image4, image5 }) => {
                 src={img}
                 alt={`Slide ${index + 1}`}
                 className="w-full h-auto object-cover cursor-pointer"
-                data-tooltip-id={`slide-${index}`}
-                data-tooltip-content={`Slide ${index + 1}\nCheck this out!`}
-              />
-              <Tooltip
-                id={`slide-${index}`}
-                place="top"
-                style={sliderTooltipStyle}
-                multiline
               />
             </CarouselItem>
           ))}

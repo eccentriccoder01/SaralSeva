@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaComment, FaPaperPlane, FaTimes, FaStar } from "react-icons/fa";
-import { Tooltip } from "react-tooltip";
 
 const FeedbackButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,15 +81,13 @@ const FeedbackButton = () => {
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-orange-600 hover:bg-orange-700 text-white p-5 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2 group"
-          data-tooltip-id="feedback-button"
-          data-tooltip-content="Share your feedback or report issues"
         >
           <FaComment className="text-2xl" />
           <span className="hidden group-hover:block text-sm font-medium whitespace-nowrap">
             Feedback
           </span>
         </button>
-        <Tooltip id="feedback-button" place="top" style={tooltipStyle} />
+        {/* external tooltip removed */}
       </div>
 
       {/* Feedback Modal */}

@@ -92,7 +92,21 @@
         "about": "About",
         "privacy": "Privacy Policy",
         "terms": "Terms & Conditions",
-        "copyright": "© 2024 SaralSeva. All rights reserved."
+        "copyright": "© 2024 SaralSeva. All rights reserved.",
+        "newsletter": {
+            "title": "Stay Updated",
+            "subtitle": "Subscribe to our newsletter for exclusive offers and updates",
+            "emailPlaceholder": "Enter your email address",
+            "subscribeBtn": "Subscribe",
+            "noThanksBtn": "No Thanks",
+            "termsPrefix": "By subscribing, you agree to our",
+            "termsLink": "Terms of Service",
+            "privacyLink": "Privacy Policy",
+            "successMessage": "Thank you for subscribing!",
+            "errorMessage": "Failed to subscribe. Please try again.",
+            "invalidEmail": "Please enter a valid email address",
+            "alreadySubscribed": "This email is already subscribed"
+        }
     },
     "common": {
         "loading": "Loading...",

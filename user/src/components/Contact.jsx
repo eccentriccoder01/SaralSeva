@@ -1,20 +1,6 @@
 import banner from "./../assets/header-banner2.jpg";
 import { Mail, MapPin, User, BookUser, MessageSquare, CheckCircle, XCircle, AlertTriangle, X } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
-
-const tooltipStyle = {
-  backgroundColor: "#FF9933",
-  color: "#1F2937",
-  padding: "8px 12px",
-  borderRadius: "12px",
-  fontSize: "14px",
-  fontWeight: 500,
-  textAlign: "center",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-  zIndex: 9999,
-};
 
 const Contact = () => {
   const [lang, setLang] = useState("en");

@@ -6,6 +6,7 @@ import { FaInstagram, FaWhatsapp, FaFacebook, FaYoutube, FaXTwitter } from "reac
 import { Tooltip } from "react-tooltip";
 import 'react-tooltip/dist/react-tooltip.css';
 import { Link } from 'react-router-dom';
+import NewsletterSubscription from '../NewsletterSubscription';
 
 const tooltipStyle = {
   backgroundColor: '#FF9933',
@@ -35,12 +36,12 @@ const Footer = () => {
         closeQR();
       }
     };
-    
+
     if (isQRActive) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
-    
+
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
@@ -102,10 +103,10 @@ const Footer = () => {
     <footer className="relative text-orange-100 dark:text-gray-200 overflow-hidden">
       {/* Gradient Background - preserved exact colors */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-950 via-orange-900 to-orange-950 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
-      
+
       {/* Depth overlay - preserved exact colors */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-      
+
       {/* Enhanced top border with glow - preserved exact colors */}
       <div className="relative">
         <div className="h-1 bg-gradient-to-r from-transparent via-orange-500/50 dark:via-orange-400/40 to-transparent shadow-lg"></div>
@@ -139,17 +140,17 @@ const Footer = () => {
 
               {/* Store badges - improved spacing and hover effects */}
               <div className="flex flex-col gap-3">
-                <a 
-                  href="https://apps.apple.com" 
-                  target="_blank" 
+                <a
+                  href="https://apps.apple.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 rounded-lg"
                 >
                   <img src={app} alt="App Store" className="w-40 sm:w-44 h-auto" />
                 </a>
-                <a 
-                  href="https://play.google.com" 
-                  target="_blank" 
+                <a
+                  href="https://play.google.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 rounded-lg"
                 >
@@ -178,11 +179,11 @@ const Footer = () => {
                   </React.Fragment>
                 ))}
               </div>
-              
+
               {/* Social QR Button */}
               <div className="mt-6 flex justify-center lg:justify-start">
-                <button 
-                  onClick={openSocialQR} 
+                <button
+                  onClick={openSocialQR}
                   className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-gray-900 font-semibold rounded-lg shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-300"
                 >
                   Social QR Code
@@ -199,20 +200,20 @@ const Footer = () => {
                 <h2 className="font-extrabold text-orange-100 dark:text-orange-300 text-sm sm:text-base mb-4 tracking-wider jost drop-shadow-lg">
                   {section.title}
                 </h2>
-                
+
                 {/* Links with better spacing and hover effects */}
                 {section.links && (
                   <nav className="flex flex-col gap-2.5">
                     {section.links.map((link, i) => (
-                      <Link 
+                      <Link
                         key={i}
-                        to={link.to} 
+                        to={link.to}
                         className="hover:text-amber-400 dark:hover:text-orange-400 transition-all duration-300 hover:translate-x-1 inline-block text-sm leading-relaxed focus:outline-none focus:text-amber-400"
                       >
                         {link.name}
                       </Link>
                     ))}
-                    
+
                   </nav>
                 )}
               </div>
@@ -220,18 +221,17 @@ const Footer = () => {
           </div>
         </div>
 
-        
-      </div>
-
-      {/* QR Code Popup - enhanced animation and styling */}
+        {/* Newsletter Subscription Section */}
+        <NewsletterSubscription />
+      </div>      {/* QR Code Popup - enhanced animation and styling */}
       {isQRActive && (
         <>
           {/* Backdrop with improved blur */}
-          <div 
+          <div
             className="fixed inset-0 bg-black/75 z-[9998] backdrop-blur-md transition-all duration-300 ease-out"
             onClick={closeQR}
           />
-          
+
           {/* Popup with smoother animation */}
           <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] animate-in fade-in zoom-in-95 duration-300 ease-out">
             <div className="relative">
@@ -243,7 +243,7 @@ const Footer = () => {
               >
                 <span className="text-3xl font-light leading-none">&times;</span>
               </button>
-              
+
               {/* QR Image - enhanced presentation */}
               <img
                 src={qrcode}
@@ -251,7 +251,7 @@ const Footer = () => {
                 className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover rounded-2xl border-4 border-amber-500 p-3 shadow-2xl bg-white"
                 onClick={(e) => e.stopPropagation()}
               />
-              
+
               {/* Instructions - better styling */}
               <p className="text-center mt-6 text-white text-sm sm:text-base bg-black/70 py-3 px-6 rounded-xl backdrop-blur-sm shadow-lg">
                 Scan to download the app
@@ -266,14 +266,14 @@ const Footer = () => {
       {/* Social QR Modal */}
       {isSocialQROpen && (
         <>
-          <div 
-            className="fixed inset-0 bg-black/75 z-[9998] backdrop-blur-md transition-all duration-300 ease-out" 
-            onClick={closeSocialQR} 
+          <div
+            className="fixed inset-0 bg-black/75 z-[9998] backdrop-blur-md transition-all duration-300 ease-out"
+            onClick={closeSocialQR}
           />
           <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] animate-in fade-in zoom-in-95 duration-300 ease-out">
             <div className="relative bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-2xl">
-              <button 
-                className="absolute -top-4 -right-4 bg-amber-500 hover:bg-amber-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-xl transition-all duration-200 hover:scale-110 hover:rotate-90 focus:outline-none focus:ring-4 focus:ring-orange-300" 
+              <button
+                className="absolute -top-4 -right-4 bg-amber-500 hover:bg-amber-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-xl transition-all duration-200 hover:scale-110 hover:rotate-90 focus:outline-none focus:ring-4 focus:ring-orange-300"
                 onClick={closeSocialQR}
                 aria-label="Close Social QR code"
               >

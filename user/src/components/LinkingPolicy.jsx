@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link2, ExternalLink, Shield, AlertTriangle, CheckCircle, XCircle, Globe, Users, Sun, Moon } from 'lucide-react';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
-import 'react-tooltip/dist/react-tooltip.css';
+// external tooltip lib removed to avoid duplicate orange boxes
 
 const tooltipStyle = {
   backgroundColor: "#FF9933",
@@ -50,25 +49,25 @@ const LinkingPolicy = () => {
   const linkingTypes = [
     {
       type: "Outbound Links",
-      icon: <ExternalLink className="w-6 h-6" data-tooltip-id="tooltip-outbound" data-tooltip-content="External links from SaralSeva" />,
+      icon: <ExternalLink className="w-6 h-6" />,
       description: "Links from SaralSeva to external websites",
       color: "bg-blue-500"
     },
     {
       type: "Inbound Links", 
-      icon: <Link2 className="w-6 h-6" data-tooltip-id="tooltip-inbound" data-tooltip-content="Links coming to SaralSeva" />,
+  icon: <Link2 className="w-6 h-6" />,
       description: "Links from external websites to SaralSeva",
       color: "bg-green-500"
     },
     {
       type: "Deep Links",
-      icon: <Globe className="w-6 h-6" data-tooltip-id="tooltip-deep" data-tooltip-content="Direct links to specific pages inside SaralSeva" />,
+  icon: <Globe className="w-6 h-6" />,
       description: "Direct links to specific pages within SaralSeva",
       color: "bg-orange-500"
     },
     {
       type: "API Integration",
-      icon: <Users className="w-6 h-6" data-tooltip-id="tooltip-api" data-tooltip-content="Integration via API with government systems" />,
+  icon: <Users className="w-6 h-6" />,
       description: "Technical integration with government systems",
       color: "bg-purple-500"
     }
@@ -98,7 +97,7 @@ const LinkingPolicy = () => {
       <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-center mb-6">
-            <Link2 className="w-12 h-12 mr-4" data-tooltip-id="tooltip-header" data-tooltip-content="SaralSeva Platform Icon" />
+            <Link2 className="w-12 h-12 mr-4" />
             <div>
               <h2 className="text-4xl font-bold mb-2">Linking Policy</h2>
             </div>
@@ -118,8 +117,7 @@ const LinkingPolicy = () => {
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 shadow-lg"
-            data-tooltip-id="tooltip-theme"
-            data-tooltip-content={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
           >
             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -430,13 +428,7 @@ const LinkingPolicy = () => {
           </p>
         </div>
 
-        {/* ReactTooltips with styling */}
-        <ReactTooltip id="tooltip-header" style={tooltipStyle} />
-        <ReactTooltip id="tooltip-theme" style={tooltipStyle} />
-        <ReactTooltip id="tooltip-outbound" style={tooltipStyle} />
-        <ReactTooltip id="tooltip-inbound" style={tooltipStyle} />
-        <ReactTooltip id="tooltip-deep" style={tooltipStyle} />
-        <ReactTooltip id="tooltip-api" style={tooltipStyle} />
+        {/* external tooltips removed */}
       </div>
     </div>
   );

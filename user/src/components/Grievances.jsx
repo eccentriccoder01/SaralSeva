@@ -9,8 +9,7 @@ import image6 from "./../assets/baner-cpgrams_7.jpg";
 import { Info, ListChecks, FileSignature, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { Tooltip } from "react-tooltip";
-import 'react-tooltip/dist/react-tooltip.css';
+// external react-tooltip removed to avoid duplicate orange tooltips
 
 const tooltipStyle = {
   backgroundColor: "#FF9933",
@@ -27,8 +26,6 @@ const tooltipStyle = {
 const GrievanceCard = ({ icon: Icon, title, description, buttonText, buttonLink, tooltipId, tooltipContent }) => (
   <div
     className="w-full max-w-sm p-8 bg-orange-50 dark:bg-gray-700 text-center rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
-    data-tooltip-id={tooltipId}
-    data-tooltip-content={tooltipContent}
   >
     <Icon className="w-20 h-20 mx-auto text-orange-600 dark:text-orange-400" />
     <h3 className="mt-4 text-2xl font-bold text-stone-800 dark:text-gray-200">{title}</h3>
@@ -116,9 +113,7 @@ const Grievances = () => {
           tooltipContent="Contact the appropriate authorities"
         />
       </div>
-      <Tooltip id="tooltip-lodge" style={tooltipStyle} place="top" />
-      <Tooltip id="tooltip-status" style={tooltipStyle} place="top" />
-      <Tooltip id="tooltip-contact" style={tooltipStyle} place="top" />
+      {/* external tooltips removed from Grievance cards */}
     </div>
   );
 };
