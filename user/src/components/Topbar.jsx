@@ -66,7 +66,7 @@ const Topbar = ({ onSearch }) => {
         <input
           type="text"
           placeholder="Search..."
-          className={`ml-4 p-2 rounded-md border w-48
+          className={`ml-4 p-2 rounded-md border w-full sm:w-44 md:w-48
   ${darkMode 
     ? "bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
     : "bg-white border-gray-300 text-black placeholder-gray-500"
@@ -76,10 +76,12 @@ const Topbar = ({ onSearch }) => {
           onChange={handleSearchChange}
         />
 
-        {/* Phone with tooltip */}
+        {/* Phone with tooltip shows in only medium and deskop width*/}
         <a
-          href="tel:9876543210"
-          className="flex items-center gap-2 hover:scale-105 transition-transform duration-300"
+          href="tel:9876543210" 
+          className="hidden sm:flex md:flex items-center gap-2 hover:scale-105 transition-transform duration-300"
+          data-tooltip-id="phone-tooltip"
+          data-tooltip-content="Click to call the helpline" 
         >
           <Phone size={18} />
           <span className="font-semibold">9876543210</span>
