@@ -16,6 +16,7 @@ import notificationRouter from './routes/notificationRouter.js';
 import grievanceRouter from './routes/grievanceRouter.js';
 import messageRouter from './routes/messageRouter.js';
 import contactRouter from "./routes/contactRoutes.js";
+import newsletterRouter from "./routes/newsletterRouter.js";
 
 // importSecurity
 import { securityMiddleware } from './middleware/security.js';
@@ -66,12 +67,13 @@ app.use('/api/v1/messages', createRateLimiter('moderate'), messageRouter);
 app.use('/api/v1/notification', createRateLimiter('moderate'), notificationRouter);
 app.use('/api/v1/grievances', createRateLimiter('moderate'), grievanceRouter);
 app.use('/api/v1/contact', createRateLimiter('light'), contactRouter);
+app.use('/api/newsletter', createRateLimiter('light'), newsletterRouter);
 
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-app.post('/api/v1/user/auth/generate-otp', async(req, res) => {
+app.post('/api/v1/user/auth/generate-otp', async (req, res) => {
     const { mobile } = req.body;
     const user = await userModel.findOne({ mobile });
     if (!user) {
@@ -105,7 +107,7 @@ app.post('/api/v1/user/auth/generate-otp', async(req, res) => {
 
 });
 
-app.post('/api/v1/user/auth/verify-otp', async(req, res) => {
+app.post('/api/v1/user/auth/verify-otp', async (req, res) => {
     const { mobile, otp } = req.body;
     try {
         const user = await userModel.findOne({ mobile, otp, otp_expiry: { $gte: new Date() } });
