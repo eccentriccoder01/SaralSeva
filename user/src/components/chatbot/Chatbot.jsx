@@ -1,6 +1,7 @@
 // frontend/src/components/Chatbot/Chatbot.jsx
 import { useState, useEffect, useRef } from "react";
 import { MessageSquare, X, SendHorizonal, HelpCircle, Languages } from "lucide-react";
+import { useTranslation } from "react-i18next"; // Import i18next hook
 import "./Chatbot.css";
 
 const FAQ_EN = [
@@ -622,12 +623,11 @@ const QUICK_QUESTIONS_HI = [
 ];
 
 const Chatbot = () => {
+  const { i18n } = useTranslation(); // Get i18n instance
   const [isOpen, setIsOpen] = useState(false);
   const [showQuick, setShowQuick] = useState(false);
-  const [language, setLanguage] = useState("en"); // Language state
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! I am SevaMittra. How can I assist you today?" },
-  ]);
+  const [language, setLanguage] = useState(i18n.language || "en"); // Initialize from i18n
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
   const chatBodyRef = useRef(null);
@@ -638,6 +638,24 @@ const Chatbot = () => {
   const welcomeMessage = language === "en" 
     ? "Hello! I am SevaMittra. How can I assist you today?" 
     : "नमस्ते! मैं सेवामित्र हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?";
+
+  // Sync chatbot language with global i18n language
+  useEffect(() => {
+    const currentLang = i18n.language || "en";
+    if (currentLang !== language) {
+      setLanguage(currentLang);
+      // Update welcome message when language changes
+      const newWelcome = currentLang === "en" 
+        ? "Hello! I am SevaMittra. How can I assist you today?" 
+        : "नमस्ते! मैं सेवामित्र हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?";
+      setMessages([{ sender: "bot", text: newWelcome }]);
+    }
+  }, [i18n.language, language]);
+
+  // Initialize welcome message on mount
+  useEffect(() => {
+    setMessages([{ sender: "bot", text: welcomeMessage }]);
+  }, []); // Only run once on mount
 
   // Disable page scroll when chatbot is open
   useEffect(() => {
@@ -667,42 +685,7 @@ const Chatbot = () => {
 
   const toggleChat = () => setIsOpen(!isOpen);
   const toggleQuick = () => setShowQuick(!showQuick);
-  const toggleLanguage = () => {
-    const newLang = language === "en" ? "hi" : "en";
-    setLanguage(newLang);
-    // Update welcome message when language changes
-    setMessages([
-      { 
-        sender: "bot", 
-        text: newLang === "en" 
-          ? "Hello! I am SevaMittra. How can I assist you today?" 
-          : "नमस्ते! मैं सेवामित्र हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?" 
-      }
-    ]);
-  };
-
-  const findResponse = (text) => {
-    const lc = text.toLowerCase().trim();
-
-    // 1. Exact match
-    for (const item of FAQ) {
-      for (const trig of item.triggers) {
-        if (lc === trig.toLowerCase()) return item.response;
-      }
-    }
-
-    // 2. Partial match
-    for (const item of FAQ) {
-      for (const trig of item.triggers) {
-        if (lc.includes(trig.toLowerCase())) return item.response;
-      }
-    }
-
-    // 3. Fallback
-    const fallback = FAQ.find((item) => item.triggers.length === 0);
-    return fallback?.response || "I’m sorry, I did not understand your query.";
-  };
-
+  
   const sendMessage = (customText) => {
     const msgText = customText ?? input.trim();
     if (!msgText) return;
@@ -726,26 +709,7 @@ const Chatbot = () => {
             <span className="font-bold">SevaMittra</span>
           </div>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button 
-              onClick={toggleLanguage} 
-              className="chatbot-lang-btn"
-              title={language === "en" ? "Switch to Hindi" : "हिंदी से बदलें"}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'white',
-                padding: '4px 8px',
-                borderRadius: '4px',
-                fontSize: '12px',
-                fontWeight: 'bold',
-                transition: 'all 0.2s',
-              }}
-              onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.2)'}
-              onMouseLeave={(e) => e.target.style.background = 'transparent'}
-            >
-              {language === "en" ? "HI" : "EN"}
-            </button>
+            
             <button onClick={toggleChat} className="chatbot-close-btn">
               <X className="w-5 h-5" />
             </button>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useTranslation } from "react-i18next"; // ✅ Import i18n hook
 import Slider from "./Slider";
 import image1 from "./../../../assets/home_slider1.jpg";
 import image2 from "./../../../assets/home_slider2.jpg";
@@ -11,7 +12,6 @@ import apply from "./../../../assets/apply.svg";
 import search from "./../../../assets/search.svg";
 import check from "./../../../assets/check.svg";
 import axios from "axios";
-// external tooltip library removed to avoid duplicate orange boxes
 
 // Wave background SVG component
 const WaveBackground = () => (
@@ -27,8 +27,9 @@ const WaveBackground = () => (
 );
 
 const Home = () => {
+  const { i18n } = useTranslation(); // ✅ Get i18n instance
   const [announcements, setAnnouncements] = useState([]);
-  const [lang, setLang] = useState("en");
+  const lang = i18n.language || "en"; // ✅ Use i18n language instead of local state
 
   const t = useMemo(
     () => ({
@@ -166,9 +167,15 @@ const Home = () => {
     "/dashboard",
   ];
 
+  // ✅ Handle language change - sync with global i18n
+  const handleLanguageChange = (newLang) => {
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
+  };
+
   return (
     <div className="bg-orange-50/30 dark:bg-gray-900/50 relative transition-colors duration-300">
-      {/* Language Toggle */}
+      {/* Language Toggle - ✅ Now syncs with i18n */}
       <div className="absolute top-4 right-4 z-50 flex items-center gap-3 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg">
         <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
           EN
@@ -177,7 +184,7 @@ const Home = () => {
           type="radio"
           name="lang"
           checked={lang === "en"}
-          onChange={() => setLang("en")}
+          onChange={() => handleLanguageChange("en")}
           className="cursor-pointer"
         />
         <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
@@ -187,7 +194,7 @@ const Home = () => {
           type="radio"
           name="lang"
           checked={lang === "hi"}
-          onChange={() => setLang("hi")}
+          onChange={() => handleLanguageChange("hi")}
           className="cursor-pointer"
         />
       </div>
@@ -248,7 +255,6 @@ const Home = () => {
                   {card.subtitle}
                 </p>
               </div>
-              {/* external tooltip removed for accessibility */}
             </Link>
           ))}
         </div>
@@ -304,7 +310,6 @@ const Home = () => {
                 <h3 className="mt-6 text-2xl font-bold text-orange-900 dark:text-amber-100 jost">
                   {step.title}
                 </h3>
-                {/* removed per-step tooltips to avoid duplicate labels */}
 
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {step.description}
