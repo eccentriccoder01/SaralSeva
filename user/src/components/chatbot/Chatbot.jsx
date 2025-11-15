@@ -1,25 +1,23 @@
 // frontend/src/components/Chatbot/Chatbot.jsx
 import { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, SendHorizonal, HelpCircle, Languages } from "lucide-react";
-import { useTranslation } from "react-i18next"; // Import i18next hook
+import { MessageSquare, X, SendHorizonal, HelpCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import "./Chatbot.css";
 
 const FAQ_EN = [
-  // 1. General help
   {
     triggers: ["help", "assist", "support", "what can you do"],
     response:
       "Hello! I am SevaMittra. I can guide you on applying for services, tracking requests, managing your account, and navigating the platform professionally.",
   },
-  // 2. Account/Login
   {
     triggers: ["login", "account", "register", "signin", "signup"],
     response:
       "Use 'Login/Register' to access your account. You may also sign in using Google for convenience.",
   },
   {
-  triggers: ["update profile", "edit profile", "profile settings", "change profile"],
-  response: `
+    triggers: ["update profile", "edit profile", "profile settings", "change profile"],
+    response: `
 <div>
   <p><strong>Update Your Profile:</strong></p>
   <p>To update your profile, follow these steps:</p>
@@ -30,81 +28,47 @@ const FAQ_EN = [
   </ol>
 </div>
 `
-},
-  // 3. Service Application
-{
-  triggers: ["How to apply for a service?","grievance", "lodge grievance", "submit grievance", "apply for service", "service application"],
-  response: `
+  },
+  {
+    triggers: ["How to apply for a service?", "grievance", "lodge grievance", "submit grievance", "apply for service", "service application"],
+    response: `
 <div>
   <p><strong>Lodge a Grievance / Apply for a Service:</strong></p>
   <p>To submit a new grievance or service request, you must be <strong>logged in or registered</strong>. Please sign in before proceeding.</p>
-
   <p>Once logged in, go to the <strong>Grievances / Services page</strong> and fill out the form:</p>
-
   <p><strong>Grievance Registration Form:</strong></p>
   <ul>
     <li><strong>Personal Details:</strong> Full Name, Email, Mobile (10-digit), Date of Birth, Gender</li>
     <li><strong>Location & Grievance Details:</strong> Country (India), State/UT, District, Grievance Category & Type, Full Address, Description of Grievance</li>
     <li><strong>Upload Supporting Document:</strong> PDF only</li>
   </ul>
-
   <p>After submitting, you can:</p>
   <ul>
     <li><strong>Check Status:</strong> Track the progress of your submitted grievances.</li>
     <li><strong>Contact Authorities:</strong> Reach out to the relevant authorities if needed.</li>
   </ul>
-
-  <a href="/grievances/grievances_registration_form" target="_blank" style="
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 14px;
-    background-color: #F97316;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-  ">Register Now</a>
+  <a href="/grievances/grievances_registration_form" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 14px; background-color: #F97316; color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">Register Now</a>
 </div>
 `,
-},
-  // 4. Request Tracking
+  },
   {
-  triggers: ["How to track my request?","status", "check status", "application status", "track request", "grievance status", "scheme status"],
-  response: `
+    triggers: ["How to track my request?", "status", "check status", "application status", "track request", "grievance status", "scheme status"],
+    response: `
 <div>
   <p><strong>Check Application / Grievance Status:</strong></p>
   <p>Enter your registration number on the <strong>Status page</strong> to track the progress of your application or grievance.</p>
-
   <p>You can check:</p>
   <ul>
     <li><strong>Scheme Status</strong></li>
     <li><strong>Grievance Status</strong></li>
   </ul>
-
   <p>Enter your scheme or grievance number to view updates.</p>
-
-  <a href="/status" target="_blank" style="
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 14px;
-    background-color: #F97316;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-  ">Check Status</a>
+  <a href="/status" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 14px; background-color: #F97316; color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">Check Status</a>
 </div>
 `,
-},
-  // 5. How Government Schemes Work
+  },
   {
-    triggers: [
-      "how government schemes work",
-      "scheme steps",
-      "work",
-      "how it works",
-      "government schemes process",
-    ],
+    triggers: ["how government schemes work", "scheme steps", "work", "how it works", "government schemes process"],
     response: `
 <div>
   <p>Government Schemes, Simplified in 3 Steps:</p>
@@ -115,50 +79,38 @@ const FAQ_EN = [
 </div>
 `,
   },
-{
-  triggers: ["my applied schemes", "applied schemes", "schemes applied"],
-  response: `
+  {
+    triggers: ["my applied schemes", "applied schemes", "schemes applied"],
+    response: `
 <div>
   <p><strong>My Applied Schemes:</strong></p>
   <p>You can view all the schemes you have applied for by clicking the button below.</p>
   <a href="/schemeApplied">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       View My Applied Schemes
     </button>
   </a>
 </div>
 `
-},
-  // 6. Scheme Information / Beneficiaries
+  },
   {
     triggers: ["scheme", "beneficiary", "scheme detail", "yojna"],
     response:
       "To view scheme information or beneficiaries, please visit the <strong>Schemes page</strong> from the navigation bar. You will find all the details organized there.",
   },
-  // 7. Scheme Eligibility
   {
     triggers: ["eligibility", "scheme eligibility", "yojna ki patrata"],
     response:
       "For checking <strong>scheme eligibility</strong>, go to the <strong>Home page</strong> and select the card labeled 'Scheme Eligibility / Yojnao Ki Patrata'. It will guide you on whether you are eligible for the scheme.",
   },
-  // 8. Scheme Penetration / Coverage
   {
     triggers: ["penetration", "coverage", "yojna ki pohch"],
     response:
       "To see scheme penetration or coverage details, please go to the <strong>Dashboard</strong> from the navigation menu. It provides the latest statistics and insights for each scheme.",
   },
-  // 10. About SaralSeva / Mission
-{
-  triggers: ["about saralseva", "mission", "objective", "what is saralseva", "about portal"],
-  response: `
+  {
+    triggers: ["about saralseva", "mission", "objective", "what is saralseva", "about portal"],
+    response: `
 <div>
   <p><strong>Our Mission:</strong></p>
   <p>To strengthen e-Governance in Panchayati Raj Institutions (PRIs) across the country, the Ministry of Panchayati Raj (MoPR) has launched SaralSeva, a user-friendly web-based portal. SaralSeva aims to bring in better transparency in decentralised planning, progress reporting, and work-based accounting.</p>
@@ -166,12 +118,10 @@ const FAQ_EN = [
   <p><strong>About SaralSeva:</strong> Our Objective is to provide an easy-to-use, transparent system for citizens and PRIs to manage applications and services digitally.</p>
 </div>
 `,
-},
-
-// 11. Application Statistics
-{
-  triggers: ["applications", "stats", "statistics", "total applications", "application status"],
-  response: `
+  },
+  {
+    triggers: ["applications", "stats", "statistics", "total applications", "application status"],
+    response: `
 <div>
   <p><strong>Application Statistics:</strong></p>
   <ul>
@@ -182,128 +132,83 @@ const FAQ_EN = [
   </ul>
 </div>
 `,
-},
-// Privacy Policy
-{
-  triggers: ["privacy policy", "privacy", "data privacy"],
-  response: `
+  },
+  {
+    triggers: ["privacy policy", "privacy", "data privacy"],
+    response: `
 <div>
   <p><strong>Privacy Policy:</strong></p>
   <p>To read our privacy policy, click the button below:</p>
   <a href="/privacypolicy">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       View Privacy Policy
     </button>
   </a>
 </div>
 `
-},
-
-// Linking Policy
-{
-  triggers: ["linking policy", "link policy", "account linking"],
-  response: `
+  },
+  {
+    triggers: ["linking policy", "link policy", "account linking"],
+    response: `
 <div>
   <p><strong>Linking Policy:</strong></p>
   <p>To read about our linking policy, click the button below:</p>
   <a href="/linkingpolicy">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       View Linking Policy
     </button>
   </a>
 </div>
 `
-},
-
-// FAQs
-{
-  triggers: ["faq", "frequently asked questions", "questions"],
-  response: `
+  },
+  {
+    triggers: ["faq", "frequently asked questions", "questions"],
+    response: `
 <div>
   <p><strong>FAQs:</strong></p>
   <p>For frequently asked questions, click the button below:</p>
   <a href="/faq">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       View FAQs
     </button>
   </a>
 </div>
 `
-},
-{
-  triggers: ["contact", "contact us", "support", "reach us", "get in touch"],
-  response: `
+  },
+  {
+    triggers: ["contact", "contact us", "support", "reach us", "get in touch"],
+    response: `
 <div>
   <p><strong>Contact Us:</strong></p>
   <p>You can reach out to the appropriate authorities via the following channels:</p>
-
   <p><strong>By Email & Phone:</strong><br/>
   Email: <a href="mailto:info@dgs.gov.in">info@dgs.gov.in</a><br/>
   Phone: 9876543210</p>
-
   <p><strong>Our Address:</strong><br/>
   National Portal Secretariat<br/>
   CGO Complex, Lodhi Road,<br/>
   New Delhi - 110 003, India.</p>
-
-  <a href="/contact" target="_blank" style="
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 14px;
-    background-color: #F97316;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-  ">Contact Us</a>
+  <a href="/contact" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 14px; background-color: #F97316; color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">Contact Us</a>
 </div>
 `,
-},
-{
-  triggers: [], // No triggers; default fallback
-  response: `
+  },
+  {
+    triggers: [],
+    response: `
 <div>
   <p>I'm sorry, I did not understand your query.</p>
-  <p>You can select from the <strong class="help-menu-link" style="cursor:pointer; text-decoration:underline;">Help Menu</strong> for quick guidance or try rephrasing your question.
-  </p>
+  <p>You can select from the <strong class="help-menu-link" style="cursor:pointer; text-decoration:underline;">Help Menu</strong> for quick guidance or try rephrasing your question.</p>
 </div>
 `
-}
+  }
 ];
 
-// Hindi FAQ
 const FAQ_HI = [
-  // 1. सामान्य सहायता
   {
     triggers: ["help", "assist", "support", "सहायता", "मदद", "what can you do"],
     response:
       "नमस्ते! मैं सेवामित्र हूं। मैं आपको सेवाओं के लिए आवेदन करने, अनुरोध ट्रैक करने, अपने खाते को प्रबंधित करने और प्लेटफ़ॉर्म पर नेविगेट करने में मार्गदर्शन कर सकता हूं।",
   },
-  // 2. खाता/लॉगिन
   {
     triggers: ["login", "account", "register", "signin", "signup", "लॉगिन", "रजिस्टर", "खाता"],
     response:
@@ -323,82 +228,46 @@ const FAQ_HI = [
 </div>
 `
   },
-  // 3. सेवा आवेदन
   {
     triggers: ["How to apply for a service?", "grievance", "lodge grievance", "submit grievance", "apply for service", "service application", "शिकायत", "सेवा के लिए आवेदन"],
     response: `
 <div>
   <p><strong>शिकायत दर्ज करें / सेवा के लिए आवेदन करें:</strong></p>
   <p>नई शिकायत या सेवा अनुरोध सबमिट करने के लिए, आपको <strong>लॉग इन या पंजीकृत</strong> होना चाहिए। कृपया आगे बढ़ने से पहले साइन इन करें।</p>
-
   <p>लॉग इन करने के बाद, <strong>शिकायत / सेवा पेज</strong> पर जाएं और फॉर्म भरें:</p>
-
   <p><strong>शिकायत पंजीकरण फॉर्म:</strong></p>
   <ul>
     <li><strong>व्यक्तिगत विवरण:</strong> पूरा नाम, ईमेल, मोबाइल (10-अंक), जन्म तिथि, लिंग</li>
     <li><strong>स्थान और शिकायत विवरण:</strong> देश (भारत), राज्य/केंद्र शासित प्रदेश, जिला, शिकायत श्रेणी और प्रकार, पूरा पता, शिकायत का विवरण</li>
     <li><strong>सहायक दस्तावेज़ अपलोड करें:</strong> केवल PDF</li>
   </ul>
-
   <p>सबमिट करने के बाद, आप:</p>
   <ul>
     <li><strong>स्थिति जांचें:</strong> अपनी सबमिट की गई शिकायतों की प्रगति ट्रैक करें।</li>
     <li><strong>अधिकारियों से संपर्क करें:</strong> आवश्यकता होने पर संबंधित अधिकारियों से संपर्क करें।</li>
   </ul>
-
-  <a href="/grievances/grievances_registration_form" target="_blank" style="
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 14px;
-    background-color: #F97316;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-  ">अभी पंजीकरण करें</a>
+  <a href="/grievances/grievances_registration_form" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 14px; background-color: #F97316; color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">अभी पंजीकरण करें</a>
 </div>
 `,
   },
-  // 4. अनुरोध ट्रैकिंग
   {
     triggers: ["How to track my request?", "status", "check status", "application status", "track request", "grievance status", "scheme status", "स्थिति जांचें", "आवेदन की स्थिति"],
     response: `
 <div>
   <p><strong>आवेदन / शिकायत स्थिति जांचें:</strong></p>
   <p>अपने आवेदन या शिकायत की प्रगति ट्रैक करने के लिए <strong>स्थिति पेज</strong> पर अपना पंजीकरण नंबर दर्ज करें।</p>
-
   <p>आप जांच सकते हैं:</p>
   <ul>
     <li><strong>योजना की स्थिति</strong></li>
     <li><strong>शिकायत की स्थिति</strong></li>
   </ul>
-
   <p>अपडेट देखने के लिए अपनी योजना या शिकायत संख्या दर्ज करें।</p>
-
-  <a href="/status" target="_blank" style="
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 14px;
-    background-color: #F97316;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-  ">स्थिति जांचें</a>
+  <a href="/status" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 14px; background-color: #F97316; color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">स्थिति जांचें</a>
 </div>
 `,
   },
-  // 5. सरकारी योजनाएं कैसे काम करती हैं
   {
-    triggers: [
-      "how government schemes work",
-      "scheme steps",
-      "work",
-      "how it works",
-      "government schemes process",
-      "योजनाएं कैसे काम करती हैं",
-      "सरकारी योजनाएं"
-    ],
+    triggers: ["how government schemes work", "scheme steps", "work", "how it works", "government schemes process", "योजनाएं कैसे काम करती हैं", "सरकारी योजनाएं"],
     response: `
 <div>
   <p>सरकारी योजनाएं, 3 चरणों में सरलीकृत:</p>
@@ -416,40 +285,28 @@ const FAQ_HI = [
   <p><strong>मेरी आवेदित योजनाएं:</strong></p>
   <p>आप नीचे दिए गए बटन पर क्लिक करके अपनी सभी आवेदित योजनाओं को देख सकते हैं।</p>
   <a href="/schemeApplied">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       मेरी आवेदित योजनाएं देखें
     </button>
   </a>
 </div>
 `
   },
-  // 6. योजना जानकारी
   {
     triggers: ["scheme", "beneficiary", "scheme detail", "yojna", "योजना", "लाभार्थी"],
     response:
       "योजना की जानकारी या लाभार्थियों को देखने के लिए, कृपया नेविगेशन बार से <strong>योजनाएं पेज</strong> पर जाएं। आपको वहां सभी विवरण व्यवस्थित मिलेंगे।",
   },
-  // 7. योजना पात्रता
   {
     triggers: ["eligibility", "scheme eligibility", "yojna ki patrata", "पात्रता", "योजना की पात्रता"],
     response:
       "<strong>योजना पात्रता</strong> की जांच के लिए, <strong>होम पेज</strong> पर जाएं और 'योजना पात्रता / Scheme Eligibility' लेबल वाले कार्ड को चुनें। यह आपको मार्गदर्शन देगा कि आप योजना के लिए पात्र हैं या नहीं।",
   },
-  // 8. योजना पहुंच
   {
     triggers: ["penetration", "coverage", "yojna ki pohch", "योजना की पहुंच", "कवरेज"],
     response:
       "योजना की पहुंच या कवरेज विवरण देखने के लिए, कृपया नेविगेशन मेनू से <strong>डैशबोर्ड</strong> पर जाएं। यह प्रत्येक योजना के लिए नवीनतम आंकड़े और अंतर्दृष्टि प्रदान करता है।",
   },
-  // 10. सरलसेवा के बारे में
   {
     triggers: ["about saralseva", "mission", "objective", "what is saralseva", "about portal", "सरलसेवा के बारे में", "उद्देश्य"],
     response: `
@@ -461,7 +318,6 @@ const FAQ_HI = [
 </div>
 `,
   },
-  // 11. आवेदन सांख्यिकी
   {
     triggers: ["applications", "stats", "statistics", "total applications", "application status", "आवेदन", "सांख्यिकी"],
     response: `
@@ -476,7 +332,6 @@ const FAQ_HI = [
 </div>
 `,
   },
-  // गोपनीयता नीति
   {
     triggers: ["privacy policy", "privacy", "data privacy", "गोपनीयता नीति", "गोपनीयता"],
     response: `
@@ -484,22 +339,13 @@ const FAQ_HI = [
   <p><strong>गोपनीयता नीति:</strong></p>
   <p>हमारी गोपनीयता नीति पढ़ने के लिए, नीचे दिए गए बटन पर क्लिक करें:</p>
   <a href="/privacypolicy">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       गोपनीयता नीति देखें
     </button>
   </a>
 </div>
 `
   },
-  // लिंकिंग नीति
   {
     triggers: ["linking policy", "link policy", "account linking", "लिंकिंग नीति"],
     response: `
@@ -507,22 +353,13 @@ const FAQ_HI = [
   <p><strong>लिंकिंग नीति:</strong></p>
   <p>हमारी लिंकिंग नीति के बारे में पढ़ने के लिए, नीचे दिए गए बटन पर क्लिक करें:</p>
   <a href="/linkingpolicy">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       लिंकिंग नीति देखें
     </button>
   </a>
 </div>
 `
   },
-  // FAQs
   {
     triggers: ["faq", "frequently asked questions", "questions", "सवाल", "प्रश्न"],
     response: `
@@ -530,15 +367,7 @@ const FAQ_HI = [
   <p><strong>FAQs:</strong></p>
   <p>अक्सर पूछे जाने वाले प्रश्नों के लिए, नीचे दिए गए बटन पर क्लिक करें:</p>
   <a href="/faq">
-    <button style="
-      padding: 6px 12px;
-      border-radius: 6px;
-      background-color: #F97316;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 5px;
-    ">
+    <button style="padding: 6px 12px; border-radius: 6px; background-color: #F97316; color: white; border: none; cursor: pointer; margin-top: 5px;">
       FAQs देखें
     </button>
   </a>
@@ -551,36 +380,23 @@ const FAQ_HI = [
 <div>
   <p><strong>हमसे संपर्क करें:</strong></p>
   <p>आप निम्नलिखित माध्यमों से संबंधित अधिकारियों से संपर्क कर सकते हैं:</p>
-
   <p><strong>ईमेल और फोन द्वारा:</strong><br/>
   ईमेल: <a href="mailto:info@dgs.gov.in">info@dgs.gov.in</a><br/>
   फोन: 9876543210</p>
-
   <p><strong>हमारा पता:</strong><br/>
   राष्ट्रीय पोर्टल सचिवालय<br/>
   CGO कॉम्प्लेक्स, लोधी रोड,<br/>
   नई दिल्ली - 110 003, भारत।</p>
-
-  <a href="/contact" target="_blank" style="
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 14px;
-    background-color: #F97316;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-  ">हमसे संपर्क करें</a>
+  <a href="/contact" target="_blank" style="display: inline-block; margin-top: 8px; padding: 8px 14px; background-color: #F97316; color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">हमसे संपर्क करें</a>
 </div>
 `,
   },
   {
-    triggers: [], // फॉलबैक
+    triggers: [],
     response: `
 <div>
   <p>क्षमा करें, मैं आपकी क्वेरी नहीं समझ पाया।</p>
-  <p>आप त्वरित मार्गदर्शन के लिए <strong class="help-menu-link" style="cursor:pointer; text-decoration:underline;">Help Menu</strong> से चुन सकते हैं या अपने प्रश्न को दोबारा लिखने का प्रयास कर सकते हैं।
-  </p>
+  <p>आप त्वरित मार्गदर्शन के लिए <strong class="help-menu-link" style="cursor:pointer; text-decoration:underline;">Help Menu</strong> से चुन सकते हैं या अपने प्रश्न को दोबारा लिखने का प्रयास कर सकते हैं।</p>
 </div>
 `
   }
@@ -623,10 +439,10 @@ const QUICK_QUESTIONS_HI = [
 ];
 
 const Chatbot = () => {
-  const { i18n } = useTranslation(); // Get i18n instance
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [showQuick, setShowQuick] = useState(false);
-  const [language, setLanguage] = useState(i18n.language || "en"); // Initialize from i18n
+  const [language, setLanguage] = useState(i18n.language || "en");
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
@@ -644,7 +460,6 @@ const Chatbot = () => {
     const currentLang = i18n.language || "en";
     if (currentLang !== language) {
       setLanguage(currentLang);
-      // Update welcome message when language changes
       const newWelcome = currentLang === "en" 
         ? "Hello! I am SevaMittra. How can I assist you today?" 
         : "नमस्ते! मैं सेवामित्र हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?";
@@ -655,7 +470,7 @@ const Chatbot = () => {
   // Initialize welcome message on mount
   useEffect(() => {
     setMessages([{ sender: "bot", text: welcomeMessage }]);
-  }, []); // Only run once on mount
+  }, []);
 
   // Disable page scroll when chatbot is open
   useEffect(() => {
@@ -666,7 +481,7 @@ const Chatbot = () => {
   const scrollToBottom = () => chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   useEffect(() => scrollToBottom(), [messages]);
 
-  // Handle clicks on inline links inside bot responses (event delegation)
+  // Handle clicks on inline links inside bot responses
   useEffect(() => {
     const node = chatBodyRef.current;
     if (!node) return;
@@ -686,6 +501,42 @@ const Chatbot = () => {
   const toggleChat = () => setIsOpen(!isOpen);
   const toggleQuick = () => setShowQuick(!showQuick);
   
+  const toggleLanguage = () => {
+    const newLang = language === "en" ? "hi" : "en";
+    setLanguage(newLang);
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
+    
+    const newWelcome = newLang === "en" 
+      ? "Hello! I am SevaMittra. How can I assist you today?" 
+      : "नमस्ते! मैं सेवामित्र हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?";
+    setMessages([{ sender: "bot", text: newWelcome }]);
+  };
+
+  const findResponse = (text) => {
+    const lc = text.toLowerCase().trim();
+
+    // 1. Exact match
+    for (const item of FAQ) {
+      for (const trig of item.triggers) {
+        if (lc === trig.toLowerCase()) return item.response;
+      }
+    }
+
+    // 2. Partial match
+    for (const item of FAQ) {
+      for (const trig of item.triggers) {
+        if (lc.includes(trig.toLowerCase())) return item.response;
+      }
+    }
+
+    // 3. Fallback
+    const fallback = FAQ.find((item) => item.triggers.length === 0);
+    return fallback?.response || (language === "en" 
+      ? "I'm sorry, I did not understand your query." 
+      : "क्षमा करें, मैं आपकी क्वेरी नहीं समझ पाया।");
+  };
+
   const sendMessage = (customText) => {
     const msgText = customText ?? input.trim();
     if (!msgText) return;
@@ -709,7 +560,7 @@ const Chatbot = () => {
             <span className="font-bold">SevaMittra</span>
           </div>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            
+           
             <button onClick={toggleChat} className="chatbot-close-btn">
               <X className="w-5 h-5" />
             </button>
