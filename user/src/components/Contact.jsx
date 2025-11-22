@@ -1,9 +1,11 @@
 import banner from "./../assets/header-banner2.jpg";
 import { Mail, MapPin, User, BookUser, MessageSquare, CheckCircle, XCircle, AlertTriangle, X } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next"; // ✅ Import i18n hook
 
 const Contact = () => {
-  const [lang, setLang] = useState("en");
+  const { i18n } = useTranslation(); // ✅ Use global i18n
+  const lang = i18n.language || "en"; // ✅ Get language from i18n
 
   const t = useMemo(
     () => ({
@@ -117,7 +119,7 @@ const Contact = () => {
     { id: "form", title: S.formTitle },
   ];
 
-  //  Smooth scroll function (cross-browser safe)
+  // Smooth scroll function (cross-browser safe)
   const smoothScrollTo = (id) => {
     const target = document.getElementById(id);
     if (!target) return;
@@ -139,12 +141,14 @@ const Contact = () => {
           <p className="mt-2 text-white text-sm md:text-base opacity-90">{S.subtitle}</p>
           <p className="mt-1 text-white text-sm opacity-80">{S.lastUpdated}</p>
         </div>
-        <div className="absolute right-4 top-4 flex items-center gap-3">
-          <button onClick={() => window.print()} className="text-sm text-white underline">{S.print}</button>
-          <label className="text-sm text-white">EN</label>
-          <input type="radio" name="lang" checked={lang === "en"} onChange={() => setLang("en")} />
-          <label className="text-sm text-white">HI</label>
-          <input type="radio" name="lang" checked={lang === "hi"} onChange={() => setLang("hi")} />
+        {/* ✅ REMOVED: Local language selector - now uses global navbar selector */}
+        <div className="absolute right-4 top-4">
+          <button 
+            onClick={() => window.print()} 
+            className="text-sm text-white bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded backdrop-blur-sm transition-colors"
+          >
+            {S.print}
+          </button>
         </div>
       </div>
 
@@ -180,11 +184,11 @@ const Contact = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold">Email</h4>
-                    <a href={`mailto:${S.email}`} className="text-amber-700 dark:text-amber-400 font-semibold">{S.email}</a>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200">Email</h4>
+                    <a href={`mailto:${S.email}`} className="text-amber-700 dark:text-amber-400 font-semibold hover:underline">{S.email}</a>
                   </div>
                   <div>
-                    <h4 className="font-semibold">Phone</h4>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200">Phone</h4>
                     <div className="font-semibold text-amber-700 dark:text-amber-400">{S.phone}</div>
                   </div>
                 </div>
@@ -208,7 +212,7 @@ const Contact = () => {
                 )}
 
                 <div className="mt-4">
-                  <div className="w-full h-44 rounded-md overflow-hidden border">
+                  <div className="w-full h-44 rounded-md overflow-hidden border border-gray-300 dark:border-gray-600">
                     <iframe
                       title="CGO Complex Map"
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14085.2214807896!2d77.2237149!3d28.5929309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce2b6d9b7a7a9%3A0xc0f3fde7b2b6b6a8!2sCGO%20Complex!5e0!3m2!1sen!2sin!4v1697188800000"
@@ -219,7 +223,7 @@ const Contact = () => {
                       loading="lazy"
                     ></iframe>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">Map data © Google</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Map data © Google</p>
                 </div>
               </div>
             </section>
