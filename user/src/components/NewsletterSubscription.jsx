@@ -8,7 +8,7 @@ const NewsletterSubscription = () => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState(null);
     const [messageType, setMessageType] = useState(null);
-
+    const [isVisible, setIsVisible] = useState(true); 
     // Demo mode flag - set to true for testing without backend
     const DEMO_MODE = true;
 
@@ -88,7 +88,12 @@ const NewsletterSubscription = () => {
     const handleNoThanks = () => {
         setEmail('');
         setMessage(null);
+        setIsVisible(false); 
     };
+
+    if (!isVisible) {
+        return null;
+    }
 
     return (
         <div className="flex justify-center -mb-2">
