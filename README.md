@@ -13,6 +13,47 @@
 
  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
+
+<!-- Add Table of Content -->
+
+## 📑 Table of Contents
+
+- [🔍 Overview](#overview)
+- [🇮🇳 Vision](#vision)
+- [🤔 Why SaralSeva](#why-saralseva)
+- [🎯 Mission](#mission)
+- [🚀 Live Demo](#demo)
+- [🌟 Key Features](#key-features)
+  - [👤 Citizen Portal](#citizen-portal)
+  - [🧑‍💼 Employee Portal](#employee-portal)
+  - [🛡️ Admin Portal](#admin-portal)
+- [🛠️ Technologies Used](#technologies-used)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [DevOps & Automation](#devops--automation)
+- [🤖 Automated Dependency Management](#automated-dependency-management)
+- [🧭 Project Flowchart](#flowchart)
+- [⚙️ Installation and Setup](#installation-setup)
+  - [📋 Prerequisites](#prerequisites)
+  - [Backend Setup](#installation-setup)
+  - [Frontend Setup](#installation-setup)
+- [🛠️ Troubleshooting](#troubleshooting)
+- [✴ Issue Creation](#issue-creation)
+- [📑 Contribution Guidelines](#contribution-guidelines)
+- [📞 Contact](#contact)
+- [🤝 Contributing](#contributing)
+  - [Ways to Contribute](#ways-to-contribute)
+- [📜 Code of Conduct](#code-of-conduct)
+- [💡 Suggestions & Feedback](#suggestions-feedback)
+- [🙌 Show Your Support](#show-your-support)
+- [📄 License](#license)
+- [⭐ Stargazers](#stargazers)
+- [🍴 Forkers](#forkers)
+
+ <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+<!-- Rest of existing content continues... -->
+
 <h2 id="overview">🔍 Overview</h2>
 
 > **SaralSeva** is a web-based full stack application designed to streamline the application and grievance resolution process for rural government schemes. This platform offers user-friendly features for users to apply for schemes, track their progress, and receive updates, as well as powerful tools for administrators and employees to manage scheme applications, monitor performance, and communicate effectively.
