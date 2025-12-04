@@ -32,5 +32,4 @@ body:
       options:
         - label: "I have reviewed the existing documentation"
         - label: "I agree to follow this project's Code of Conduct"
-        - label: "I am a GSSOC'25 contributor"
         - label: "I want to work on this issue"
