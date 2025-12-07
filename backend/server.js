@@ -29,6 +29,9 @@ import { createRateLimiter } from './middleware/rateLimiting/rateLimiter.js'
 // SanitizeMiddleware
 import { sanitizeMiddleware } from './middleware/sanitizeMiddleware.js';
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
