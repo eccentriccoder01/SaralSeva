@@ -14,6 +14,19 @@ import {
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import LanguageSwitcher from "./LanguageSwitcher"; // ✅ Import LanguageSwitcher
 
+const { i18n } = useTranslation();
+
+<select
+  value={i18n.language}
+  onChange={(e) => i18n.changeLanguage(e.target.value)}
+>
+  <option value="en">English</option>
+  <option value="hi">हिंदी</option>
+  <option value="mr">मराठी</option>
+  <option value="gu">ગુજરાતી</option>
+  <option value="kn">ಕನ್ನಡ</option>
+</select>
+
 const tooltipStyle = {
   backgroundColor: "#FF9933",
   color: "#1F2937",
