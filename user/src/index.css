@@ -158,15 +158,17 @@
    CSS FOR LONG TEXT IN DIFFERENT LANGUAGES
 ========================================================================== */
 
-nav {
+nav,
+.navbar {
   flex-wrap: wrap;
 }
 
 button {
   min-width: max-content;
-  white-space: normal;
+  white-space: nowrap;
 }
 
-* {
-  word-break: break-word;
+a {
+  white-space: nowrap;
 }
+
