@@ -58,9 +58,10 @@ const INDIAN_STATES = [
 
 // Gender keywords
 const GENDER_KEYWORDS = {
-  'male': ['male', 'man', 'boy', 'he', 'his', 'him'],
-  'female': ['female', 'woman', 'girl', 'she', 'her', 'women', 'widow']
+  'female': ['female', 'woman', 'women', 'girl', 'she', 'her', 'widow', 'lady'],
+  'male': ['male', 'man', 'boy', 'he', 'his', 'him']
 };
+
 
 /**
  * Tokenize and clean text
