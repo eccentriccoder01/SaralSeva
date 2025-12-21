@@ -1,0 +1,21 @@
+{
+  "navigation": {
+    "home": "मुख्यपृष्ठ",
+    "about": "आमच्याबद्दल",
+    "schemes": "योजना",
+    "askAI": "एआयला विचारा",
+    "successStories": "यशोगाथा",
+    "dashboard": "डॅशबोर्ड",
+    "grievances": "तक्रारी",
+    "contact": "संपर्क",
+    "login": "लॉगिन",
+    "register": "नोंदणी करा",
+    "logout": "लॉगआउट",
+    "myAccount": "माझे खाते",
+    "profile": "प्रोफाइल",
+    "schemeApplied": "अर्ज केलेल्या योजना",
+    "grievancesApplied": "नोंदवलेल्या तक्रारी",
+    "status": "स्थिती",
+    "switchTheme": "थीम बदला"
+  }
+}

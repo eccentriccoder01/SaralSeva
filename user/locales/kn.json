@@ -1,0 +1,21 @@
+{
+  "navigation": {
+    "home": "ಮುಖಪುಟ",
+    "about": "ನಮ್ಮ ಬಗ್ಗೆ",
+    "schemes": "ಯೋಜನೆಗಳು",
+    "askAI": "ಎಐಗೆ ಕೇಳಿ",
+    "successStories": "ಯಶಸ್ಸಿನ ಕಥೆಗಳು",
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "grievances": "ದೂರುಗಳು",
+    "contact": "ಸಂಪರ್ಕಿಸಿ",
+    "login": "ಲಾಗಿನ್",
+    "register": "ನೋಂದಣಿ",
+    "logout": "ಲಾಗ್‌ಔಟ್",
+    "myAccount": "ನನ್ನ ಖಾತೆ",
+    "profile": "ಪ್ರೊಫೈಲ್",
+    "schemeApplied": "ಅರ್ಜಿಸಿದ ಯೋಜನೆಗಳು",
+    "grievancesApplied": "ಅರ್ಜಿಸಿದ ದೂರುಗಳು",
+    "status": "ಸ್ಥಿತಿ",
+    "switchTheme": "ಥೀಮ್ ಬದಲಿಸಿ"
+  }
+}

@@ -1,10 +1,21 @@
 {
-  "home": {
-    "welcome": "सरलसेवा में आपका स्वागत है",
-    "description": "डिजिटल सेवाओं के लिए आपका एकमात्र समाधान।",
+  "navigation": {
+    "home": "होम",
+    "about": "हमारे बारे में",
+    "schemes": "योजनाएँ",
+    "askAI": "एआई से पूछें",
+    "successStories": "सफलता की कहानियाँ",
+    "dashboard": "डैशबोर्ड",
+    "grievances": "शिकायतें",
+    "contact": "संपर्क करें",
     "login": "लॉगिन",
+    "register": "रजिस्टर",
     "logout": "लॉगआउट",
-    "language": "भाषा",
-    "contrast": "हाई कॉन्ट्रास्ट मोड"
+    "myAccount": "मेरा खाता",
+    "profile": "प्रोफ़ाइल",
+    "schemeApplied": "लागू की गई योजनाएँ",
+    "grievancesApplied": "दर्ज की गई शिकायतें",
+    "status": "स्थिति",
+    "switchTheme": "थीम बदलें"
   }
 }

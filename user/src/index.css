@@ -153,3 +153,22 @@
     @apply h-10 px-4 bg-gradient-to-r from-[#f8b2a] to-[#e86a33] text-white rounded-md font-semibold shadow-md;
   }
 }
+
+/* ========================================================================== 
+   CSS FOR LONG TEXT IN DIFFERENT LANGUAGES
+========================================================================== */
+
+nav,
+.navbar {
+  flex-wrap: wrap;
+}
+
+button {
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+a {
+  white-space: nowrap;
+}
+

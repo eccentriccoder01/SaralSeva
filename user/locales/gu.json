@@ -1,0 +1,21 @@
+{
+  "navigation": {
+    "home": "મુખ્ય પેજ",
+    "about": "અમારા વિશે",
+    "schemes": "યોજનાઓ",
+    "askAI": "એઆઈને પૂછો",
+    "successStories": "સફળતાની વાર્તાઓ",
+    "dashboard": "ડેશબોર્ડ",
+    "grievances": "ફરિયાદો",
+    "contact": "સંપર્ક કરો",
+    "login": "લોગિન",
+    "register": "રજીસ્ટર",
+    "logout": "લોગઆઉટ",
+    "myAccount": "મારું ખાતું",
+    "profile": "પ્રોફાઇલ",
+    "schemeApplied": "લાગુ કરેલી યોજનાઓ",
+    "grievancesApplied": "નોંધાયેલ ફરિયાદો",
+    "status": "સ્થિતિ",
+    "switchTheme": "થીમ બદલો"
+  }
+}

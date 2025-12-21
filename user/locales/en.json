@@ -1,10 +1,21 @@
 {
-  "home": {
-    "welcome": "Welcome to SaralSeva",
-    "description": "Your one-stop solution for digital services.",
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "schemes": "Schemes",
+    "askAI": "Ask AI",
+    "successStories": "Success Stories",
+    "dashboard": "Dashboard",
+    "grievances": "Grievances",
+    "contact": "Contact",
     "login": "Login",
+    "register": "Register",
     "logout": "Logout",
-    "language": "Language",
-    "contrast": "High Contrast Mode"
+    "myAccount": "My Account",
+    "profile": "Profile",
+    "schemeApplied": "Schemes Applied",
+    "grievancesApplied": "Grievances Applied",
+    "status": "Status",
+    "switchTheme": "Switch Theme"
   }
 }
