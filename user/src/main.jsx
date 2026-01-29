@@ -10,7 +10,7 @@ import { SchemeProvider } from "./components/context/SchemaContext.jsx";
 import { UserProvider } from "./components/context/UserContext.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import './i18n/config.js'; // ✅ Import i18next configuration
-import "./src/i18n.js"; // ✅ Import i18next configuration
+//import "./src/i18n.js"; // ✅ Import i18next configuration
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
